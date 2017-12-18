@@ -1,0 +1,26 @@
+<!-- scripts -->
+{% for i in page.plugin %}
+    {%- if i.type === 'relative' -%}
+        {%- for j in i.file | findContent('', '') -%}
+            <script type="text/javascript" src="{{- path.js -}}{{- i.file -}}"></script>
+        {%- endfor -%}
+    {%- else -%}
+        {%- for j in i.file | findContent('', '') -%}
+            <script type="text/javascript" src="{{- i.file -}}"></script>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endfor %}
+{% if path.babel -%}
+<script type="text/javascript" src="{{path.js}}{{path.babel}}"></script>
+{%- endif %}
+{% for i in page.scripts %}
+    {%- if i.type === 'relative' -%}
+        {%- for j in i.file | findContent('', '') -%}
+            <script type="text/javascript" src="{{- path.js -}}{{- i.file -}}"></script>
+        {%- endfor -%}
+    {%- else -%}
+        {%- for j in i.file | findContent('', '') -%}
+            <script type="text/javascript" src="{{- i.file -}}"></script>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endfor %}

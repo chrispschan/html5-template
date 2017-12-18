@@ -1,0 +1,43 @@
+{% macro map(id, class, options) %}
+    <div
+    {% if id %} id="{{- id -}}"{% endif %} 
+    class="map{% if class %} {{ class }}{% endif %}"
+    {% if options.backgroundColor %} data-map-background-color="{{- options.backgroundColor -}}"{% endif %}
+    {% if options.center %} data-map-center="{{- options.center -}}"{% endif %}
+    {% if options.clickableIcons %} data-map-clickable-icons="{{- options.clickableIcons -}}"{% endif %}
+    {% if options.disableDefaultUI %} data-map-disable-default-ui="{{- options.disableDefaultUI -}}"{% endif %}
+    {% if options.disableDoubleClickZoom %} data-map-disable-double-click-zoom="{{- options.disableDoubleClickZoom -}}"{% endif %}
+    {% if options.draggable %} data-map-draggable="{{- options.draggable -}}"{% endif %}
+    {% if options.draggableCursor %} data-map-draggable-cursor="{{- options.draggableCursor -}}"{% endif %}
+    {% if options.draggingCursor %} data-map-dragging-cursor="{{- options.draggingCursor -}}"{% endif %}
+    {% if options.fullscreenControl %} data-map-fullscreen-control="{{- options.fullscreenControl -}}"{% endif %}
+    {% if options.fullscreenControlOption %} data-map-fullscreen-control-option="{{- options.fullscreenControlOption -}}"{% endif %}
+    {% if options.heading %} data-map-heading="{{- options.heading -}}"{% endif %}
+    {% if options.keyboardShortcuts %} data-map-keyboard-shortcuts="{{- options.keyboardShortcuts -}}"{% endif %}
+    {% if options.mapTypeControl %} data-map-map-type-control="{{- options.mapTypeControl -}}"{% endif %}
+    {% if options.mapTypeId %} data-map-map-type-id="{{- options.mapTypeId -}}"{% endif %}
+    {% if options.maxZoom %} data-map-max-zoom="{{- options.maxZoom -}}"{% endif %}
+    {% if options.minZoom %} data-map-min-zoom="{{- options.minZoom -}}"{% endif %}
+    {% if options.noClear %} data-map-no-clear="{{- options.noClear -}}"{% endif %}
+    {% if options.panControl %} data-map-pan-control="{{- options.panControl -}}"{% endif %}
+    {% if options.panControlOptions %} data-map-pan-control-options="{{- options.panControlOptions -}}"{% endif %}
+    {% if options.rotateControl %} data-map-rotate-control="{{- options.rotateControl -}}"{% endif %}
+    {% if options.rotateControlOptions %} data-map-rotate-control-options="{{- options.rotateControlOptions -}}"{% endif %}
+    {% if options.scaleControl %} data-map-scale-control="{{- options.scaleControl -}}"{% endif %}
+    {% if options.scaleControlOptions %} data-map-scale-control-options="{{- options.scaleControlOptions -}}"{% endif %}
+    {% if options.scrollwheel %} data-map-scrollwheel="{{- options.scrollwheel -}}"{% endif %}
+    {% if options.signInControl %} data-map-sign-in-control="{{- options.signInControl -}}"{% endif %}
+    {% if options.streetViewControl %} data-map-street-view-control="{{- options.streetViewControl -}}"{% endif %}
+    {% if options.streetViewControlOptions %} data-map-street-view-control-options="{{- options.streetViewControlOptions -}}"{% endif %}
+    {% if options.tilt %} data-map-tilt="{{- options.tilt -}}"{% endif %}
+    {% if options.zoom %} data-map-zoom="{{- options.zoom -}}"{% endif %}
+    {% if options.zoomControl %} data-map-zoom-control="{{- options.zoomControl -}}"{% endif %}
+    {% if options.zoomControlOptions %} data-map-zoom-control-options="{{- options.zoomControlOptions -}}"{% endif %}
+    {% if options.geolocation %} data-map-geolocation="{{- options.geolocation -}}"{% endif %}>
+        {%- if options.notSupport -%}
+            <!--[if lte IE 9]><p class="map__msg">{{- options.notSupport | safe -}}</p><![endif]-->
+        {%- endif -%}
+    </div>
+
+    {% if options.key %}<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{- key -}}"></script>{% endif %}
+{% endmacro %}

@@ -1,0 +1,12 @@
+﻿{
+"lang": [
+{"id":"en","code":"en","name":"English"},
+{"id":"zh","code":"zh","name":"Chinese"},
+{"id":"tc","code":"zh-Hant","name":"Chinese"},
+{"id":"sc","code":"zh-Hans","name":"Chinese"}
+],
+"viewport": [
+{"id":"device","viewport":"width=device-width, initial-scale=1.0"},
+{"id":"fixed","viewport":"width=640, initial-scale=1, user-scalable=no"}
+]
+}

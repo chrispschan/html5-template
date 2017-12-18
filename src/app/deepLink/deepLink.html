@@ -1,0 +1,17 @@
+{% macro deepLink(id, class, href, options) %}
+	<a href="{% if href %}{{href}}{% else %}javascript:;{% endif %}"
+	{% if options.target %} target="{{- options.target -}}"{% endif %}
+	{% if id %} id="{{- id -}}"{% endif %} 
+	class="deepLink{% if class %} {{ class }}{% endif %}"
+	{% if options.deepLink %} data-deep-link="{{- options.deepLink -}}"{% endif %}
+	{% if options.appName %} data-appName="{{- options.appName -}}"{% endif %}
+	{% if options.androidId %} data-android-id="{{- options.androidId -}}"{% endif %}
+	{% if options.androidLink %} data-android-link="{{- options.androidLink -}}"{% endif %}
+	{% if options.iosId %} data-ios-id="{{- options.iosId -}}"{% endif %}
+	{% if options.iosLink %} data-ios-link="{{- options.iosLink -}}"{% endif %}
+	{% if options.windowsId %} data-windows-id="{{- options.windowsId -}}"{% endif %}
+	{% if options.windowsLink %} data-windows-link="{{- options.windowsLink -}}"{% endif %}
+	>
+	{{- caller() -}}
+	</a>
+{% endmacro %}

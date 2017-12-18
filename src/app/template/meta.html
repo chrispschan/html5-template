@@ -1,0 +1,47 @@
+<meta charset="UTF-8" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="{%- for i in html.viewport | findContent(viewport, 'viewport') -%}{{- i -}}{%- endfor -%}" />
+
+<!-- Microsoft Tiles -->
+<meta name="msapplication-config" content="browserconfig.xml">
+
+<meta name="description" content="{%- for i in page.head | findContent('description', lang) -%}{{- i -}}{%- endfor -%}" />
+<meta name="keywords" content="{%- for i in page.head | findContent('keywords', lang) -%}{{- i -}}{%- endfor -%}" />
+<meta name="author" content="{%- for i in page.head | findContent('author', lang) -%}{{- i -}}{%- endfor -%}" />
+<meta name="copyright" content="{%- for i in page.head | findContent('copyright', lang) -%}{{- i -}}{%- endfor -%}" />
+
+{% if share %}
+    <!-- Share Information-->
+    <!-- for Facebook & LinkedIn -->
+    <meta property="og:title" content="{%- for i in page.head | findContent('title', lang) -%}{{- i -}}{%- endfor -%}" />
+    <meta property="og:description" content="{%- for i in page.head | findContent('description', lang) -%}{{- i -}}{%- endfor -%}" />
+    <meta property="og:image" content="{%- for i in page.head | findContent('ogImage', lang) -%}{{- i -}}{%- endfor -%}" />
+    <meta property="og:url" content="{%- for i in page.head | findContent('ogUrl', lang) -%}{{- i -}}{%- endfor -%}" />
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="{%- for i in page.head | findContent('title', lang) -%}{{- i -}}{%- endfor -%}"/>
+    <meta property="twitter:description" content="{%- for i in page.head | findContent('description', lang) -%}{{- i -}}{%- endfor -%}"/>
+    <meta property="twitter:image" content="{%- for i in page.head | findContent('twImage', lang) -%}{{- i -}}{%- endfor -%}" />
+{% endif %}
+
+{% if noTel %}
+    <!-- disable telephone number detection -->
+    <meta name = "format-detection" content = "telephone=no">
+{%- endif %}
+{%- if noDate -%}
+    <!-- disable date detection -->
+    <meta name = "format-detection" content = "date=no">
+{%- endif %}
+{%- if noAddr -%}
+    <!-- disable address detection -->
+    <meta name = "format-detection" content = "address=no">
+{%- endif %}
+{%- if noEmail -%}
+    <!-- disable email detection -->
+    <meta name = "format-detection" content = "email=no">
+{% endif %}
+
+{% if refresh %}
+    <meta http-equiv="refresh" content="0;URL={{refresh | safe}}" />
+{% endif %}

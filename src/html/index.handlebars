@@ -1,0 +1,41 @@
+{{!-- set value to @local --}}
+{{#setVal}}
+    {{!-- [value name]:[value type |string number boolean object|] = [value]; --}}
+    lang:string = en;    {{!-- page language id <src/data/html.xlsm -- lang -- id> --}}
+    page:object = index;    {{!-- page content data <json file name> --}}
+    viewport:string = device;    {{!-- viewport setting <src/data/html.xlsm -- viewport -- id> --}}
+    share:boolean = true;    {{!-- add facebook, LinkedIn, Twitter share meta tag? --}}
+    noTel:boolean = true;    {{!-- need disable browser telephone number detection? --}}
+    noDate:boolean = true;    {{!-- need disable browser date detection? --}}
+    noAddr:boolean = true;    {{!-- need disable browser address detection? --}}
+    noEmail:boolean = true;    {{!-- need disable browser email detection? --}}
+    {{!-- refresh:string = '/index_hb.html'; --}}
+{{/setVal}}
+
+{{#> template/html5}}
+    <!-- .innerWrapper -->
+    <div class="innerWrapper">
+        <h1>
+            {{~#eachContent @local.page.content "h1" @local.lang ~}}
+                {{{this}}}
+            {{~/eachContent~}}
+        </h1>
+
+        {{#eachContent @local.page.content "content1" @local.lang}}
+            <p>{{{this}}}</p>
+        {{/eachContent}}
+
+        {{#eachContent @local.page.content "content2" @local.lang}}
+            <p><strong>{{{this}}}</strong></p>
+        {{/eachContent}}
+
+        <ul>
+            {{#eachContent @local.page.content "tools" @local.lang}}
+                <li>{{{this}}}</li>
+            {{/eachContent}}
+            {{#eachContent @local.page.content "hdTool" @local.lang}}
+                <li>{{{this}}}</li>
+            {{/eachContent}}
+        </ul>
+    </div>
+{{/template/html5}}

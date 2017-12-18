@@ -1,0 +1,39 @@
+{# set value #}
+{% set lang="en" %}     {# page language id <src/data/html.xlsm -- lang -- id> #}
+{% set page=index %}     {# page content data <json file name> #}
+{% set viewport="device" %}     {# viewport setting <src/data/html.xlsm -- viewport -- id> #}
+{% set share=true %}     {# add facebook, LinkedIn, Twitter share meta tag? #}
+{% set noTel=true %}     {# need disable browser telephone number detection? #}
+{% set noDate=true %}     {# need disable browser date detection? #}
+{% set noAddr=true %}     {# need disable browser address detection? #}
+{% set noEmail=true %}     {# need disable browser email detection? #}
+
+{%- extends "template/html5.html" -%}
+
+{% block html %}
+    <!-- .innerWrapper -->
+    <div class="innerWrapper">
+        <h1>
+            {%- for i in page.content | findContent('h1', lang) -%}
+                {{- i | safe -}}
+            {%- endfor -%}
+        </h1>
+
+        {% for i in page.content | findContent('content1', lang) -%}
+            <p>{{- i | safe -}}</p>
+        {%- endfor %}
+
+        {% for i in page.content | findContent('content2', lang) -%}
+            <p><strong>{{- i | safe -}}</strong></p>
+        {%- endfor %}
+
+        <ul>
+            {%- for i in page.content | findContent('tools', lang) -%}
+                <li>{{- i | safe -}}</li>
+            {%- endfor %}
+            {%- for i in page.content | findContent('nunjucksTool', lang) -%}
+                <li>{{- i | safe -}}</li>
+            {%- endfor %}
+        </ul>
+    </div>
+{% endblock %}

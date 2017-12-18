@@ -1,0 +1,15 @@
+<a href="{{~#if href}}{{href}}{{else}}javascript:;{{~/if~}}"
+	{{~#if target}} target="{{target}}"{{~/if}} 
+	{{~#if id}} id="{{id}}"{{~/if}} 
+	class="deepLink{{#if class}} {{class}}{{/if}}"
+	{{~#if deepLink}} data-deep-link="{{deepLink}}"{{~/if}}
+	{{~#if appName}} data-app-name="{{appName}}"{{~/if}}
+	{{~#if androidId}} data-android-id="{{androidId}}"{{~/if}}
+	{{~#if androidLink}} data-android-link="{{androidLink}}"{{~/if}}
+	{{~#if iosId}} data-ios-id="{{iosId}}"{{~/if}}
+	{{~#if iosLink}} data-ios-link="{{iosLink}}"{{~/if}}
+	{{~#if windowsId}} data-windows-id="{{windowsId}}"{{~/if~}}
+	{{~#if windowsLink}} data-windows-link="{{windowsLink}}"{{~/if~}}
+>
+	{{~> @partial-block ~}}
+</a>

@@ -1,0 +1,47 @@
+<meta charset="UTF-8" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="{{~#eachContent html.viewport  @local.viewport "viewport" ~}}{{{this}}}{{~/eachContent~}}" />
+
+<!-- Microsoft Tiles -->
+<meta name="msapplication-config" content="browserconfig.xml">
+
+<meta name="description" content="{{~#eachContent @local.page.head "description"  @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+<meta name="keywords" content="{{~#eachContent @local.page.head "keywords" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+<meta name="author" content="{{~#eachContent @local.page.head "author" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+<meta name="copyright" content="{{~#eachContent @local.page.head "copyright" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+
+{{#if @local.share}}
+    <!-- Share Information-->
+    <!-- for Facebook & LinkedIn -->
+    <meta property="og:title" content="{{~#eachContent @local.page.head "title" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+    <meta property="og:description" content="{{~#eachContent @local.page.head "description" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+    <meta property="og:image" content="{{~#eachContent @local.page.head "ogImage" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+    <meta property="og:url" content="{{~#eachContent @local.page.head "ogUrl" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="{{~#eachContent @local.page.head "title" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
+    <meta property="twitter:description" content="{{~#eachContent @local.page.head "description" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
+    <meta property="twitter:image" content="{{~#eachContent @local.page.head "twImage" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+{{/if}}
+
+{{#if @local.noTel}}
+    <!-- disable telephone number detection -->
+    <meta name = "format-detection" content = "telephone=no">
+{{~/if}}
+{{~#if @local.noDate ~}}
+    <!-- disable date detection -->
+    <meta name = "format-detection" content = "date=no">
+{{~/if}}
+{{~#if @local.noAddr ~}}
+    <!-- disable address detection -->
+    <meta name = "format-detection" content = "address=no">
+{{~/if}}
+{{~#if @local.noEmail ~}}
+    <!-- disable email detection -->
+    <meta name = "format-detection" content = "email=no">
+{{/if}}
+
+{{#if @local.refresh }}
+    <meta http-equiv="refresh" content="0;URL={{{@local.refresh}}}" />
+{{/if}}

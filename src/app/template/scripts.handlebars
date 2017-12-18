@@ -1,0 +1,26 @@
+<!-- scripts -->
+{{#each @local.page.plugin as |files|}}
+    {{~#ifCond files.type "===" "relative" ~}}
+        {{~#eachContent files.file "" "" ~}}
+            <script type="text/javascript" src="{{@local.path.css}}{{{this}}}"></script>
+        {{~/eachContent~}}
+    {{else}}
+        {{~#eachContent files.file "" "" ~}}
+            <script type="text/javascript" src="{{{this}}}"></script>
+        {{~/eachContent~}}
+    {{~/ifCond}}
+{{~/each}}
+{{#if path.babel ~}}
+    <script type="text/javascript" src="{{@local.path.js}}{{@local.path.babel}}"></script>
+{{~/if}}
+{{#each @local.page.scripts as |files|}}
+    {{~#ifCond files.type "===" "relative" ~}}
+        {{~#eachContent files.file "" "" ~}}
+            <script type="text/javascript" src="{{@local.path.css}}{{{this}}}"></script>
+        {{~/eachContent~}}
+    {{else}}
+        {{~#eachContent files.file "" "" ~}}
+            <script type="text/javascript" src="{{{this}}}"></script>
+        {{~/eachContent~}}
+    {{~/ifCond}}
+{{~/each}}

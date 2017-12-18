@@ -1,0 +1,12 @@
+<!-- style -->
+{% for i in page.style %}
+    {%- if i.type === 'relative' -%}
+        {%- for j in i.file | findContent('', '') -%}
+            <link rel="stylesheet" type="text/css" href="{{- path.css -}}{{- j -}}" />
+        {%- endfor -%}
+    {%- else -%}
+        {%- for j in i.file | findContent('', '') -%}
+            <link rel="stylesheet" type="text/css" href="{{- j -}}" />
+        {%- endfor -%}
+    {%- endif -%}
+{%- endfor %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{%- for i in html.lang | findContent(lang, 'code') -%}{{- i -}}{%- endfor -%}" dir="ltr">
+<head>
+    {% include 'template/meta.html' %}
+    {% block meta %}{% endblock %}
+
+    <title>{%- for i in page.head | findContent('title', lang) -%}{{- i -}}{%- endfor -%}</title>
+
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Recommended favicon format -->
+    <link rel="icon" type="image/png" href="/favicon-32x32.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/coast-228x228.png">
+    <!-- Helps prevent duplicate content issues -->
+    <link rel="canonical" href="{%- for i in page.head | findContent('canonical', lang) -%}{{- i -}}{%- endfor -%}">
+
+    {% include 'template/style.html' %}
+    {% block style %}{% endblock %}
+</head>
+<body>
+    {%- block html -%}{%- endblock %}
+
+    {% include 'template/scripts.html' %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

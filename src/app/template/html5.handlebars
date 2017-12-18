@@ -1,0 +1,31 @@
+{{#setVal}}
+    path:object = path;
+{{/setVal}}
+
+<!DOCTYPE html>
+<html lang="{{~#eachContent html.lang @local.lang "code" ~}}{{{this}}}{{~/eachContent~}}" dir="ltr">
+<head>
+    {{> template/meta}}
+    {{{block "meta"}}}
+
+    <title>{{~#eachContent @local.page.head "title" @local.lang ~}}{{{this}}}{{~/eachContent~}}</title>
+    
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Recommended favicon format -->
+    <link rel="icon" type="image/png" href="/favicon-32x32.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/coast-228x228.png">
+    <!-- Helps prevent duplicate content issues -->
+    <link rel="canonical" href="{{~#eachContent @local.page.head "canonical" @local.lang ~}}{{{this}}}{{~/eachContent~}}">
+
+    {{> template/style}}
+    {{{block "style"}}}
+</head>
+<body>
+    {{> @partial-block }}
+
+    {{> template/scripts}}
+    {{{block "scripts"}}}
+</body>
+</html>
