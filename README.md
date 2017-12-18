@@ -72,7 +72,7 @@ Default: 'hb'
 
 #### gulpOptions.accessibility
 [gulp-accessibility](https://www.npmjs.com/package/gulp-accessibility) options.<br/>
-View [AccessSniff](https://github.com/yargalot/AccessSniff) options for all available options.
+View [AccessSniff](https://github.com/yargalot/AccessSniff) options for all available options.<br/>
 Default:
 ```js
 accessibilityLevel: 'WCAG2AA',
@@ -85,10 +85,9 @@ reportLevels: {
 ```
 
 #### gulpOptions.defaultTasks
-Tasks inculde Gulp.js default task.
+Tasks inculde Gulp.js default task.<br/>
 Default:
 ```js
-'server:setup', // setup localhost
 'fonts:copy',   // copy fonts files to output location
 'img:copy', // copy images files to output location
 'favicon:build',    // build favicon to root location

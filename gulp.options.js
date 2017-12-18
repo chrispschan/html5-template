@@ -56,7 +56,6 @@ const gulpOptions = {
         }
     },
     defaultTasks: [
-        'server:setup',
         'fonts:copy',
         'img:copy',
         'favicon:build',

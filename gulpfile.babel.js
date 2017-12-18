@@ -119,7 +119,7 @@ gulp.task('default', () => {
     if (htmlTemplate == 'hb') defaultTasks.push('hb:watch');
     else defaultTasks.push('nunjucks:watch');
 
-    gulp.start(defaultTasks);
+    gulp.start(defaultTasks, ['server:setup']);
 });
 
 // use handlebars develop
@@ -128,7 +128,7 @@ gulp.task('hb:dev', () => {
 
     defaultTasks.push('hb:watch');
 
-    gulp.start(defaultTasks);
+    gulp.start(defaultTasks, ['server:setup']);
 });
 
 // use nunjucks develop
@@ -137,7 +137,7 @@ gulp.task('nunjucks:dev', () => {
 
     defaultTasks.push('nunjucks:watch');
 
-    gulp.start(defaultTasks);
+    gulp.start(defaultTasks, ['server:setup']);
 });
 
 // demo develop
