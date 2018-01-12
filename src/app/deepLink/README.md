@@ -6,7 +6,7 @@ Class of setup deeplink and call deeplink functions.
 
 ### Getting Started
 ```js
-import DeepLink from 'deepLink/deepLink.class';
+import DeepLink from 'deepLink';
 
 const deepLink = new DeepLink();
 ```

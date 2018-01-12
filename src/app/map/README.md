@@ -6,7 +6,7 @@ Class of some usaful use Google Maps functions.
 
 ### Getting Started
 ```js
-import Map from 'map/map.class';
+import Map from 'map';
 
 const map = new Map();
 ```

@@ -1,6 +1,6 @@
 import 'object/object.property';
 import 'element/element.property';
-import plugin from 'plugin/plugin.class';
+import plugin from 'plugin';
 
 // Google Maps
 export default class Map extends plugin {
