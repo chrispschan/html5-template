@@ -1,7 +1,7 @@
 # DeepLink
 Module of call mobile app deeplink
 
-## deepLink.class.js
+## index.js
 Class of setup deeplink and call deeplink functions.
 
 ### Getting Started

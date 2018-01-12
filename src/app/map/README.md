@@ -1,7 +1,7 @@
 # Map
 Module of [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/).
 
-## map.class.js
+## index.js
 Class of some usaful use Google Maps functions.
 
 ### Getting Started
