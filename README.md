@@ -107,7 +107,7 @@ Default:
 
 #### Images Files
 ```js
-['./src/img/**/*', '!./src/img/**/_*']
+['./src/img/**/*', '!./src/img/**/_*', '!./src/img/_**/*']
 ```
 
 #### Favicon File

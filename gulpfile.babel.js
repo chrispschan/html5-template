@@ -38,7 +38,7 @@ product = {
     watchFiles: {    // gulp watch files
         serve: gulpOptions.server.root,
         fonts: ['./src/fonts/**/*', '!./src/fonts/**/_*'],
-        img: ['./src/img/**/*', '!./src/img/**/_*'],
+        img: ['./src/img/**/*', '!./src/img/**/_*', '!./src/img/_**/*'],
         favicon: './src/favicon.png',
         import: ['./node_modules','./src/app/'],    // babel import path
         js: ['./src/js/**/*.js', '!./src/js/**/_*.js'],
