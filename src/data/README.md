@@ -46,6 +46,7 @@ Use Macro export JSON files.
 ```
 
 ### Call Content JSON
+Can use [Nunjucks](https://mozilla.github.io/nunjucks/) / [Handlebars](http://handlebarsjs.com/) call json content.<br/>
 src/data/index.json
 ```json
 {
