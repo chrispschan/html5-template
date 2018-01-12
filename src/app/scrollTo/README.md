@@ -2,6 +2,7 @@
 Function of scroll element
 
 ## Getting Started
+ScrollTo(element: element object, to: Number | String | element object, duration: Number = 0)
 ```js
 import ScrollTo from 'scrollTo';
 
