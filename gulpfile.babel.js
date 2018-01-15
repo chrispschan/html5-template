@@ -252,7 +252,7 @@ gulp.task(
         return gulp.src(watchFiles.scss)
             .pipe(postcss(processors, {syntax: syntaxScss}))
             .pipe(sourcemaps.init())    // sourcemaps
-            .pipe(sass({importer: moduleImporter(), outputStyle: ''}).on('error', sass.logError))    // minify --> outputStyle: 'compressed'
+            .pipe(sass({importer: moduleImporter(), outputStyle: 'compressed'}).on('error', sass.logError))    // minify --> outputStyle: 'compressed'
             .pipe(sourcemaps.write('./'))    // sourcemaps
             .pipe(gulp.dest(outputFiles.scss));
     }
