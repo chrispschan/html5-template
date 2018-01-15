@@ -13,22 +13,22 @@ const deepLink = new DeepLink();
 
 ### DeepLink (options = {});
 #### options
-- ele: string (default: null) - deeplink elements. Call DeepLink.addDeepLink() if ele not null.
-- delay: number (default: 300) - wait deeplink loading. Will call store deeplink if timeout and store setting not null.
+- ele: string (default: `null`) - deeplink elements. Call DeepLink.addDeepLink() if ele not null.
+- delay: number (default: `300`) - wait deeplink loading. Will call store deeplink if timeout and store setting not null.
 - windows: object - windows phone app setting
-    - support: boolean (default: false) - support windows phone app
-    - id: string (default: null) - windows phone app id
-    - deepLink: srting (default: null) - windows phone deeplink. Use options.deepLink if not setting.
+    - support: boolean (default: `false`) - support windows phone app
+    - id: string (default: `null`) - windows phone app id
+    - deepLink: srting (default: `null`) - windows phone deeplink. Use options.deepLink if not setting.
 - android: object - android app setting
-    - support: boolean (default: true) - support android app
-    - id: string (default: null) - android app id
-    - deepLink: srting (default: null) - android deeplink. Use options.deepLink if not setting.
+    - support: boolean (default: `true`) - support android app
+    - id: string (default: `null`) - android app id
+    - deepLink: srting (default: `null`) - android deeplink. Use options.deepLink if not setting.
 - ios: object - ios app setting
-    - support: boolean (default: true) - support ios app
-    - id: string (default: null) - ios app id
-    - deepLink: srting (default: null) - ios deeplink. Use options.deepLink if not setting.
-- deepLink: string (default: null) - base deeplink
-- appName: string (default: '') - app name
+    - support: boolean (default: `true`) - support ios app
+    - id: string (default: `null`) - ios app id
+    - deepLink: srting (default: `null`) - ios deeplink. Use options.deepLink if not setting.
+- deepLink: string (default: `null`) - base deeplink
+- appName: string (default: `''`) - app name
 
 ### DeepLink.addDeepLink (ele = '.deepLink', options = {})
 Set elements to deeplink elements.
@@ -70,22 +70,22 @@ Call deeplink without click link.
 
 #### options
 Deeplink options.
-- delay: number (default: 300) - wait deeplink loading. Will call store deeplink if timeout and store setting not null.
+- delay: number (default: `300`) - wait deeplink loading. Will call store deeplink if timeout and store setting not null.
 - windows: object - windows phone app setting
-    - support: boolean (default: false) - support windows phone app
-    - id: string (default: null) - windows phone app id
-    - deepLink: srting (default: null) - windows phone deeplink. Use options.deepLink if not setting.
+    - support: boolean (default: `false`) - support windows phone app
+    - id: string (default: `null`) - windows phone app id
+    - deepLink: srting (default: `null`) - windows phone deeplink. Use options.deepLink if not setting.
 - android: object - android app setting
-    - support: boolean (default: true) - support android app
-    - id: string (default: null) - android app id
-    - deepLink: srting (default: null) - android deeplink. Use options.deepLink if not setting.
+    - support: boolean (default: `true`) - support android app
+    - id: string (default: `null`) - android app id
+    - deepLink: srting (default: `null`) - android deeplink. Use options.deepLink if not setting.
 - ios: object - ios app setting
-    - support: boolean (default: true) - support ios app
-    - id: string (default: null) - ios app id
-    - deepLink: srting (default: null) - ios deeplink. Use options.deepLink if not setting.
-- href: string (default: 'javascript:;') - link if not support device or not store setting
-- deepLink: string (default: null) - base deeplink
-- appName: string (default: '') - app name
+    - support: boolean (default: `true`) - support ios app
+    - id: string (default: `null`) - ios app id
+    - deepLink: srting (default: `null`) - ios deeplink. Use options.deepLink if not setting.
+- href: string (default: `'javascript:;'`) - link if not support device or not store setting
+- deepLink: string (default: `null`) - base deeplink
+- appName: string (default: `''`) - app name
 
 #### onLoadOpen
 On window.load redirect.
