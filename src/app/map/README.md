@@ -17,16 +17,16 @@ Google Maps element.
 
 #### options
 - [Google Maps options](https://developers.google.com/maps/documentation/javascript/reference#MapOptions)
-- key: string (default: '') - load Google Maps Javascript API key if html not load the API
-- language: string (default: '') - load Google Maps Javascript API language if html not load the API
-- region: string (default: '') - load Google Maps Javascript API region if html not load the API
-- zoom: number (default: 10) - Maps default zoom value
-- center: object (default: {lat: 22.28552, lng: 114.15769}) - Maps default center
-- geolocation: boolean (default: false) - use geolocation
-- geolocationOption: object (default: {})
+- key: string (default: `''`) - load Google Maps Javascript API key if html not load the API
+- language: string (default: `''`) - load Google Maps Javascript API language if html not load the API
+- region: string (default: `''`) - load Google Maps Javascript API region if html not load the API
+- zoom: number (default: `10`) - Maps default zoom value
+- center: object (default: `{lat: 22.28552, lng: 114.15769}`) - Maps default center
+- geolocation: boolean (default: `false`) - use geolocation
+- geolocationOption: object (default: `{}`)
     - [position options](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions)
     - marker: boolean - cerate marker to geolocation
-- events: object (default: {}) - add event listeners to map
+- events: object (default: `{}`) - add event listeners to map
     - ([event](https://developers.google.com/maps/documentation/javascript/events)): function (event, self)
 - markers: object | [object] - cerate markers to map
     - position: object - marker position
@@ -34,7 +34,7 @@ Google Maps element.
         - lng: number
     - events: object - add event listeners to marker
         - ([event](https://developers.google.com/maps/documentation/javascript/events)): function (event, self)
-    - layer: number (default: 0) - cerate markers layer
+    - layer: number (default: `0`) - cerate markers layer
 
 #### dataset
 Some options can use element dataset setting:
