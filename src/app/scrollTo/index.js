@@ -1,3 +1,5 @@
+const _scrollTimeout = null;
+
 export default function ScrollTo (element, to, duration = 0) {
     let start = element.scrollTop,
         change = null,
@@ -8,8 +10,10 @@ export default function ScrollTo (element, to, duration = 0) {
         currentTime += increment;
         let val = Math.easeInOutQuad(currentTime, start, change, duration);
         element.scrollTop = val;
-        if (currentTime < duration)
-            setTimeout(animateScroll, increment);
+        if (currentTime < duration) {
+            if (_scrollTimeout !== null) clearTimeout(_scrollTimeout);
+            _scrollTimeout = setTimeout(animateScroll, increment);
+        }
     };
 
     if (typeof to === 'number') change = to - start;
