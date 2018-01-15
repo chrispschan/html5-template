@@ -33,17 +33,17 @@ Edit gulp.options.js to change Gulp.js tasks options.
 
 #### gulpOptions.server
 Setup localhost server options
-- root: string (default: './app/') - server root folder
-- port: string (default: '9999') - server port
+- root: string (default: `'./app/'`) - server root folder
+- port: string (default: `'9999'`) - server port
 
 #### gulpOptions.outputFiles
 Build folder structure options. The folder structure will under `gulpOptions.server.root`.
-- fonts: string (default: 'fonts') - fonts files output location
-- img: string (default: 'images') - images files output location
-- js: string (default: 'js') - javascript files output location
-- babel: string (default: 'babel.js') - all html files pre-load javascript file name if use handlebars / nunjucks template build up html. Set `''` if not need pre-load.
-- scss: string (default: 'styles') - css files output location
-- html: string (default: '') - html files output location
+- fonts: string (default: `'fonts'`) - fonts files output location
+- img: string (default: `'images'`) - images files output location
+- js: string (default: `'js'`) - javascript files output location
+- babel: string (default: `'babel.js'`) - all html files pre-load javascript file name if use handlebars / nunjucks template build up html. Set `''` if not need pre-load.
+- scss: string (default: `'styles'`) - css files output location
+- html: string (default: `''`) - html files output location
 
 #### gulpOptions.favicon
 [gulp-favicons](https://www.npmjs.com/package/gulp-favicons) options.<br/>
@@ -64,8 +64,8 @@ pipeHTML: false
 
 #### gulpOptions.htmlTemplate
 Ues whilch tool to build html files.<br/>
-Vaule: 'hb' | 'nunjucks'<br/>
-Default: 'hb'
+Vaule: `'hb' | 'nunjucks'`<br/>
+Default: `'hb'`
 
 #### gulpOptions.htmlbeautify
 [gulp-html-beautify](https://www.npmjs.com/package/gulp-html-beautify) options.
