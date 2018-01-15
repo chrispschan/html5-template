@@ -1,32 +1,36 @@
-const _scrollTimeout = null;
+import 'document/document.property';
+
+let _scrollTimeout = null;
 
 export default function ScrollTo (element, to, duration = 0) {
-    let start = element.scrollTop,
-        change = null,
-        currentTime = 0,
-        increment = 20;
-    
-    let animateScroll = function () {
-        currentTime += increment;
-        let val = Math.easeInOutQuad(currentTime, start, change, duration);
-        element.scrollTop = val;
-        if (currentTime < duration) {
-            if (_scrollTimeout !== null) clearTimeout(_scrollTimeout);
-            _scrollTimeout = setTimeout(animateScroll, increment);
-        }
-    };
+    if (element) {
+        let start = element.scrollTop,
+            change = null,
+            currentTime = 0,
+            increment = 20;
+        
+        let animateScroll = function () {
+            currentTime += increment;
+            let val = Math.easeInOutQuad(currentTime, start, change, duration);
+            element.scrollTop = val;
+            if (currentTime < duration) {
+                if (_scrollTimeout !== null) clearTimeout(_scrollTimeout);
+                _scrollTimeout = setTimeout(animateScroll, increment);
+            }
+        };
 
-    if (typeof to === 'number') change = to - start;
-    else if (typeof to === 'string') {
-        let _ele = document.getElementById(to) ? [document.getElementById(to)] : document.getElementsByClassName(to);
+        if (typeof to === 'number') change = to - start;
+        else if (typeof to === 'string') {
+            let _ele = document.getElementById(to) ? [document.getElementById(to)] : document.getElementsByClassName(to);
 
-        if (_ele.length > 0)
-            change = _ele[0].offsetTop - start;
-    } else if (to.offsetTop) change = to.offsetTop - start;
-    else if (to.length > 0)
-        if (to[0].offsetTop) change = to[0].offsetTop - start;
-    
-    if (change !== null) animateScroll();
+            if (_ele.length > 0)
+                change = _ele[0].offsetTop - start;
+        } else if (to.offsetTop) change = to.offsetTop - start;
+        else if (to.length > 0)
+            if (to[0].offsetTop) change = to[0].offsetTop - start;
+        
+        if (change !== null) animateScroll();
+    }
 }
 
 // t = current time
