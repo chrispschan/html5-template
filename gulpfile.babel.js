@@ -215,7 +215,7 @@ gulp.task(
                 .pipe(source(_path[_path.length-1]))
                 .pipe(buffer())
                 .pipe(sourcemaps.init({loadMaps: true}))    // sourcemaps
-                .pipe(uglify({output: {comments: /^\!|license|Copyright/}}))    // minify
+                .pipe(uglify({output: {comments: /^\!|license|License|Copyright|copyright/}}))    // minify
                 .pipe(sourcemaps.write('./'))    // sourcemaps
                 .pipe(gulp.dest(outputFiles.js+'/'+_folder));
 
