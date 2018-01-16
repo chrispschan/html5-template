@@ -21,7 +21,7 @@ export default function ScrollTo (element, to, duration = 0) {
 
         if (typeof to === 'number') change = to - start;
         else if (typeof to === 'string') {
-            let _ele = document.getElementById(to) ? [document.getElementById(to)] : document.getElementsByClassName(to);
+            let _ele = document.querySelectorAll(to);
 
             if (_ele.length > 0)
                 change = _ele[0].offsetTop - start;
