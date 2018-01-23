@@ -22,3 +22,31 @@ Element.getDataset = function (ele) {
 
     return ele.dataset;
 };
+
+// add class without jq
+Element.addClass = function (ele, className) {
+    if (ele.classList)
+        ele.classList.add(className);
+    else
+        ele.className += ' ' + className;
+};
+
+// remove class without jq
+Element.removeClass = function (ele, className) {
+    if (ele.classList)
+        ele.classList.remove(className);
+    else
+        ele.className = ele.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+};
+
+// has class without jq
+Element.hasClass = function (ele, className) {
+    let _hasClass = false;
+
+    if (ele.classList)
+        _hasClass = ele.classList.contains(className);
+    else
+        _hasClass = new RegExp('(^| )' + className + '( |$)', 'gi').test(ele.className);
+
+    return _hasClass;
+};
