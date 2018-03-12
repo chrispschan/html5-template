@@ -74,138 +74,232 @@ const stylelintConfig = {
                 'bottom',
                 'left',
 
-                //Box Model
-                'align-content',
-                'align-items',
-                'align-self',
-                'border-bottom-color',
-                'border-bottom-left-radius',
-                'border-bottom-right-radius',
-                'border-bottom-style',
-                'border-bottom-width',
-                'border-bottom',
-                'border-color',
-                'border-image-outset',
-                'border-image-repeat',
-                'border-image-slice',
-                'border-image-source',
-                'border-image-width',
-                'border-image',
-                'border-left-color',
-                'border-left-style',
-                'border-left-width',
-                'border-left',
-                'border-radius',
-                'border-radius',
-                'border-right-color',
-                'border-right-style',
-                'border-right-width',
-                'border-right',
-                'border-style',
-                'border-top-color',
-                'border-top-left-radius',
-                'border-top-right-radius',
-                'border-top-style',
-                'border-top-width',
-                'border-top',
-                'border-width',
-                'border',
-                'box-sizing',
-                'clear',
+                //display
                 'display',
-                'flex-basis',
-                'flex-direction',
-                'flex-flow',
-                'flex-grow',
-                'flex-shrink',
-                'flex-wrap',
-                'flex',
+                'clear',
                 'float',
+                'visibility',
+                'backface-visibility',    //-webkit- | -moz-; ie10
+                'order',    //-webkit- | -moz-; ie11
+
+                //table
+                'border-collapse',
+                'table-layout',
+                'border-spacing',   //ie8
+                'caption-side', //ie8
+                'empty-cells',  //ie8
+
+                //flex
+                'flex',    //-webkit- | -moz- | -ms-; ie10
+                'flex-basis',    //-webkit- | -moz-; ie11
+                'flex-direction',    //-webkit- | -moz-; ie11
+                'flex-flow',    //-webkit- | -moz-; ie11
+                'flex-grow',    //-webkit- | -moz-; ie11
+                'flex-shrink',    //-webkit- | -moz-; ie11
+                'flex-wrap',    //-webkit- | -moz-; ie11
+
+                //grid
+                'grid', //ie16
+                'grid-area', //ie16
+                'grid-auto-columns', //ie16
+                'grid-auto-flow', //ie16
+                'grid-auto-rows', //ie16
+                'grid-column', //ie16
+                'grid-column-end', //ie16
+                'grid-column-gap', //ie16
+                'grid-column-start', //ie16
+                'grid-gap', //ie16
+                'grid-row', //ie16
+                'grid-row-end', //ie16
+                'grid-row-gap', //ie16
+                'grid-row-start', //ie16
+                'grid-template', //ie16
+                'grid-template-areas', //ie16
+                'grid-template-columns', //ie16
+                'grid-template-rows', //ie16
+
+                //box-sizing
+                'box-sizing',
+
+                //sizing
                 'height',
-                'justify-content',
-                'margin-bottom',
-                'margin-left',
-                'margin-right',
-                'margin-top',
-                'margin',
+                'width',
                 'max-height',
                 'max-width',
                 'min-height',
                 'min-width',
-                'order',
-                'outline-color',
-                'outline-offset',
-                'outline-style',
-                'outline-width',
-                'outline',
-                'overflow-x',
-                'overflow-y',
+
+                //overflow
                 'overflow',
+                'overflow-x',    //-ms-; ie8
+                'overflow-y',    //-ms-; ie8
+
+                //content align
+                'align-content', //-webkit-; ie11
+                'align-items',  //-webkit-; ie11
+                'align-self',   //-webkit-; ie11
+                'justify-content',    //-webkit- | -moz-; ie11
+
+                //padding
+                'padding',
                 'padding-bottom',
                 'padding-left',
                 'padding-right',
                 'padding-top',
-                'padding',
-                'visibility',
-                'width',
 
-                //Table
-                'border-collapse',
-                'border-spacing',
-                'caption-side',
-                'empty-cells',
-                'table-layout',
+                //margin
+                'margin',
+                'margin-bottom',
+                'margin-left',
+                'margin-right',
+                'margin-top',
 
-                // Typography
+                //border
+                'border',
+                'border-color',
+                'border-style',
+                'border-width',
+                'border-bottom',
+                'border-bottom-color',
+                'border-bottom-style',
+                'border-bottom-width',
+                'border-left',
+                'border-left-color',
+                'border-left-style',
+                'border-left-width',
+                'border-right',
+                'border-right-color',
+                'border-right-style',
+                'border-right-width',
+                'border-top',
+                'border-top-color',
+                'border-top-style',
+                'border-top-width',
+                'border-image-outset',    //ie11
+                'border-image-repeat',    //ie11
+                'border-image-slice',    //ie11
+                'border-image-source',    //ie11
+                'border-image-width',    //ie11
+                'border-radius',    //-webkit- | -moz-; ie9
+                'border-bottom-left-radius',    //-webkit- | -moz-; ie9
+                'border-bottom-right-radius',    //-webkit- | -moz-; ie9
+                'border-top-left-radius',    //-webkit- | -moz-; ie9
+                'border-top-right-radius',    //-webkit- | -moz-; ie9
+                'border-image',    //-webkit- | -moz- | -o-; ie11
+
+                //outline
+                'outline',  //ie8
+                'outline-color',  //ie8
+                'outline-style',  //ie8
+                'outline-width',  //ie8
+                'outline-offset',  //ie15
+
+                //box typography
+                'box-decoration-break',
+                'box-shadow',
+
+                //font style
                 'color',
+                'font',
                 'font-family',
-                'font-size-adjust',
                 'font-size',
-                'font-stretch',
                 'font-style',
                 'font-variant',
                 'font-weight',
-                'font',
-                'letter-spacing',
-                'line-height',
-                'text-align',
                 'text-decoration',
-                'text-indent',
-                'text-shadow',
-                'text-transform',
+
+                //font sizing
+                'line-height',
+                'letter-spacing',
+
+                //font overflow
+                'text-overflow',
+
+                //font align
+                'direction',
+                'text-align',
                 'vertical-align',
-                'white-space',
+                'text-indent',
                 'word-break',
                 'word-spacing',
                 'word-wrap',
+                'white-space',  //ie8
 
-                // List
-                'content',
-                'quotes',
-                'counter-increment',
-                'counter-reset',
+                //font typography
+                'text-transform',
+                'text-shadow',  //ie10
+
+                //list
                 'list-style',
-                'list-style-type',
                 'list-style-image',
                 'list-style-position',
-                'resize',
-                'cursor',
+                'list-style-type',
+                
+                //column
+                'column-count', //-webkit- | -moz-; ie10
+                'column-fill', //-webkit- | -moz-; ie10
+                'column-gap', //-webkit- | -moz-; ie10
+                'column-rule', //-webkit- | -moz-; ie10
+                'column-rule-color', //-webkit- | -moz-; ie10
+                'column-rule-style', //-webkit- | -moz-; ie10
+                'column-rule-width', //-webkit- | -moz-; ie10
+                'column-width', //-webkit- | -moz-; ie10
+                'columns', //-webkit- | -moz-; ie10
 
-                // Visual
+                //content
+                'content',  //ie8
+                'quotes',   //ie8
+                'counter-increment',  //ie8
+                'counter-reset',  //ie8
+
+                //background
+                'background',
                 'background-attachment',
-                'background-clip',
                 'background-color',
                 'background-image',
-                'background-origin',
-                'background-position-x',
-                'background-position-y',
                 'background-position',
                 'background-repeat',
-                'background-size',
-                'background',
-                'box-decoration-break',
-                'box-shadow',
-                'opacity'
+                'background-clip',  //ie9
+                'background-origin',    //ie9
+                'background-size',    //-webkit- | -moz- | -o-; ie9
+
+                //cursor
+                'cursor',
+                'pointer-events',   //ie11
+                'user-select',    //-webkit- | -moz- | -ms-; ie10
+
+                //other
+                'unicode-bidi',
+                'clip', //ie8
+                'opacity',  //ie9
+                'object-fit',   //ie16
+                'perspective',    //-webkit- | -moz-; ie10
+                'perspective-origin',    //-webkit- | -moz-; ie10
+                'filter',    //-webkit-; ie13
+
+                //print
+                'page-break-after',
+                'page-break-before',
+                'page-break-inside',
+
+                //css3
+                'animation',    //-webkit- | -moz- | -o-; ie10
+                'animation-delay',    //-webkit- | -moz- | -o-; ie10
+                'animation-direction',    //-webkit- | -moz- | -o-; ie10
+                'animation-duration',    //-webkit- | -moz- | -o-; ie10
+                'animation-fill-mode',    //-webkit- | -moz- | -o-; ie10
+                'animation-iteration-count',    //-webkit- | -moz- | -o-; ie10
+                'animation-name',    //-webkit- | -moz- | -o-; ie10
+                'animation-play-state',    //-webkit- | -moz- | -o-; ie10
+                'animation-timing-function',    //-webkit- | -moz- | -o-; ie10
+                'transition',    //-webkit- | -moz- | -o-; ie10
+                'transition-delay',    //-webkit- | -moz- | -o-; ie10
+                'transition-duration',    //-webkit- | -moz- | -o-; ie10
+                'transition-property',    //-webkit- | -moz- | -o-; ie10
+                'transition-timing-function',    //-webkit- | -moz- | -o-; ie10
+                'transform',    //2D:-webkit- | -moz- | -o- | -ms-; ie9 / 3D:-webkit-; ie12
+                'transform-origin',    //2D:-webkit- | -moz- | -o- | -ms-; ie9 / 3D:-webkit-; ie12
+                'transform-style'    //-webkit- | -moz-; ie11
             ], { 'unspecified': 'ignore' }
         ],
         'property-case': 'lower',
