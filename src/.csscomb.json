@@ -12,7 +12,7 @@
     "space-after-colon": " ",
     "space-before-combinator": " ",
     "space-after-combinator": " ",
-    "space-between-declarations": "\n",
+    "space-between-declarations": "\n\n",
     "space-before-opening-brace": " ",
     "space-after-opening-brace": "\n",
     "space-after-selector-delimiter": "\n",
@@ -22,7 +22,9 @@
     "tab-size": true,
     "unitless-zero": true,
     "sort-order": [
+        [ "$import" ],
         [ "$variable" ],
+        [ "$extend" ],
         [ "$include" ],
         [
             "position",
@@ -568,6 +570,7 @@
             "-ms-transform-style",
             "-o-transform-style",
             "transform-style"
-        ]
+        ],
+        [ "..." ]
     ]
 }

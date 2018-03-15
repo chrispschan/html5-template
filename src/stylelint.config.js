@@ -6,17 +6,23 @@ const stylelintConfig = {
         'at-rule-empty-line-before': [ 'always', {
             'except': [ 'blockless-after-blockless', 'first-nested' ],
             'ignore': [ 'after-comment' ],
-            'ignoreAtRules': [ 'if', 'else', 'array', 'of', 'at-rules']
+            'ignoreAtRules': [ 'if', 'else', 'array', 'of', 'at-rules', 'include']
         } ],
         'at-rule-name-case': 'lower',
         'at-rule-semicolon-newline-after': 'always',
         'block-closing-brace-newline-after': [ 'always-multi-line', {
             'ignoreAtRules': ['if', 'else']
         }],
-        'block-closing-brace-newline-before': 'always-multi-line',
+        'block-closing-brace-newline-before': [
+            'always-multi-line',
+            {'ignore': ['if', 'else', 'include']}
+        ],
         'block-closing-brace-space-before': 'always-single-line',
         'block-no-empty': true,
-        'block-opening-brace-newline-after': 'always-multi-line',
+        'block-opening-brace-newline-after': [
+            'always-multi-line',
+            {'ignore': ['if', 'else', 'include']}
+        ],
         'block-opening-brace-space-after': 'always-single-line',
         'block-opening-brace-space-before': 'always',
         'color-hex-case': 'lower',
