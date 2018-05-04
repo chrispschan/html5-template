@@ -82,7 +82,7 @@ export default class DeepLink {
             for (let i = 0; i < _ele.length; i++) {
                 _selfOptions = Object.assign({}, _options);
 
-                Element.getDataset(_ele[i].dataset);
+                Element.getDataset(_ele[i]);
 
                 if (_ele[i].dataset.deepLink) _selfOptions.deepLink = _ele[i].dataset.deepLink;
                 if (_ele[i].dataset.appName) _selfOptions.appName = _ele[i].dataset.appName;
