@@ -109,8 +109,6 @@ export default class DeepLink {
                         return true;
                     };
 
-                    console.log(_ele[i].onclick);
-
                     this._deepLinkEle.push(_ele[i]);
                 }
             }
