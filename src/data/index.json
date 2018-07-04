@@ -1,33 +1,103 @@
-﻿{
-"head": [
-{"id":"title","en":"HTML5 Template","zh":"HTML5 範本"},
-{"id":"description","en":"HTML5 template with Gulp.js","zh":"以 Gulp.js 建立 HTML 5 範本"},
-{"id":"keywords","en":"html5, template, gulp","zh":"html5, template, gulp"},
-{"id":"author","en":"Chris Chan","zh":"Chris Chan"},
-{"id":"copyright","en":"Chris Chan","zh":"Chris Chan"},
-{"id":"canonical","en":"/index.html","zh":"/index.html"},
-{"id":"ogImage","en":"","zh":""},
-{"id":"ogUrl","en":"","zh":""},
-{"id":"twImage","en":"","zh":""}
-],
-"list": [
-{"id":"absolute"},
-{"id":"relative"}
-],
-"plugin": [
-],
-"scripts": [
-],
-"style": [
-{"id":"style","type":"relative","file":"style.css"}
-],
-"content": [
-{"id":"h1","en":"HTML5 Template","zh":"HTML5 範本"},
-{"id":"content1","en":"HTML5 template with <a  href=\"https://gulpjs.com/\" target=\"_blank\">Gulp.js</a>","zh":"以 <a  href=\"https://gulpjs.com/\" target=\"_blank\">Gulp.js</a> 建立 HTML 5 範本"},
-{"id":"content2","en":"Development tools:","zh":"開發工具："},
-{"id":"tools","en":"<a  href=\"https://babeljs.io/\" target=\"_blank\">Babel</a>","zh":"<a  href=\"https://babeljs.io/\" target=\"_blank\">Babel</a>"},
-{"id":"tools","en":"<a  href=\"http://sass-lang.com/\" target=\"_blank\">SCSS</a>","zh":"<a  href=\"http://sass-lang.com/\" target=\"_blank\">SCSS</a>"},
-{"id":"hdTool","en":"<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>","zh":"<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>"},
-{"id":"nunjucksTool","en":"<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>","zh":"<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>"}
-]
+{
+  "head": [
+    {
+      "id": "title",
+      "en": "HTML5 Template",
+      "zh": "HTML5 範本"
+    },
+    {
+      "id": "description",
+      "en": "HTML5 template with Gulp.js",
+      "zh": "以 Gulp.js 建立 HTML 5 範本"
+    },
+    {
+      "id": "keywords",
+      "en": "html5, template, gulp",
+      "zh": "html5, template, gulp"
+    },
+    {
+      "id": "author",
+      "en": "Chris Chan",
+      "zh": "Chris Chan"
+    },
+    {
+      "id": "copyright",
+      "en": "Chris Chan",
+      "zh": "Chris Chan"
+    },
+    {
+      "id": "canonical",
+      "en": "/index.html",
+      "zh": "/index.html"
+    },
+    {
+      "id": "ogImage",
+      "en": "",
+      "zh": ""
+    },
+    {
+      "id": "ogUrl",
+      "en": "",
+      "zh": ""
+    },
+    {
+      "id": "twImage",
+      "en": "",
+      "zh": ""
+    }
+  ],
+  "list": [
+    {
+      "id": "absolute"
+    },
+    {
+      "id": "relative"
+    }
+  ],
+  "plugin": [],
+  "scripts": [],
+  "style": [
+    {
+      "id": "style",
+      "type": "relative",
+      "file": "style.css"
+    }
+  ],
+  "content": [
+    {
+      "id": "h1",
+      "en": "HTML5 Template",
+      "zh": "HTML5 範本"
+    },
+    {
+      "id": "content1",
+      "en": "HTML5 template with <a  href=\"https://gulpjs.com/\" target=\"_blank\">Gulp.js</a>",
+      "zh": "以 <a  href=\"https://gulpjs.com/\" target=\"_blank\">Gulp.js</a> 建立 HTML 5 範本"
+    },
+    {
+      "id": "content2",
+      "en": "Development tools:",
+      "zh": "開發工具："
+    },
+    {
+      "id": "tools",
+      "en": "<a  href=\"https://babeljs.io/\" target=\"_blank\">Babel</a>",
+      "zh": "<a  href=\"https://babeljs.io/\" target=\"_blank\">Babel</a>"
+    },
+    {
+      "id": "tools",
+      "en": "<a  href=\"http://sass-lang.com/\" target=\"_blank\">SCSS</a>",
+      "zh": "<a  href=\"http://sass-lang.com/\" target=\"_blank\">SCSS</a>"
+    },
+    {
+      "id": "hdTool",
+      "en": "<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>",
+      "zh": "<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>"
+    },
+    {
+      "id": "nunjucksTool",
+      "en": "<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>",
+      "zh": "<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>"
+    }
+  ]
 }

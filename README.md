@@ -34,7 +34,11 @@ Edit gulp.options.js to change Gulp.js tasks options.
 #### gulpOptions.server
 Setup localhost server options
 - root: string (default: `'./app/'`) - server root folder
-- port: string (default: `'9999'`) - server port
+- port: string (default: `'30000'`) - server port
+
+#### gulpOptions.cmsServer
+Setup CMS localhost server options
+- port: string (default: `'30001'`) - server port
 
 #### gulpOptions.outputFiles
 Build folder structure options. The folder structure will under `gulpOptions.server.root`.
@@ -98,6 +102,19 @@ Default:
 'scss:watch',   // keep watch scss files
 'content:watch' // keep watch page content json files
 ``` 
+### API
+Edit gulp.api.js to add API handle to localhost server.<br/>
+e.g.:
+```js
+const gulpAPI = [
+    {
+        route: '/api',
+        handle: (req, res, next) => {
+            res.end();
+        }
+    }
+];
+```
 
 ### Watch Files Location
 #### Fonts Files

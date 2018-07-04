@@ -1,4 +1,5 @@
 import fs from 'fs';
+import del from 'del';
 import gulp from 'gulp';
 import sourcemaps from 'gulp-sourcemaps';
 import source from 'vinyl-source-stream';
@@ -17,6 +18,7 @@ import ssi from 'connect-ssi';
 import htmlbeautify from 'gulp-html-beautify';
 import hb from 'gulp-hb';
 import nunjucksRender from 'gulp-nunjucks-render';
+import directoryMap from 'gulp-directory-map';
 
 import stylelint from 'stylelint';
 import postcss from 'gulp-postcss';
@@ -32,11 +34,19 @@ import manageEnvironment from './src/manageEnvironment.js';    // nunjucks envir
 import eslintConfig from './src/eslint.config.js';
 
 import gulpOptions from './gulp.options.js';
+import gulpApi from './gulp.api.js';
 
 const serve = browserSync.create(),
+cmsServe = browserSync.create(),
 product = {
     watchFiles: {    // gulp watch files
         serve: gulpOptions.server.root,
+        cmsServe: {
+            root: './cms/',
+            temp: 'cms/temp/',
+            output: 'src/data/',
+            folderMenu: 'folderMenu.json'
+        },
         fonts: ['./src/fonts/**/*', '!./src/fonts/**/_*'],
         img: ['./src/img/**/*', '!./src/img/**/_*', '!./src/img/_**/*'],
         favicon: './src/favicon.png',
@@ -76,6 +86,16 @@ demo = {
     }
 };
 
+// check is string a json format
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 let watchFiles = Object.assign({}, product.watchFiles), 
 outputFiles = {
     fonts: watchFiles.serve + product.outputFiles.fonts,
@@ -89,12 +109,123 @@ options = {
     serve: {
         server: watchFiles.serve,
         port: gulpOptions.server.port,
-        baseDir: watchFiles.serve,
+        baseDir: watchFiles.serve
+    },
+    cmsServe: {
+        server: watchFiles.cmsServe.root,
+        port: gulpOptions.cmsServer.port,
+        baseDir: watchFiles.cmsServe.root,
+        open: false,
+        ui: {
+            port: 3002
+        },
         middleware: [
             ssi({
-                baseDir: watchFiles.serve == './' ? __dirname : __dirname + watchFiles.serve.replace('./', '/'),
+                baseDir: watchFiles.cmsServe.root,
                 ext: '.html'
-            })
+            }),
+            {
+                route: '/api/getFolderStructure',
+                handle: (req, res, next) => {
+                    gulp.src(watchFiles.content)
+                        .pipe(directoryMap({
+                            filename: watchFiles.cmsServe.folderMenu
+                        }))
+                        .pipe(gulp.dest(watchFiles.cmsServe.root)).on('end', () => {
+                            fs.readFile(`${watchFiles.cmsServe.root.replace('./', '')}${watchFiles.cmsServe.folderMenu}`, 'utf8', (err, data) => {
+                                if (err) {
+                                    res.end(JSON.stringify({}));
+
+                                    return console.log(err);
+                                }
+                                if (isJson(data)) {
+                                    res.end(JSON.stringify(JSON.parse(data)));
+                                } else {
+                                    res.end(JSON.stringify({}));
+                                }
+                            });
+                        });
+                }
+            },
+            {
+                route: '/api/getJson',
+                handle: (req, res, next) => {
+                    let _data = '';
+                    let _path = '';
+
+                    req.on('data', function(chunk) {
+                        _data += chunk.toString();
+                        if (isJson(_data)) {
+                            _data = JSON.parse(_data);
+                            if (_data.temp === true) {
+                                _path = watchFiles.cmsServe.temp + _data.path;
+                            } else {
+                                _path = watchFiles.cmsServe.output + _data.path;
+                            }
+
+                            fs.stat(_path, function(err, stat) {
+                                if(err == null) {
+                                    _path = _path;
+                                } else if(err.code == 'ENOENT') {
+                                    if (_data.temp === true) _path = watchFiles.cmsServe.output + _data.path;
+                                    else _path = ''
+                                } else {
+                                    if (_data.temp === true) _path = watchFiles.cmsServe.output + _data.path;
+                                    else _path = ''
+                                }
+
+                                if (_path !== '') {
+                                    fs.readFile(_path, 'utf8', (err, data) => {
+                                        let _json = data;
+                                        if (err) {
+                                            res.end(JSON.stringify({}));
+
+                                            return console.log(err);
+                                        }
+
+                                        if (_json[0] !== '{' && _json[0] !== '[' && _json[0] !== '"') _json = _json.substr(1);
+                                        res.end(JSON.stringify(JSON.parse(_json)));
+                                    });
+                                } else {
+                                    res.end(JSON.stringify({}));
+                                }
+                            });
+                        }
+                    });
+                }
+            },
+            {
+                route: '/api/saveJson',
+                handle: (req, res, next) => {
+                    let _data = '';
+                    let _path = '';
+                    req.on('data', function(chunk) {
+                        _data += chunk.toString();
+                        if (isJson(_data)) {
+                            _data = JSON.parse(_data);
+                            if (_data.temp === true) {
+                                _path = watchFiles.cmsServe.temp + _data.path;
+                            } else {
+                                _path = watchFiles.cmsServe.output + _data.path;
+                            }
+
+                            if (typeof _data.path !== 'undefined' && typeof _data.json !== 'undefined') {
+                                fs.writeFile(_path, JSON.stringify(_data.json, null, 2), function(err) {
+                                    if(err) {
+                                        res.end(JSON.stringify({}));
+                                        // text = err;
+                                        return console.log(err);
+                                    }
+
+                                    res.end(JSON.stringify({}));
+                                });
+                            } else {
+                                res.end(JSON.stringify({}));
+                            }
+                        }
+                    });
+                }
+            }
         ]
     },
     favicon: gulpOptions.favicon,
@@ -114,12 +245,19 @@ contentData = {
 },
 htmlTemplate = gulpOptions.htmlTemplate,
 defaultTasks = gulpOptions.defaultTasks;
+
+gulpApi.push(ssi({
+    baseDir: watchFiles.serve == './' ? __dirname : __dirname + watchFiles.serve.replace('./', '/'),
+    ext: '.html'
+}));
+
+options.serve.middleware = gulpApi;
  
 gulp.task('default', () => {
     if (htmlTemplate == 'hb') defaultTasks.push('hb:watch');
     else defaultTasks.push('nunjucks:watch');
 
-    gulp.start(defaultTasks, ['server:setup']);
+    gulp.start(defaultTasks, ['cmsServer:setup', 'server:setup']);
 });
 
 // use handlebars develop
@@ -175,10 +313,16 @@ gulp.task('demo', () => {
     else defaultTasks.push('nunjucks:watch');
 
     gulp.start(defaultTasks);
-}),
+});
 
 // local server setup
 gulp.task('server:setup', () => serve.init(options.serve));
+
+// cms server setup
+gulp.task('cmsServer:setup', () => {
+    del([`./${watchFiles.cmsServe.temp}**/*.json`]);
+    return cmsServe.init(options.cmsServe);
+});
 
 // font copy
 gulp.task('fonts:copy', () => gulp.src(watchFiles.fonts).pipe(gulp.dest(outputFiles.fonts)));

@@ -1,7 +1,10 @@
 const gulpOptions = {
     server: {
         root: './app/',
-        port: '9999'
+        port: '30000'
+    },
+    cmsServer: {
+        port: '30001'
     },
     outputFiles: {
         fonts: 'fonts',
