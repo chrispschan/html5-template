@@ -42,6 +42,48 @@ const helpers = {
                                 for (let j=0; j<objectKey.length; j++)
                                     newVal[1] = newVal[1][objectKey[j]];
                                 break;
+                            case 'content':
+                                objectKey = newVal[1].split('.');
+                                newVal[1] = options.data.root._parent;
+                                if (typeof options.data.local.lang !== 'undefined') {
+                                    lang = options.data.local.lang;
+                                }
+
+                                for (let j=0; j<objectKey.length; j++) {
+                                    newVal[1] = newVal[1][objectKey[j]];
+
+                                    if (lang !== null) {
+                                        for (let k in newVal[1]) {
+                                            _newVal[k] = {};
+
+                                            if (k === 'iconText' || k === 'option') {
+                                                for (let l = 0; l < newVal[1][k].length; l++) {
+                                                    _newObj = newVal[1][k][l];
+                                                    _newObj.text = newVal[1][k][l][lang];
+
+                                                    if (typeof _newVal[k][newVal[1][k][l].id] === 'undefined')
+                                                        _newVal[k][newVal[1][k][l].id] = [_newObj];
+                                                    else if (Array.isArray(_newVal[k][newVal[1][k][l].id])) {
+                                                        _newVal[k][newVal[1][k][l].id].push(_newObj);
+                                                    }
+                                                }
+                                            } else {
+                                                for (let l = 0; l < newVal[1][k].length; l++) {
+                                                    if (typeof _newVal[k][newVal[1][k][l].id] === 'undefined')
+                                                        _newVal[k][newVal[1][k][l].id] = newVal[1][k][l][lang];
+                                                    else if (Array.isArray(_newVal[k][newVal[1][k][l].id])) {
+                                                        _newVal[k][newVal[1][k][l].id].push(newVal[1][k][l][lang]);
+                                                    } else {
+                                                        _newVal[k][newVal[1][k][l].id] = [_newVal[k][newVal[1][k][l].id], newVal[1][k][l][lang]];
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        newVal[1] = _newVal;
+                                    }
+                                }
+                                break;
                             case 'string':
                             default:
                                 break;
