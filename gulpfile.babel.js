@@ -43,8 +43,10 @@ product = {
         serve: gulpOptions.server.root,
         cmsServe: {
             root: './cms/',
-            temp: 'cms/temp/',
+            temp: 'cms/temp/data/',
+            scssTemp: 'cms/temp/app/',
             output: 'src/data/',
+            scssOutput: 'src/app/',
             folderMenu: 'folderMenu.json'
         },
         fonts: ['./src/fonts/**/*', '!./src/fonts/**/_*'],
@@ -58,7 +60,8 @@ product = {
         nunjucks: ['./src/app/'],    // nunjucks partials
         handlebars: ['./src/html/**/*.handlebars', './src/html/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs'],
         html: ['./src/html/**/*.html', '!./src/html/**/_*.html'],
-        content: ['./src/data/**/*.json', '!./src/data/**/_*.json']    // html content json
+        content: ['./src/data/**/*.json', '!./src/data/**/_*.json'],    // html content json
+        scssVal: ['./src/app/**/*.variables.scss', '!./src/app/**/_*.variables.scss']
     }, 
     outputFiles: gulpOptions.outputFiles
 }, 
@@ -87,13 +90,96 @@ demo = {
 };
 
 // check is string a json format
-function isJson(str) {
+function isJson (str) {
     try {
         JSON.parse(str);
     } catch (e) {
         return false;
     }
     return true;
+}
+
+// scss variables to json format
+function scss2json (str) {
+    let _strArr = str.replace(new RegExp('\r', 'g'), '').split('\n'),
+        _item,
+        _json = [];
+
+    for (let i = 0; i < _strArr.length; i++) {
+        if (_strArr[i] !== '') {
+            _item = _strArr[i].split('    // ');
+
+            if (_item[0].substr(0, 2) === '//' || _item[0].search('@import') !== -1) {
+                _json.push(_item.length > 1 ? `${_item[0]}${_item[1]}` : _item[0]);
+            } else {
+                _item[0] = _item[0].split(': ');
+
+                if (_item[0].length > 1) {
+                    _item[0][1] = _item[0][1].replace(';', '');
+                    if (_item[0][1][0] === '(' && _item[0][1][_item[0][1].length - 1] === ')') {
+                        _item[0][1] = _item[0][1].substr(1, _item[0][1].length - 2).split(', ');
+                    }
+                }
+
+                _json.push({id: _item[0][0].substr(1), value: _item[0][1], comment:(_item.length > 1 ? _item[1] : '')});
+            }
+        }
+    }
+
+    return _json;
+}
+
+// json object to scss variables
+function json2scss (item) {
+    let _scss = '',
+        _keys,
+        _new;
+
+    if (typeof item === 'object' && !Array.isArray(item)) {
+        _keys = Object.keys(item);
+
+        if (_keys.length === 1) {
+            _scss = '$' + _keys[0] + ': ' + item[_keys[0]] + ';\n';
+        } else if (_keys.length > 0) {
+            if (_keys.indexOf('id') !== -1 && _keys.indexOf('value') !== -1) {
+                if (typeof item.value === 'string')
+                    _scss = `$${item.id}: ${item.value};`;
+                else if (Array.isArray(item.value)) {
+                    _scss = `$${item.id}: (`;
+                    for (let i = 0; i < item.value.length; i++) {
+                        if (i !== 0)
+                            _scss += ', ';
+                        _scss += `${item.value[i]}`;
+                    }
+                    _scss += ');';
+                }
+
+                if (typeof item.comment === 'string') {
+                    if (item.comment !== '')
+                        _scss += `    // ${item.comment}`;
+                }
+
+                _scss += '\n';
+            } else {
+                for (let k in item) {
+                    _new = json2scss(item[k]);
+                    if (_scss !== '' && _new.search('//') === 0)
+                        _scss += '\n';
+                    _scss += _new;
+                }
+            }
+        }
+    } else if (Array.isArray(item)) {
+        for (let i = 0; i < item.length; i++) {
+            _new = json2scss(item[i]);
+            if (_scss !== '' && _new.search('//') === 0)
+                _scss += '\n';
+            _scss += _new;
+        }
+    } else if (typeof item === 'string')
+        _scss = `${item}\n`;
+    
+    return _scss;
 }
 
 let watchFiles = Object.assign({}, product.watchFiles), 
@@ -127,24 +213,36 @@ options = {
             {
                 route: '/api/getFolderStructure',
                 handle: (req, res, next) => {
-                    gulp.src(watchFiles.content)
-                        .pipe(directoryMap({
-                            filename: watchFiles.cmsServe.folderMenu
-                        }))
-                        .pipe(gulp.dest(watchFiles.cmsServe.root)).on('end', () => {
-                            fs.readFile(`${watchFiles.cmsServe.root.replace('./', '')}${watchFiles.cmsServe.folderMenu}`, 'utf8', (err, data) => {
-                                if (err) {
-                                    res.end(JSON.stringify({}));
+                    let _data = '',
+                        _watch;
 
-                                    return console.log(err);
-                                }
-                                if (isJson(data)) {
-                                    res.end(JSON.stringify(JSON.parse(data)));
-                                } else {
-                                    res.end(JSON.stringify({}));
-                                }
-                            });
-                        });
+                    req.on('data', function(chunk) {
+                        _data += chunk.toString();
+                        if (isJson(_data)) {
+                            _data = JSON.parse(_data);
+
+                            _watch = _data.type === 'style' ? watchFiles.scssVal : watchFiles.content;
+
+                            gulp.src(_watch)
+                                .pipe(directoryMap({
+                                    filename: watchFiles.cmsServe.folderMenu
+                                }))
+                                .pipe(gulp.dest(watchFiles.cmsServe.root)).on('end', () => {
+                                    fs.readFile(`${watchFiles.cmsServe.root.replace('./', '')}${watchFiles.cmsServe.folderMenu}`, 'utf8', (err, data) => {
+                                        if (err) {
+                                            res.end(JSON.stringify({}));
+
+                                            return console.log(err);
+                                        }
+                                        if (isJson(data)) {
+                                            res.end(JSON.stringify(JSON.parse(data)));
+                                        } else {
+                                            res.end(JSON.stringify({}));
+                                        }
+                                    });
+                                });
+                        }
+                    });
                 }
             },
             {
@@ -152,39 +250,51 @@ options = {
                 handle: (req, res, next) => {
                     let _data = '';
                     let _path = '';
+                    let _temp = watchFiles.cmsServe.temp;
+                    let _output = watchFiles.cmsServe.output;
 
                     req.on('data', function(chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
-                            if (_data.temp === true) {
-                                _path = watchFiles.cmsServe.temp + _data.path;
-                            } else {
-                                _path = watchFiles.cmsServe.output + _data.path;
+                            if (_data.path.search('.scss') !== -1) {
+                                _temp = watchFiles.cmsServe.scssTemp;
+                                _output = watchFiles.cmsServe.scssOutput;
                             }
+                            if (_data.temp === true) {
+                                _path = _temp + _data.path;
+                            } else {
+                                _path = _output + _data.path;
+                            }
+                            
 
                             fs.stat(_path, function(err, stat) {
                                 if(err == null) {
                                     _path = _path;
                                 } else if(err.code == 'ENOENT') {
-                                    if (_data.temp === true) _path = watchFiles.cmsServe.output + _data.path;
+                                    if (_data.temp === true) _path = _output + _data.path;
                                     else _path = ''
                                 } else {
-                                    if (_data.temp === true) _path = watchFiles.cmsServe.output + _data.path;
+                                    if (_data.temp === true) _path = _output + _data.path;
                                     else _path = ''
                                 }
 
                                 if (_path !== '') {
                                     fs.readFile(_path, 'utf8', (err, data) => {
-                                        let _json = data;
+                                        let _json = _data.path.search('.scss') !== -1 && _path.search('cms/') !== 0 ? scss2json(data) : data;
+
                                         if (err) {
                                             res.end(JSON.stringify({}));
 
                                             return console.log(err);
                                         }
 
-                                        if (_json[0] !== '{' && _json[0] !== '[' && _json[0] !== '"') _json = _json.substr(1);
-                                        res.end(JSON.stringify(JSON.parse(_json)));
+                                        if (typeof _json === 'string') {
+                                            if (_json[0] !== '{' && _json[0] !== '[' && _json[0] !== '"') _json = _json.substr(1);
+                                            res.end(JSON.stringify(JSON.parse(_json)));
+                                        } else
+                                            res.end(JSON.stringify(_json));
+                                        
                                     });
                                 } else {
                                     res.end(JSON.stringify({}));
@@ -199,18 +309,36 @@ options = {
                 handle: (req, res, next) => {
                     let _data = '';
                     let _path = '';
+                    let _pathArr;
+                    let _dir = '.';
+                    let _temp = watchFiles.cmsServe.temp;
+                    let _output = watchFiles.cmsServe.output;
+                    let _newData;
                     req.on('data', function(chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
+                            if (_data.path.search('.scss') !== -1) {
+                                _temp = watchFiles.cmsServe.scssTemp;
+                                _output = watchFiles.cmsServe.scssOutput;
+                            }
                             if (_data.temp === true) {
-                                _path = watchFiles.cmsServe.temp + _data.path;
+                                _path = _temp + _data.path;
                             } else {
-                                _path = watchFiles.cmsServe.output + _data.path;
+                                _path = _output + _data.path;
                             }
 
                             if (typeof _data.path !== 'undefined' && typeof _data.json !== 'undefined') {
-                                fs.writeFile(_path, JSON.stringify(_data.json, null, 2), function(err) {
+                                _pathArr = _path.split('/');
+                                _newData = _data.path.search('.scss') !== -1 && _path.search('cms') === -1 ? json2scss(_data.json) : JSON.stringify(_data.json, null, 2);
+                                for (let i = 0; i < _pathArr.length - 1; i++) {
+                                    _dir += `/${_pathArr[i]}`;
+
+                                    if (!fs.existsSync(_dir))
+                                        fs.mkdirSync(_dir);
+                                }
+
+                                fs.writeFile(_path, _newData, function(err) {
                                     if(err) {
                                         res.end(JSON.stringify({}));
                                         // text = err;
@@ -320,7 +448,7 @@ gulp.task('server:setup', () => serve.init(options.serve));
 
 // cms server setup
 gulp.task('cmsServer:setup', () => {
-    del([`./${watchFiles.cmsServe.temp}**/*.json`]);
+    del([`./${watchFiles.cmsServe.temp}**/*.json`, `./${watchFiles.cmsServe.temp}**/*.scss`]);
     return cmsServe.init(options.cmsServe);
 });
 
