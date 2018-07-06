@@ -1,0 +1,115 @@
+@import "default.variables.scss";
+
+@mixin default-reset {
+    body,
+    html {
+        position: relative;
+
+        height: 100%;
+        width: 100%;
+
+        overflow: auto;
+
+        padding: 0;
+
+        margin: 0;
+
+        background-color: $background-color;
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    nav,
+    section {
+        display: block;
+    }
+
+    p, h1, h2, h3, h4, h5, h6, ul, ol, table {
+        margin-top: 0;
+        margin: 0 0 $base-margin;
+    }
+
+    audio,
+    canvas,
+    video {
+        display: inline-block;
+    }
+
+    audio:not([controls]) {
+        display: none;
+    }
+
+    [hidden] {
+        display: none;
+    }
+
+    blockquote {
+        margin: 0;
+    }
+    pre {
+        word-wrap: break-word; 
+        white-space: pre;
+        white-space: pre-wrap;
+    }
+    q {
+        quotes: none;
+    }
+    q:before,
+    q:after {
+        content: "";
+        content: none;
+    }
+    sub,
+    sup {
+        position: relative;
+
+        line-height: 0;
+
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+    img {
+        display: block; 
+
+        border: 0;
+
+        vertical-align: middle;
+
+        -ms-interpolation-mode: bicubic;
+    }
+    svg:not(:root) {
+        overflow: hidden;
+    }
+    figure {
+        margin: 0;
+    }
+
+    form {
+        margin: 0;
+    }
+
+    fieldset {
+        padding: 0; 
+
+        margin: 0;
+
+        border: 0;
+    }
+
+    legend {
+        padding: 0; 
+
+        border: 0;
+    }
+}

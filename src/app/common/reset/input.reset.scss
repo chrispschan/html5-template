@@ -1,0 +1,65 @@
+@import "default.variables.scss";
+@import "input.variables.scss";
+
+@mixin input-reset {
+    :-ms-input-placeholder {
+        // Internet Explorer 10-11
+        color: $input-placeholder-color;
+    }
+
+    ::-ms-input-placeholder {
+        // Microsoft Edge
+        color: $input-placeholder-color;
+    }
+
+    ::placeholder {
+        color: $input-placeholder-color;
+
+        opacity: 1; // Firefox
+    }
+
+    label {
+        cursor: pointer;
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 0;
+
+        margin: 0;
+
+        border: 1px solid $input-border-color;
+
+        outline: 0 none;
+
+        color: $input-font-color;
+
+        vertical-align: baseline;
+
+        text-shadow: none;
+
+        background-color: $input-background-color;
+
+        &:focus {
+            outline: $focus-outlin;
+        }
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        box-sizing: border-box;
+    }
+
+    input[type="search"] {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+
+        -webkit-appearance: textfield;
+
+        &::-webkit-search-decoration {
+            -webkit-appearance: none;
+        }
+    }
+}

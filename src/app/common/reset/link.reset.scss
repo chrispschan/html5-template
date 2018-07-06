@@ -1,0 +1,23 @@
+@import "default.variables.scss";
+@import "link.variables.scss";
+
+@mixin link-reset {
+    a {
+        outline: 0 none;
+
+        color: $link-color;
+        text-decoration: none;
+
+        &:hover {
+            color: $link-hover-color;
+        }
+
+        &:visited {
+            color: $link-visited;
+        }
+
+        &:focus {
+            outline: $focus-outlin;
+        }
+    }
+}

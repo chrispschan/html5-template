@@ -1,0 +1,22 @@
+@import "color.variables.scss";
+
+// color setup
+// loop by $color-fullList(color.variables.scss)
+@mixin color-class($color-list:$color-fullList) {
+    @for $i from 1 through length($color-list) {
+        // font-color
+        .#{nth(nth($color-list, $i), 1)} {
+            color: nth(nth($color-list, $i), 2);
+        }
+
+        // background-color
+        .#{nth(nth($color-list, $i), 1)}-background {
+            background-color: nth(nth($color-list, $i), 2);
+        }
+
+        // border-color
+        .#{nth(nth($color-list, $i), 1)}-border {
+            border-color: nth(nth($color-list, $i), 2);
+        }
+    }
+}

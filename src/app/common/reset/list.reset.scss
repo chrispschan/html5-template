@@ -1,0 +1,24 @@
+@import "list.variables.scss";
+
+@mixin list-reset {
+    ol,
+    ul {
+        padding: 0 0 0 $list-padding-left;
+    }
+
+    ol {
+        list-style-type: $ol-style-type;
+    }
+
+    ul {
+        list-style-type: $ul-style-type;
+    }
+
+    li {
+        margin: 0;
+
+         + li {
+            margin-top: $li-margin;
+        }
+    }
+}

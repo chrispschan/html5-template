@@ -1,0 +1,20 @@
+@import "default.reset.scss";
+@import "button.reset.scss";
+@import "font.reset.scss";
+@import "input.reset.scss";
+@import "link.reset.scss";
+@import "list.reset.scss";
+@import "table.reset.scss";
+
+// reset browser style
+@mixin reset {
+    @include default-reset();
+    @include button-reset();
+    @include font-reset();
+    @include input-reset();
+    @include link-reset();
+    @include list-reset();
+    @include table-reset();
+
+    @content;
+}

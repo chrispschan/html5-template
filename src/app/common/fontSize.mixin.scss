@@ -1,0 +1,63 @@
+@import "fontSize.variables.scss";
+@import "unit.function.scss";
+
+// font-size setup
+// loop by $font-size-fullList(fontSize.variables.scss)
+@mixin font-size-class($font-size-list:$font-size-fullList, $font-unit:px) {
+    $fontClass: "";
+    @for $i from 1 through length($font-size-list) {
+        // if default html tag, set <tag> font-size
+        @if nth(nth($font-size-list, $i), 1) == "h1" or 
+        nth(nth($font-size-list, $i), 1) == "h2" or 
+        nth(nth($font-size-list, $i), 1) == "h3" or 
+        nth(nth($font-size-list, $i), 1) == "h4" or 
+        nth(nth($font-size-list, $i), 1) == "h5" or 
+        nth(nth($font-size-list, $i), 1) == "h6" or
+        nth(nth($font-size-list, $i), 1) == "p" or
+        nth(nth($font-size-list, $i), 1) == "li" or
+        nth(nth($font-size-list, $i), 1) == "td" or
+        nth(nth($font-size-list, $i), 1) == "th" or
+        nth(nth($font-size-list, $i), 1) == "label" or
+        nth(nth($font-size-list, $i), 1) == "small" or
+        nth(nth($font-size-list, $i), 1) == "sub" or
+        nth(nth($font-size-list, $i), 1) == "sup" {
+            $fontClass: nth(nth($font-size-list, $i), 1) + ", ." + nth(nth($font-size-list, $i), 1);
+        } @else {
+            $fontClass: "." + nth(nth($font-size-list, $i), 1);
+        }
+
+        #{$fontClass} {
+            @if $font-unit == em or $font-unit == rem {
+                font-size: px2rem(nth(nth(nth($font-size-list, $i), 2), 1), $font-unit: $font-unit);
+            } @else if $font-unit == vw {
+                font-size: px2vw(nth(nth(nth($font-size-list, $i), 2), 1));
+            } @else {
+                font-size: nth(nth(nth($font-size-list, $i), 2), 1);
+            }
+            line-height: nth(nth(nth($font-size-list, $i), 2), 2) / nth(nth(nth($font-size-list, $i), 2), 1);
+        }
+
+        // without line-height
+        .#{nth(nth($font-size-list, $i), 1)}-size {
+            @if $font-unit == em or $font-unit == rem {
+                font-size: px2rem(nth(nth(nth($font-size-list, $i), 2), 1), $font-unit: $font-unit);
+            } @else if $font-unit == vw {
+                font-size: px2vw(nth(nth(nth($font-size-list, $i), 2), 1));
+            } @else {
+                font-size: nth(nth(nth($font-size-list, $i), 2), 1);
+            }
+        }
+
+        // if $font-unit not px, add class for set font-size to px
+        @if $font-unit != px {
+            .#{nth(nth($font-size-list, $i), 1)}px {
+                font-size: nth(nth(nth($font-size-list, $i), 2), 1);
+                line-height: nth(nth(nth($font-size-list, $i), 2), 2) / nth(nth(nth($font-size-list, $i), 2), 1);
+            }
+
+            .#{nth(nth($font-size-list, $i), 1)}px-size {
+                font-size: nth(nth(nth($font-size-list, $i), 2), 1);
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@import "table.variables.scss";
+
+@mixin table-reset {
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+
+        border: 1px solid $table-border-color;
+    }
+
+    td,
+    th {
+        padding: 0;
+
+        font-weight: normal;
+
+        vertical-align: top;
+    }
+
+    th {
+        border: 1px solid $table-head-border-color;
+
+        color: $table-head-font-color;
+
+        background-color: $table-head-background-color;
+    }
+
+    td {
+        border: 1px solid $table-body-border-color;
+
+        color: $table-body-font-color;
+
+        background-color: $table-body-background-color;
+    }
+}

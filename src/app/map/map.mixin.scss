@@ -1,4 +1,4 @@
-@import "map.variables.scss";
+@import "map.default.scss";
 
 // set element size
 @mixin setEleSize($proportion: (16, 9), $width: 100%, $height: 0, $resetPadding: false) {

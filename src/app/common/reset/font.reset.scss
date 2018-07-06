@@ -1,0 +1,38 @@
+@import "font.variables.scss";
+
+@mixin font-reset {
+    *{
+        text-rendering: optimizeLegibility;
+    }
+    
+    body,
+    html {
+        color: $black;
+        font-family: $font-family;
+        font-size: nth($base-font-size, 1);
+
+        line-height: nth($base-font-size, 2) / nth($base-font-size, 1);
+    }
+
+    ::-moz-selection {
+        // Firefox
+        color: $font-selection-color;
+
+        text-shadow: none;
+
+        background-color: $font-selection-background-color;
+    }
+
+    ::selection {
+        color: $font-selection-color;
+
+        text-shadow: none;
+
+        background-color: $font-selection-background-color;
+    }
+
+    b,
+    strong {
+        font-weight: bold;
+    }
+}

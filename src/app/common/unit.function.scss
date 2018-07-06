@@ -1,0 +1,22 @@
+@import "unit.default.scss";
+
+// px to rem / em
+@function px2rem($toPx,$basePx:nth($base-font-size, 1), $font-unit:rem){
+    $font-size:1;
+
+    @if ($font-unit != em and $font-unit != rem) {
+        $font-unit:em;
+    }
+
+    $font-size: $toPx/$basePx;
+    @return ($font-size+$font-unit);
+}
+
+// px to vw/vh
+// ie9+
+@function px2vw($toPx,$vSize:$base-viewport-width, $font-unit:vw){
+    @if ($font-unit != vw and $font-unit != vh) {
+        $font-unit:vw;
+    }
+    @return ($toPx/$vSize*100+$font-unit);
+}

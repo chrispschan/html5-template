@@ -1,0 +1,29 @@
+@import "default.variables.scss";
+@import "button.variables.scss";
+
+@mixin button-reset {
+    button,
+    input[type="button"],
+    input[type="reset"],
+    input[type="submit"] {
+        padding: 0;
+
+        margin: 0;
+
+        border: 1px solid $button-border-color;
+
+        outline: 0 none;
+
+        color: $button-font-color;
+
+        vertical-align: baseline;
+
+        text-shadow: none;
+
+        background-color: $button-background-color;
+
+        &:focus {
+            outline: $focus-outlin;
+        }
+    }
+}

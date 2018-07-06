@@ -20,15 +20,10 @@ import hb from 'gulp-hb';
 import nunjucksRender from 'gulp-nunjucks-render';
 import directoryMap from 'gulp-directory-map';
 
-import stylelint from 'stylelint';
-import postcss from 'gulp-postcss';
-import reporter from 'postcss-reporter';
-import syntaxScss from 'postcss-scss';
 import eslint from 'gulp-eslint';
 
 import accessibility from 'gulp-accessibility';
 
-import stylelintConfig from './src/stylelint.config.js';
 import helpers from './src/helpers.js';    // handlebars helpers
 import manageEnvironment from './src/manageEnvironment.js';    // nunjucks environment
 import eslintConfig from './src/eslint.config.js';
@@ -115,13 +110,20 @@ function scss2json (str) {
                 _item[0] = _item[0].split(': ');
 
                 if (_item[0].length > 1) {
-                    _item[0][1] = _item[0][1].replace(';', '');
-                    if (_item[0][1][0] === '(' && _item[0][1][_item[0][1].length - 1] === ')') {
-                        _item[0][1] = _item[0][1].substr(1, _item[0][1].length - 2).split(', ');
-                    }
-                }
+                    if (_item[0][0].search('-fullList') === -1) {
+                        _item[0][1] = _item[0][1].replace(';', '');
+                        if (_item[0][1][0] === '(' && _item[0][1][_item[0][1].length - 1] === ')') {
+                            _item[0][1] = _item[0][1].substr(1, _item[0][1].length - 2).split(', ');
+                        }
 
-                _json.push({id: _item[0][0].substr(1), value: _item[0][1], comment:(_item.length > 1 ? _item[1] : '')});
+                        _json.push({id: _item[0][0].substr(1), value: _item[0][1], comment:(_item.length > 1 ? _item[1] : '')});
+                    } else {
+                        _json.push({id: _item[0][0].substr(1), value: 'will auto gem', comment:(_item.length > 1 ? _item[1] : '')});
+                    }
+                    
+                } else {
+                    _json.push(`${_item[0]}${_item.length > 1 ? `    ${_item[1]}` : ''}`);
+                }
             }
         }
     }
@@ -170,7 +172,13 @@ function json2scss (item) {
             }
         }
     } else if (Array.isArray(item)) {
+        let _fullList = [];
         for (let i = 0; i < item.length; i++) {
+            if (typeof item[i].id !== 'undefined' && typeof item[i].value !== 'undefined') {
+                if (item[i].id.search('-fullList') === -1)
+                    _fullList.push(`(\"${item[i].id}\", $${item[i].id})`);
+                else item[i].value = _fullList;
+            }
             _new = json2scss(item[i]);
             if (_scss !== '' && _new.search('//') === 0)
                 _scss += '\n';
@@ -513,16 +521,7 @@ gulp.task(
 gulp.task(
     'scss:build', 
     () =>    {
-        let processors = [
-                stylelint(stylelintConfig),
-                reporter({
-                        clearMessages: true,
-                        throwError: true
-                })
-            ];
-
         return gulp.src(watchFiles.scss)
-            .pipe(postcss(processors, {syntax: syntaxScss}))
             .pipe(sourcemaps.init())    // sourcemaps
             .pipe(sass({importer: moduleImporter(), outputStyle: 'compressed'}).on('error', sass.logError))    // minify --> outputStyle: 'compressed'
             .pipe(sourcemaps.write('./'))    // sourcemaps
