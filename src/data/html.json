@@ -18,11 +18,7 @@
     }
   },
   "viewport": {
-    "device": {
-      "viewport": "width=device-width, initial-scale=1.0"
-    },
-    "fixed": {
-      "viewport": "width=640, initial-scale=1, user-scalable=no"
-    }
+    "device": "width=device-width, initial-scale=1.0",
+    "fixed": "width=640, initial-scale=1, user-scalable=no"
   }
 }
