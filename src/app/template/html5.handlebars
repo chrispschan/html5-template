@@ -3,12 +3,12 @@
 {{/setVal}}
 
 <!DOCTYPE html>
-<html lang="{{~#eachContent html.lang @local.lang "code" ~}}{{{this}}}{{~/eachContent~}}" dir="ltr">
+<html lang="{{~#eachContent html.lang "" @local.lang ~}}{{{this.code}}}{{~/eachContent~}}" dir="ltr">
 <head>
     {{> template/meta}}
     {{{block "meta"}}}
 
-    <title>{{~#eachContent @local.page.head "title" @local.lang ~}}{{{this}}}{{~/eachContent~}}</title>
+    <title>{{~#eachContent @local.page.head.title "" @local.lang ~}}{{{this}}}{{~/eachContent~}}</title>
     
     <!-- Standard favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -17,7 +17,7 @@
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="/coast-228x228.png">
     <!-- Helps prevent duplicate content issues -->
-    <link rel="canonical" href="{{~#eachContent @local.page.head "canonical" @local.lang ~}}{{{this}}}{{~/eachContent~}}">
+    <link rel="canonical" href="{{~#eachContent @local.page.head.canonical "" @local.lang ~}}{{{this}}}{{~/eachContent~}}">
 
     {{> template/style}}
     {{{block "style"}}}

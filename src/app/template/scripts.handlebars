@@ -1,13 +1,9 @@
 <!-- scripts -->
 {{#each @local.page.plugin as |files|}}
     {{~#ifCond files.type "===" "relative" ~}}
-        {{~#eachContent files.file "" "" ~}}
-            <script type="text/javascript" src="{{@local.path.css}}{{{this}}}"></script>
-        {{~/eachContent~}}
+        <script type="text/javascript" src="{{@local.path.css}}{{{files.file}}}"></script>
     {{else}}
-        {{~#eachContent files.file "" "" ~}}
-            <script type="text/javascript" src="{{{this}}}"></script>
-        {{~/eachContent~}}
+        <script type="text/javascript" src="{{{files.file}}}"></script>
     {{~/ifCond}}
 {{~/each}}
 {{#if path.babel ~}}
@@ -15,12 +11,8 @@
 {{~/if}}
 {{#each @local.page.scripts as |files|}}
     {{~#ifCond files.type "===" "relative" ~}}
-        {{~#eachContent files.file "" "" ~}}
-            <script type="text/javascript" src="{{@local.path.css}}{{{this}}}"></script>
-        {{~/eachContent~}}
+        <script type="text/javascript" src="{{@local.path.css}}{{{files.file}}}"></script>
     {{else}}
-        {{~#eachContent files.file "" "" ~}}
-            <script type="text/javascript" src="{{{this}}}"></script>
-        {{~/eachContent~}}
+        <script type="text/javascript" src="{{{files.file}}}"></script>
     {{~/ifCond}}
 {{~/each}}

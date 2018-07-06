@@ -1,12 +1,8 @@
 <!-- style -->
 {{#each @local.page.style as |files|}}
     {{~#ifCond files.type "===" "relative" ~}}
-        {{~#eachContent files.file "" "" ~}}
-            <link rel="stylesheet" type="text/css" href="{{@local.path.css}}{{{this}}}" />
-        {{~/eachContent~}}
+        <link rel="stylesheet" type="text/css" href="{{@local.path.css}}{{{files.file}}}" />
     {{else}}
-        {{~#eachContent files.file "" "" ~}}
-            <link rel="stylesheet" type="text/css" href="{{{this}}}" />
-        {{~/eachContent~}}
+        <link rel="stylesheet" type="text/css" href="{{{files.file}}}" />
     {{~/ifCond}}
 {{~/each}}

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="{%- for i in html.lang | findContent(lang, 'code') -%}{{- i -}}{%- endfor -%}" dir="ltr">
+<html lang="{{- html.lang[lang].code -}}" dir="ltr">
 <head>
     {% include 'template/meta.html' %}
     {% block meta %}{% endblock %}
 
-    <title>{%- for i in page.head | findContent('title', lang) -%}{{- i -}}{%- endfor -%}</title>
+    <title>{{- page.head.title[lang] -}}</title>
 
     <!-- Standard favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -13,7 +13,7 @@
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="/coast-228x228.png">
     <!-- Helps prevent duplicate content issues -->
-    <link rel="canonical" href="{%- for i in page.head | findContent('canonical', lang) -%}{{- i -}}{%- endfor -%}">
+    <link rel="canonical" href="{{- page.head.canonical[lang] -}}">
 
     {% include 'template/style.html' %}
     {% block style %}{% endblock %}

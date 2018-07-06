@@ -14,24 +14,18 @@
     <!-- .innerWrapper -->
     <div class="innerWrapper">
         <h1>
-            {%- for i in page.content | findContent('h1', lang) -%}
-                {{- i | safe -}}
-            {%- endfor -%}
+            {{- page.content.h1[lang] | safe -}}
         </h1>
 
-        {% for i in page.content | findContent('content1', lang) -%}
-            <p>{{- i | safe -}}</p>
-        {%- endfor %}
+        <p>{{- page.content.content1[lang] | safe -}}</p>
 
-        {% for i in page.content | findContent('content2', lang) -%}
-            <p><strong>{{- i | safe -}}</strong></p>
-        {%- endfor %}
+        <p><strong>{{- page.content.content2[lang] | safe -}}</strong></p>
 
         <ul>
-            {%- for i in page.content | findContent('tools', lang) -%}
+            {%- for i in page.content.tools[lang] -%}
                 <li>{{- i | safe -}}</li>
             {%- endfor %}
-            {%- for i in page.content | findContent('nunjucksTool', lang) -%}
+            {%- for i in page.content.nunjucksTool[lang] -%}
                 <li>{{- i | safe -}}</li>
             {%- endfor %}
         </ul>

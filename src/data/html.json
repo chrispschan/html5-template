@@ -1,34 +1,28 @@
 {
-  "lang": [
-    {
-      "id": "en",
+  "lang": {
+    "en": {
       "code": "en",
       "name": "English"
     },
-    {
-      "id": "zh",
+    "zh": {
       "code": "zh",
       "name": "Chinese"
     },
-    {
-      "id": "tc",
+    "tc": {
       "code": "zh-Hant",
       "name": "Chinese"
     },
-    {
-      "id": "sc",
+    "sc": {
       "code": "zh-Hans",
       "name": "Chinese"
     }
-  ],
-  "viewport": [
-    {
-      "id": "device",
+  },
+  "viewport": {
+    "device": {
       "viewport": "width=device-width, initial-scale=1.0"
     },
-    {
-      "id": "fixed",
+    "fixed": {
       "viewport": "width=640, initial-scale=1, user-scalable=no"
     }
-  ]
+  }
 }

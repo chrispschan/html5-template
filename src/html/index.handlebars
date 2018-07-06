@@ -16,24 +16,24 @@
     <!-- .innerWrapper -->
     <div class="innerWrapper">
         <h1>
-            {{~#eachContent @local.page.content "h1" @local.lang ~}}
+            {{~#eachContent @local.page.content.h1 "" @local.lang ~}}
                 {{{this}}}
             {{~/eachContent~}}
         </h1>
 
-        {{#eachContent @local.page.content "content1" @local.lang}}
+        {{#eachContent @local.page.content.content1 "" @local.lang}}
             <p>{{{this}}}</p>
         {{/eachContent}}
 
-        {{#eachContent @local.page.content "content2" @local.lang}}
+        {{#eachContent @local.page.content.content2 "" @local.lang}}
             <p><strong>{{{this}}}</strong></p>
         {{/eachContent}}
 
         <ul>
-            {{#eachContent @local.page.content "tools" @local.lang}}
+            {{#eachContent @local.page.content.tools "" @local.lang}}
                 <li>{{{this}}}</li>
             {{/eachContent}}
-            {{#eachContent @local.page.content "hdTool" @local.lang}}
+            {{#eachContent @local.page.content.hdTool "" @local.lang}}
                 <li>{{{this}}}</li>
             {{/eachContent}}
         </ul>
