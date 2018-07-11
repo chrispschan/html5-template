@@ -47,7 +47,8 @@ const gulpOptions = {
             'wrap_line_length': 0,
             'wrap_attributes': 'auto',
             'wrap_attributes_indent_size': 4,
-            'end_with_newline': false
+            'end_with_newline': false,
+            "unformatted": ["img", "code", "pre", "sub", "sup", "em", "strong", "b", "i", "u", "strike", "big", "small", "pre"]
     },
     accessibility: {
         accessibilityLevel: 'WCAG2AA',
