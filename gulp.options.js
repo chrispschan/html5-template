@@ -26,7 +26,7 @@ const gulpOptions = {
         },
         pipeHTML: false
     },
-    htmlTemplate: 'hb', // 'hb' | 'nunjucks'
+    htmlTemplate: 'nunjucks', // 'hb' | 'nunjucks'
     htmlbeautify: {
             'indent_size': 4,
             'indent_char': ' ',
