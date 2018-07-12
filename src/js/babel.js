@@ -1,1 +1,1 @@
-// start with es6 coding
+// start coding

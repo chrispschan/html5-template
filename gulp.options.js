@@ -26,7 +26,8 @@ const gulpOptions = {
         },
         pipeHTML: false
     },
-    htmlTemplate: 'nunjucks', // 'hb' | 'nunjucks'
+    es5: false,
+    htmlTemplate: 'hb', // 'hb' | 'nunjucks'
     htmlbeautify: {
             'indent_size': 4,
             'indent_char': ' ',
@@ -48,7 +49,7 @@ const gulpOptions = {
             'wrap_attributes': 'auto',
             'wrap_attributes_indent_size': 4,
             'end_with_newline': false,
-            "unformatted": ["img", "code", "pre", "sub", "sup", "em", "strong", "b", "i", "u", "strike", "big", "small", "pre"]
+            "unformatted": []
     },
     accessibility: {
         accessibilityLevel: 'WCAG2AA',

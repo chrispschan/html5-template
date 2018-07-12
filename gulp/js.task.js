@@ -8,6 +8,7 @@ import watchify from 'watchify';
 import babelify from 'babelify';
 import uglify from 'gulp-uglify';
 import eslint from 'gulp-eslint';
+import include from 'gulp-include';
 
 import gulpOptions from './../gulp.options.js';
 
@@ -15,6 +16,7 @@ import eslintConfig from './../src/eslint.config.js';
 
 const watchFiles = {
     js: ['./src/js/**/*.js', '!./src/js/**/_*.js'],
+    jsInclude: [`${__dirname}/../node_modules`, `${__dirname}/../src/app`],
     jsLint: ['./src/app/**/*.js', './src/js/**/*.js', '!./src/app/**/_*.js', '!./src/js/**/_*.js']
 },
 outputFiles = {
@@ -25,29 +27,43 @@ outputFiles = {
 gulp.task(
     'js:build',
     ['js:lint'],
-    () => gulp.src(watchFiles.js)
-        .pipe(each(function (content, file, callback) {
-            let newContent = '// my comment\n' + content,
-            _path = file.path.replace(file.base, '').split('\\'),
-            _folder = '';
-            
-            for (let i=0; i<_path.length-1; i++) {
-                _folder += _path[i] + '/';
-            }
-
-            let bundler = watchify(browserify(file, {debug: true, paths: watchFiles.import}).transform(babelify));
-
-            bundler.bundle()
-                .on('error', (err) => {console.error(err); this.emit('end');})
-                .pipe(source(_path[_path.length-1]))
-                .pipe(buffer())
+    () => {
+        if (gulpOptions.es5) {
+            return gulp.src(watchFiles.js)
                 .pipe(sourcemaps.init({loadMaps: true}))    // sourcemaps
+                .pipe(include({
+                    extensions: 'js',
+                    includePaths: watchFiles.jsInclude
+                }))
                 .pipe(uglify({output: {comments: /^\!|license|License|Copyright|copyright/}}))    // minify
                 .pipe(sourcemaps.write('./'))    // sourcemaps
-                .pipe(gulp.dest(outputFiles.js+'/'+_folder));
+                .pipe(gulp.dest(outputFiles.js));
+        } else {
+            return gulp.src(watchFiles.js)
+                .pipe(each(function (content, file, callback) {
+                    let newContent = '// my comment\n' + content,
+                    _path = file.path.replace(file.base, '').split('\\'),
+                    _folder = '';
+                    
+                    for (let i=0; i<_path.length-1; i++) {
+                        _folder += _path[i] + '/';
+                    }
 
-            callback(null, newContent);
-        }))
+                    let bundler = watchify(browserify(file, {debug: true, paths: watchFiles.import}).transform(babelify));
+
+                    bundler.bundle()
+                        .on('error', (err) => {console.error(err); this.emit('end');})
+                        .pipe(source(_path[_path.length-1]))
+                        .pipe(buffer())
+                        .pipe(sourcemaps.init({loadMaps: true}))    // sourcemaps
+                        .pipe(uglify({output: {comments: /^\!|license|License|Copyright|copyright/}}))    // minify
+                        .pipe(sourcemaps.write('./'))    // sourcemaps
+                        .pipe(gulp.dest(outputFiles.js+'/'+_folder));
+
+                    callback(null, newContent);
+                }));
+        }
+    }
 );
 
 // js watch

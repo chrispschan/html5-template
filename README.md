@@ -66,6 +66,11 @@ icons: {
 pipeHTML: false
 ```
 
+#### gulpOptions.es5
+Is ES5 coding?<br/>
+If use ES5, will use [gulp-include](https://www.npmjs.com/package/gulp-include) to make inclusion of files a breeze. Please make sure all include files is ES5 coding.<br/>
+Default: `false`
+
 #### gulpOptions.htmlTemplate
 Ues whilch tool to build html files.<br/>
 Vaule: `'hb' | 'nunjucks'`<br/>

@@ -23,6 +23,7 @@
     "gulp-favicons": "^2.2.7",
     "gulp-hb": "^6.0.2",
     "gulp-html-beautify": "^1.0.1",
+    "gulp-include": "^2.3.1",
     "gulp-nunjucks-render": "^2.2.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
