@@ -16,6 +16,7 @@ import eslintConfig from './../src/eslint.config.js';
 
 const watchFiles = {
     js: ['./src/js/**/*.js', '!./src/js/**/_*.js'],
+    import: ['./node_modules','./src/app/'],    // babel import path
     jsInclude: [`${__dirname}/../node_modules`, `${__dirname}/../src/app`],
     jsLint: ['./src/app/**/*.js', './src/js/**/*.js', '!./src/app/**/_*.js', '!./src/js/**/_*.js']
 },
