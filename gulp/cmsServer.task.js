@@ -29,9 +29,7 @@ let options = {
         port: gulpOptions.cmsServer.port,
         baseDir: watchFiles.cmsServe.root,
         open: false,
-        ui: {
-            port: 3002
-        },
+        ui: false,
         middleware: [
             ssi({
                 baseDir: watchFiles.cmsServe.root,

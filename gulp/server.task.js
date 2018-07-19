@@ -11,7 +11,8 @@ let options = {
     serve: {
         server: gulpOptions.server.root,
         port: gulpOptions.server.port,
-        baseDir: gulpOptions.server.root
+        baseDir: gulpOptions.server.root,
+        ui: false
     }
 };
 
