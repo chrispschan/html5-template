@@ -69,12 +69,20 @@
       ]
     },
     "hdTool": {
-      "en": ["<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>"],
-      "zh": ["<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>"]
+      "en": [
+        "<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>"
+      ],
+      "zh": [
+        "<a  href=\"http://handlebarsjs.com/\" target=\"_blank\">Handlebars</a>"
+      ]
     },
     "nunjucksTool": {
-      "en": ["<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>"],
-      "zh": ["<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>"]
+      "en": [
+        "<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>"
+      ],
+      "zh": [
+        "<a  href=\"https://mozilla.github.io/nunjucks/\" target=\"_blank\">Nunjucks</a>"
+      ]
     }
   }
 }
