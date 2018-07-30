@@ -1,7 +1,7 @@
 <!-- scripts -->
 {{#each @local.page.plugin as |files|}}
     {{~#ifCond files.type "===" "relative" ~}}
-        <script type="text/javascript" src="{{@local.path.css}}{{{files.file}}}"></script>
+        <script type="text/javascript" src="{{@local.path.js}}{{{files.file}}}"></script>
     {{else}}
         <script type="text/javascript" src="{{{files.file}}}"></script>
     {{~/ifCond}}
@@ -11,7 +11,7 @@
 {{~/if}}
 {{#each @local.page.scripts as |files|}}
     {{~#ifCond files.type "===" "relative" ~}}
-        <script type="text/javascript" src="{{@local.path.css}}{{{files.file}}}"></script>
+        <script type="text/javascript" src="{{@local.path.js}}{{{files.file}}}"></script>
     {{else}}
         <script type="text/javascript" src="{{{files.file}}}"></script>
     {{~/ifCond}}
