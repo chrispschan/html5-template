@@ -115,6 +115,14 @@ Default:
 'scss:watch',   // keep watch scss files
 'content:watch' // keep watch page content json files
 ``` 
+
+#### gulpOptions.testTasks
+Tasks inculde Gulp.js test task.<br/>
+Default:
+```js
+'unit-test' // run unit test
+```
+
 ### API
 Edit gulp.api.js to add API handle to localhost server.<br/>
 e.g.:

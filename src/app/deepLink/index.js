@@ -84,6 +84,7 @@ export default class DeepLink {
 
                 Element.getDataset(_ele[i]);
 
+                if (_ele[i].href) _selfOptions.href = _ele[i].href;
                 if (_ele[i].dataset.deepLink) _selfOptions.deepLink = _ele[i].dataset.deepLink;
                 if (_ele[i].dataset.appName) _selfOptions.appName = _ele[i].dataset.appName;
                 if (_ele[i].dataset.androidId) _selfOptions.android.id = _ele[i].dataset.androidId;

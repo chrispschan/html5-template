@@ -72,6 +72,9 @@ const gulpOptions = {
         'js:watch',
         'scss:watch',
         'content:watch'
+    ],
+    testTasks: [
+        'unit-test'
     ]
 };
 
