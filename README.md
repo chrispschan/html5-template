@@ -21,8 +21,15 @@ Run command line:
 gulp
 ```
 
+### Unit Test (Jasmine)
+Run jasmine unit test case (`./src/app/*.spec.js` & `./src/js/*.spec.js`)
+Run command line:
+```cmd
+gulp unit-test
+```
+
 ### WCAG Checking
-Check all html output files by gulp-accessibility and output the report to ./reports/wcag/<br/>
+Check all html output files by gulp-accessibility and output the report to `./reports/wcag/`<br/>
 Run command line:
 ```cmd
 gulp wcag:check

@@ -1,4 +1,5 @@
 /node_modules
 /cms/folderMenu.json
 /cms/temp/*.json
+/src/test
 /app
