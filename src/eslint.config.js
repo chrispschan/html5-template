@@ -87,7 +87,7 @@ const eslintConfig = {
                 ['&&', '||'],
                 ['in', 'instanceof']
             ],
-          'allowSamePrecedence': true
+            'allowSamePrecedence': true
         }],
         'no-mixed-spaces-and-tabs': 'error',
         'no-multi-spaces': ['error', { 'ignoreEOLComments': true }],
@@ -152,8 +152,9 @@ const eslintConfig = {
         'space-infix-ops': 'error',
         'space-unary-ops': ['error', { 'words': true, 'nonwords': false }],
         'spaced-comment': ['error', 'always', {
-            'line': { 'markers': ['*package', '!', '/', ',', '='] },
-            'block': { 'balanced': true, 'markers': ['*package', '!', ',', ':', '::', 'flow-include'], 'exceptions': ['*'] }
+            'line': { 'markers': ['*package', '!', '/', ',', '=', '=require', '=include'] },
+            'block': { 'balanced': true, 'markers': ['*package', '!', ',', ':', '::', 'flow-include', '=require', '=include'], 'exceptions': ['*'] },
+            'exceptions': ['=', '=require', '=include']
         }],
         'symbol-description': 'error',
         'template-curly-spacing': ['error', 'never'],

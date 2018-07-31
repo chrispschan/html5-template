@@ -71,6 +71,14 @@ Is ES5 coding?<br/>
 If use ES5, will use [gulp-include](https://www.npmjs.com/package/gulp-include) to make inclusion of files a breeze. Please make sure all include files is ES5 coding.<br/>
 Default: `false`
 
+#### gulpOptions.gulpWatch
+Dose use [gulp-watch](https://www.npmjs.com/package/gulp-watch)?<br/>
+Default: `false`
+
+#### gulpOptions.watchAppFolder
+If set `true`, will build the files when `./src/app/` files change.<br/>
+Default: `true`
+
 #### gulpOptions.htmlTemplate
 Ues whilch tool to build html files.<br/>
 Vaule: `'hb' | 'nunjucks'`<br/>
@@ -138,8 +146,19 @@ const gulpAPI = [
 ```
 
 #### Javascript Files
+##### gulpOptions.es5: false
 ```js
-['./src/js/**/*.js', '!./src/js/**/_*.js']
+// will browserify 
+['./src/js/**/*.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js', '!./src/js/**/*.min.*', '!./src/js/**/*.es5.js']
+
+// will not browserify
+// for any es5 plugins if need
+// if file name is *.es5.js, build file name will remove '.es5'
+['./src/js/**/*.es5.js', './src/js/**/*.min.js', '!./src/js/**/_*.es5.js', '!./src/js/**/_*.min.js']
+```
+##### gulpOptions.es5: true
+```js
+['./src/js/**/*.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js']
 ```
 
 #### SCSS Files

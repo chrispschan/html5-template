@@ -12,11 +12,24 @@ import './gulp/js.task.js';
 import './gulp/scss.task.js';
 import './gulp/wcag.task.js';
 
-let defaultTasks = gulpOptions.defaultTasks;
+let defaultTasks = gulpOptions.defaultTasks,
+    watchTasks = ['cmsServer:setup', 'server:setup'];
  
 gulp.task('default', () => {
-    if (gulpOptions.htmlTemplate == 'hb') defaultTasks.push('hb:watch');
-    else defaultTasks.push('nunjucks:watch');
+    let _watchTasks = defaultTasks.filter((item) => {
+        return item.search(':watch') !== -1 || item.search('unitTest') !== -1 || item.toLowerCase().search('server') !== -1;
+    });
 
-    gulp.start(defaultTasks, ['cmsServer:setup', 'server:setup']);
+    defaultTasks = defaultTasks.filter((item) => {
+        return item.search(':watch') === -1 && item.search('unitTest') === -1 && item.toLowerCase().search('server') === -1;
+    });
+
+    watchTasks = watchTasks.concat(_watchTasks);
+
+    if (gulpOptions.htmlTemplate == 'hb') watchTasks.push('hb:watch');
+    else watchTasks.push('nunjucks:watch');
+
+    gulp.start(defaultTasks, watchTasks);
 });
+
+gulp.task('clean', () => del([`${gulpOptions.server.root}**/*`]));

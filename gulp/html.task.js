@@ -5,6 +5,7 @@ import rename from 'gulp-rename';
 import htmlbeautify from 'gulp-html-beautify';
 import hb from 'gulp-hb';
 import nunjucksRender from 'gulp-nunjucks-render';
+import watch from 'gulp-watch';
 
 import helpers from './../src/helpers.js';    // handlebars helpers
 import manageEnvironment from './../src/manageEnvironment.js';    // nunjucks environment
@@ -15,9 +16,13 @@ const watchFiles = {
         serve: gulpOptions.server.root,
         hb: './src/app/**/*.{hbs,handlebars}',    // handlebars partials
         nunjucks: ['./src/app/'],    // nunjucks partials
-        handlebars: ['./src/html/**/*.handlebars', './src/html/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs'],
-        html: ['./src/html/**/*.html', '!./src/html/**/_*.html'],
+        handlebars: gulpOptions.watchAppFolder ? ['./src/html/**/*.handlebars', './src/html/**/*.hbs', './src/app/**/*.handlebars', './src/app/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs', '!./src/app/**/_*.handlebars', '!./src/app/**/_*.hbs'] : ['./src/html/**/*.handlebars', './src/html/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs'],
+        html: gulpOptions.watchAppFolder ? ['./src/html/**/*.html', './src/app/**/*.html', '!./src/html/**/_*.html', '!./src/app/**/_*.html'] : ['./src/html/**/*.html', '!./src/html/**/_*.html'],
         content: ['./src/data/**/*.json', '!./src/data/**/_*.json']    // html content json
+    },
+    buildFiles = {
+        handlebars: ['./src/html/**/*.handlebars', './src/html/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs'],
+        html: ['./src/html/**/*.html', '!./src/html/**/_*.html']
     },
     outputFiles = {
         fonts: watchFiles.serve + gulpOptions.outputFiles.fonts,
@@ -43,7 +48,7 @@ let contentPath = watchFiles.content,
 // hb build
 gulp.task(
     'hb:build',
-    () => gulp.src(watchFiles.handlebars)
+    () => gulp.src(buildFiles.handlebars)
         .pipe(hb({
             partials: watchFiles.hb,
             data: contentData
@@ -54,12 +59,19 @@ gulp.task(
 );
 
 // hb watch
-gulp.task('hb:watch', () => gulp.watch(watchFiles.handlebars, ['hb:build']));
+gulp.task('hb:watch', () => {
+    if (gulpOptions.gulpWatch) {
+        return watch(watchFiles.handlebars, () => {
+            return gulp.start('hb:build');
+        });
+    } else
+        return gulp.watch(watchFiles.handlebars, ['hb:build']);
+});
 
 // nunjucks build
 gulp.task(
     'nunjucks:build',
-    () => gulp.src(watchFiles.html)
+    () => gulp.src(buildFiles.html)
         .pipe(nunjucksRender({
             path: watchFiles.nunjucks,
             data: contentData,
@@ -70,7 +82,14 @@ gulp.task(
 );
 
 // nunjucks watch
-gulp.task('nunjucks:watch', () => gulp.watch(watchFiles.html, ['nunjucks:build']));
+gulp.task('nunjucks:watch', () => {
+    if (gulpOptions.gulpWatch) {
+        return watch(watchFiles.html, () => {
+            return gulp.start('nunjucks:build');
+        });
+    } else
+        return gulp.watch(watchFiles.html, ['nunjucks:build']);
+});
 
 // get content json
 gulp.task(
@@ -78,7 +97,7 @@ gulp.task(
     () => gulp.src(contentPath)
         .pipe(each(function (content, file, callback) {
             let newContent = content,
-                fileArr = file.path.search(/\\/) !== -1 ? file.path.split('\\') : file.path.split('\/'),
+                fileArr = file.path.split('\\'),
                 val = fileArr[fileArr.length - 1].replace('.json', '');
 
             fs.readFile(file.path, 'utf8', function (err, data) {
@@ -97,9 +116,17 @@ gulp.task(
 // content json watch
 gulp.task('content:watch',
     () => {
-        gulp.watch(watchFiles.content, (event) => {
-            contentPath = event.path;
+        if (gulpOptions.gulpWatch) {
+            return watch(watchFiles.content, (event) => {
+                contentPath = event.path;
 
-            gulp.start('content:get');
-        });
+                return gulp.start('content:get');
+            });
+        } else {
+            return gulp.watch(watchFiles.content, (event) => {
+                contentPath = event.path;
+
+                return gulp.start('content:get');
+            });
+        }
     });
