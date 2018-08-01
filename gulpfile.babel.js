@@ -31,8 +31,10 @@ gulp.task('default', () => {
     if (gulpOptions.htmlTemplate == 'hb') watchTasks.push('hb:watch');
     else watchTasks.push('nunjucks:watch');
 
-    gulp.start(defaultTasks, watchTasks);
+    gulp.start(['default:start']);
 });
+
+gulp.task('default:start', defaultTasks, () => gulp.start(watchTasks));
 
 gulp.task('clean', () => del([`${gulpOptions.server.root}**/*`]));
 
