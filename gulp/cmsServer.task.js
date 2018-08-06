@@ -10,18 +10,18 @@ import gulpOptions from './../gulp.options.js';
 import {isJson, scss2json, json2scss} from './json.function.js';
 
 const cmsServe = browserSync.create(),
-watchFiles = {
-    cmsServe: {
-        root: './cms/',
-        temp: 'cms/temp/data/',
-        scssTemp: 'cms/temp/app/',
-        output: 'src/data/',
-        scssOutput: 'src/app/',
-        folderMenu: 'folderMenu.json'
-    },
-    content: ['./src/data/**/*.json', '!./src/data/**/_*.json'],    // html content json
-    scssVal: ['./src/app/**/*.variables.scss', '!./src/app/**/_*.variables.scss']
-};
+    watchFiles = {
+        cmsServe: {
+            root: './cms/',
+            temp: 'cms/temp/data/',
+            scssTemp: 'cms/temp/app/',
+            output: 'src/data/',
+            scssOutput: 'src/app/',
+            folderMenu: 'folderMenu.json'
+        },
+        content: ['./src/data/**/*.json', '!./src/data/**/_*.json'],    // html content json
+        scssVal: ['./src/app/**/*.variables.scss', '!./src/app/**/_*.variables.scss']
+    };
 
 let options = {
     cmsServe: {
@@ -32,7 +32,7 @@ let options = {
         ui: false,
         middleware: [
             ssi({
-                baseDir: watchFiles.cmsServe.root,
+                baseDir: watchFiles.cmsServe.root == './' ? __dirname + '/..' : __dirname + '/..' + watchFiles.cmsServe.root.replace('./', '/'),
                 ext: '.html'
             }),
             {
@@ -41,7 +41,7 @@ let options = {
                     let _data = '',
                         _watch;
 
-                    req.on('data', function(chunk) {
+                    req.on('data', function (chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
@@ -59,11 +59,10 @@ let options = {
 
                                             return console.log(err);
                                         }
-                                        if (isJson(data)) {
+                                        if (isJson(data))
                                             res.end(JSON.stringify(JSON.parse(data)));
-                                        } else {
+                                        else
                                             res.end(JSON.stringify({}));
-                                        }
                                     });
                                 });
                         }
@@ -78,7 +77,7 @@ let options = {
                     let _temp = watchFiles.cmsServe.temp;
                     let _output = watchFiles.cmsServe.output;
 
-                    req.on('data', function(chunk) {
+                    req.on('data', function (chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
@@ -86,22 +85,20 @@ let options = {
                                 _temp = watchFiles.cmsServe.scssTemp;
                                 _output = watchFiles.cmsServe.scssOutput;
                             }
-                            if (_data.temp === true) {
+                            if (_data.temp === true)
                                 _path = _temp + _data.path;
-                            } else {
+                            else
                                 _path = _output + _data.path;
-                            }
-                            
 
-                            fs.stat(_path, function(err, stat) {
-                                if(err == null) {
+                            fs.stat(_path, function (err, stat) {
+                                if (err == null)
                                     _path = _path;
-                                } else if(err.code == 'ENOENT') {
+                                else if (err.code == 'ENOENT') {
                                     if (_data.temp === true) _path = _output + _data.path;
-                                    else _path = ''
+                                    else _path = '';
                                 } else {
                                     if (_data.temp === true) _path = _output + _data.path;
-                                    else _path = ''
+                                    else _path = '';
                                 }
 
                                 if (_path !== '') {
@@ -119,11 +116,9 @@ let options = {
                                             res.end(JSON.stringify(JSON.parse(_json)));
                                         } else
                                             res.end(JSON.stringify(_json));
-                                        
                                     });
-                                } else {
+                                } else
                                     res.end(JSON.stringify({}));
-                                }
                             });
                         }
                     });
@@ -139,7 +134,7 @@ let options = {
                     let _temp = watchFiles.cmsServe.temp;
                     let _output = watchFiles.cmsServe.output;
                     let _newData;
-                    req.on('data', function(chunk) {
+                    req.on('data', function (chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
@@ -147,11 +142,10 @@ let options = {
                                 _temp = watchFiles.cmsServe.scssTemp;
                                 _output = watchFiles.cmsServe.scssOutput;
                             }
-                            if (_data.temp === true) {
+                            if (_data.temp === true)
                                 _path = _temp + _data.path;
-                            } else {
+                            else
                                 _path = _output + _data.path;
-                            }
 
                             if (typeof _data.path !== 'undefined' && typeof _data.json !== 'undefined') {
                                 _pathArr = _path.split('/');
@@ -163,8 +157,8 @@ let options = {
                                         fs.mkdirSync(_dir);
                                 }
 
-                                fs.writeFile(_path, _newData, function(err) {
-                                    if(err) {
+                                fs.writeFile(_path, _newData, function (err) {
+                                    if (err) {
                                         res.end(JSON.stringify({}));
                                         // text = err;
                                         return console.log(err);
@@ -172,9 +166,8 @@ let options = {
 
                                     res.end(JSON.stringify({}));
                                 });
-                            } else {
+                            } else
                                 res.end(JSON.stringify({}));
-                            }
                         }
                     });
                 }

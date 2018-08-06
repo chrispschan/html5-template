@@ -17,7 +17,7 @@ let options = {
 };
 
 gulpApi.push(ssi({
-    baseDir: gulpOptions.server.root == './' ? __dirname : __dirname + gulpOptions.server.root.replace('./', '/'),
+    baseDir: gulpOptions.server.root == './' ? __dirname + '/..' : __dirname + '/..' + gulpOptions.server.root.replace('./', '/'),
     ext: '.html'
 }));
 
