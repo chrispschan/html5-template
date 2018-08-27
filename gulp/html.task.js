@@ -97,7 +97,7 @@ gulp.task(
     () => gulp.src(contentPath)
         .pipe(each(function (content, file, callback) {
             let newContent = content,
-                fileArr = file.path.split('\\'),
+                fileArr = file.path.search(/\\/) !== -1 ? file.path.split('\\') : file.path.split('\/'),
                 val = fileArr[fileArr.length - 1].replace('.json', '');
 
             fs.readFile(file.path, 'utf8', function (err, data) {
