@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import del from 'del';
+import gulpSequence from 'gulp-sequence';
 
 import gulpOptions from './gulp.options.js';
 
@@ -15,14 +16,19 @@ import './gulp/unit-test.task.js';
 import './gulp/wcag.task.js';
 
 let defaultTasks = gulpOptions.defaultTasks,
-    watchTasks = ['cmsServer:setup', 'server:setup'];
+    buildTasks = [],
+    serverTasks = [
+        'cmsServer:setup',
+        'server:setup'
+    ],
+    watchTasks = [];
  
-gulp.task('default', () => {
+gulp.task('default', (cd) => {
     let _watchTasks = defaultTasks.filter((item) => {
         return item.search(':watch') !== -1 || item.search('unitTest') !== -1 || item.toLowerCase().search('server') !== -1;
     });
 
-    defaultTasks = defaultTasks.filter((item) => {
+    buildTasks = defaultTasks.filter((item) => {
         return item.search(':watch') === -1 && item.search('unitTest') === -1 && item.toLowerCase().search('server') === -1;
     });
 
@@ -31,10 +37,8 @@ gulp.task('default', () => {
     if (gulpOptions.htmlTemplate == 'hb') watchTasks.push('hb:watch');
     else watchTasks.push('nunjucks:watch');
 
-    gulp.start(['default:start']);
+    return gulpSequence(buildTasks, serverTasks, watchTasks, cd);
 });
-
-gulp.task('default:start', defaultTasks, () => gulp.start(watchTasks));
 
 gulp.task('clean', () => del([`${gulpOptions.server.root}**/*`]));
 
