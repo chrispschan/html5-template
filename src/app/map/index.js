@@ -373,7 +373,7 @@ export default class Map extends plugin {
         if (typeof marker === 'string') {
             _arr = marker.split('-');
 
-            if (_arr.length > 3) {
+            if (_arr.length >= 3) {
                 _arr[0] = parseInt(_arr[0]);
                 if (typeof _arr[0] !== 'string') _marker = this._layer[_arr[0]].filter((e) => e.markerId === marker);
             } else _marker = [];
