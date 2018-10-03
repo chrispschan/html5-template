@@ -13,21 +13,21 @@ const deepLink = new DeepLink();
 
 ### DeepLink (options = {});
 #### options
-- ele: string (default: `null`) - deeplink elements. Call DeepLink.addDeepLink() if ele not null.
-- delay: number (default: `300`) - wait deeplink loading. Will call store deeplink if timeout and store setting not null.
+- ele: string (default: `undefined`) - deeplink elements. Call DeepLink.addDeepLink() if ele not null.
+- delay: number (default: `300`) - wait deeplink loading. Will call store deeplink if timeout and store setting not false.
 - windows: object - windows phone app setting
     - support: boolean (default: `false`) - support windows phone app
-    - id: string (default: `null`) - windows phone app id
-    - deepLink: srting (default: `null`) - windows phone deeplink. Use options.deepLink if not setting.
+    - id: string (default: `undefined`) - windows phone app id
+    - deepLink: srting (default: `undefined`) - windows phone deeplink. Use options.deepLink if not setting.
 - android: object - android app setting
     - support: boolean (default: `true`) - support android app
-    - id: string (default: `null`) - android app id
-    - deepLink: srting (default: `null`) - android deeplink. Use options.deepLink if not setting.
+    - id: string (default: `undefined`) - android app id
+    - deepLink: srting (default: `undefined`) - android deeplink. Use options.deepLink if not setting.
 - ios: object - ios app setting
     - support: boolean (default: `true`) - support ios app
-    - id: string (default: `null`) - ios app id
-    - deepLink: srting (default: `null`) - ios deeplink. Use options.deepLink if not setting.
-- deepLink: string (default: `null`) - base deeplink
+    - id: string (default: `undefined`) - ios app id
+    - deepLink: srting (default: `undefined`) - ios deeplink. Use options.deepLink if not setting.
+- deepLink: string (default: `undefined`) - base deeplink
 - appName: string (default: `''`) - app name
 
 ### DeepLink.addDeepLink (ele = '.deepLink', options = {})

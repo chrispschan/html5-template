@@ -61,7 +61,7 @@ export default class Map extends plugin {
             delete _options.language;
             delete _options.region;
 
-            Element.getDataset(self._mapEle[i]);
+            self._mapEle[i].getDataset();
 
             if (self._mapEle[i].dataset.mapBackgroundColor) _options.backgroundColor = self._mapEle[i].dataset.mapBackgroundColor;
             if (self._mapEle[i].dataset.mapCenter) {
@@ -75,7 +75,7 @@ export default class Map extends plugin {
             if (self._mapEle[i].dataset.mapDraggableCursor) _options.draggableCursor = self._mapEle[i].dataset.mapDraggableCursor;
             if (self._mapEle[i].dataset.mapDraggingCursor) _options.draggingCursor = self._mapEle[i].dataset.mapDraggingCursor;
             if (self._mapEle[i].dataset.mapFullscreenControl) _options.fullscreenControl = self._mapEle[i].dataset.mapFullscreenControl === 'true';
-            if (self._mapEle[i].dataset.mapFullscreenControlOption) _options.fullscreenControlOption = {position: self._mapEle[i].dataset.mapFullscreenControlOption};
+            if (self._mapEle[i].dataset.mapFullscreenControlOptions) _options.fullscreenControlOptions = {position: self._mapEle[i].dataset.mapFullscreenControlOptions};
             if (self._mapEle[i].dataset.mapHeading) _options.heading = Number(self._mapEle[i].dataset.mapHeading);
             if (self._mapEle[i].dataset.mapKeyboardShortcuts) _options.keyboardShortcuts = self._mapEle[i].dataset.mapKeyboardShortcuts === 'true';
             if (self._mapEle[i].dataset.mapMapTypeControl) _options.mapTypeControl = self._mapEle[i].dataset.mapMapTypeControl === 'true';
@@ -90,7 +90,6 @@ export default class Map extends plugin {
             if (self._mapEle[i].dataset.mapScaleControl) _options.scaleControl = self._mapEle[i].dataset.mapScaleControl === 'true';
             if (self._mapEle[i].dataset.mapScaleControlOptions) _options.scaleControlOptions = {position: self._mapEle[i].dataset.mapScaleControlOptions};
             if (self._mapEle[i].dataset.mapScrollwheel) _options.scrollwheel = self._mapEle[i].dataset.mapScrollwheel === 'true';
-            if (self._mapEle[i].dataset.mapSignInControl) _options.signInControl = self._mapEle[i].dataset.mapSignInControl === 'true';
             if (self._mapEle[i].dataset.mapStreetViewControl) _options.streetViewControl = self._mapEle[i].dataset.mapStreetViewControl === 'true';
             if (self._mapEle[i].dataset.mapStreetViewControlOptions) _options.streetViewControlOptions = {position: self._mapEle[i].dataset.mapStreetViewControlOptions};
             if (self._mapEle[i].dataset.mapTilt) _options.tilt = Number(self._mapEle[i].dataset.mapTilt);
@@ -325,7 +324,7 @@ export default class Map extends plugin {
         return this.toggleMarker(_options, _markers);
     }
 
-    toggleMarker (options, marker) {
+    toggleMarker (options, marker, index = -1) {
         let _marker,
             _options = Object.assign({
                 show: true,
@@ -333,11 +332,11 @@ export default class Map extends plugin {
             }, options),
             _arr,
             _results = {
-                action: _options.show ? 'show' : _options.remove ? 'remove' : 'hide',
+                action: _options.remove ? 'remove' : _options.show ? 'show' : 'hide',
                 markers: []
             };
 
-        _marker = this._findMarker(marker);
+        _marker = this._findMarker(marker, index);
 
         if (_options.show && !_options.remove) {
             for (let i = 0; i < _marker.length; i++) {

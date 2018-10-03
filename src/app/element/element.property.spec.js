@@ -8,7 +8,7 @@ describe('element.property.js', function () {
 
             let ele = document.getElementById('element1');
 
-            Element.getDataset(ele);
+            ele.getDataset();
 
             expect(ele.dataset.name).toBe('test');
             expect(ele.dataset.id).toBe('001');
@@ -32,7 +32,7 @@ describe('element.property.js', function () {
 
             expect(classes).toBe('class1');
 
-            Element.addClass(ele, 'class2');
+            ele.addClass('class2');
 
             if (ele.classList)
                 classes = ele.classList.value;
@@ -60,7 +60,7 @@ describe('element.property.js', function () {
 
             expect(classes).toBe('class1 class2');
 
-            Element.removeClass(ele, 'class2');
+            ele.removeClass('class2');
 
             if (ele.classList)
                 classes = ele.classList.value;
@@ -79,8 +79,8 @@ describe('element.property.js', function () {
 
             let ele = document.getElementById('element4');
 
-            expect(Element.hasClass(ele, 'class3')).toBe(false);
-            expect(Element.hasClass(ele, 'class2')).toBe(true);
+            expect(ele.hasClass('class3')).toBe(false);
+            expect(ele.hasClass('class2')).toBe(true);
 
             document.body.removeChild(ele);
         });

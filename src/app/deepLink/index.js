@@ -34,9 +34,6 @@ export default class DeepLink {
             ios: {
                 support: true
             },
-            href: 'javascript:;',
-            deepLink: null,
-            store: null,
             appName: ''
         }, options);
 
@@ -82,9 +79,9 @@ export default class DeepLink {
             for (let i = 0; i < _ele.length; i++) {
                 _selfOptions = Object.assign({}, _options);
 
-                Element.getDataset(_ele[i]);
+                _ele[i].getDataset();
 
-                if (_ele[i].href) _selfOptions.href = _ele[i].href;
+                if (!_selfOptions.href && _ele[i].href) _selfOptions.href = _ele[i].href;
                 if (_ele[i].dataset.deepLink) _selfOptions.deepLink = _ele[i].dataset.deepLink;
                 if (_ele[i].dataset.appName) _selfOptions.appName = _ele[i].dataset.appName;
                 if (_ele[i].dataset.androidId) _selfOptions.android.id = _ele[i].dataset.androidId;
@@ -129,7 +126,7 @@ export default class DeepLink {
         return setTimeout(() => {
             let _start = new Date().getTime();
             if (_options[this._os].support) {
-                if (_options.deepLink != null) {
+                if (!_options.deepLink) {
                     let _timeout = setTimeout(() => {
                         // Get current time
                         let _now = new Date().getTime();

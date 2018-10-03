@@ -289,7 +289,7 @@ Map style template.
 ### Getting Started
 SCSS Files:
 ```scss
-@import './src/app/map/map';
+@import './src/app/map/map.mixin.scss';
 ```
 
 #### @mixin map($proportion: $map-proportion, $width: 100%, $height: 0)

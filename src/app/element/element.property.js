@@ -1,11 +1,11 @@
 // ie get dataset value
-Element.getDataset = function (ele) {
-    if (!ele.dataset) {
-        let attr = ele.attributes,
+Element.prototype.getDataset = function () {
+    if (!this.dataset) {
+        let attr = this.attributes,
             nameArr = [],
             valName = '';
 
-        ele.dataset = {};
+        this.dataset = {};
 
         for (let i = 0; i < attr.length; i++) {
             if (attr[i].localName.substr(0, 5) === 'data-') {
@@ -15,38 +15,38 @@ Element.getDataset = function (ele) {
                 for (let j = 1; j < nameArr.length; j++)
                     valName += j === 1 ? nameArr[j] : (nameArr[j].substr(0, 1).toUpperCase() + nameArr[j].substr(1));
 
-                ele.dataset[valName] = attr[i].value;
+                this.dataset[valName] = attr[i].value;
             }
         }
     }
 
-    return ele.dataset;
+    return this.dataset;
 };
 
 // add class without jq
-Element.addClass = function (ele, className) {
-    if (ele.classList)
-        ele.classList.add(className);
+Element.prototype.addClass = function (className) {
+    if (this.classList)
+        this.classList.add(className);
     else
-        ele.className += ' ' + className;
+        this.className += ' ' + className;
 };
 
 // remove class without jq
-Element.removeClass = function (ele, className) {
-    if (ele.classList)
-        ele.classList.remove(className);
+Element.prototype.removeClass = function (className) {
+    if (this.classList)
+        this.classList.remove(className);
     else
-        ele.className = ele.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+        this.className = this.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
 };
 
 // has class without jq
-Element.hasClass = function (ele, className) {
+Element.prototype.hasClass = function (className) {
     let _hasClass = false;
 
-    if (ele.classList)
-        _hasClass = ele.classList.contains(className);
+    if (this.classList)
+        _hasClass = this.classList.contains(className);
     else
-        _hasClass = new RegExp('(^| )' + className + '( |$)', 'gi').test(ele.className);
+        _hasClass = new RegExp('(^| )' + className + '( |$)', 'gi').test(this.className);
 
     return _hasClass;
 };

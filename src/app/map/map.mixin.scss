@@ -15,12 +15,17 @@
 @mixin map($proportion: $map-proportion, $width: 100%, $height: 0) {
     .map {
         @include setEleSize($proportion, $width, $height, true);
+        margin-bottom: $map-margin-bottom;
 
         &__msg {
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             text-align: center;
         }
 
