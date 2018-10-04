@@ -138,7 +138,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<a href="https://www.google.com.hk/" class="deepLink deepLink1">Deeplink</a>
+<a href="https://www.google.com.hk/" class="deepLink">Deeplink</a>
 ```
 
 #### options

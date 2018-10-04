@@ -20,9 +20,12 @@
     <meta property="og:url" content="{{- page.head.ogUrl[lang] -}}" />
     <!-- for Twitter -->
     <meta name="twitter:card" content="summary" />
-    <meta property="twitter:title" content="{{- page.head.title[lang] -}}"/>
-    <meta property="twitter:description" content="{{- page.head.description[lang] -}}"/>
-    <meta property="twitter:image" content="{{- page.head.twImage[lang] -}}" />
+    <meta name="twitter:site" content="{{- page.head.twSite[lang] -}}"/>
+    <meta name="twitter:creator" content="{{- page.head.twCreator[lang] -}}"/>
+    <meta name="twitter:title" content="{{- page.head.title[lang] -}}"/>
+    <meta name="twitter:description" content="{{- page.head.description[lang] -}}"/>
+    <meta name="twitter:image" content="{{- page.head.twImage[lang] -}}" />
+    <meta name="twitter:image:alt" content="{{- page.head.twImageAlt[lang] -}}" />
 {% endif %}
 
 {% if noTel %}

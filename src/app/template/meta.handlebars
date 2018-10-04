@@ -20,9 +20,12 @@
     <meta property="og:url" content="{{~#eachContent @local.page.head.ogUrl "" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
     <!-- for Twitter -->
     <meta name="twitter:card" content="summary" />
-    <meta property="twitter:title" content="{{~#eachContent @local.page.head.title "" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
-    <meta property="twitter:description" content="{{~#eachContent @local.page.head.description "" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
-    <meta property="twitter:image" content="{{~#eachContent @local.page.head.twImage "" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+    <meta name="twitter:site" content="{{~#eachContent @local.page.head.twSite "" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
+    <meta name="twitter:creator" content="{{~#eachContent @local.page.head.twCreator "" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
+    <meta name="twitter:title" content="{{~#eachContent @local.page.head.title "" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
+    <meta name="twitter:description" content="{{~#eachContent @local.page.head.description "" @local.lang ~}}{{{this}}}{{~/eachContent~}}"/>
+    <meta name="twitter:image" content="{{~#eachContent @local.page.head.twImage "" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
+    <meta name="twitter:image:alt" content="{{~#eachContent @local.page.head.twImageAlt "" @local.lang ~}}{{{this}}}{{~/eachContent~}}" />
 {{/if}}
 
 {{#if @local.noTel}}

@@ -1,0 +1,11 @@
+{% macro socialMedia(id, class, href, options) %}
+    <a href="{% if href %}{{href}}{% else %}#{% endif %}"
+    {% if id %} id="{{- id -}}"{% endif %} 
+    class="socialMedia
+    {%- if options.type %} socialMedia--{{options.type}}{% endif -%}
+    {%- if class %} {{ class }}{%- endif -%}"
+    {%- for key, value in options %} data-{{key}}="{{value}}"{%- endfor -%}
+    >
+    {{- caller() -}}
+    </a>
+{% endmacro %}

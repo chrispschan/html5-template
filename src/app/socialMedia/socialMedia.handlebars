@@ -1,0 +1,14 @@
+<a href="{{~#if href}}{{href}}{{else}}#{{~/if~}}"
+    {{~#if id}} id="{{id}}"{{~/if}} 
+    class="socialMedia
+    {{~#if type}} socialMedia--{{type}}{{~/if}}
+    {{~#if class}} {{class}}{{~/if}}"
+    {{~#if type}} data-type="{{type}}"{{~/if}}
+    {{~#if popup}} data-popup="{{popup}}"{{~/if}}
+    {{~#if via}} data-via="{{via}}"{{~/if}}
+    {{~#if related}} data-related="{{related}}"{{~/if}}
+    {{~#if hashtags}} data-hashtags="{{hashtags}}"{{~/if}}
+    {{~#if text}} data-text="{{text}}"{{~/if}}
+>
+    {{~> @partial-block ~}}
+</a>

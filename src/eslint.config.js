@@ -152,9 +152,9 @@ const eslintConfig = {
         'space-infix-ops': 'error',
         'space-unary-ops': ['error', { 'words': true, 'nonwords': false }],
         'spaced-comment': ['error', 'always', {
-            'line': { 'markers': ['*package', '!', '/', ',', '=', '=require', '=include'] },
-            'block': { 'balanced': true, 'markers': ['*package', '!', ',', ':', '::', 'flow-include', '=require', '=include'], 'exceptions': ['*'] },
-            'exceptions': ['=', '=require', '=include']
+            'line': { 'markers': ['*package', '!', '/', ',', '=====', '----------', '=require', '=include'], 'exceptions': ['*', '=', '-'] },
+            'block': { 'balanced': true, 'markers': ['*package', '!', ',', ':', '::', '=====', '----------', 'flow-include', '=require', '=include'], 'exceptions': ['*', '=', '-'] },
+            'exceptions': ['*', '=', '-', '=require', '=include']
         }],
         'symbol-description': 'error',
         'template-curly-spacing': ['error', 'never'],
