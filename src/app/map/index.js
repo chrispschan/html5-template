@@ -103,7 +103,7 @@ export default class Map extends plugin {
                         case 'mapScaleControlOptions':
                         case 'mapStreetViewControlOptions':
                         case 'mapZoomControlOptions':
-                            _options[_key] = {position: self._mapEle[i].dataset[key]}
+                            _options[_key] = {position: self._mapEle[i].dataset[key]};
                             break;
                         case 'mapGeolocation':    // skip value
                             break;
