@@ -5,9 +5,59 @@ import 'element/element.property';
 export default class SocialMedia {
     constructor (options = {}) {
         this._social = {
+            buffer: {   // buffer
+                url: 'https://bufferapp.com/add',
+                href: 'url',
+                key: [
+                    'text'
+                ]
+            },
+            digg: {   // digg
+                url: 'http://www.digg.com/submit',
+                href: 'url',
+                key: [
+                    'text'
+                ]
+            },
             facebook: {    // facebook
                 url: 'https://www.facebook.com/sharer/sharer.php',
                 href: 'u'
+            },
+            google: {   // google+
+                url: 'https://plus.google.com/share',
+                href: 'url'
+            },
+            line: {   // line
+                url: 'https://social-plugins.line.me/lineit/share',
+                href: 'url'
+            },
+            linkedIn: {   // linkedIn
+                url: 'http://www.linkedin.com/shareArticle',
+                href: 'url',
+                key: [
+                    'mini'
+                ]
+            },
+            reddit: {   // reddit
+                url: 'http://reddit.com/submit',
+                href: 'url',
+                key: [
+                    'title'
+                ]
+            },
+            stumbleUpon: {   // stumbleUpon
+                url: 'http://www.stumbleupon.com/submit',
+                href: 'url',
+                key: [
+                    'title'
+                ]
+            },
+            tumblr: {   // tumblr
+                url: 'http://www.tumblr.com/share/link',
+                href: 'url',
+                key: [
+                    'title'
+                ]
             },
             twitter: {    // twitter
                 url: 'https://twitter.com/share',
@@ -19,9 +69,20 @@ export default class SocialMedia {
                     'text'
                 ]
             },
+            vk: {    // vk
+                url: 'http://vkontakte.ru/share.php',
+                href: 'url'
+            },
             whatsapp: {    // whatsapp
                 url: 'https://wa.me/',
                 href: 'text'
+            },
+            yummly: {    // yummly
+                url: 'http://www.yummly.com/urb/verify',
+                href: 'url',
+                key: [
+                    'title'
+                ]
             },
             other: {    // other - call https://www.addtoany.com/
                 url: 'https://www.addtoany.com/add_to/',
@@ -50,15 +111,18 @@ export default class SocialMedia {
 
             _ele[i].getDataset();
 
-            /*----------  common  ----------*/
+            /*----------  share url  ----------*/
             if (_selfOptions.href === '#' && _ele[i].href) _selfOptions.href = _ele[i].href;
-            if (_ele[i].dataset.type) _selfOptions.type = _ele[i].dataset.type;
-            if (_ele[i].dataset.popup) _selfOptions.popup = _ele[i].dataset.popup === 'true';
-            /*----------  twitter  ----------*/
-            if (_ele[i].dataset.via) _selfOptions.via = _ele[i].dataset.via;
-            if (_ele[i].dataset.related) _selfOptions.related = _ele[i].dataset.related;
-            if (_ele[i].dataset.hashtags) _selfOptions.hashtags = _ele[i].dataset.hashtags;
-            if (_ele[i].dataset.text) _selfOptions.text = _ele[i].dataset.text;
+
+            /*----------  self options from dataset  ----------*/
+            if (typeof _ele[i].dataset === 'object') {
+                for (let key in _ele[i].dataset) {
+                    if (key === 'popup')    // true/false value
+                        _selfOptions[key] = _ele[i].dataset[key] === 'true';
+                    else
+                        _selfOptions[key] = _ele[i].dataset[key];
+                }
+            }
 
             // share window.location.href when without href
             if (_selfOptions.href === '#' || _selfOptions.href === 'javascript:;')
