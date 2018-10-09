@@ -1,11 +1,11 @@
-{% macro socialMedia(id, class, href, options) %}
+{% macro socialMedia(id, class, href, dataset) %}
     <a href="{% if href %}{{href}}{% else %}#{% endif %}"
-    {% if id %} id="{{- id -}}"{% endif %} 
-    class="socialMedia
-    {%- if options.type %} socialMedia--{{options.type}}{% endif -%}
-    {%- if class %} {{ class }}{%- endif -%}"
-    {%- for key, value in options %} data-{{key}}="{{value}}"{%- endfor -%}
+        {% if id %} id="{{- id -}}"{% endif %} 
+        class="socialMedia
+        {%- if dataset.type %} socialMedia--{{dataset.type}}{% endif -%}
+        {%- if class %} {{ class }}{%- endif -%}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
-    {{- caller() -}}
+        {{- caller() -}}
     </a>
 {% endmacro %}

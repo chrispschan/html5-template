@@ -183,7 +183,7 @@ Output:
 <div class="map"></div>
 ```
 
-### macro map(id, class, options)
+### macro map(id, class, dataset, options)
 
 #### id
 Nunjucks Files:
@@ -205,21 +205,20 @@ Output:
 <div class="map map1"></div>
 ```
 
-#### options
-Set dataset value and not support message (< IE9).
-
-##### Set dataset
+#### dataset
+Set dataset value.<br/>
 If need set `data-map-clickable-icons`<br/>
 Nunjucks Files:
 ```nunjucks
-{{ map(options={clickableIcons="false"}) }}
+{{ map(dataset={clickableIcons="false"}) }}
 ```
 Output:
 ```html
 <div class="map" data-map-clickable-icons="false"></div>
 ```
 
-##### Set not support message (< IE9)
+#### options
+Set not support message (< IE9).<br/>
 Nunjucks Files:
 ```nunjucks
 {{ map(options={notSupport="Not Support Google Maps"}) }}

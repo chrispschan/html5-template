@@ -1,6 +1,23 @@
 const manageEnvironment = function(environment) {
     environment.addFilter('typeof', (obj, type) => typeof obj === type);
 
+    environment.addFilter('toDataset', (obj) => {
+        let results = obj,
+            keyArr;
+
+        if (typeof results === 'string') {
+            results = results.substr(0, 1).toLowerCase() + results.substr(1);
+            keyArr = results.split(/(?=[A-Z])/);
+
+            for (let i = 0; i < keyArr.length; i++)
+                keyArr[i] = keyArr[i].toLowerCase();
+
+            results = keyArr.join('-');
+        }
+
+        return results;
+    });
+
     environment.addFilter('findContent', (obj, searchBy, key) => {
         let results = [],
             searchArr = Array.isArray(searchBy) ? searchBy.length > 2 ? searchBy : ['id', searchBy[0]] : ['id', searchBy];

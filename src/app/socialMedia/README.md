@@ -61,7 +61,7 @@ Output:
 <a href="#" class="socialMedia">Share</a>
 ```
 
-### macro map(id, class, href, options)
+### macro map(id, class, href, dataset)
 
 #### id
 Nunjucks Files:
@@ -94,18 +94,16 @@ Output:
 <a href="https://www.google.com.hk/" class="socialMedia">Share</a>
 ```
 
-#### options
-Set dataset value.
-
-##### Set dataset
-If need set `data-type`<br/>
+#### dataset
+Set dataset value.<br/>
+If need set `data-text`<br/>
 Nunjucks Files:
 ```nunjucks
-{% call socialMedia(options: {type: 'facebook'}) -%}Share{%- endcall %}
+{% call socialMedia(dataset: {text: 'share'}) -%}Share{%- endcall %}
 ```
 Output:
 ```html
-<a href="#" class="socialMedia" data-type="facebook">Share</a>
+<a href="#" class="socialMedia" data-text="share">Share</a>
 ```
 
 ## socialMedia.handlebars
@@ -153,12 +151,12 @@ Output:
 ```
 
 #### Set dataset
-If need set `data-type`<br/>
+If need set `data-text`<br/>
 Handlebars Files:
 ```handlebars
-{{#> socialMedia/socialMedia type="facebook"}}Share{{/socialMedia/socialMedia}}
+{{#> socialMedia/socialMedia text="share"}}Share{{/socialMedia/socialMedia}}
 ```
 Output:
 ```html
-<a href="#" class="socialMedia" data-type="facebook">Share</a>
+<a href="#" class="socialMedia" data-text="share">Share</a>
 ```

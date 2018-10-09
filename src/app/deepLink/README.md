@@ -108,7 +108,7 @@ Output:
 <a href="javascript:;" class="deepLink">Deeplink</a>
 ```
 
-### macro map(id, class, href, options)
+### macro map(id, class, href, dataset, options)
 
 #### id
 Nunjucks Files:
@@ -141,21 +141,20 @@ Output:
 <a href="https://www.google.com.hk/" class="deepLink">Deeplink</a>
 ```
 
-#### options
-Set dataset value and link target.
-
-##### Set dataset
+#### dataset
+Set dataset value.<br/>
 If need set `data-deep-link`<br/>
 Nunjucks Files:
 ```nunjucks
-{% call deepLink(options: {deepLink: 'deeplink://path'}) -%}Deeplink{%- endcall %}
+{% call deepLink(dataset: {deepLink: 'deeplink://path'}) -%}Deeplink{%- endcall %}
 ```
 Output:
 ```html
 <a href="javascript:;" class="deepLink" data-deep-link="deeplink://path">Deeplink</a>
 ```
 
-##### Set link target
+#### options
+Set link target.<br/>
 Nunjucks Files:
 ```nunjucks
 {% call deepLink(options: {target: '_blank'}) -%}Deeplink{%- endcall %}
