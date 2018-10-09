@@ -63,39 +63,56 @@ export default class Map extends plugin {
 
             self._mapEle[i].getDataset();
 
-            if (self._mapEle[i].dataset.mapBackgroundColor) _options.backgroundColor = self._mapEle[i].dataset.mapBackgroundColor;
-            if (self._mapEle[i].dataset.mapCenter) {
-                let _latlng = self._mapEle[i].dataset.mapCenter.replace(/ /g, '').split(',');
-                if (_latlng.length >= 2) _options.center = {lat: _latlng[0], lng: _latlng[1]};
+            /*----------  self options from dataset  ----------*/
+            if (typeof self._mapEle[i].dataset === 'object') {
+                for (let key in self._mapEle[i].dataset) {
+                    let _key = key.substr(3);
+
+                    _key = _key.substr(0, 1).toUpperCase() + _key.substr(1);
+
+                    switch (key) {
+                        case 'mapClickableIcons':   // true/false value
+                        case 'mapDisableDefaultUI':
+                        case 'mapDisableDoubleClickZoom':
+                        case 'mapDraggable':
+                        case 'mapFullscreenControl':
+                        case 'mapKeyboardShortcuts':
+                        case 'mapMapTypeControl':
+                        case 'mapNoClear':
+                        case 'mapPanControl':
+                        case 'mapRotateControl':
+                        case 'mapScaleControl':
+                        case 'mapScrollwheel':
+                        case 'mapStreetViewControl':
+                        case 'mapZoomControl':
+                            _options[_key] = self._mapEle[i].dataset[key] === 'true';
+                            break;
+                        case 'mapHeading':    // number value
+                        case 'mapMaxZoom':
+                        case 'mapTilt':
+                        case 'mapZoom':
+                            _options[_key] = Number(self._mapEle[i].dataset[key]);
+                            break;
+                        case 'mapCenter':   // latlng
+                            let _latlng = self._mapEle[key].dataset.mapCenter.replace(/ /g, '').split(',');
+                            if (_latlng.length >= 2) _options[_key] = {lat: _latlng[0], lng: _latlng[1]};
+                            break;
+                        case 'mapFullscreenControlOptions':     // control options
+                        case 'mapPanControlOptions':
+                        case 'mapRotateControlOptions':
+                        case 'mapScaleControlOptions':
+                        case 'mapStreetViewControlOptions':
+                        case 'mapZoomControlOptions':
+                            _options[_key] = {position: self._mapEle[i].dataset[key]}
+                            break;
+                        case 'mapGeolocation':    // skip value
+                            break;
+                        default:
+                            _options[_key] = self._mapEle[i].dataset[key];
+                            break;
+                    }
+                }
             }
-            if (self._mapEle[i].dataset.mapClickableIcons) _options.clickableIcons = self._mapEle[i].dataset.mapClickableIcons === 'true';
-            if (self._mapEle[i].dataset.mapDisableDefaultUi) _options.disableDefaultUI = self._mapEle[i].dataset.mapDisableDefaultUi === 'true';
-            if (self._mapEle[i].dataset.mapDisableDoubleClickZoom) _options.disableDoubleClickZoom = self._mapEle[i].dataset.mapDisableDoubleClickZoom === 'true';
-            if (self._mapEle[i].dataset.mapDraggable) _options.draggable = self._mapEle[i].dataset.mapDraggable === 'true';
-            if (self._mapEle[i].dataset.mapDraggableCursor) _options.draggableCursor = self._mapEle[i].dataset.mapDraggableCursor;
-            if (self._mapEle[i].dataset.mapDraggingCursor) _options.draggingCursor = self._mapEle[i].dataset.mapDraggingCursor;
-            if (self._mapEle[i].dataset.mapFullscreenControl) _options.fullscreenControl = self._mapEle[i].dataset.mapFullscreenControl === 'true';
-            if (self._mapEle[i].dataset.mapFullscreenControlOptions) _options.fullscreenControlOptions = {position: self._mapEle[i].dataset.mapFullscreenControlOptions};
-            if (self._mapEle[i].dataset.mapHeading) _options.heading = Number(self._mapEle[i].dataset.mapHeading);
-            if (self._mapEle[i].dataset.mapKeyboardShortcuts) _options.keyboardShortcuts = self._mapEle[i].dataset.mapKeyboardShortcuts === 'true';
-            if (self._mapEle[i].dataset.mapMapTypeControl) _options.mapTypeControl = self._mapEle[i].dataset.mapMapTypeControl === 'true';
-            if (self._mapEle[i].dataset.mapMapTypeId) _options.mapTypeId = self._mapEle[i].dataset.mapMapTypeId;
-            if (self._mapEle[i].dataset.mapMaxZoom) _options.maxZoom = Number(self._mapEle[i].dataset.mapMaxZoom);
-            if (self._mapEle[i].dataset.mapMinZoom) _options.minZoom = Number(self._mapEle[i].dataset.mapMinZoom);
-            if (self._mapEle[i].dataset.mapNoClear) _options.noClear = self._mapEle[i].dataset.mapNoClear === 'true';
-            if (self._mapEle[i].dataset.mapPanControl) _options.panControl = self._mapEle[i].dataset.mapPanControl === 'true';
-            if (self._mapEle[i].dataset.mapPanControlOptions) _options.panControlOptions = {position: self._mapEle[i].dataset.mapPanControlOptions};
-            if (self._mapEle[i].dataset.mapRotateControl) _options.rotateControl = self._mapEle[i].dataset.mapRotateControl === 'true';
-            if (self._mapEle[i].dataset.mapRotateControlOptions) _options.rotateControlOptions = {position: self._mapEle[i].dataset.mapRotateControlOptions};
-            if (self._mapEle[i].dataset.mapScaleControl) _options.scaleControl = self._mapEle[i].dataset.mapScaleControl === 'true';
-            if (self._mapEle[i].dataset.mapScaleControlOptions) _options.scaleControlOptions = {position: self._mapEle[i].dataset.mapScaleControlOptions};
-            if (self._mapEle[i].dataset.mapScrollwheel) _options.scrollwheel = self._mapEle[i].dataset.mapScrollwheel === 'true';
-            if (self._mapEle[i].dataset.mapStreetViewControl) _options.streetViewControl = self._mapEle[i].dataset.mapStreetViewControl === 'true';
-            if (self._mapEle[i].dataset.mapStreetViewControlOptions) _options.streetViewControlOptions = {position: self._mapEle[i].dataset.mapStreetViewControlOptions};
-            if (self._mapEle[i].dataset.mapTilt) _options.tilt = Number(self._mapEle[i].dataset.mapTilt);
-            if (self._mapEle[i].dataset.mapZoom) _options.zoom = Number(self._mapEle[i].dataset.mapZoom);
-            if (self._mapEle[i].dataset.mapZoomControl) _options.zoomControl = self._mapEle[i].dataset.mapZoomControl === 'true';
-            if (self._mapEle[i].dataset.mapZoomControlOptions) _options.zoomControlOptions = {position: self._mapEle[i].dataset.mapZoomControlOptions};
 
             self._map.push(new google.maps.Map(self._mapEle[i], _options));
 

@@ -81,15 +81,29 @@ export default class DeepLink {
 
                 _ele[i].getDataset();
 
+                /*----------  href  ----------*/
                 if (!_selfOptions.href && _ele[i].href) _selfOptions.href = _ele[i].href;
-                if (_ele[i].dataset.deepLink) _selfOptions.deepLink = _ele[i].dataset.deepLink;
-                if (_ele[i].dataset.appName) _selfOptions.appName = _ele[i].dataset.appName;
-                if (_ele[i].dataset.androidId) _selfOptions.android.id = _ele[i].dataset.androidId;
-                if (_ele[i].dataset.androidLink) _selfOptions.android.deepLink = _ele[i].dataset.androidLink;
-                if (_ele[i].dataset.iosId) _selfOptions.ios.id = _ele[i].dataset.iosId;
-                if (_ele[i].dataset.iosLink) _selfOptions.ios.deepLink = _ele[i].dataset.iosLink;
-                if (_ele[i].dataset.windowsId) _selfOptions.windows.id = _ele[i].dataset.windowsId;
-                if (_ele[i].dataset.windowsLink) _selfOptions.windows.deepLink = _ele[i].dataset.windowsLink;
+
+                /*----------  self options from dataset  ----------*/
+                if (typeof _ele[i].dataset === 'object') {
+                    for (let key in _ele[i].dataset) {
+                        switch (key) {
+                            case 'androidId':
+                            case 'iosId':
+                            case 'windowsId':
+                                _selfOptions[key.replace('Id', '')].id = _ele[i].dataset[key];
+                                break;
+                            case 'androidLink':
+                            case 'iosLink':
+                            case 'windowsLink':
+                                _selfOptions[key.replace('Link', '')].deepLink = _ele[i].dataset[key];
+                                break;
+                            default:
+                                _selfOptions[key] = _ele[i].dataset[key];
+                                break;
+                        }
+                    }
+                }
 
                 if (_selfOptions[this._os].support) {
                     if (_selfOptions[this._os].deepLink) _selfOptions.deepLink = _selfOptions[this._os].deepLink;

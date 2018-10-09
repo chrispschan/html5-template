@@ -41,7 +41,7 @@ Some options can use element dataset setting:
 - data-map-background-color: string (e.g.: `'#000000'`)
 - data-map-center: string (e.g.: `'22.28552, 114.15769'`)
 - data-map-clickable-icons: string = `'true' | 'false'`
-- data-map-disable-default-ui: string = `'true' | 'false'`
+- data-map-disable-default-u-i: string = `'true' | 'false'`
 - data-map-disable-double-click-zoom: string = `'true' | 'false'`
 - data-map-draggable: string = `'true' | 'false'`
 - data-map-draggable-cursor: string (e.g.: `'url(http://www.example.com/icon.png'), auto;'`)

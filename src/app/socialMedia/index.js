@@ -117,10 +117,14 @@ export default class SocialMedia {
             /*----------  self options from dataset  ----------*/
             if (typeof _ele[i].dataset === 'object') {
                 for (let key in _ele[i].dataset) {
-                    if (key === 'popup')    // true/false value
-                        _selfOptions[key] = _ele[i].dataset[key] === 'true';
-                    else
-                        _selfOptions[key] = _ele[i].dataset[key];
+                    switch (key) {
+                        case 'popup':   // true/false value
+                            _selfOptions[key] = _ele[i].dataset[key] === 'true';
+                            break;
+                        default:
+                            _selfOptions[key] = _ele[i].dataset[key];
+                            break;
+                    }
                 }
             }
 
