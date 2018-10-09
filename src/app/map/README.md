@@ -265,7 +265,10 @@ Output:
 If need set `data-map-clickable-icons`<br/>
 Handlebars Files:
 ```handlebars
-{{> map/map clickableIcons="false"}}
+{{#setVal}}
+    dataset:dataset = {"clickableIcons": "false"}
+{{/setVal}}
+{{> map/map dataset=@local.dataset}}
 ```
 Output:
 ```html
@@ -275,7 +278,10 @@ Output:
 ##### Set not support message (< IE9)
 Handlebars Files:
 ```handlebars
-{{> map/map notSupport="Not Support Google Maps"}}
+{{#setVal}}
+    options:json = {"notSupport": "Not Support Google Maps"}
+{{/setVal}}
+{{> map/map options=@local.options}}
 ```
 Output:
 ```html

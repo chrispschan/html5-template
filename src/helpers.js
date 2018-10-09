@@ -42,6 +42,30 @@ const helpers = {
                                 for (let j=0; j<objectKey.length; j++)
                                     newVal[1] = newVal[1][objectKey[j]];
                                 break;
+                            case 'json':
+                                newVal[1] = JSON.parse(newVal[1]);
+                                break;
+                            case 'dataset':
+                                let _data = JSON.parse(newVal[1]);
+                                let _newData = {};
+                                let _keyLower;
+                                let _keyArr;
+
+                                if (typeof _data === 'object') {
+                                    for (let key in _data) {
+                                        _keyLower = key.substr(0, 1).toLowerCase() + key.substr(1)
+                                        _keyArr = _keyLower.split(/(?=[A-Z])/);
+
+                                        for (let j = 0; j < _keyArr.length; j++)
+                                            _keyArr[j] = _keyArr[j].toLowerCase();
+
+                                        _newData[_keyArr.join('-')] = _data[key];
+                                    }
+
+                                    newVal[1] = _newData;
+                                } else
+                                    newVal[1] = _data;
+                                break;
                             case 'content':
                                 objectKey = newVal[1].split('.');
                                 newVal[1] = options.data.root._parent;

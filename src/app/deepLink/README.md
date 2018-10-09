@@ -212,7 +212,10 @@ Output:
 If need set `data-deep-link`<br/>
 Handlebars Files:
 ```handlebars
-{{#> deepLink/deepLink deepLink="deeplink://path"}}Deeplink{{/deepLink/deepLink}}
+{{#setVal}}
+    dataset:dataset = {"deepLink": "deeplink://path"}
+{{/setVal}}
+{{#> deepLink/deepLink dataset=@local.dataset}}Deeplink{{/deepLink/deepLink}}
 ```
 Output:
 ```html
@@ -222,7 +225,10 @@ Output:
 #### Set link target
 Handlebars Files:
 ```handlebars
-{{#> deepLink/deepLink target="_blank"}}Deeplink{{/deepLink/deepLink}}
+{{#setVal}}
+    options:json = {"target": "_blank"}
+{{/setVal}}
+{{#> deepLink/deepLink options=@local.options}}Deeplink{{/deepLink/deepLink}}
 ```
 Output:
 ```html

@@ -1,41 +1,11 @@
 <div
     {{#if id}} id="{{id}}"{{/if}} 
     class="map{{#if class}} {{class}}{{/if}}"
-    {{#if backgroundColor}} data-map-background-color="{{{backgroundColor}}}"{{/if}}
-    {{#if center}} data-map-center="{{{center}}}"{{/if}}
-    {{#if clickableIcons}} data-map-clickable-icons="{{{clickableIcons}}}"{{/if}}
-    {{#if disableDefaultUI}} data-map-disable-default-u-i="{{{disableDefaultUI}}}"{{/if}}
-    {{#if disableDoubleClickZoom}} data-map-disable-double-click-zoom="{{{disableDoubleClickZoom}}}"{{/if}}
-    {{#if draggable}} data-map-draggable="{{{draggable}}}"{{/if}}
-    {{#if draggableCursor}} data-map-draggable-cursor="{{{draggableCursor}}}"{{/if}}
-    {{#if draggingCursor}} data-map-dragging-cursor="{{{draggingCursor}}}"{{/if}}
-    {{#if fullscreenControl}} data-map-fullscreen-control="{{{fullscreenControl}}}"{{/if}}
-    {{#if fullscreenControlOptions}} data-map-fullscreen-control-options="{{{fullscreenControlOptions}}}"{{/if}}
-    {{#if heading}} data-map-heading="{{{heading}}}"{{/if}}
-    {{#if keyboardShortcuts}} data-map-keyboard-shortcuts="{{{keyboardShortcuts}}}"{{/if}}
-    {{#if mapTypeControl}} data-map-map-type-control="{{{mapTypeControl}}}"{{/if}}
-    {{#if mapTypeId}} data-map-map-type-id="{{{mapTypeId}}}"{{/if}}
-    {{#if maxZoom}} data-map-max-zoom="{{{maxZoom}}}"{{/if}}
-    {{#if minZoom}} data-map-min-zoom="{{{minZoom}}}"{{/if}}
-    {{#if noClear}} data-map-no-clear="{{{noClear}}}"{{/if}}
-    {{#if panControl}} data-map-pan-control="{{{panControl}}}"{{/if}}
-    {{#if panControlOptions}} data-map-pan-control-options="{{{panControlOptions}}}"{{/if}}
-    {{#if rotateControl}} data-map-rotate-control="{{{rotateControl}}}"{{/if}}
-    {{#if rotateControlOptions}} data-map-rotate-control-options="{{{rotateControlOptions}}}"{{/if}}
-    {{#if scaleControl}} data-map-scale-control="{{{scaleControl}}}"{{/if}}
-    {{#if scaleControlOptions}} data-map-scale-control-options="{{{scaleControlOptions}}}"{{/if}}
-    {{#if scrollwheel}} data-map-scrollwheel="{{{scrollwheel}}}"{{/if}}
-    {{#if streetViewControl}} data-map-street-view-control="{{{streetViewControl}}}"{{/if}}
-    {{#if streetViewControlOptions}} data-map-street-view-control-options="{{{streetViewControlOptions}}}"{{/if}}
-    {{#if tilt}} data-map-tilt="{{{tilt}}}"{{/if}}
-    {{#if zoom}} data-map-zoom="{{{zoom}}}"{{/if}}
-    {{#if zoomControl}} data-map-zoom-control="{{{zoomControl}}}"{{/if}}
-    {{#if zoomControlOptions}} data-map-zoom-control-options="{{{zoomControlOptions}}}"{{/if}}
-    {{#if geolocation}} data-map-geolocation="{{{geolocation}}}"{{/if}}
+    {{~#each dataset}} data-map-{{@key}}="{{this}}"{{~/each ~}}
 >
-    {{~#if notSupport ~}}
-    <!--[if lte IE 9]><p class="map__msg">{{{notSupport}}}</p><![endif]-->
+    {{~#if options.notSupport ~}}
+    <!--[if lte IE 9]><p class="map__msg">{{{options.notSupport}}}</p><![endif]-->
     {{~/if~}}
 </div>
 
-{{#if key}}<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{{key}}}"></script>{{/if}}
+{{#if options.key}}<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{{options.key}}}"></script>{{/if}}

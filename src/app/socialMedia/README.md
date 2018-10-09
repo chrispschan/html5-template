@@ -154,7 +154,10 @@ Output:
 If need set `data-text`<br/>
 Handlebars Files:
 ```handlebars
-{{#> socialMedia/socialMedia text="share"}}Share{{/socialMedia/socialMedia}}
+{{#setVal}}
+    dataset:dataset = {"text": "share"}
+{{/setVal}}
+{{#> socialMedia/socialMedia dataset=@local.dataset}}Share{{/socialMedia/socialMedia}}
 ```
 Output:
 ```html
