@@ -108,7 +108,7 @@ Output:
 <a href="javascript:;" class="deepLink">Deeplink</a>
 ```
 
-### macro map(id, class, href, dataset, options)
+### macro deepLink(id, class, href, dataset, options)
 
 #### id
 Nunjucks Files:

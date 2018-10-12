@@ -61,7 +61,7 @@ Output:
 <a href="#" class="socialMedia">Share</a>
 ```
 
-### macro map(id, class, href, dataset)
+### macro socialMedia(id, class, href, dataset)
 
 #### id
 Nunjucks Files:

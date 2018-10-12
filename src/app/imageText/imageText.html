@@ -13,11 +13,9 @@
         {% endif -%} 
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
-        {{ itemGenerator(options.beforeItems, options) }}
-        
-        {{ caller() }}
-        
-        {{ itemGenerator(options.afterItems, options) }}
+        {{- itemGenerator(options.beforeItems, options) -}}
+        {{- caller() -}}
+        {{- itemGenerator(options.afterItems, options) -}}
     </{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}>
 {% endmacro %}
 
