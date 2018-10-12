@@ -1,0 +1,180 @@
+@import "imageText.default.scss";
+
+@mixin imageText-text-align() {
+    &--center {
+        .imageText {
+            &__image,
+            &__text {
+                margin-left: auto;
+                margin-right: auto;
+
+                text-align: center;
+
+                &__item {
+                    margin-left: auto;
+                    margin-right: auto;
+
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    &--right {
+        .imageText {
+            &__image,
+            &__text {
+                margin-left: auto;
+                margin-right: 0;
+
+                text-align: right;
+
+                &__item {
+                    margin-left: auto;
+                    margin-right: 0;
+
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+@mixin vertical-imageText-item-align() {
+    &__image,
+    &__text {
+        &--center {
+            margin-left: auto;
+            margin-right: auto;
+
+            text-align: center;
+
+            .imageText {
+                &__image,
+                &__text {
+                    &__item {
+                        margin-left: auto;
+                        margin-right: auto;
+
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        &--right {
+            margin-left: auto;
+            margin-right: 0;
+
+            text-align: right;
+
+            .imageText {
+                &__image,
+                &__text {
+                    &__item {
+                        margin-left: auto;
+                        margin-right: 0;
+
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin imageText-vertical-align() {
+    &--center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &--right {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    &--middle {
+        .imageText {
+            &__image,
+            &__text {
+                vertical-align: middle;
+            }
+        }
+    }
+
+    &--bottom {
+        .imageText {
+            &__image,
+            &__text {
+                vertical-align: bottom;
+            }
+        }
+    }
+}
+
+@mixin horizontal-imageText-item-align() {
+    &__image,
+    &__text {
+        &--middle {
+            vertical-align: middle;
+        }
+
+        &--bottom {
+            vertical-align: bottom;
+        }
+    }
+}
+
+@mixin imageText__item-margin() {
+    margin-bottom: $imageText-margin-bottom;
+
+    &__text,
+    &__image {
+        &__item {
+            display: block;
+
+            margin: 0;
+
+             + .imageText {
+                &__image,
+                &__text {
+                    &__item {
+                        margin-top: $imageText-items-margin;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin reset-imageText--inside() {
+    &__image {
+        &--background {
+            position: static;
+
+            height: auto;
+            width: auto;
+
+            .imageText {
+                &__image {
+                    &__item {
+                        position: static;
+                        top: auto;
+                        right: auto;
+                        bottom: auto;
+                        left: auto;
+
+                        max-width: none;
+                        min-height: 0;
+                        min-height: none;
+                        min-width: 0;
+
+                        -ms-transform: none;   // ie9
+                        transform: none;
+                    }
+                }
+            }
+        }
+    }
+}

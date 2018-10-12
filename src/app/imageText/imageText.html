@@ -1,0 +1,130 @@
+{# imageText element #}
+{% macro imageText(id, class, dataset, options) %}
+    <{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}
+        {% if id %} id="{{- id -}}"{% endif %} 
+        class="imageText
+        {%- for modifier in options.modifier %} imageText--{{ modifier }}{% endfor -%}
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- if options.tag === "a" %} 
+            href="{% if options.href %}{{- options.href -}}{% else %}javascript:;{% endif %}"
+            {%- if options.target %} 
+                target="{{options.target}}"
+            {% endif -%}
+        {% endif -%} 
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{ itemGenerator(options.beforeItems, options) }}
+        
+        {{ caller() }}
+        
+        {{ itemGenerator(options.afterItems, options) }}
+    </{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}>
+{% endmacro %}
+
+{# imageText image item #}
+{% macro image(id, class, src, dataset, options) %}
+    <{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}
+        {% if id %} id="{{- id -}}"{% endif %} 
+        class="imageText__image
+        {%- if options.align %} imageText__image--{{ options.align }}{% endif -%}
+        {%- if options.background %} imageText__image--background{% endif -%}
+        {%- if class %} {{ class }}{% endif -%}"  
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+       <img
+            class="imageText__image__item" 
+            src="{{src}}" 
+            alt="{{options.alt}}"
+            {% if options.width %} width="{{- options.width -}}"{% endif %} 
+            {% if options.height %} height="{{- options.height -}}"{% endif %} 
+        />
+    </{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}>
+{% endmacro %}
+
+{# imageText text item wrapper #}
+{% macro text(id, class, dataset, options) %}
+    <{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}
+        {% if id %} id="{{- id -}}"{% endif %} 
+        class="imageText__text
+        {%- if options.align %} imageText__image--{{ options.align }}{% endif -%}
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- if options.tag === "a" %} 
+            href="{% if options.href %}{{- options.href -}}{% else %}javascript:;{% endif %}"
+            {%- if options.target %} 
+                target="{{options.target}}"
+            {% endif -%}
+        {% endif -%} 
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}>
+{% endmacro %}
+
+{# imageText text itme #}
+{% macro textItem(id, class, dataset, options) %}
+    <{% if options.tag %}{{- options.tag -}}{% else %}p{% endif %}
+        {% if id %} id="{{- id -}}"{% endif %} 
+        class="imageText__text__item{% if class %} {{ class }}{% endif %}"
+        {%- if options.tag === "a" %} 
+            href="{% if options.href %}{{- options.href -}}{% else %}javascript:;{% endif %}"
+            {%- if options.target %} 
+                target="{{options.target}}"
+            {% endif -%}
+        {% endif -%} 
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </{% if options.tag %}{{- options.tag -}}{% else %}p{% endif %}>
+{% endmacro %}
+
+{# auto generator by items list #}
+{% macro itemGenerator(items, options) %}
+    {% if options.tag | canDivInside %}
+        {% set itemTag='div' %}
+    {% else %}
+        {% set itemTag='span' %}
+    {% endif %}
+
+    {% for key, item in items | arr2obj %}
+        {% if item.type === 'image' %}
+            {{ image(
+                id=item.id, 
+                class=item.class,
+                src=item.src,
+                dataset=item.dataset,
+                options=options | assignObj([
+                    {tag: itemTag}, 
+                    item.options
+                ])
+            ) }}
+        {% else %}
+            {% call text(
+                id=item.id,
+                class=item.class,
+                dataset=item.dataset,
+                options=options | assignObj([
+                    {tag: itemTag}, 
+                    item.options
+                ])
+            ) %}
+                {% if options.tag | canDivInside %}
+                    {% set textTag='p' %}
+                {% else %}
+                    {% set textTag='span' %}
+                {% endif %}
+
+                {% if item.content | typeof("object") %}
+                    {% for content in options.text.content %}
+                        {% call textItem(options={tag: textTag}) -%}
+                            {{- content | safe -}}
+                        {%- endcall %}
+                    {% endfor %}
+                {% else %}
+                    {% call textItem(options={tag: textTag}) -%}
+                        {{- item.content | safe -}}
+                    {%- endcall %}
+                {% endif %}
+            {% endcall %}
+        {% endif %}
+    {% endfor %}
+{% endmacro%}

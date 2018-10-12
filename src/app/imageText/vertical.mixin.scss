@@ -1,0 +1,60 @@
+@import "common.mixin.scss";
+
+@import "imageText.default.scss";
+
+@mixin vertical-imageText-item($itemStyle: false) {
+    &__image,
+    &__text {
+        display: block;
+
+        padding: 0;
+
+        margin: 0;
+
+         + .imageText {
+            &__image,
+            &__text {
+                padding: 0;
+
+                margin-top: $imageText-items-margin;
+            }
+        }
+    }
+
+    @if ($itemStyle) {
+        @include imageText__item-margin();
+    }
+};
+
+@mixin vertical-imageText($ele: "", $modifier: "", $itemStyle: false) {
+    #{$ele}.imageText#{$modifier} {
+        display: block;
+
+        padding: 0;
+
+        @if ($modifier == "" and $ele == "") {
+            @include reset-imageText--inside();
+            @include vertical-imageText-item($itemStyle);
+            @include imageText-text-align();
+            @include vertical-imageText-item-align();
+        } @else {
+            .imageText {
+                @include reset-imageText--inside();
+                @include vertical-imageText-item($itemStyle);
+            }
+
+            &.imageText {
+                @include imageText-text-align();
+
+                &--center,
+                &--right {
+                    .imageText {
+                        @include vertical-imageText-item-align();
+                    }
+                }
+            }
+        }
+
+        @content;
+    }
+};

@@ -1,0 +1,225 @@
+@import "common.mixin.scss";
+
+@import "imageText.default.scss";
+
+@mixin inside-imageText-image-align($x: "center", $y: "center") {
+    .imageText {
+        &__image {
+            &--background {
+
+                .imageText {
+                    &__image {
+                        &__item {
+                            $tx: false;
+                            $ty: false;
+
+                            @if ($x == "left") {
+                                right: auto;
+                                left: 0;
+                            } @else if ($x == "right") {
+                                right: 0;
+                                left: auto;
+                            } @else if ($x == "center") {
+                                $tx: true;
+
+                                right: auto;
+                                left: 50%;
+                            }
+                            @else {
+                                top: $x;
+                                bottom: auto;
+                            }
+
+                            @if ($y == "top") {
+                                top: 0;
+                                bottom: auto;
+                            } @else if ($y == "bottom") {
+                                top: auto;
+                                bottom: 0;
+                            } @else if ($y == "center") {
+                                $ty: true;
+
+                                top: 50%;
+                                bottom: auto;
+                            }
+                            @else {
+                                top: $y;
+                                bottom: auto;
+                            }
+
+                            @if ($tx or $ty) {
+                                @if ($ty and $tx) {
+                                    -ms-transform: translate(-50%, -50%);   // ie9
+                                    transform: translate(-50%, -50%);
+                                } @else if ($ty == false) {
+                                    -ms-transform: translateX(-50%);   // ie9
+                                    transform: translateX(-50%);
+                                } @else {
+                                    -ms-transform: translateY(-50%);   // ie9
+                                    transform: translateY(-50%);
+                                }
+                            } @else {
+                                -ms-transform: none;   // ie9
+                                transform: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin inside-imageText-image-align-modifier($modifier: "", $x: "center", $y: "center") {
+    &--#{$modifier} {
+        @include inside-imageText-image-align($x: $x, $y: $y);
+    }
+}
+
+@mixin inside-imageText-align() {
+    @include inside-imageText-image-align-modifier($modifier: "background-left-top", $x: "left", $y: "top");
+    @include inside-imageText-image-align-modifier($modifier: "background-left-center", $x: "left", $y: "center");
+    @include inside-imageText-image-align-modifier($modifier: "background-left-bottom", $x: "left", $y: "bottom");
+    @include inside-imageText-image-align-modifier($modifier: "background-center-top", $x: "center", $y: "top");
+    @include inside-imageText-image-align-modifier($modifier: "background-center-bottom", $x: "center", $y: "bottom");
+    @include inside-imageText-image-align-modifier($modifier: "background-right-top", $x: "right", $y: "top");
+    @include inside-imageText-image-align-modifier($modifier: "background-right-top", $x: "right", $y: "center");
+    @include inside-imageText-image-align-modifier($modifier: "background-right-top", $x: "right", $y: "bottom");
+
+    &--cover {
+        .imageText {
+            &__image {
+                &--background {
+                    .imageText {
+                        &__image {
+                            &__item {
+                                min-height: 100%;
+                                min-width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &--contain {
+        .imageText {
+            &__image {
+                &--background {
+                    .imageText {
+                        &__image {
+                            &__item {
+                                max-height: 100%;
+                                max-width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &--text-center {
+        justify-content: center;
+    }
+
+    &--text-bottom {
+        justify-content: flex-end;
+    }
+}
+
+@mixin inside-imageText-item($itemStyle: false) {
+    &__image,
+    &__text {
+        position: relative;
+        z-index: 2;
+
+        display: block;
+
+        margin: 0;
+
+         + .imageText {
+            &__image,
+            &__text {
+                margin-top: $imageText-items-margin;
+            }
+        }
+    }
+
+    &__image {
+        &--background {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+
+            height: 100%;
+            width: 100%;
+
+            overflow: hidden;
+
+             + .imageText {
+                &__image,
+                &__text {
+                    margin: 0;
+                }
+            }
+
+            .imageText {
+                &__image {
+                    &__item {
+                        position: absolute;
+                    }
+                }
+            }
+        }
+    }
+
+    @if ($itemStyle) {
+        @include imageText__item-margin();
+    }
+};
+
+@mixin inside-imageText($ele: "", $modifier: "", $itemStyle: false, $textAlign: false) {
+    #{$ele}.imageText#{$modifier} {
+        position: relative;
+
+        display: block;
+        display: flex;
+
+        flex-direction: column;
+
+        overflow: hidden;
+
+        justify-content: flex-start;
+
+        padding: $imageText-inside-padding;
+
+        @if ($modifier == "" and $ele == "") {
+            @include inside-imageText-item($itemStyle);
+            @include inside-imageText-image-align($x: "center", $y: "center");
+            @include imageText-text-align();
+            @include vertical-imageText-item-align();
+        } @else {
+            .imageText {
+                @include inside-imageText-item($itemStyle);
+            }
+            @include inside-imageText-image-align($x: "center", $y: "center");
+
+            &.imageText {
+                @include imageText-text-align();
+                @include inside-imageText-align();
+
+                &--center,
+                &--right {
+                    .imageText {
+                        @include vertical-imageText-item-align();
+                    }
+                }
+            }
+        }
+
+        @content;
+    }
+};

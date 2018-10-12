@@ -1,0 +1,36 @@
+@import "common.mixin.scss";
+@import "vertical.mixin.scss";
+@import "horizontal.mixin.scss";
+@import "inline.mixin.scss";
+@import "inside.mixin.scss";
+
+@import "imageText.default.scss";
+
+@mixin imageText($defaultType: $imageText-default-type, $defaultOnly: $imageText-default-only) {
+    @if ($defaultType == "horizontal") {
+        @include horizontal-imageText($itemStyle: true, $textAlign: true);
+    } @else if ($defaultType == "inline") {
+        @include inline-imageText($itemStyle: true, $textAlign: true);
+    } @else if ($defaultType == "inside") {
+        @include inside-imageText($itemStyle: true, $textAlign: true);
+    } @else {
+        @include vertical-imageText($itemStyle: true);
+    }
+    
+    @if ($defaultType != "vertical" and $defaultOnly != true) {
+        @include vertical-imageText($modifier: "--vertical");
+    }
+    @if ($defaultType != "horizontal" and $defaultOnly != true) {
+        @include horizontal-imageText($modifier: "--horizontal");
+    }
+    @if ($defaultType != "inline" and $defaultOnly != true) {
+        @include inline-imageText($modifier: "--inline");
+    }
+    @if ($defaultType != "inside" and $defaultOnly != true) {
+        @include inside-imageText($modifier: "--inside");
+    }
+
+    .imageText {
+        @content;
+    }
+}

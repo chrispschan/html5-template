@@ -1,0 +1,110 @@
+@import "common.mixin.scss";
+
+@import "imageText.default.scss";
+
+@mixin inline-imageText-item($itemStyle: false) {
+    &__image,
+    &__text {
+        padding: 0;
+
+        margin: 0;
+
+        vertical-align: top;
+
+         + .imageText {
+            &__image,
+            &__text {
+                padding-left: $imageText-items-margin;
+
+                margin: 0;
+            }
+        }
+    }
+
+    @if ($itemStyle) {
+        @include imageText__item-margin();
+    }
+
+    &__text {
+        display: inline;
+
+        &__item {
+            display: inline;
+        }
+    }
+
+    &__image {
+        display: inline-block;
+    }
+};
+
+@mixin inline-imageText($ele: "", $modifier: "", $itemStyle: false, $textAlign: false) {
+    #{$ele}.imageText#{$modifier} {
+        display: inline;
+
+        padding: 0;
+
+        vertical-align: text-bottom;
+
+        .imageText {
+            &__image,
+            &__text {
+                margin: 0;
+
+                vertical-align: top;
+
+                 + .imageText {
+                    &__image,
+                    &__text {
+                        padding-left: $imageText-items-margin;
+                    }
+                }
+            }
+        }
+
+        .imageText {
+            &__text {
+                display: inline;
+
+                &__item {
+                    display: inline;
+                }
+            }
+
+            &__image {
+                display: inline-block;
+            }
+        }
+
+        @if ($modifier == "" and $ele == "") {
+            @include reset-imageText--inside();
+            @include inline-imageText-item($itemStyle);
+            @include imageText-vertical-align();
+            @include horizontal-imageText-item-align();
+            @if ($textAlign) {
+                @include imageText-text-align();
+            }
+        } @else {
+            .imageText {
+                @include reset-imageText--inside();
+                @include inline-imageText-item($itemStyle);
+            }
+
+            &.imageText {
+                @include imageText-vertical-align();
+                @if ($textAlign) {
+                    @include imageText-text-align();
+                }
+
+                &--middle,
+                &--bottom {
+                    .imageText {
+                        @include horizontal-imageText-item-align();
+                    }
+                }
+            }
+        }
+
+        @content;
+    }
+};
