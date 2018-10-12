@@ -52,7 +52,7 @@
     <{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}
         {% if id %} id="{{- id -}}"{% endif %} 
         class="imageText__text
-        {%- if options.align %} imageText__image--{{ options.align }}{% endif -%}
+        {%- if options.align %} imageText__text--{{ options.align }}{% endif -%}
         {%- if class %} {{ class }}{% endif -%}"
         {%- if options.tag === "a" %} 
             href="{% if options.href %}{{- options.href -}}{% else %}javascript:;{% endif %}"
