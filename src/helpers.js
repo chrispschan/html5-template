@@ -3,6 +3,32 @@ import handlebars from 'handlebars';
 let __switch_stack__ = [],
     __blocks__ = Object.create(null);
 
+function assignObj (objs) {
+    let _objs = {};
+
+    for (let i = 0; i < objs.length; i++) {
+        if (typeof objs[i] === 'object') {
+            for (let key in objs[i]) {
+                if (typeof objs[i][key] === 'object' && !Array.isArray(objs[i][key]))
+                    _objs[key] = assignObj([_objs[key] ? _objs[key] : {}, objs[i][key]]);
+                else if (Array.isArray(objs[i][key])) {
+                    _objs[key] = [];
+
+                    for (let j = 0; j < objs[i][key].length; j++) {
+                        if (typeof objs[i][key][j] === 'object')
+                            _objs[key].push(assignObj([{}, objs[i][key][j]]));
+                        else
+                            _objs[key].push(objs[i][key][j]);
+                    }
+                } else
+                    _objs[key] = objs[i][key];
+            }
+        }
+    }
+
+    return _objs;
+}
+
 const helpers = {
     extend: (name, context, options) => {
         var block = __blocks__[name];
@@ -19,7 +45,7 @@ const helpers = {
         return val;
     },
     setVal: (options) => {
-        let vals = options.fn(this).replace(/ /g, '').replace(/\t/g, '').replace(/\r/g, '').replace(/\n/g, ''),
+        let vals = options.fn(this).replace(/ = /g, '=').replace(/    /g, '').replace(/\t/g, '').replace(/\r/g, '').replace(/\n/g, ''),
             newVal,
             objectKey;
         vals = vals.split(';');
@@ -29,6 +55,7 @@ const helpers = {
                 if (newVal.length >= 2) {
                     newVal[0] = newVal[0].split(':');
                     if (newVal[0].length >= 2) {
+                        console.log(newVal[1]);
                         switch (newVal[0][1]) {
                             case 'boolean':
                                 newVal[1] = newVal[1] === 'true' ? true : false;
@@ -65,6 +92,29 @@ const helpers = {
                                     newVal[1] = _newData;
                                 } else
                                     newVal[1] = _data;
+                                break;
+                            case 'canDivInside':
+                                let canInsideTags = [
+                                    'artiicle',
+                                    'aside',
+                                    'body',
+                                    'details',
+                                    'div',
+                                    'form',
+                                    'footer',
+                                    'header',
+                                    'main',
+                                    'section'
+                                ];
+
+                                newVal[1] = canInsideTags.indexOf(newVal[1]) !== -1
+                                break;
+                            case 'assignObj':
+                                let _objArr = JSON.parse(newVal[1]);
+
+                                if (!Array.isArray(_objArr)) _objArr = [_objArr];
+
+                                newVal[1] = assignObj(_objArr);
                                 break;
                             case 'content':
                                 objectKey = newVal[1].split('.');
@@ -144,7 +194,7 @@ const helpers = {
         }
     },
     ifTypeof: (val, type, options) => {
-        return typeof val === type ? options.fn(this) : options.inverse(this);
+        return typeof type === 'array' ? (Array.isArray(val) ? options.fn(this) : options.inverse(this)) : (typeof val === type ? options.fn(this) : options.inverse(this));
     },
     switch: (val, options) => {
         __switch_stack__.push({
@@ -173,6 +223,12 @@ const helpers = {
         let stack = __switch_stack__[__switch_stack__.length - 1];
          if (!stack.switch_match)
             return options.fn(this);
+    },
+    obj2json: (options) => {
+        if (typeof options === 'object')
+            return JSON.stringify(options);
+
+        return "{}";
     },
     eachContent: (data, searchBy, key, options) => {
         let ret = '',
