@@ -28,7 +28,13 @@
         class="imageText__image
         {%- if options.align %} imageText__image--{{ options.align }}{% endif -%}
         {%- if options.background %} imageText__image--background{% endif -%}
-        {%- if class %} {{ class }}{% endif -%}"  
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- if options.tag === "a" %} 
+            href="{% if options.href %}{{- options.href -}}{% else %}javascript:;{% endif %}"
+            {%- if options.target %} 
+                target="{{options.target}}"
+            {% endif -%}
+        {% endif -%}
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
        <img
