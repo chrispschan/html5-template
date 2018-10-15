@@ -1,13 +1,13 @@
-<{{#if options.tag}}{{options.tag}} {{else}}div {{/if}} 
-    {{~#if id}} id="{{id}}"{{/if~}} 
-    class="imageText
+<{{~#if options.tag}}{{options.tag}}{{~else~}}div{{/if~}} 
+    {{~#if id}} id="{{id}}"{{/if}}{{!--
+    --}} class="imageText
     {{~#each options.modifier}} imageText--{{this}}{{~/each ~}}
     {{~#if class}} {{class}}{{/if~}}" 
-    {{~#ifCond options.tag '===' 'a'}} href="{{~#if options.href}}{{options.href}}{{else}}javascript:;{{/if~}}"
-    {{~#if options.target}} target="{{options.target}}"{{/if~}}{{/ifCond~}} 
+    {{~#ifCond options.tag '===' 'a'}} href="{{~#if ../options.href}}{{../../options.href}}{{else}}javascript:;{{/if~}}"
+    {{~#if ../options.target}} target="{{../../options.target}}"{{/if~}}{{/ifCond~}} 
     {{~#each dataset}} data-{{@key}}="{{this}}"{{~/each ~}}
 >
-    {{> imageText/itemGenerator items=options.beforeItems options=options}}
+    {{~> imageText/itemGenerator items=options.beforeItems options=options~}}
     {{~> @partial-block ~}}
-    {{> imageText/itemGenerator items=options.afterItems options=options}}
+    {{~> imageText/itemGenerator items=options.afterItems options=options~}}
 </{{#if options.tag}}{{options.tag}}{{else}}div{{/if}}>

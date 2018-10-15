@@ -1,10 +1,10 @@
-<{{#if options.tag}}{{options.tag}} {{else}}p {{/if}} 
-    {{~#if id}} id="{{id}}"{{/if}} 
-    class="imageText__text__item
+<{{~#if options.tag~}}{{~options.tag~}}{{~else~}}p{{~/if~}} 
+    {{~#if id}} id="{{~id~}}"{{~/if}}{{!--
+    --}} class="imageText__text__item
     {{~#if class}} {{class}}{{/if~}}" 
-    {{~#ifCond options.tag '===' 'a'}} href="{{~#if options.href}}{{options.href}}{{else}}javascript:;{{/if~}}"
-    {{~#if options.target}} target="{{options.target}}"{{/if~}}{{/ifCond~}} 
+    {{~#ifCond options.tag '===' 'a'}} href="{{~#if ../options.href}}{{../../options.href}}{{else}}javascript:;{{/if~}}"
+    {{~#if ../options.target}} target="{{../../options.target}}"{{/if~}}{{/ifCond~}} 
     {{~#each dataset}} data-{{@key}}="{{this}}"{{~/each ~}}
 >
     {{~> @partial-block ~}}
-</{{#if options.tag}}{{options.tag}}{{else}}p{{/if}}>
+</{{~#if options.tag~}}{{~options.tag~}}{{~else~}}p{{~/if~}}>

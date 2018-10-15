@@ -29,7 +29,7 @@ const gulpOptions = {
     es5: false,
     gulpWatch: false,
     watchAppFolder: false,
-    htmlTemplate: 'nunjucks', // 'hb' | 'nunjucks'
+    htmlTemplate: 'hb', // 'hb' | 'nunjucks'
     htmlbeautify: {
         'indent_size': 4,
         'indent_char': ' ',
