@@ -37,6 +37,7 @@
     "jsdom-global": "^3.0.2",
     "lodash": "^4.17.10",
     "node-mime": "^1.0.0",
+    "randomatic": "^3.1.0",
     "sass-module-importer": "^1.4.0",
     "sshpk": "^1.14.2",
     "stylelint-order": "^1.0.0",
