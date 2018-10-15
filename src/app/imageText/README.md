@@ -14,11 +14,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<div class="imageText">
-
-    Image Text
-
-</div>
+<div class="imageText">Image Text</div>
 ```
 
 #### id
@@ -28,11 +24,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<div id="imageText1" class="imageText">
-
-    Image Text
-
-</div>
+<div id="imageText1" class="imageText">Image Text</div>
 ```
 
 #### class
@@ -42,11 +34,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<div class="imageText imageText1">
-
-    Image Text
-
-</div>
+<div class="imageText imageText1">Image Text</div>
 ```
 
 #### dataset
@@ -58,11 +46,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<div class="imageText" data-text="xxx">
-
-    Image Text
-
-</div>
+<div class="imageText" data-text="xxx">Image Text</div>
 ```
 
 #### options
@@ -74,11 +58,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<button class="imageText">
-
-    Image Text
-
-</button>
+<button class="imageText">Image Text</button>
 ```
 
 #####href
@@ -89,11 +69,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<a class="imageText" href="#">
-
-    Image Text
-
-</a>
+<a class="imageText" href="#">Image Text</a>
 ```
 
 #####target
@@ -104,11 +80,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<a class="imageText" href="javascript:;" target="_blank">
-
-    Image Text
-
-</a>
+<a class="imageText" href="javascript:;" target="_blank">Image Text</a>
 ```
 
 #####modifier
@@ -120,11 +92,7 @@ Nunjucks Files:
 ```
 Output:
 ```html
-<div class="imageText imageText--center imageText--horizontal">
-
-    Image Text
-
-</div>
+<div class="imageText imageText--center imageText--horizontal">Image Text</div>
 ```
 
 #####beforeItems
@@ -136,24 +104,20 @@ Nunjucks Files:
         {type: "image", src: "/favicon-32x32.png"}, 
         {type: "text", content: "xxx"}
     ]
-}) %}Image Text{% endcall %}
+}) %}
+    Image Text
+{% endcall %}
 ```
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image">
         <img class="imageText__image__item" src="/favicon-32x32.png" alt="" />
     </div>
-
     <div class="imageText__text">
-
         <p class="imageText__text__item">xxx</p>
-
     </div>
-
     Image Text
-
 </div>
 ```
 
@@ -166,24 +130,20 @@ Nunjucks Files:
         {type: "image", src: "/favicon-32x32.png"}, 
         {type: "text", content: "xxx"}
     ]
-}) %}Image Text{% endcall %}
+}) %}
+    Image Text
+{% endcall %}
 ```
 Output:
 ```html
 <div class="imageText">
-
     Image Text
-
     <div class="imageText__image">
         <img class="imageText__image__item" src="/favicon-32x32.png" alt="" />
     </div>
-
     <div class="imageText__text">
-
         <p class="imageText__text__item">xxx</p>
-
     </div>
-
 </div>
 ```
 
@@ -200,11 +160,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image">
         <img class="imageText__image__item" src="" alt="" />
     </div>
-
 </div>
 ```
 
@@ -218,11 +176,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div id="image1" class="imageText__image">
         <img class="imageText__image__item" src="" alt="" />
     </div>
-
 </div>
 ```
 
@@ -236,11 +192,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image image1">
         <img class="imageText__image__item" src="" alt="" />
     </div>
-
 </div>
 ```
 
@@ -254,11 +208,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image">
         <img class="imageText__image__item" src="image.png" alt="" />
     </div>
-
 </div>
 ```
 
@@ -274,11 +226,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image" data-text="xxx">
         <img class="imageText__image__item" src="" alt="" />
     </div>
-
 </div>
 ```
 
@@ -294,11 +244,43 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image">
         <img class="imageText__image__item" src="" alt="xxx" />
     </div>
+</div>
+```
 
+#####width
+Set image width.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {{ image(options={width: 320}) }}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__image">
+        <img class="imageText__image__item" src="" alt="" width="320" />
+    </div>
+</div>
+```
+
+#####height
+Set image height.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {{ image(options={height: 320}) }}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__image">
+        <img class="imageText__image__item" src="" alt="" height="320" />
+    </div>
 </div>
 ```
 
@@ -313,11 +295,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <button class="imageText__image">
         <img class="imageText__image__item" src="" alt="" />
     </button>
-
 </div>
 ```
 
@@ -332,11 +312,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <a class="imageText__image" href="#">
         <img class="imageText__image__item" src="" alt="" />
     </a>
-
 </div>
 ```
 
@@ -351,11 +329,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <a class="imageText__image" href="javascript:;" target="_blank">
         <img class="imageText__image__item" src="" alt="" />
     </a>
-
 </div>
 ```
 
@@ -370,11 +346,9 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText">
-
     <div class="imageText__image imageText__image--center">
         <img class="imageText__image__item" src="" alt="" />
     </div>
-
 </div>
 ```
 
@@ -389,11 +363,378 @@ Nunjucks Files:
 Output:
 ```html
 <div class="imageText imageText--inside">
-
     <div class="imageText__image imageText__image--background">
         <img class="imageText__image__item" src="" alt="" />
     </div>
+</div>
+```
 
+### macro text(id, class, dataset, options)
+Create imageText__text element.<br/>
+Nunjucks Files:
+```nunjucks
+{%- from "imageText/imageText.html" import imageText, text -%}
+
+{% call imageText() %}
+    {% call text() %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">Text</div>
+</div>
+```
+
+#### id
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(id="text1") %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div id="text1" class="imageText__text">Text</div>
+</div>
+```
+
+#### class
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(class="text1") %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text text1">Text</div>
+</div>
+```
+
+#### dataset
+Set dataset value.<br/>
+If need set `data-text`<br/>
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(dataset={text: "xxx"}) %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text" data-text="xxx">Text</div>
+</div>
+```
+
+#### options
+#####tag
+Set element tag.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(options={tag: "button"}) %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <button class="imageText__text">Text</button>
+</div>
+```
+
+#####href
+Set element href if tag = 'a'.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(options={tag: "a", href: "#"}) %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <a class="imageText__text" href="#">Text</a>
+</div>
+```
+
+#####target
+Set element target if tag = 'a'.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(options={tag: "a", target: "_blank"}) %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <a class="imageText__text" href="javascript:;" target="_blank">Text</a>
+</div>
+```
+
+#####align
+Add align modifier class.<br/>
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text(options={align: "center"}) %}Text{% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text imageText__text--center">Text</div>
+</div>
+```
+
+### macro textItem(id, class, dataset, options)
+Create imageText__text__item element.<br/>
+Nunjucks Files:
+```nunjucks
+{%- from "imageText/imageText.html" import imageText, text, textItem -%}
+
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem() %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <p class="imageText__text__item">Text</p>
+    </div>
+</div>
+```
+
+#### id
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem(id="text1") %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <p id="text1" class="imageText__text__item">Text</p>
+    </div>
+</div>
+```
+
+#### class
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem(class="text1") %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <p class="imageText__text__item text1">Text</p>
+    </div>
+</div>
+```
+
+#### dataset
+Set dataset value.<br/>
+If need set `data-text`<br/>
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem(dataset={text: "xxx"}) %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <p class="imageText__text__item" data-text="xxx">Text</p>
+    </div>
+</div>
+```
+
+#### options
+#####tag
+Set element tag.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem(options={tag: "div"}) %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <div class="imageText__text__item">Text</div>
+    </div>
+</div>
+```
+
+#####href
+Set element href if tag = 'a'.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem(options={tag: "a", href: "#"}) %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <a class="imageText__text__item" href="#">Text</a>
+    </div>
+</div>
+```
+
+#####target
+Set element target if tag = 'a'.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {% call text() %}
+        {% call textItem(options={tag: "a", target: "_blank"}) %}Text{% endcall %}
+    {% endcall %}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__text">
+        <a class="imageText__text__item" href="javascript:;" target="_blank">Text</a>
+    </div>
+</div>
+```
+
+### macro itemGenerator(items, options)
+Auto create imageText__image/imageText__text element(s) by items.<br/>
+Nunjucks Files:
+```nunjucks
+{%- from "imageText/imageText.html" import imageText, itemGenerator -%}
+
+{% call imageText() %}
+    {{ itemGenerator(items=[
+        {type: "image", src: "/favicon-32x32.png"}, 
+        {type: "text", content: "xxx"}
+    ]) }}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <div class="imageText__image">
+        <img class="imageText__image__item" src="/favicon-32x32.png" alt="" />
+    </div>
+    <div class="imageText__text">
+        <p class="imageText__text__item">xxx</p>
+    </div>
+</div>
+```
+
+#### items
+Create items array. All items can set owner options.
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {{ itemGenerator(items=[
+        {
+            type: "image", src: "/favicon-32x32.png", 
+            id: "image1",
+            options: {
+                tag: "button"    
+            }
+        }, 
+        {
+            type: "text", content: "xxx",
+            id: "text1", 
+            options: {
+                tag: "span"    
+            }
+        }
+    ]) }}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <button id="image1" class="imageText__image">
+        <img class="imageText__image__item" src="/favicon-32x32.png" alt="" />
+    </button>
+    <span id="text1" class="imageText__text">
+        <span class="imageText__text__item">xxx</span>
+    </span>
+</div>
+```
+
+#### options
+Global options for all items
+Nunjucks Files:
+```nunjucks
+{% call imageText() %}
+    {{ itemGenerator(items=[
+        {type: "image", src: "/favicon-32x32.png"}, 
+        {type: "text", content: "xxx"}
+    ],
+    options={
+        tag: "span"
+    }) }}
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    <span class="imageText__image">
+        <img class="imageText__image__item" src="/favicon-32x32.png" alt="" />
+    </span>
+    <span class="imageText__text">
+        <span class="imageText__text__item">xxx</span>
+    </span>
+</div>
+```
+
+#####afterItems
+Call `macro itemGenerator(options.afterItems, options)` to auto create `image/text` element after `caller()`.
+Nunjucks Files:
+```nunjucks
+{% call imageText(options={
+    afterItems: [
+        {type: "image", src: "/favicon-32x32.png"}, 
+        {type: "text", content: "xxx"}
+    ]
+}) %}
+    Image Text
+{% endcall %}
+```
+Output:
+```html
+<div class="imageText">
+    Image Text
+    <div class="imageText__image">
+        <img class="imageText__image__item" src="/favicon-32x32.png" alt="" />
+    </div>
+    <div class="imageText__text">
+        <p class="imageText__text__item">xxx</p>
+    </div>
 </div>
 ```
 

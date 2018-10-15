@@ -37,5 +37,25 @@
                 <li>{{{this}}}</li>
             {{/eachContent}}
         </ul>
+
+        {{#setVal}}
+            options1:json = {
+                "modifier": [
+                    "horizontal"
+                ],
+                "beforeItems": [
+                    {
+                        "type": "image",
+                        "src": "/favicon-32x32.png"
+                    },
+                    {
+                        "content": "text1 text1"
+                    }
+                ]
+            };
+        {{/setVal}}
+        {{#> imageText/imageText options=@local.options1}}
+            {{> imageText/image src="/favicon-32x32.png"}}
+        {{/imageText/imageText}}
     </div>
 {{/template/html5}}
