@@ -1546,232 +1546,144 @@ Output:
 </div>
 ```
 
-## map.scss
-Map style template.
+## imageText.scss
+imageText style template.
 
 ### Getting Started
 SCSS Files:
 ```scss
-@import './src/app/map/map.mixin.scss';
+@import './src/app/imageText/imageText.mixin.scss';
 ```
 
-#### @mixin map($proportion: $map-proportion, $width: 100%, $height: 0)
-.map style.<br/>
+#### @mixin imageText($defaultType: $imageText-default-type, $defaultOnly: $imageText-default-only)
+.imageText style.<br/>
 SCSS Files:
 ```scss
-@include map();
+@include imageText();
 ```
 Output:
-```css
-.map {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 56.25%;
-}
-.map__msg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-```
+`.imageText`, `.imageText--horizontal`, `.imageText--inline`, `.imageText--inside`, `.imageText--center`, `.imageText--right`, `.imageText--middle`, `.imageText--bottom` style
 
-##### $proportion
-- .map proportion
-- default $map-proportion: (16, 9) - 16:9
+##### $defaultType
+- `.imageText` default style
+- `"vertical" | "horizontal" | "inline" | "inside"`
+- default `$imageText-default-type: "vertical";`
 SCSS Files:
 ```scss
-@include map($proportion: (4, 3));
+@include imageText($defaultType: "horizontal");
 ```
 Output:
-```css
-.map {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 75%;
-}
-.map__msg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-```
+`.imageText`, `.imageText--vertical`, `.imageText--inline`, `.imageText--inside`, `.imageText--center`, `.imageText--right`, `.imageText--middle`, `.imageText--bottom` style
 
-##### $width
-- .map width
-- default 100%
+##### $defaultOnly
+- only create default type style
+- default `$imageText-default-only: false;`
 SCSS Files:
 ```scss
-@include map($width: 500px);
+@include imageText($defaultOnly: true);
 ```
 Output:
-```css
-.map {
-    position: relative;
-    width: 500px;
-    height: 0;
-    padding-top: 281.25px;
-}
-.map__msg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-```
-
-##### $height
-- .map height
-- default 0
-- if $height != 0, $proportion will not calculation
-SCSS Files:
-```scss
-@include map($height: 500px);
-```
-Output:
-```css
-.map {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    padding-top: 0;
-}
-.map__msg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-```
+`.imageText`, `.imageText--center`, `.imageText--right` style
 
 ##### Add Custom Style
 SCSS Files:
 ```scss
-@include map() {
+@include imageText() {
     margin-top: 20px;
 
-    &__input {
+    &__custom__item {
         width: 100px;
     }
 }
 ```
 Output:
 ```css
-.map {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 56.25%;
+.imageText {
     margin-top: 20px;
 }
-.map__msg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-.map__input {
+.imageText__custom__item {
     width: 100px;
 }
 ```
 
-#### @mixin setEleSize($proportion: (16, 9), $width: 100%, $height: 0, $resetPadding: false)
-Return size style without element.<br/>
+#### @mixin `(vertical | horizontal | inline | inside`-imageText($ele: "", $modifier: "", $itemStyle: false)
+.imageText style of type.<br/>
 SCSS Files:
 ```scss
-.ele {
-    @include setEleSize();
+@include vertical-imageText();
+```
+Output:
+`.imageText`, `.imageText--center`, `.imageText--right` style, without `.imageText__text` and `.imageText__image` reset style.
+
+##### $ele
+- `#{$ele}.imageText`
+- default `""`
+SCSS Files:
+```scss
+@include vertical-imageText($ele: ".test");
+```
+Output:
+`.test.imageText`, `.test.imageText--center`, `.test.imageText--right` style
+
+##### $modifier
+- `.imageText#{$modifier}`
+- default `""`
+SCSS Files:
+```scss
+@include vertical-imageText($modifier: "--custom");
+```
+Output:
+`.imageText--custom`, `.imageText--custom.imageText--center`, `.imageText--custom.imageText--right` style
+
+##### $itemStyle
+- `.imageText__text` and `.imageText__image` reset style
+- default `false`
+SCSS Files:
+```scss
+@include vertical-imageText($itemStyle: true);
+```
+Output:
+`.imageText`, `.imageText--center`, `.imageText--right` style, with `.imageText__text` and `.imageText__image` reset style.
+
+##### Add Custom Style
+SCSS Files:
+```scss
+@include vertical-imageText() {
+    margin-top: 20px;
+
+    &__custom__item {
+        width: 100px;
+    }
 }
 ```
 Output:
 ```css
-.ele {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 56.25%;
+.imageText {
+    margin-top: 20px;
+}
+.imageText__custom__item {
+    width: 100px;
 }
 ```
 
-##### $proportion
-- element proportion
-- default $map-proportion: (16, 9) - 16:9
+#### Set Responsive Style
+##### Default type only
 SCSS Files:
 ```scss
-.ele {
-    @include setEleSize($proportion:(4, 3));
-}
-```
-Output:
-```css
-.ele {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 75%;
-}
-```
+@include imageText($defaultOnly: true);  // default style of type vertical
 
-##### $width
-- element width
-- default 100%
+@media only screen and (max-width: 640px) { // change style to type horizontal when screen width <= 640px
+    @include horizontal-imageText();
+}
+```
+##### Multi type
 SCSS Files:
 ```scss
-.ele {
-    @include setEleSize($width: 500px);
-}
-```
-Output:
-```css
-.ele {
-    position: relative;
-    width: 500px;
-    height: 0;
-    padding-top: 281.25px;
-}
-```
+@include imageText();  // create all type style
 
-##### $height
-- element height
-- default 0
-- if $height != 0, $proportion will not calculation
-SCSS Files:
-```scss
-.ele {
-    @include setEleSize($height: 500px);
-}
-```
-Output:
-```css
-.ele {
-    position: relative;
-    width: 100%;
-    height: 500px;
-}
-```
-
-##### $resetPadding
-- if $height != 0, need reset padding-top to 0 
-SCSS Files:
-```scss
-.ele {
-    @include setEleSize($height: 500px);
-}
-```
-Output:
-```css
-.ele {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    padding-top: 0;
+@media only screen and (max-width: 640px) { // change style when screen width <= 640px
+    @include horizontal-imageText();    // all type
+    @include vertical-imageText($modifier: "--horizontal");    // horizontal type
+    @include inline-imageText($modifier: "--inline");    // inline type
 }
 ```

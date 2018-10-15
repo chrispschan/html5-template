@@ -37,18 +37,5 @@
                 <li>{{{this}}}</li>
             {{/eachContent}}
         </ul>
-
-        {{#setVal}}
-    items:json = [
-        {"type": "image", "src": "/favicon-32x32.png"}, 
-        {"type": "text", "content": "xxx"}
-    ];
-    options:json = {
-        "tag": "span"
-    };
-{{/setVal}}
-{{#> imageText/imageText}}
-    {{> imageText/itemGenerator items=@local.items options=@local.options}}
-{{/imageText/imageText}}
     </div>
 {{/template/html5}}

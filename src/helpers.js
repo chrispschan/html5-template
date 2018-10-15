@@ -55,7 +55,6 @@ const helpers = {
                 if (newVal.length >= 2) {
                     newVal[0] = newVal[0].split(':');
                     if (newVal[0].length >= 2) {
-                        console.log(newVal[1]);
                         switch (newVal[0][1]) {
                             case 'boolean':
                                 newVal[1] = newVal[1] === 'true' ? true : false;

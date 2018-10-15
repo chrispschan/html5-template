@@ -1,29 +1,4 @@
 @import "./src/app/common/common.scss";
-@import "./src/app/imageText/imageText.mixin.scss";
 
 @include html-reset() {
-    @include imageText();
-
-    #test {
-        @include horizontal-imageText('&');
-    }
-
-    #test2 {
-        height: 320px;
-
-        .imageText {
-            &__text {
-                width: 40%;
-            }
-        }
-
-        @media only screen and (max-width: 640px) {
-            @include vertical-imageText($ele: '&') {};
-        }
-    }
-    
-
-    @media only screen and (max-width: 640px) {
-        @include vertical-imageText($modifier: '--horizontal') {};
-    }
 }

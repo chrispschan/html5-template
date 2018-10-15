@@ -30,11 +30,5 @@
                 <li>{{- i | safe -}}</li>
             {%- endfor %}
         </ul>
-
-       {% call imageText() %}
-    {% call text() %}
-        {% call textItem(options={tag: "a", target: "_blank"}) %}Text{% endcall %}
-    {% endcall %}
-{% endcall %}
     </div>
 {% endblock %}
