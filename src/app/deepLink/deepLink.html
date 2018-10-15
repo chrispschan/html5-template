@@ -2,7 +2,7 @@
 	<a href="{% if href %}{{href}}{% else %}javascript:;{% endif %}"
 		{% if options.target %} target="{{- options.target -}}"{% endif %}
 		{% if id %} id="{{- id -}}"{% endif %} 
-		class="deepLink{% if class %} {{ class }}{% endif %}"
+		{#!- #} class="deepLink{% if class %} {{ class }}{% endif %}"
 	    {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
 	>
 		{{- caller() -}}

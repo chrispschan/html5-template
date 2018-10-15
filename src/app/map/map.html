@@ -1,7 +1,7 @@
 {% macro map(id, class, dataset, options) %}
     <div
         {% if id %} id="{{- id -}}"{% endif %} 
-        class="map{% if class %} {{ class }}{% endif %}"
+        {#!- #} class="map{% if class %} {{ class }}{% endif %}"
         {%- for key, value in dataset %} data-map-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
         {%- if options.notSupport -%}
