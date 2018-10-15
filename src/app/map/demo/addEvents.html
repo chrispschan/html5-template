@@ -1,0 +1,16 @@
+{% set demoCode=demo.map.addEvents %}
+{% set demoContent=demoList.map.demo.addEvents %}
+
+{% from "demo/demo.html" import demo %}
+{% from "map/map.html" import map %}
+
+{% call demo({content: demoContent, 
+html: '{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoAddEvents") }}
+{{ map(class="mapDemoAddEvents") }}', 
+js: demoCode.js, 
+scss: demoCode.scss}) -%}
+    {{ map(class="mapDemoAddEvents") }}
+    {{ map(class="mapDemoAddEvents") }}
+{%- endcall %}

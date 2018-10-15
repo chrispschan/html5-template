@@ -1,0 +1,16 @@
+@import "./src/app/common/common.scss";
+
+$prismjs-font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+$prismjs-text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+$prismjs-margin-bottom: $base-margin;
+$prismjs-padding: $base-margin / 2;
+$prismjs-border-radius: .3rem;
+$prismjs-background-color: #272822;
+$prismjs-color: #f8f8f2;
+$prismjs-comment-color: slategray;
+$prismjs-property-color: #f92672;
+$prismjs-boolean-color: #ae81ff;
+$prismjs-selector-color: #a6e22e;
+$prismjs-atrule-color: #e6db74;
+$prismjs-keyword-color: #66d9ef;
+$prismjs-regex-color: #fd971f;

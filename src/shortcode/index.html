@@ -1,0 +1,20 @@
+{# set value #}
+{% set lang="en" %}     {# page language id <src/data/html.xlsm -- lang -- id> #}
+{% set page=shortcode %}     {# page content data <json file name> #}
+{% set viewport="device" %}     {# viewport setting <src/data/html.xlsm -- viewport -- id> #}
+{% set share=true %}     {# add facebook, LinkedIn, Twitter share meta tag? #}
+{% set noTel=true %}     {# need disable browser telephone number detection? #}
+{% set noDate=true %}     {# need disable browser date detection? #}
+{% set noAddr=true %}     {# need disable browser address detection? #}
+{% set noEmail=true %}     {# need disable browser email detection? #}
+
+{%- extends "template/html5.html" -%}
+{%- from "demo/demo.html" import demoInclue -%}
+
+{% block html %}
+    <!-- .innerWrapper -->
+    <div class="innerWrapper">
+        <h1>Shortcode</h1>
+        {{ demoInclue(demoList, shortcode.demo) }}
+    </div>
+{% endblock %}

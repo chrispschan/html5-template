@@ -1,0 +1,14 @@
+{% set demoContent=demoList.common.demo.fontSize %}
+{% set fontSizeList=scssVal.fontSize %}
+
+{% from "demo/demo.html" import demo %}
+
+{% call demo({content: demoContent }) -%}
+    {% for key, value in fontSizeList %}
+        {% if key !== 'font-size-fullList' and value | typeof('object') %}
+            <p class="{{key}}">{{key}}: font size - {{value.value[0]}}, line height - {{value.value[1]}}</p>
+<pre class="language-scss"><code class="language-scss">.{{key}}, .{{key}}-size{% if scss.font['font-unit'] !== 'px' %}, .{{key}}px, .{{key}}px-size{% endif %}</code></pre>
+        {% endif %}
+    {% endfor %}
+{%- endcall %}
+

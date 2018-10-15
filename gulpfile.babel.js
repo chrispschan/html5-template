@@ -14,14 +14,19 @@ import './gulp/js.task.js';
 import './gulp/scss.task.js';
 import './gulp/unit-test.task.js';
 import './gulp/wcag.task.js';
+import './gulp/shortcode.task.js';
+import './gulp/shortcodeServer.task.js';
 
 let defaultTasks = gulpOptions.defaultTasks,
     buildTasks = [],
     serverTasks = [
         'cmsServer:setup',
-        'server:setup'
+        'server:setup',
+        'shortcodeServer:setup'
     ],
-    watchTasks = [];
+    watchTasks = [
+        'shortcode:watch'
+    ];
  
 gulp.task('default', (cd) => {
     let _watchTasks = defaultTasks.filter((item) => {
@@ -34,10 +39,15 @@ gulp.task('default', (cd) => {
 
     watchTasks = watchTasks.concat(_watchTasks);
 
-    if (gulpOptions.htmlTemplate == 'hb') watchTasks.push('hb:watch');
-    else watchTasks.push('nunjucks:watch');
+    if (gulpOptions.htmlTemplate == 'hb') {
+        watchTasks.push('hb:watch');
+        watchTasks.push('shortcode:hb:watch');
+    } else {
+        watchTasks.push('nunjucks:watch');
+        watchTasks.push('shortcode:nunjucks:watch');
+    }
 
-    return gulpSequence(buildTasks, serverTasks, watchTasks, cd);
+    return gulpSequence(buildTasks, 'shortcode:build', serverTasks, watchTasks, cd);
 });
 
 gulp.task('clean', () => del([`${gulpOptions.server.root}**/*`]));

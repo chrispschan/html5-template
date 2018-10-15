@@ -1,0 +1,987 @@
+{
+  "common": {
+    "title": "common",
+    "description": "",
+    "demo": {
+      "color": {
+        "enable": true,
+        "title": "Color",
+        "description": ""
+      },
+      "fontSize": {
+        "enable": true,
+        "title": "Font Size",
+        "description": ""
+      },
+      "font": {
+        "enable": true,
+        "title": "Typography",
+        "description": ""
+      },
+      "input": {
+        "enable": true,
+        "title": "Input",
+        "description": "",
+        "options": {
+          "checkbox": true,
+          "color": true,
+          "date": true,
+          "datetime-local": true,
+          "email": true,
+          "file": true,
+          "month": true,
+          "number": true,
+          "password": true,
+          "radio": true,
+          "range": true,
+          "search": true,
+          "tel": true,
+          "text": true,
+          "time": true,
+          "url": true,
+          "week": true,
+          "select": true
+        }
+      },
+      "button": {
+        "enable": true,
+        "title": "Button",
+        "description": ""
+      },
+      "list": {
+        "enable": true,
+        "title": "List",
+        "description": "",
+        "options": {
+          "ul": true,
+          "ol": true
+        }
+      },
+      "table": {
+        "enable": true,
+        "title": "Table",
+        "description": ""
+      }
+    }
+  },
+  "map": {
+    "title": "Map",
+    "description": "",
+    "demo": {
+      "default": {
+        "enable": false,
+        "title": "Map (map = '.map', options = {})",
+        "description": "The initial Map class.",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "map": {
+                "type": "string",
+                "description": "The Map element(s)'s class name/id."
+              },
+              "options": {
+                "type": "object",
+                "description": "Extends <a href=\"https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions\" target=\"_blank\">google.maps.MapOptions</a>.<br/>Define the properties that can be set on a Map."
+              }
+            }
+          },
+          "options": {
+            "title": "Map.options Properties",
+            "data": {
+              "backgroundColor": {
+                "type": "string",
+                "description": "Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized."
+              },
+              "center": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngLiteral\" target=\"_blank\">google.maps.LatLngLiteral</a>",
+                "description": "The initial Map center."
+              },
+              "clickableIcons": {
+                "type": "boolean",
+                "description": "When <b>false</b>, map icons are not clickable. A map icon represents a point of interest, also known as a POI. By default map icons are clickable."
+              },
+              "disableDefaultUI": {
+                "type": "boolean",
+                "description": "Enables/disables all default UI. May be overridden individually."
+              },
+              "disableDoubleClickZoom": {
+                "type": "boolean",
+                "description": "Enables/disables zoom and center on double click. Enabled by default.<br/><br/><b>Note:</b> This property is <b>not recommended</b>. To disable zooming on double click, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
+              },
+              "draggable": {
+                "type": "boolean",
+                "description": "If false, prevents the map from being dragged. Dragging is enabled by default.<br/><br/><b>Note:</b> This property is <b>deprecated</b>. To disable dragging on the map, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
+              },
+              "draggableCursor": {
+                "type": "string",
+                "description": "The name or url of the cursor to display when mousing over a draggable map. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggableCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
+              },
+              "draggingCursor": {
+                "type": "string",
+                "description": "The name or url of the cursor to display when the map is being dragged. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggingCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
+              },
+              "fullscreenControl": {
+                "type": "boolean",
+                "description": "The enabled/disabled state of the Fullscreen control."
+              },
+              "fullscreenControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#FullscreenControlOptions\" target=\"_blank\">google.maps.FullscreenControlOptions</a>",
+                "description": "The display options for the Fullscreen control."
+              },
+              "gestureHandling": {
+                "type": "string",
+                "description": "This setting controls how the API handles gestures on the map. Allowed values:<br/><ul><li>\"<b>cooperative</b>\": Scroll events and one-finger touch gestures scroll the page, and do not zoom or pan the map. Two-finger touch gestures pan and zoom the map. Scroll events with a ctrl key or ⌘ key pressed zoom the map.<br/>In this mode the map cooperates with the page.</li><li>\"<b>greedy</b>\": All touch gestures and scroll events pan or zoom the map.\n</li><li>\"<b>none</b>\": The map cannot be panned or zoomed by user gestures.\n</li><li>\"<b>auto</b>\": (default) Gesture handling is either cooperative or greedy, depending on whether the page is scrollable or in an iframe.\n</li></ul>"
+              },
+              "heading": {
+                "type": "number",
+                "description": "The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available."
+              },
+              "keyboardShortcuts": {
+                "type": "boolean",
+                "description": "If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default."
+              },
+              "mapTypeControl": {
+                "type": "boolean",
+                "description": "The initial enabled/disabled state of the Map type control."
+              },
+              "mapTypeControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#MapTypeControlOptions\" target=\"_blank\">google.maps.MapTypeControlOptions</a>",
+                "description": "The initial display options for the Map type control."
+              },
+              "mapTypeId": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/map#MapTypeId\" target=\"_blank\">google.maps.MapTypeId</a> | string",
+                "description": "The initial Map mapTypeId. Defaults to <b>ROADMAP</b>."
+              },
+              "maxZoom": {
+                "type": "number",
+                "description": "The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "minZoom": {
+                "type": "number",
+                "description": "The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "noClear": {
+                "type": "boolean",
+                "description": "If true, do not clear the contents of the Map div."
+              },
+              "panControl": {
+                "type": "boolean",
+                "description": "The enabled/disabled state of the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
+              },
+              "panControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#PanControlOptions\" target=\"_blank\">google.maps.PanControlOptions</a>",
+                "description": "The display options for the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
+              },
+              "rotateControl": {
+                "type": "boolean",
+                "description": "The enabled/disabled state of the Rotate control."
+              },
+              "rotateControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#RotateControlOptions\" target=\"_blank\">google.maps.RotateControlOptions</a>",
+                "description": "The display options for the Rotate control."
+              },
+              "scaleControl": {
+                "type": "boolean",
+                "description": "The initial enabled/disabled state of the Scale control."
+              },
+              "scaleControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#ScaleControlOptions\" target=\"_blank\">google.maps.ScaleControlOptions</a>",
+                "description": "The initial display options for the Scale control."
+              },
+              "scrollwheel": {
+                "type": "boolean",
+                "description": "If false, disables zooming on the map using a mouse scroll wheel. The scrollwheel is enabled by default.<br/><br/><b>Note</b>: This property is <b>not recommended</b>. To disable zooming using scrollwheel, you can use the <b>gestureHandling</b> property, and set it to either \"<b>cooperative</b>\" or \"<b>none</b>\"."
+              },
+              "streetView": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/street-view#StreetViewPanorama\" target=\"_blank\">google.maps.StreetViewPanorama</a>",
+                "description": "A <b>StreetViewPanorama</b> to display when the Street View pegman is dropped on the map. If no panorama is specified, a default <b>StreetViewPanorama</b> will be displayed in the map's <b>div</b> when the pegman is dropped."
+              },
+              "streetViewControl": {
+                "type": "boolean",
+                "description": "The initial enabled/disabled state of the Street View Pegman control. This control is part of the default UI, and should be set to <b>false</b> when displaying a map type on which the Street View road overlay should not appear (e.g. a non-Earth map type)."
+              },
+              "streetViewControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#StreetViewControlOptions\" target=\"_blank\">google.maps.StreetViewControlOptions</a>",
+                "description": "The initial display options for the Street View Pegman control."
+              },
+              "styles": {
+                "type": "Array<<a href=\"https://developers.google.com/maps/documentation/javascript/reference/map#MapTypeStyle\" target=\"_blank\">google.maps.MapTypeStyle</a>>",
+                "description": "Styles to apply to each of the default map types. Note that for <b>satellite</b>/<b>hybrid</b> and <b>terrain</b> modes, these styles will only apply to labels and geometry."
+              },
+              "tilt": {
+                "type": "number",
+                "description": "Controls the automatic switching behavior for the angle of incidence of the map. The only allowed values are <b>0</b> and <b>45</b>. The value <b>0</b> causes the map to always use a 0° overhead view regardless of the zoom level and viewport. The value <b>45</b> causes the tilt angle to automatically switch to 45 whenever 45° imagery is available for the current zoom level and viewport, and switch back to 0 whenever 45° imagery is not available (this is the default behavior). 45° imagery is only available for <b>satellite</b> and <b>hybrid</b> map types, within some locations, and at some zoom levels. <b>Note</b>: <b>getTilt</b> returns the current tilt angle, not the value specified by this option. Because <b>getTilt</b> and this option refer to different things, do not <b>bind()</b> the <b>tilt</b> property; doing so may yield unpredictable effects."
+              },
+              "zoom": {
+                "type": "number",
+                "description": "The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "zoomControl": {
+                "type": "boolean",
+                "description": "The enabled/disabled state of the Zoom control."
+              },
+              "zoomControlOptions": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/control#ZoomControlOptions\" target=\"_blank\">google.maps.ZoomControlOptions</a>",
+                "description": "The display options for the Zoom control."
+              },
+              "geolocation": {
+                "type": "boolean",
+                "description": "The initial Map center to the user's position."
+              },
+              "geolocationOption": {
+                "type": "object",
+                "description": "Extends <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions\" target=\"_blank\">PositionOptions</a>.<br/>Interface describes an object containing option properties to pass as a parameter of <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition\" target=\"_blank\">Geolocation.getCurrentPosition()</a>."
+              },
+              "events": {
+                "type": "object",
+                "description": "The initial Map events callback functions. Add <a href=\"https://developers.google.com/maps/documentation/javascript/reference/#Map\" target=\"_blank\">MapsEventListener</a> by <a href=\"https://developers.google.com/maps/documentation/javascript/events\" target=\"_blank\">key</a>."
+              },
+              "markers": {
+                "type": "Array<Map.marker>",
+                "description": "The initial Map markers."
+              }
+            }
+          },
+          "geolocationOption": {
+            "title": "Map.option.geolocation Properties",
+            "data": {
+              "enableHighAccuracy": {
+                "type": "boolean",
+                "description": "Is a <b>Boolean</b> that indicates the application would like to receive the best possible results. If <b>true</b> and if the device is able to provide a more accurate position, it will do so. Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example). On the other hand, if <b>false</b>, the device can take the liberty to save resources by responding more quickly and/or using less power.<br/>Default: false."
+              },
+              "timeout": {
+                "type": "long",
+                "description": "Is a positive <b>long<b/> value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position. The default value is <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity\" target=\"_blank\">Infinity</a>, meaning that <b>getCurrentPosition()</b> won't return until the position is available."
+              },
+              "maximumAge": {
+                "type": "long",
+                "description": "Is a positive <b>long</b> value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return. If set to <b>0</b>, it means that the device cannot use a cached position and must attempt to retrieve the real current position. If set to <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity\" target=\"_blank\">Infinity</a> the device must return a cached position regardless of its age.<br/>Default: 0."
+              },
+              "marker": {
+                "type": "boolean",
+                "description": "If <b>true</b> will set the marker to geolocation at the map.<br/>Default: false."
+              }
+            }
+          },
+          "events": {
+            "title": "Map.option.events Properties",
+            "data": {
+              "bounds_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the viewport bounds have changed."
+              },
+              "center_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the map center property changes."
+              },
+              "click": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user clicks on the map. An ApiMouseEvent with properties for the clicked location is returned unless a place icon was clicked, in which case an IconMouseEvent with a placeid is returned. IconMouseEvent and ApiMouseEvent are identical, except that IconMouseEvent has the placeid field. The event can always be treated as an ApiMouseEvent when the placeid is not important. The click event is not fired if a marker or infowindow was clicked."
+              },
+              "dblclick": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user double-clicks on the map. Note that the click event will also fire, right before this one."
+              },
+              "drag": {
+                "type": "function | Map.event",
+                "description": "This event is repeatedly fired while the user drags the map."
+              },
+              "dragend": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user stops dragging the map."
+              },
+              "dragstart": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user starts dragging the map."
+              },
+              "heading_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the map heading property changes."
+              },
+              "idle": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the map becomes idle after panning or zooming."
+              },
+              "maptypeid_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the mapTypeId property changes."
+              },
+              "mousemove": {
+                "type": "function | Map.event",
+                "description": "This event is fired whenever the user's mouse moves over the map container."
+              },
+              "mouseout": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user's mouse exits the map container."
+              },
+              "mouseover": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user's mouse enters the map container."
+              },
+              "projection_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the projection has changed."
+              },
+              "rightclick": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the DOM contextmenu event is fired on the map container."
+              },
+              "tilesloaded": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the visible tiles have finished loading."
+              },
+              "tilt_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the map tilt property changes."
+              },
+              "zoom_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the map zoom property changes."
+              }
+            }
+          },
+          "event": {
+            "title": "Map.event Properties",
+            "data": {
+              "callback": {
+                "type": "function",
+                "description": "The event callback function. Required."
+              },
+              "type": {
+                "type": "'marker' | 'map'",
+                "description": "Add event to map/marker.<br/>default: 'map'"
+              },
+              "disableOther": {
+                "type": "boolean",
+                "description": "Disable other events of map/marker."
+              },
+              "marker": {
+                "type": "Map.marker.markerId | <a href=\"https://developers.google.com/maps/documentation/javascript/markers\" target=\"_blank\">google.maps.Marker</a>",
+                "description": "Only enabled when event.type is \"<b>marker</b>\". Search marker by markerId/LatLngLiteral and add event listener."
+              }
+            }
+          },
+          "marker": {
+            "title": "Map.marker Properties",
+            "data": {
+              "anchorPoint": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/coordinates#Point\" target=\"_blank\">google.maps.Point</a>",
+                "description": "The offset from the marker's position to the tip of an InfoWindow that has been opened with the marker as anchor."
+              },
+              "animation": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/marker#Animation\" target=\"_blank\">google.maps.Animation</a>",
+                "description": "Which animation to play when marker is added to a map."
+              },
+              "clickable": {
+                "type": "boolean",
+                "description": "If true, the marker receives mouse and touch events. Default value is true."
+              },
+              "crossOnDrag": {
+                "type": "boolean",
+                "description": "If false, disables cross that appears beneath the marker when dragging. This option is <b>true</b> by default."
+              },
+              "cursor": {
+                "type": "string",
+                "description": "Mouse cursor to show on hover"
+              },
+              "draggable": {
+                "type": "boolean",
+                "description": "If true, the marker can be dragged. Default value is false."
+              },
+              "icon": {
+                "type": "string | <a href=\"https://developers.google.com/maps/documentation/javascript/reference/marker#Icon\" target=\"_blank\">google.maps.Icon</a> | <a href=\"https://developers.google.com/maps/documentation/javascript/reference/marker#Symbol\" target=\"_blank\">google.maps.Symbol</a>",
+                "description": "Icon for the foreground. If a string is provided, it is treated as though it were an <b>Icon</b> with the string as <b>url</b>."
+              },
+              "label": {
+                "type": "string | <a href=\"https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerLabel\" target=\"_blank\">google.maps.MarkerLabel</a>",
+                "description": "Adds a label to the marker. The label can either be a string, or a <b>MarkerLabel</b> object."
+              },
+              "map": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/map#Map\" target=\"_blank\">google.maps.Map</a> | <a href=\"https://developers.google.com/maps/documentation/javascript/reference/street-view#StreetViewPanorama\" target=\"_blank\">google.maps.StreetViewPanorama</a>",
+                "description": "Map on which to display Marker."
+              },
+              "opacity": {
+                "type": "number",
+                "description": "The marker's opacity between 0.0 and 1.0."
+              },
+              "optimized": {
+                "type": "boolean",
+                "description": "Optimization renders many markers as a single static element. Optimized rendering is enabled by default. Disable optimized rendering for animated GIFs or PNGs, or when each marker must be rendered as a separate DOM element (advanced usage only)."
+              },
+              "position": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngLiteral\" target=\"_blank\">google.maps.LatLngLiteral</a>",
+                "description": "Marker position. Required."
+              },
+              "shape": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerShape\" target=\"_blank\">google.maps.MarkerShape</a>",
+                "description": "Image map region definition used for drag/click."
+              },
+              "title": {
+                "type": "string",
+                "description": "Rollover text"
+              },
+              "visible": {
+                "type": "boolean",
+                "description": "If true, the marker is visible"
+              },
+              "zIndex": {
+                "type": "number",
+                "description": "All markers are displayed on the map in order of their zIndex, with higher values displaying in front of markers with lower values. By default, markers are displayed according to their vertical position on screen, with lower markers appearing in front of markers further up the screen."
+              },
+              "events": {
+                "type": "object",
+                "description": "The initial Marker events call back functions. Add <a href=\"https://developers.google.com/maps/documentation/javascript/reference/event#MapsEventListener\" target=\"_blank\">MapsEventListener</a> by <a href=\"https://developers.google.com/maps/documentation/javascript/reference/#Marker\" target=\"_blank\">key</a>."
+              },
+              "layer": {
+                "type": "number",
+                "description": "The initial Marker to Map's layer index.<br/>default: 0"
+              },
+              "markerId": {
+                "type": "string",
+                "description": "Read only. Auto create when add marker to map.<br/>format: {layer}-{position.lat}-{position.lng}"
+              }
+            }
+          },
+          "markerEvents": {
+            "title": "Map.marker.events Properties",
+            "data": {
+              "animation_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's animation property changes."
+              },
+              "click": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker icon was clicked."
+              },
+              "clickable_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's clickable property changes."
+              },
+              "cursor_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's cursor property changes."
+              },
+              "dblclick": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker icon was double clicked."
+              },
+              "drag": {
+                "type": "function | Map.event",
+                "description": "This event is repeatedly fired while the user drags the marker."
+              },
+              "dragend": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user stops dragging the marker."
+              },
+              "draggable_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's draggable property changes."
+              },
+              "dragstart": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the user starts dragging the marker."
+              },
+              "flat_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's flat property changes."
+              },
+              "icon_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker icon property changes."
+              },
+              "mousedown": {
+                "type": "function | Map.event",
+                "description": "This event is fired for a mousedown on the marker."
+              },
+              "mouseout": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the mouse leaves the area of the marker icon."
+              },
+              "mouseover": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the mouse enters the area of the marker icon."
+              },
+              "mouseup": {
+                "type": "function | Map.event",
+                "description": "This event is fired for a mouseup on the marker."
+              },
+              "position_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker position property changes."
+              },
+              "rightclick": {
+                "type": "function | Map.event",
+                "description": "This event is fired for a rightclick on the marker."
+              },
+              "shape_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's shape property changes."
+              },
+              "title_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker title property changes."
+              },
+              "visible_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's visible property changes."
+              },
+              "zindex_changed": {
+                "type": "function | Map.event",
+                "description": "This event is fired when the marker's zIndex property changes."
+              }
+            }
+          },
+          "nunjucks": {
+            "title": "{{ map(id, class, options) }}",
+            "data": {
+              "id": {
+                "type": "string",
+                "description": "Map element id attribute."
+              },
+              "class": {
+                "type": "string",
+                "description": "Map element class attribute."
+              },
+              "options.backgroundColor": {
+                "type": "string",
+                "description": "Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized."
+              },
+              "options.center": {
+                "type": "string",
+                "description": "The initial Map center.<br/>Format: 'lat, lng'<br/>Demo: '0, 0'"
+              },
+              "options.clickableIcons": {
+                "type": "'true' | 'false'",
+                "description": "When <b>false</b>, map icons are not clickable. A map icon represents a point of interest, also known as a POI. By default map icons are clickable."
+              },
+              "options.disableDefaultUI": {
+                "type": "'true' | 'false'",
+                "description": "Enables/disables all default UI. May be overridden individually."
+              },
+              "options.disableDoubleClickZoom": {
+                "type": "'true' | 'false'",
+                "description": "Enables/disables zoom and center on double click. Enabled by default.<br/><br/><b>Note:</b> This property is <b>not recommended</b>. To disable zooming on double click, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
+              },
+              "options.draggable": {
+                "type": "'true' | 'false'",
+                "description": "If false, prevents the map from being dragged. Dragging is enabled by default.<br/><br/><b>Note:</b> This property is <b>deprecated</b>. To disable dragging on the map, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
+              },
+              "options.draggableCursor": {
+                "type": "string",
+                "description": "The name or url of the cursor to display when mousing over a draggable map. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggableCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
+              },
+              "options.draggingCursor": {
+                "type": "string",
+                "description": "The name or url of the cursor to display when the map is being dragged. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggingCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
+              },
+              "options.fullscreenControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Fullscreen control."
+              },
+              "options.fullscreenControlOptions": {
+                "type": "string",
+                "description": "The display options for the Fullscreen control."
+              },
+              "options.heading": {
+                "type": "number",
+                "description": "The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available."
+              },
+              "options.keyboardShortcuts": {
+                "type": "'true' | 'false'",
+                "description": "If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default."
+              },
+              "options.mapTypeControl": {
+                "type": "'true' | 'false'",
+                "description": "The initial enabled/disabled state of the Map type control."
+              },
+              "options.mapTypeId": {
+                "type": "string",
+                "description": "The initial Map mapTypeId. Defaults to <b>ROADMAP</b>."
+              },
+              "options.maxZoom": {
+                "type": "number",
+                "description": "The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "options.minZoom": {
+                "type": "number",
+                "description": "The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "options.noClear": {
+                "type": "'true' | 'false'",
+                "description": "If true, do not clear the contents of the Map div."
+              },
+              "options.panControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
+              },
+              "options.panControlOptions": {
+                "type": "string",
+                "description": "The display options for the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
+              },
+              "options.rotateControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Rotate control."
+              },
+              "options.rotateControlOptions": {
+                "type": "string",
+                "description": "The display options for the Rotate control."
+              },
+              "options.scaleControl": {
+                "type": "'true' | 'false'",
+                "description": "The initial enabled/disabled state of the Scale control."
+              },
+              "options.scaleControlOptions": {
+                "type": "string",
+                "description": "The initial display options for the Scale control."
+              },
+              "options.scrollwheel": {
+                "type": "'true' | 'false'",
+                "description": "If false, disables zooming on the map using a mouse scroll wheel. The scrollwheel is enabled by default.<br/><br/><b>Note</b>: This property is <b>not recommended</b>. To disable zooming using scrollwheel, you can use the <b>gestureHandling</b> property, and set it to either \"<b>cooperative</b>\" or \"<b>none</b>\"."
+              },
+              "options.streetViewControl": {
+                "type": "'true' | 'false'",
+                "description": "The initial enabled/disabled state of the Street View Pegman control. This control is part of the default UI, and should be set to <b>false</b> when displaying a map type on which the Street View road overlay should not appear (e.g. a non-Earth map type)."
+              },
+              "options.streetViewControlOptions": {
+                "type": "string",
+                "description": "The initial display options for the Street View Pegman control."
+              },
+              "options.tilt": {
+                "type": "number",
+                "description": "Controls the automatic switching behavior for the angle of incidence of the map. The only allowed values are <b>0</b> and <b>45</b>. The value <b>0</b> causes the map to always use a 0° overhead view regardless of the zoom level and viewport. The value <b>45</b> causes the tilt angle to automatically switch to 45 whenever 45° imagery is available for the current zoom level and viewport, and switch back to 0 whenever 45° imagery is not available (this is the default behavior). 45° imagery is only available for <b>satellite</b> and <b>hybrid</b> map types, within some locations, and at some zoom levels. <b>Note</b>: <b>getTilt</b> returns the current tilt angle, not the value specified by this option. Because <b>getTilt</b> and this option refer to different things, do not <b>bind()</b> the <b>tilt</b> property; doing so may yield unpredictable effects."
+              },
+              "options.zoom": {
+                "type": "number",
+                "description": "The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "options.zoomControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Zoom control."
+              },
+              "options.zoomControlOptions": {
+                "type": "string",
+                "description": "The display options for the Zoom control."
+              },
+              "options.geolocation": {
+                "type": "'true' | 'false'",
+                "description": "The initial Map center to the user's position."
+              },
+              "options.notSupport": {
+                "type": "string",
+                "description": "Display string when IE < 9."
+              },
+              "options.key": {
+                "type": "string",
+                "description": "Add Google Maps JavaScript API with key. "
+              }
+            }
+          },
+          "handlebars": {
+            "title": "{{> map }}",
+            "data": {
+              "id": {
+                "type": "string",
+                "description": "Map element id attribute."
+              },
+              "class": {
+                "type": "string",
+                "description": "Map element class attribute."
+              },
+              "backgroundColor": {
+                "type": "string",
+                "description": "Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized."
+              },
+              "center": {
+                "type": "string",
+                "description": "The initial Map center.<br/>Format: 'lat, lng'<br/>Demo: '0, 0'"
+              },
+              "clickableIcons": {
+                "type": "'true' | 'false'",
+                "description": "When <b>false</b>, map icons are not clickable. A map icon represents a point of interest, also known as a POI. By default map icons are clickable."
+              },
+              "disableDefaultUI": {
+                "type": "'true' | 'false'",
+                "description": "Enables/disables all default UI. May be overridden individually."
+              },
+              "disableDoubleClickZoom": {
+                "type": "'true' | 'false'",
+                "description": "Enables/disables zoom and center on double click. Enabled by default.<br/><br/><b>Note:</b> This property is <b>not recommended</b>. To disable zooming on double click, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
+              },
+              "draggable": {
+                "type": "'true' | 'false'",
+                "description": "If false, prevents the map from being dragged. Dragging is enabled by default.<br/><br/><b>Note:</b> This property is <b>deprecated</b>. To disable dragging on the map, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
+              },
+              "draggableCursor": {
+                "type": "string",
+                "description": "The name or url of the cursor to display when mousing over a draggable map. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggableCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
+              },
+              "draggingCursor": {
+                "type": "string",
+                "description": "The name or url of the cursor to display when the map is being dragged. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggingCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
+              },
+              "fullscreenControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Fullscreen control."
+              },
+              "fullscreenControlOptions": {
+                "type": "string",
+                "description": "The display options for the Fullscreen control."
+              },
+              "heading": {
+                "type": "number",
+                "description": "The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available."
+              },
+              "keyboardShortcuts": {
+                "type": "'true' | 'false'",
+                "description": "If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default."
+              },
+              "mapTypeControl": {
+                "type": "'true' | 'false'",
+                "description": "The initial enabled/disabled state of the Map type control."
+              },
+              "mapTypeId": {
+                "type": "string",
+                "description": "The initial Map mapTypeId. Defaults to <b>ROADMAP</b>."
+              },
+              "maxZoom": {
+                "type": "number",
+                "description": "The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "minZoom": {
+                "type": "number",
+                "description": "The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "noClear": {
+                "type": "'true' | 'false'",
+                "description": "If true, do not clear the contents of the Map div."
+              },
+              "panControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
+              },
+              "panControlOptions": {
+                "type": "string",
+                "description": "The display options for the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
+              },
+              "rotateControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Rotate control."
+              },
+              "rotateControlOptions": {
+                "type": "string",
+                "description": "The display options for the Rotate control."
+              },
+              "scaleControl": {
+                "type": "'true' | 'false'",
+                "description": "The initial enabled/disabled state of the Scale control."
+              },
+              "scaleControlOptions": {
+                "type": "string",
+                "description": "The initial display options for the Scale control."
+              },
+              "scrollwheel": {
+                "type": "'true' | 'false'",
+                "description": "If false, disables zooming on the map using a mouse scroll wheel. The scrollwheel is enabled by default.<br/><br/><b>Note</b>: This property is <b>not recommended</b>. To disable zooming using scrollwheel, you can use the <b>gestureHandling</b> property, and set it to either \"<b>cooperative</b>\" or \"<b>none</b>\"."
+              },
+              "streetViewControl": {
+                "type": "'true' | 'false'",
+                "description": "The initial enabled/disabled state of the Street View Pegman control. This control is part of the default UI, and should be set to <b>false</b> when displaying a map type on which the Street View road overlay should not appear (e.g. a non-Earth map type)."
+              },
+              "streetViewControlOptions": {
+                "type": "string",
+                "description": "The initial display options for the Street View Pegman control."
+              },
+              "tilt": {
+                "type": "number",
+                "description": "Controls the automatic switching behavior for the angle of incidence of the map. The only allowed values are <b>0</b> and <b>45</b>. The value <b>0</b> causes the map to always use a 0° overhead view regardless of the zoom level and viewport. The value <b>45</b> causes the tilt angle to automatically switch to 45 whenever 45° imagery is available for the current zoom level and viewport, and switch back to 0 whenever 45° imagery is not available (this is the default behavior). 45° imagery is only available for <b>satellite</b> and <b>hybrid</b> map types, within some locations, and at some zoom levels. <b>Note</b>: <b>getTilt</b> returns the current tilt angle, not the value specified by this option. Because <b>getTilt</b> and this option refer to different things, do not <b>bind()</b> the <b>tilt</b> property; doing so may yield unpredictable effects."
+              },
+              "zoom": {
+                "type": "number",
+                "description": "The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
+              },
+              "zoomControl": {
+                "type": "'true' | 'false'",
+                "description": "The enabled/disabled state of the Zoom control."
+              },
+              "zoomControlOptions": {
+                "type": "string",
+                "description": "The display options for the Zoom control."
+              },
+              "geolocation": {
+                "type": "'true' | 'false'",
+                "description": "The initial Map center to the user's position."
+              },
+              "notSupport": {
+                "type": "string",
+                "description": "Display string when IE < 9."
+              },
+              "key": {
+                "type": "string",
+                "description": "Add Google Maps JavaScript API with key. "
+              }
+            }
+          }
+        }
+      },
+      "setZoom": {
+        "enable": false,
+        "title": "Map.setZoom (zoom, index = -1)",
+        "description": "Set the Map zoom.",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "zoom": {
+                "type": "number",
+                "description": "New zoom of the Map. Required."
+              },
+              "index": {
+                "type": "number",
+                "description": "The Map index in Map.map Array.  If <b>-1</b>, set all Maps in Map.map Array."
+              }
+            }
+          }
+        }
+      },
+      "setCenter": {
+        "enable": false,
+        "title": "Map.setCenter (center, panTo = true, index = -1)",
+        "description": "Set the Map center.",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "center": {
+                "type": "<a href=\"https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngLiteral\" target=\"_blank\">google.maps.LatLngLiteral</a>",
+                "description": "New center of the Map. Required. "
+              },
+              "panTo": {
+                "type": "boolean",
+                "description": "If <b>true</b>, with animation for pan to new center."
+              },
+              "index": {
+                "type": "number",
+                "description": "The Map index in Map.map Array.  If <b>-1</b>, set all Maps in Map.map Array."
+              }
+            }
+          }
+        }
+      },
+      "addEvents": {
+        "enable": false,
+        "title": "Map.addEvents (options, index = -1)",
+        "description": "Add event listener to Map/Marker.",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "options": {
+                "type": "object",
+                "description": "Add <a href=\"https://developers.google.com/maps/documentation/javascript/reference/#Map\" target=\"_blank\">MapsEventListener</a> by <a href=\"https://developers.google.com/maps/documentation/javascript/events\" target=\"_blank\">key</a>."
+              },
+              "index": {
+                "type": "number",
+                "description": "The Map index in Map.map Array.  If <b>-1</b>, set all Maps in Map.map Array."
+              }
+            }
+          }
+        }
+      },
+      "addMarkers": {
+        "enable": false,
+        "title": "Map.addMarkers (markers, index = -1)",
+        "description": "Add Marker(s) to Map.",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "markers": {
+                "type": "Map.marker | Array<Map.marker>",
+                "description": "Add markers to Map."
+              },
+              "index": {
+                "type": "number",
+                "description": "The Map index in Map.map Array.  If <b>-1</b>, set all Maps in Map.map Array."
+              }
+            }
+          }
+        }
+      },
+      "toggleLayer": {
+        "enable": false,
+        "title": "Map.toggleLayer (options, layer = -1, index = -1)",
+        "description": "Show/hide/remove Map layer(s).",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "options": {
+                "type": "object",
+                "description": "Action."
+              },
+              "layer": {
+                "type": "number",
+                "description": "Edit layer index."
+              },
+              "index": {
+                "type": "number",
+                "description": "The Map index in Map.map Array.  If <b>-1</b>, set all Maps in Map.map Array."
+              }
+            }
+          },
+          "options": {
+            "title": "Map.toggleLayer.options",
+            "data": {
+              "show": {
+                "type": "boolean",
+                "description": "Hide layer(s) when set false."
+              },
+              "remove": {
+                "type": "boolean",
+                "description": "Remove layer(s) when set true."
+              }
+            }
+          }
+        }
+      },
+      "toggleMarker": {
+        "enable": true,
+        "title": "Map.toggleMarker (options, marker, index = -1)",
+        "description": "Show/hide/remove Map marker(s).",
+        "table": {
+          "parameters": {
+            "title": "Parameters",
+            "data": {
+              "options": {
+                "type": "object",
+                "description": "Action."
+              },
+              "marker": {
+                "type": "Map.marker | Array<Map.marker> | Map.marker.markerId | Array<Map.marker.markerId>",
+                "description": "Edit marker(s)."
+              },
+              "index": {
+                "type": "number",
+                "description": "The Map index in Map.map Array.  If <b>-1</b>, set all Maps in Map.map Array."
+              }
+            }
+          },
+          "options": {
+            "title": "Map.toggleMarker.options",
+            "data": {
+              "show": {
+                "type": "boolean",
+                "description": "Hide marker(s) when set false."
+              },
+              "remove": {
+                "type": "boolean",
+                "description": "Remove marker(s) when set true."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

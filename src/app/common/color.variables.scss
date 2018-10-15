@@ -1,5 +1,7 @@
-$black: #000000;
+$black: #000000;    // /: ;
+$gray: #dddddd;
 $white: #ffffff;
 $blue: #1a0dab;
 $purple: #690690;
-$color-fullList: (("black", $black), ("white", $white), ("blue", $blue), ("purple", $purple));
+$color-fullList: (("black", $black), ("gray", $gray), ("white", $white), ("blue", $blue), ("purple", $purple));
+

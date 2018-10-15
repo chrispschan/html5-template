@@ -1,0 +1,60 @@
+<html>
+
+<head></head>
+
+<body>
+    <div class="demo">
+
+        <h3>Map.addEvents (options, index = -1)</h3>
+
+        <p>Add event listener to Map/Marker.</p>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th colspan="2">Parameters</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>options</th>
+                    <td>
+
+                        <b>Type: object</b>
+                        <br> Add
+                        <a href="https://developers.google.com/maps/documentation/javascript/reference/#Map" target="_blank">MapsEventListener</a> by
+                        <a href="https://developers.google.com/maps/documentation/javascript/events" target="_blank">key</a>.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>index</th>
+                    <td>
+
+                        <b>Type: number</b>
+                        <br> The Map index in Map.map Array. If
+                        <b>-1</b>, set all Maps in Map.map Array.
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div class="map mapDemoAddEvents"></div>
+
+        <div class="map mapDemoAddEvents"></div>
+
+        <p>
+            <b>Nunjucks:</b>
+        </p>
+        <pre class="language-html"><code class="language-html prism">{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoAddEvents") }}
+{{ map(class="mapDemoAddEvents") }}</code></pre>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{{#> demo/demo 
+html="{{> map/map id=\"mapDemo1\"}}" 
+js="import Map from \'map\';
+
+let map = new Map('#mapDemo1');
+
+map.waitReady(() => {
+    // run stript when map ready
+});" 
+scss="@import \"./src/app/map/map.mixin.scss\";
+
+@include map() {
+    &#mapDemo1 {
+        // style
+    }
+}"}}
+    {{> map/map id="mapDemo1"}}
+{{/demo/demo}}

@@ -25,11 +25,13 @@
     input,
     textarea,
     select {
-        padding: 0;
+        padding: $input-padding;
 
-        margin: 0;
+        margin: $input-margin;
 
         border: 1px solid $input-border-color;
+
+        border-radius: $input-border-radius;
 
         outline: 0 none;
 
@@ -43,6 +45,47 @@
 
         &:focus {
             outline: $focus-outlin;
+        }
+
+        &:hover {
+            border-color: $input-hover-border-color;
+
+            color: $input-hover-font-color;
+
+            background-color: $input-hover-background-color;
+        }
+
+        &:disabled {
+            border-color: $input-disabled-border-color;
+
+            color: $input-disabled-font-color;
+
+            background-color: $input-disabled-background-color;
+
+            cursor: default;
+        }
+    }
+    
+    input,
+    textarea{
+        &:-moz-read-only { /* For Firefox */
+           border-color: $input-readonly-border-color;
+
+            color: $input-readonly-font-color;
+
+            background-color: $input-readonly-background-color;
+
+            cursor: text;
+        }
+
+        &:read-only {
+            border-color: $input-readonly-border-color;
+
+            color: $input-readonly-font-color;
+
+            background-color: $input-readonly-background-color;
+
+            cursor: text;
         }
     }
 

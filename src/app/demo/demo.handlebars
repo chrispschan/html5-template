@@ -1,0 +1,29 @@
+{{#if title}}
+<h3><b>{{{title}}}</b></h3>
+{{/if}}
+{{#if description}}
+{{#ifTypeof description "string"}}
+<p>{{{description}}}</p>
+{{else}}
+{{#each description}}
+<p>{{{this}}}</p>
+{{/each}}
+{{/ifTypeof}}
+{{/if}}
+{{> @partial-block }}
+{{#if html}}
+<p><b>Handlebars:</b></p>
+<pre class="language-handlebars"><code class="language-handlebars">{{html}}</code></pre>
+{{/if}}
+{{#if js}}
+<p><b>Javascript(es6):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{js}}</code></pre>
+{{/if}}
+{{#if es5}}
+<p><b>Javascript(es5):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{es5}}</code></pre>
+{{/if}}
+{{#if scss}}
+<p><b>SCSS:</b></p>
+<pre class="language-scss"><code class="language-scss">{{scss}}</code></pre>
+{{/if}}

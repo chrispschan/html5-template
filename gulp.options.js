@@ -6,6 +6,9 @@ const gulpOptions = {
     cmsServer: {
         port: '30001'
     },
+    shortcodeServer: {
+        port: '30002'
+    },
     outputFiles: {
         fonts: 'fonts',
         img: 'images',
@@ -29,7 +32,7 @@ const gulpOptions = {
     es5: false,
     gulpWatch: false,
     watchAppFolder: false,
-    htmlTemplate: 'hb', // 'hb' | 'nunjucks'
+    htmlTemplate: 'nunjucks', // 'hb' | 'nunjucks'
     htmlbeautify: {
         'indent_size': 4,
         'indent_char': ' ',
@@ -51,7 +54,9 @@ const gulpOptions = {
         'wrap_attributes': 'auto',
         'wrap_attributes_indent_size': 4,
         'end_with_newline': false,
-        'unformatted': []
+        'unformatted': ['pre', 'code'],
+        'content_unformatted': ['pre', 'code'],
+        'extra_liners': ['pre', 'head', 'body', '/html']
     },
     accessibility: {
         accessibilityLevel: 'WCAG2AA',

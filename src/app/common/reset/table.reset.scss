@@ -10,25 +10,27 @@
 
     td,
     th {
-        padding: 0;
-
-        font-weight: normal;
-
         vertical-align: top;
     }
 
     th {
+        padding: $table-head-padding;
+
         border: 1px solid $table-head-border-color;
 
         color: $table-head-font-color;
+        font-weight: $table-head-font-weight;
 
         background-color: $table-head-background-color;
     }
 
     td {
+        padding: $table-body-padding;
+
         border: 1px solid $table-body-border-color;
 
         color: $table-body-font-color;
+        font-weight: $table-body-font-weight;
 
         background-color: $table-body-background-color;
     }

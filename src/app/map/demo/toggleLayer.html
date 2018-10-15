@@ -1,0 +1,52 @@
+{% set demoCode=demo.map.toggleLayer %}
+{% set demoContent=demoList.map.demo.toggleLayer %}
+
+{% from "demo/demo.html" import demo %}
+{% from "map/map.html" import map %}
+
+{% call demo({content: demoContent, 
+html: '{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoToggleLayer") }}
+{{ map(class="mapDemoToggleLayer") }}
+<label for="mapDemoToggleLayerShow">show:</label>
+<input type="checkbox" checked name="mapLayerShow" id="mapDemoToggleLayerShow" />
+<label for="mapDemoToggleLayerRemove">remove:</label>
+<input type="checkbox" name="mapLayerRemove" id="mapDemoToggleLayerRemove" />
+<label for="mapDemoToggleLayer">layer:</label>
+<input type="number" name="mapLayer" id="mapDemoToggleLayer" value="-1" />
+<label for="mapDemoToggleIndex">index:</label>
+<input type="number" name="mapIndex" id="mapDemoToggleIndex" value="-1" />
+<button id="mapDemoToggleLayerButton">Toggle Layer</button><br/>
+<label for="mapDemoToggleLayerAddMarkersLat">lat:</label>
+<input type="number" name="mapLat" id="mapDemoToggleLayerAddMarkersLat" />
+<label for="mapDemoToggleLayerAddMarkersLng">lng:</label>
+<input type="number" name="mapLng" id="mapDemoToggleLayerAddMarkersLng" />
+<label for="mapDemoToggleLayerAddMarkersLayer">layer:</label>
+<input type="number" name="mapLayer" id="mapDemoToggleLayerAddMarkersLayer" value="0" />
+<label for="mapDemoToggleLayerAddMarkersIndex">index:</label>
+<input type="number" name="mapIndex" id="mapDemoToggleLayerAddMarkersIndex" value="-1" />
+<button id="mapDemoToggleLayerAddMarkerButton">Add Marker</button>', 
+js: demoCode.js, 
+scss: demoCode.scss}) -%}
+    {{ map(class="mapDemoToggleLayer") }}
+    {{ map(class="mapDemoToggleLayer") }}
+    <label for="mapDemoToggleLayerShow">show:</label>
+    <input type="checkbox" checked name="mapLayerShow" id="mapDemoToggleLayerShow" />
+    <label for="mapDemoToggleLayerRemove">remove:</label>
+    <input type="checkbox" name="mapLayerRemove" id="mapDemoToggleLayerRemove" />
+    <label for="mapDemoToggleLayer">layer:</label>
+    <input type="number" name="mapLayer" id="mapDemoToggleLayer" value="-1" />
+    <label for="mapDemoToggleIndex">index:</label>
+    <input type="number" name="mapIndex" id="mapDemoToggleIndex" value="-1" />
+    <button id="mapDemoToggleLayerButton">Toggle Layer</button><br/>
+    <label for="mapDemoToggleLayerAddMarkersLat">lat:</label>
+    <input type="number" name="mapLat" id="mapDemoToggleLayerAddMarkersLat" />
+    <label for="mapDemoToggleLayerAddMarkersLng">lng:</label>
+    <input type="number" name="mapLng" id="mapDemoToggleLayerAddMarkersLng" />
+    <label for="mapDemoToggleLayerAddMarkersLayer">layer:</label>
+    <input type="number" name="mapLayer" id="mapDemoToggleLayerAddMarkersLayer" value="0" />
+    <label for="mapDemoToggleLayerAddMarkersIndex">index:</label>
+    <input type="number" name="mapIndex" id="mapDemoToggleLayerAddMarkersIndex" value="-1" />
+    <button id="mapDemoToggleLayerAddMarkerButton">Add Marker</button>
+{%- endcall %}

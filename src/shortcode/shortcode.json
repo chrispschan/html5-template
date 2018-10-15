@@ -1,0 +1,72 @@
+{
+  "head": {
+    "title": {
+      "en": "Shortcode",
+      "zh": "Shortcode"
+    },
+    "description": {
+      "en": "Shortcode",
+      "zh": "Shortcode"
+    },
+    "keywords": {
+      "en": "shortcode",
+      "zh": "shortcode"
+    },
+    "author": {
+      "en": "Chris Chan",
+      "zh": "Chris Chan"
+    },
+    "copyright": {
+      "en": "Chris Chan",
+      "zh": "Chris Chan"
+    },
+    "canonical": {
+      "en": "/index.html",
+      "zh": "/index.html"
+    },
+    "ogImage": {
+      "en": "",
+      "zh": ""
+    },
+    "ogUrl": {
+      "en": "",
+      "zh": ""
+    },
+    "twImage": {
+      "en": "",
+      "zh": ""
+    }
+  },
+  "plugin": [
+    {
+      "type": "absolute",
+      "file": "https://maps.googleapis.com/maps/api/js?key=AIzaSyBDWiNjmhLiH5KHrqKQL-mNN9gZ0GpzZvM"
+    }
+  ],
+  "scripts": [
+    {
+      "type": "relative",
+      "file": "shortcode.js"
+    }
+  ],
+  "style": [
+    {
+      "type": "relative",
+      "file": "shortcode.css"
+    },
+    {
+      "type": "relative",
+      "file": "style.css"
+    }
+  ],
+  "content": {
+    "h1": {
+      "en": "Shortcode",
+      "zh": "Shortcode"
+    }
+  },
+  "demo": {
+    "common": false,
+    "map": true
+  }
+}

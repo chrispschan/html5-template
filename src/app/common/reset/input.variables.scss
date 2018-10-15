@@ -1,6 +1,19 @@
 @import "./src/app/common/color.variables.scss";
 
+$input-padding: 5px 10px;
+$input-margin: 0 0 20px;
+$input-text-shadow: none;
+$input-border-radius: 5px;
 $input-font-color: $black;
 $input-background-color: $white;
 $input-border-color: $black;
-$input-placeholder-color: $black;
+$input-placeholder-color: $gray;
+$input-hover-font-color: $white;
+$input-hover-background-color: $black;
+$input-hover-border-color: $black;
+$input-disabled-font-color: $black;
+$input-disabled-background-color: $gray;
+$input-disabled-border-color: $black;
+$input-readonly-font-color: $black;
+$input-readonly-background-color: $white;
+$input-readonly-border-color: $gray;

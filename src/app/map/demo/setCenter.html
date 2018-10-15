@@ -1,0 +1,34 @@
+{% set demoCode=demo.map.setCenter %}
+{% set demoContent=demoList.map.demo.setCenter %}
+
+{% from "demo/demo.html" import demo %}
+{% from "map/map.html" import map %}
+
+{% call demo({content: demoContent, 
+html: '{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoSetCenter") }}
+{{ map(class="mapDemoSetCenter") }}
+<label for="mapDemoSetCenterLat">lat:</label>
+<input type="number" name="mapLat" id="mapDemoSetCenterLat" />
+<label for="mapDemoSetCenterLng">lng:</label>
+<input type="number" name="mapLng" id="mapDemoSetCenterLng" />
+<label for="mapDemoSetCenterPanTo">panTo:</label>
+<input type="checkbox" name="mapPanTo" id="mapDemoSetCenterPanTo" checked />
+<label for="mapDemoSetCenterIndex">index:</label>
+<input type="number" name="mapIndex" id="mapDemoSetCenterIndex" value="-1" />
+<button id="mapDemoSetCenterButton">Set Center</button>', 
+js: demoCode.js, 
+scss: demoCode.scss}) -%}
+    {{ map(class="mapDemoSetCenter") }}
+    {{ map(class="mapDemoSetCenter") }}
+    <label for="mapDemoSetCenterLat">lat:</label>
+    <input type="number" name="mapLat" id="mapDemoSetCenterLat" />
+    <label for="mapDemoSetCenterLng">lng:</label>
+    <input type="number" name="mapLng" id="mapDemoSetCenterLng" />
+    <label for="mapDemoSetCenterPanTo">panTo:</label>
+    <input type="checkbox" name="mapPanTo" id="mapDemoSetCenterPanTo" checked />
+    <label for="mapDemoSetCenterIndex">index:</label>
+    <input type="number" name="mapIndex" id="mapDemoSetCenterIndex" value="-1" />
+    <button id="mapDemoSetCenterButton">Set Center</button>
+{%- endcall %}

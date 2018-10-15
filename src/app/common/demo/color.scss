@@ -1,0 +1,40 @@
+@import "./src/app/common/common.scss";
+
+.shortcode-color {
+    display: table;
+
+    width: 100%;
+
+    margin-bottom: $base-margin;
+
+    &__item {
+        display: table-row;
+
+        &__color {
+            display: table-cell;
+
+            width: 40px;
+            min-width: 40px;
+        }
+
+        &__name {
+            display: table-cell;
+
+            padding: 0 #{$base-margin / 2};
+
+            vertical-align: middle;
+        }
+
+        &__code {
+            display: table-cell;
+
+            padding: #{$base-margin / 2} 0;
+
+            vertical-align: middle;
+
+             > pre[class*="language-"] {
+                margin: 0;
+            }
+        }
+    }
+}

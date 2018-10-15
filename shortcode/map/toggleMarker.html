@@ -1,0 +1,219 @@
+<html>
+
+<head></head>
+
+<body>
+    <div class="demo">
+
+        <h3>Map.toggleMarker (options, marker, index = -1)</h3>
+
+        <p>Show/hide/remove Map marker(s).</p>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th colspan="2">Parameters</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>options</th>
+                    <td>
+
+                        <b>Type: object</b>
+                        <br> Action.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>marker</th>
+                    <td>
+
+                        <b>Type: Map.marker | Array
+                            <Map.marker> | Map.marker.markerId | Array
+                                <Map.marker.markerId>
+                        </b>
+                        <br> Edit marker(s).
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>index</th>
+                    <td>
+
+                        <b>Type: number</b>
+                        <br> The Map index in Map.map Array. If
+                        <b>-1</b>, set all Maps in Map.map Array.
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th colspan="2">Map.toggleMarker.options</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>show</th>
+                    <td>
+
+                        <b>Type: boolean</b>
+                        <br> Hide marker(s) when set false.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>remove</th>
+                    <td>
+
+                        <b>Type: boolean</b>
+                        <br> Remove marker(s) when set true.
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div class="map mapDemoToggleMarker"></div>
+
+        <div class="map mapDemoToggleMarker"></div>
+
+        <label for="mapDemoToggleMarkerIndex">index:</label>
+        <input type="number" name="mapIndex" id="mapDemoToggleMarkerIndex" value="-1">
+        <br>
+        <button id="mapDemoShowButton0">Show M0</button>
+        <button id="mapDemoHideButton0">Hide M0</button>
+        <button id="mapDemoRemoveButton0">Remove M0</button>
+        <button id="mapDemoResetButton0">Reset M0</button>
+        <br>
+        <button id="mapDemoShowButton1">Show M1</button>
+        <button id="mapDemoHideButton1">Hide M1</button>
+        <button id="mapDemoRemoveButton1">Remove M1</button>
+        <button id="mapDemoResetButton1">Reset M1</button>
+        <br>
+        <button id="mapDemoShowButton2">Show M2</button>
+        <button id="mapDemoHideButton2">Hide M2</button>
+        <button id="mapDemoRemoveButton2">Remove M2</button>
+        <button id="mapDemoResetButton2">Reset M2</button>
+
+        <p>
+            <b>Nunjucks:</b>
+        </p>
+        <pre class="language-html"><code class="language-html prism">{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoToggleMarker") }}
+{{ map(class="mapDemoToggleMarker") }}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleMarkerIndex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>index:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapIndex<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleMarkerIndex<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>-1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoShowButton0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Show M0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoHideButton0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hide M0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoRemoveButton0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Remove M0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoResetButton0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reset M0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoShowButton1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Show M1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoHideButton1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hide M1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoRemoveButton1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Remove M1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoResetButton1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reset M1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoShowButton2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Show M2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoHideButton2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hide M2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoRemoveButton2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Remove M2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoResetButton2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reset M2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+
+        <p>
+            <b>Javascript(es6):</b>
+        </p>
+        <pre class="language-javascript"><code class="language-javascript prism"><span class="token keyword">import</span> Map <span class="token keyword">from</span> <span class="token string">'map'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token string">'.mapDemoToggleMarker'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    markers<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            position<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                lat<span class="token punctuation">:</span> <span class="token number">22.28552</span><span class="token punctuation">,</span>
+                lng<span class="token punctuation">:</span> <span class="token number">114.15769</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'M0'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            position<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                lat<span class="token punctuation">:</span> <span class="token number">22.26479252616582</span><span class="token punctuation">,</span>
+                lng<span class="token punctuation">:</span> <span class="token number">113.9421272277832</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'M1'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            position<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                lat<span class="token punctuation">:</span> <span class="token number">22.35245727253212</span><span class="token punctuation">,</span>
+                lng<span class="token punctuation">:</span> <span class="token number">114.11859512329102</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'M2'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+map<span class="token punctuation">.</span><span class="token function">waitReady</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// run stript when map ready</span>
+    <span class="token keyword">let</span> mapDemoToggleMarkerIndex <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'mapDemoToggleMarkerIndex'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> markerId <span class="token operator">=</span> map<span class="token punctuation">.</span>layer<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>markerId<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> markerPosition <span class="token operator">=</span> map<span class="token punctuation">.</span>layer<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`mapDemoShowButton</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>  <span class="token comment">// show marker</span>
+            <span class="token keyword">let</span> _index <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>mapDemoToggleMarkerIndex<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">toggleMarker</span><span class="token punctuation">(</span><span class="token punctuation">{</span>show<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> markerId<span class="token punctuation">,</span> _index<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span>layer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`mapDemoHideButton</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>  <span class="token comment">// hide marker</span>
+            <span class="token keyword">let</span> _index <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>mapDemoToggleMarkerIndex<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">toggleMarker</span><span class="token punctuation">(</span><span class="token punctuation">{</span>show<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">,</span> markerId<span class="token punctuation">,</span> _index<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span>layer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`mapDemoRemoveButton</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>  <span class="token comment">// remove marker</span>
+            <span class="token keyword">let</span> _index <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>mapDemoToggleMarkerIndex<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">toggleMarker</span><span class="token punctuation">(</span><span class="token punctuation">{</span>remove<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> markerId<span class="token punctuation">,</span> _index<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span>layer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`mapDemoResetButton</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>  <span class="token comment">// reset marker</span>
+            <span class="token keyword">let</span> _index <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>mapDemoToggleMarkerIndex<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            map<span class="token punctuation">.</span><span class="token function">toggleMarker</span><span class="token punctuation">(</span><span class="token punctuation">{</span>remove<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> markerId<span class="token punctuation">,</span> _index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            map<span class="token punctuation">.</span><span class="token function">addMarkers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                position<span class="token punctuation">:</span> markerPosition<span class="token punctuation">,</span>
+                label<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`M</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> _index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span>layer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
+        <p>
+            <b>SCSS:</b>
+        </p>
+        <pre class="language-scss"><code class="language-scss prism"><span class="token keyword">@import</span> <span class="token string">"./src/app/map/map.mixin.scss"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">@include</span> <span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token selector"><span class="token parent important">&amp;</span>.mapDemoToggleMarker </span><span class="token punctuation">{</span>
+        <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+
+        <span class="token property">width</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+    </div>
+
+</body>
+
+</html>

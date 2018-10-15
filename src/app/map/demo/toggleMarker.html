@@ -1,0 +1,44 @@
+{% set demoCode=demo.map.toggleMarker %}
+{% set demoContent=demoList.map.demo.toggleMarker %}
+
+{% from "demo/demo.html" import demo %}
+{% from "map/map.html" import map %}
+
+{% call demo({content: demoContent, 
+html: '{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoToggleMarker") }}
+{{ map(class="mapDemoToggleMarker") }}
+<label for="mapDemoToggleMarkerIndex">index:</label>
+<input type="number" name="mapIndex" id="mapDemoToggleMarkerIndex" value="-1" /><br/>
+<button id="mapDemoShowButton0">Show M0</button>
+<button id="mapDemoHideButton0">Hide M0</button>
+<button id="mapDemoRemoveButton0">Remove M0</button>
+<button id="mapDemoResetButton0">Reset M0</button><br/>
+<button id="mapDemoShowButton1">Show M1</button>
+<button id="mapDemoHideButton1">Hide M1</button>
+<button id="mapDemoRemoveButton1">Remove M1</button>
+<button id="mapDemoResetButton1">Reset M1</button><br/>
+<button id="mapDemoShowButton2">Show M2</button>
+<button id="mapDemoHideButton2">Hide M2</button>
+<button id="mapDemoRemoveButton2">Remove M2</button>
+<button id="mapDemoResetButton2">Reset M2</button>', 
+js: demoCode.js, 
+scss: demoCode.scss}) -%}
+    {{ map(class="mapDemoToggleMarker") }}
+    {{ map(class="mapDemoToggleMarker") }}
+    <label for="mapDemoToggleMarkerIndex">index:</label>
+    <input type="number" name="mapIndex" id="mapDemoToggleMarkerIndex" value="-1" /><br/>
+    <button id="mapDemoShowButton0">Show M0</button>
+    <button id="mapDemoHideButton0">Hide M0</button>
+    <button id="mapDemoRemoveButton0">Remove M0</button>
+    <button id="mapDemoResetButton0">Reset M0</button><br/>
+    <button id="mapDemoShowButton1">Show M1</button>
+    <button id="mapDemoHideButton1">Hide M1</button>
+    <button id="mapDemoRemoveButton1">Remove M1</button>
+    <button id="mapDemoResetButton1">Reset M1</button><br/>
+    <button id="mapDemoShowButton2">Show M2</button>
+    <button id="mapDemoHideButton2">Hide M2</button>
+    <button id="mapDemoRemoveButton2">Remove M2</button>
+    <button id="mapDemoResetButton2">Reset M2</button>
+{%- endcall %}

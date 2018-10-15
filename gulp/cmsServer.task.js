@@ -15,12 +15,15 @@ const cmsServe = browserSync.create(),
             root: './cms/',
             temp: 'cms/temp/data/',
             scssTemp: 'cms/temp/app/',
+            shortcodeTemp: 'cms/shortcode/',
             output: 'src/data/',
             scssOutput: 'src/app/',
+            shortcodeOutput: 'src/shortcode/',
             folderMenu: 'folderMenu.json'
         },
         content: ['./src/data/**/*.json', '!./src/data/**/_*.json'],    // html content json
-        scssVal: ['./src/app/**/*.variables.scss', '!./src/app/**/_*.variables.scss']
+        scssVal: ['./src/app/**/*.variables.scss', '!./src/app/**/_*.variables.scss'],
+        shortcode: ['./src/shortcode/**/*.json', '!./src/shortcode/**/_*.json']
     };
 
 let options = {
@@ -46,7 +49,17 @@ let options = {
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
 
-                            _watch = _data.type === 'style' ? watchFiles.scssVal : watchFiles.content;
+                            switch (_data.type) {
+                                case 'style':
+                                    _watch = watchFiles.scssVal;
+                                    break;
+                                case 'shortcode':
+                                    _watch = watchFiles.shortcode;
+                                    break;
+                                default:
+                                    _watch = watchFiles.content;
+                                    break;
+                            }
 
                             gulp.src(_watch)
                                 .pipe(directoryMap({
@@ -74,17 +87,29 @@ let options = {
                 handle: (req, res, next) => {
                     let _data = '';
                     let _path = '';
-                    let _temp = watchFiles.cmsServe.temp;
-                    let _output = watchFiles.cmsServe.output;
+                    let _temp = '';
+                    let _output = '';
 
                     req.on('data', function (chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
-                            if (_data.path.search('.scss') !== -1) {
-                                _temp = watchFiles.cmsServe.scssTemp;
-                                _output = watchFiles.cmsServe.scssOutput;
+
+                            switch (_data.type) {
+                                case 'style':
+                                    _temp = watchFiles.cmsServe.scssTemp;
+                                    _output = watchFiles.cmsServe.scssOutput;
+                                    break;
+                                case 'shortcode':
+                                    _temp = watchFiles.cmsServe.shortcodeTemp;
+                                    _output = watchFiles.cmsServe.shortcodeOutput;
+                                    break;
+                                default:
+                                    _temp = watchFiles.cmsServe.temp;
+                                    _output = watchFiles.cmsServe.output;
+                                    break;
                             }
+
                             if (_data.temp === true)
                                 _path = _temp + _data.path;
                             else
@@ -131,17 +156,29 @@ let options = {
                     let _path = '';
                     let _pathArr;
                     let _dir = '.';
-                    let _temp = watchFiles.cmsServe.temp;
-                    let _output = watchFiles.cmsServe.output;
+                    let _temp = '';
+                    let _output = '';
                     let _newData;
                     req.on('data', function (chunk) {
                         _data += chunk.toString();
                         if (isJson(_data)) {
                             _data = JSON.parse(_data);
-                            if (_data.path.search('.scss') !== -1) {
-                                _temp = watchFiles.cmsServe.scssTemp;
-                                _output = watchFiles.cmsServe.scssOutput;
+                            
+                            switch (_data.type) {
+                                case 'style':
+                                    _temp = watchFiles.cmsServe.scssTemp;
+                                    _output = watchFiles.cmsServe.scssOutput;
+                                    break;
+                                case 'shortcode':
+                                    _temp = watchFiles.cmsServe.shortcodeTemp;
+                                    _output = watchFiles.cmsServe.shortcodeOutput;
+                                    break;
+                                default:
+                                    _temp = watchFiles.cmsServe.temp;
+                                    _output = watchFiles.cmsServe.output;
+                                    break;
                             }
+
                             if (_data.temp === true)
                                 _path = _temp + _data.path;
                             else

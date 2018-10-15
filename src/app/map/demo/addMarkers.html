@@ -1,0 +1,30 @@
+{% set demoCode=demo.map.addMarkers %}
+{% set demoContent=demoList.map.demo.addMarkers %}
+
+{% from "demo/demo.html" import demo %}
+{% from "map/map.html" import map %}
+
+{% call demo({content: demoContent, 
+html: '{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoAddMarkers") }}
+{{ map(class="mapDemoAddMarkers") }}
+<label for="mapDemoAddMarkersLat">lat:</label>
+<input type="number" name="mapLat" id="mapDemoAddMarkersLat" />
+<label for="mapDemoAddMarkersLng">lng:</label>
+<input type="number" name="mapLng" id="mapDemoAddMarkersLng" />
+<label for="mapDemoAddMarkersIndex">index:</label>
+<input type="number" name="mapIndex" id="mapDemoAddMarkersIndex" value="-1" />
+<button id="mapDemoAddMarkersButton">Add Marker</button>', 
+js: demoCode.js, 
+scss: demoCode.scss}) -%}
+    {{ map(class="mapDemoAddMarkers") }}
+    {{ map(class="mapDemoAddMarkers") }}
+    <label for="mapDemoAddMarkersLat">lat:</label>
+    <input type="number" name="mapLat" id="mapDemoAddMarkersLat" />
+    <label for="mapDemoAddMarkersLng">lng:</label>
+    <input type="number" name="mapLng" id="mapDemoAddMarkersLng" />
+    <label for="mapDemoAddMarkersIndex">index:</label>
+    <input type="number" name="mapIndex" id="mapDemoAddMarkersIndex" value="-1" />
+    <button id="mapDemoAddMarkersButton">Add Marker</button>
+{%- endcall %}

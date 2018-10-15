@@ -1,0 +1,9 @@
+@import "./src/app/map/map.mixin.scss";
+
+@include map() {
+    &.mapDemoSetZoom {
+        float: left;
+
+        width: 50%;
+    }
+}

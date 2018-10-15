@@ -1,0 +1,92 @@
+{% macro demo(options) %}
+    <div class="demo">
+        {% if options.content.title %}
+            <h3>{{options.content.title | safe}}</h3>
+        {% endif %}
+        {% if options.content.description | typeof('string') and options.content.description !== '' %}
+            <p>{{options.content.description | safe}}</p>
+        {% else %}
+            {% for i in options.content.description %}
+                <p>{{i | safe}}</p>
+            {% endfor %}
+        {% endif %}
+        {% if options.content.table %}
+            {% for key, value in options.content.table %}
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{value.title}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for th, td in value.data %}
+                            <tr>
+                                <th>{{th}}</th>
+                                <td>
+                                    {% if td.type %}
+                                        <b>Type: {{td.type}}</b><br/>
+                                    {% endif %}
+                                    {{td.description}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% endif %}
+{{caller()}}
+        {% if options.html %}
+            <p><b>Nunjucks:</b></p>
+<pre class="language-html"><code class="language-html">{{options.html}}</code></pre>
+        {% endif %}
+        {% if options.js %}
+            <p><b>Javascript(es6):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{options.js}}</code></pre>
+        {% endif %}
+        {% if options.es5 %}
+            <p><b>Javascript(es5):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{options.es5}}</code></pre>
+        {% endif %}
+        {% if options.scss %}
+        <p><b>SCSS:</b></p>
+<pre class="language-scss"><code class="language-scss">{{options.scss}}</code></pre>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro demoInclue(demoList={}, options={}) %}
+    {% for key, value in options %}
+        {% if value === true and demoList[key] %}
+            {% if demoList[key].title %}<h2>{{demoList[key].title}}</h2>{% endif %}
+            {% if demoList[key].description | typeof('string') and demoList[key].description !== '' %}
+                {% if demoList[key].description %}<p>{{demoList[key].description}}</p>{% endif %}
+            {% else %}
+                {% for i in demoList[key].description %}
+                    <p>{{i | safe}}</p>
+                {% endfor %}
+            {% endif %}
+            {% if demoList[key].nunjucks %}
+                <p><b>Nunjucks:</b></p>
+<pre class="language-html"><code class="language-html">{{demoList[key].nunjucks}}</code></pre>
+            {% endif %}
+            {% if demoList[key].js %}
+                <p><b>Javascript(es6):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{demoList[key].js}}</code></pre>
+            {% endif %}
+            {% if demoList[key].es5 %}
+                <p><b>Javascript(es5):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{demoList[key].es5}}</code></pre>
+            {% endif %}
+            {% if demoList[key].scss %}
+            <p><b>SCSS:</b></p>
+<pre class="language-scss"><code class="language-scss">{{demoList[key].scss}}</code></pre>
+            {% endif %}
+
+            {% for file, data in demoList[key].demo %}
+                {% if data.enable === true %}
+                    <!--#include virtual="/{{key}}/{{file}}.html"-->
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

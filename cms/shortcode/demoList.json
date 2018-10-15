@@ -1,0 +1,69 @@
+{
+  "common": {
+    "title": "common",
+    "description": "",
+    "demo": {
+      "button": {
+        "enable": false,
+        "title": "button",
+        "description": ""
+      },
+      "color": {
+        "enable": false,
+        "title": "color",
+        "description": ""
+      },
+      "font": {
+        "enable": false,
+        "title": "font",
+        "description": ""
+      },
+      "fontSize": {
+        "enable": false,
+        "title": "fontSize",
+        "description": ""
+      },
+      "input": {
+        "enable": false,
+        "title": "input",
+        "description": ""
+      },
+      "list": {
+        "enable": false,
+        "title": "list",
+        "description": ""
+      },
+      "table": {
+        "enable": false,
+        "title": "table",
+        "description": ""
+      }
+    }
+  },
+  "map": {
+    "title": "map",
+    "description": "",
+    "demo": {
+      "default": {
+        "enable": false,
+        "title": "default",
+        "description": ""
+      },
+      "marker": {
+        "enable": false,
+        "title": "marker",
+        "description": ""
+      },
+      "setCenter": {
+        "enable": false,
+        "title": "setCenter",
+        "description": ""
+      },
+      "setZoom": {
+        "enable": false,
+        "title": "setZoom",
+        "description": ""
+      }
+    }
+  }
+}

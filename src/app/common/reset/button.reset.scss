@@ -6,11 +6,13 @@
     input[type="button"],
     input[type="reset"],
     input[type="submit"] {
-        padding: 0;
+        padding: $button-padding;
 
-        margin: 0;
+        margin: $button-margin;
 
         border: 1px solid $button-border-color;
+
+        border-radius: $button-border-radius;
 
         outline: 0 none;
 
@@ -18,12 +20,32 @@
 
         vertical-align: baseline;
 
-        text-shadow: none;
+        text-shadow: $button-text-shadow;
 
         background-color: $button-background-color;
 
+        cursor: pointer;
+
         &:focus {
             outline: $focus-outlin;
+        }
+
+        &:hover {
+            border-color: $button-hover-border-color;
+
+            color: $button-hover-font-color;
+
+            background-color: $button-hover-background-color;
+        }
+
+        &:disabled {
+            border-color: $button-disabled-border-color;
+
+            color: $button-disabled-font-color;
+
+            background-color: $button-disabled-background-color;
+
+            cursor: default;
         }
     }
 }

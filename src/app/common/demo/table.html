@@ -1,0 +1,26 @@
+{% set demoContent=demoList.common.demo.table %}
+
+{% from "demo/demo.html" import demo %}
+
+{% call demo({content: demoContent })-%}
+    <table>
+        <thead>
+            <tr>
+                <td>td</td>
+                {% for i in range(1, 3) -%}
+                    <th>th {{i}}</th>
+                {%- endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(1, 3) -%}
+                <tr>
+                    <th>th</th>
+                    {% for j in range(1, 3) -%}
+                        <td>td {{j}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%- endcall %}

@@ -1,0 +1,134 @@
+<html>
+
+<head></head>
+
+<body>
+    <div class="demo">
+
+        <h3>Map.toggleLayer (options, layer = -1, index = -1)</h3>
+
+        <p>Show/hide/remove Map layer(s).</p>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th colspan="2">Parameters</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>options</th>
+                    <td>
+
+                        <b>Type: object</b>
+                        <br> Action.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>layer</th>
+                    <td>
+
+                        <b>Type: number</b>
+                        <br> Edit layer index.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>index</th>
+                    <td>
+
+                        <b>Type: number</b>
+                        <br> The Map index in Map.map Array. If
+                        <b>-1</b>, set all Maps in Map.map Array.
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th colspan="2">Map.toggleLayer.options</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>show</th>
+                    <td>
+
+                        <b>Type: boolean</b>
+                        <br> Hide layer(s) when set false.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>remove</th>
+                    <td>
+
+                        <b>Type: boolean</b>
+                        <br> Remove layer(s) when set true.
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div class="map mapDemoToggleLayer"></div>
+
+        <div class="map mapDemoToggleLayer"></div>
+
+        <label for="mapDemoToggleLayerShow">show:</label>
+        <input type="checkbox" checked name="mapLayerShow" id="mapDemoToggleLayerShow">
+        <label for="mapDemoToggleLayerRemove">remove:</label>
+        <input type="checkbox" name="mapLayerRemove" id="mapDemoToggleLayerRemove">
+        <label for="mapDemoToggleLayer">layer:</label>
+        <input type="number" name="mapLayer" id="mapDemoToggleLayer" value="-1">
+        <label for="mapDemoToggleIndex">index:</label>
+        <input type="number" name="mapIndex" id="mapDemoToggleIndex" value="-1">
+        <button id="mapDemoToggleLayerButton">Toggle Layer</button>
+        <br>
+        <label for="mapDemoToggleLayerAddMarkersLat">lat:</label>
+        <input type="number" name="mapLat" id="mapDemoToggleLayerAddMarkersLat">
+        <label for="mapDemoToggleLayerAddMarkersLng">lng:</label>
+        <input type="number" name="mapLng" id="mapDemoToggleLayerAddMarkersLng">
+        <label for="mapDemoToggleLayerAddMarkersLayer">layer:</label>
+        <input type="number" name="mapLayer" id="mapDemoToggleLayerAddMarkersLayer" value="0">
+        <label for="mapDemoToggleLayerAddMarkersIndex">index:</label>
+        <input type="number" name="mapIndex" id="mapDemoToggleLayerAddMarkersIndex" value="-1">
+        <button id="mapDemoToggleLayerAddMarkerButton">Add Marker</button>
+
+        <p>
+            <b>Nunjucks:</b>
+        </p>
+        <pre class="language-html"><code class="language-html prism">{% from "map/map.html" import map %}
+
+{{ map(class="mapDemoToggleLayer") }}
+{{ map(class="mapDemoToggleLayer") }}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerShow<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>show:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>checkbox<span class="token punctuation">"</span></span> <span class="token attr-name">checked</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapLayerShow<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerShow<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerRemove<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>remove:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>checkbox<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapLayerRemove<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerRemove<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>layer:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapLayer<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayer<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>-1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleIndex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>index:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapIndex<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleIndex<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>-1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerButton<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Toggle Layer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersLat<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>lat:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapLat<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersLat<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersLng<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>lng:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapLng<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersLng<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersLayer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>layer:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapLayer<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersLayer<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersIndex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>index:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>number<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapIndex<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkersIndex<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>-1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>mapDemoToggleLayerAddMarkerButton<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Add Marker<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+
+    </div>
+
+</body>
+
+</html>

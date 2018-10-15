@@ -27,7 +27,7 @@
 
         @content;
 
-        @include font-size-class($font-unit: rem);
+        @include font-size-class($font-unit: $font-unit);
         @include color-class();
     }
 }
