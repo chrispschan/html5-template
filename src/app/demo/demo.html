@@ -54,7 +54,7 @@
     </div>
 {% endmacro %}
 
-{% macro demoInclue(demoList={}, demoCode={}, options={}) %}
+{% macro demoInclue(demoList={}, demoCode={}, scssVal={}, options={}) %}
     {% for key, value in options %}
         {% if value === true and demoList[key] %}
             {% if demoList[key].title %}<h2>{{demoList[key].title}}</h2>{% endif %}

@@ -176,8 +176,32 @@ gulp.task(
             return false;
         };
 
+        let _buildScss = function (_demo) {
+            let _dir = `./src/app/${_demo}`,
+                _content = '';
+
+            if (fs.existsSync(`${_dir}/${_demo}.default.scss`) && !fs.existsSync(`${_dir}/${_demo}.variables.scss`))
+                fs.copyFileSync(`${_dir}/${_demo}.default.scss`, `${_dir}/${_demo}.variables.scss`);
+
+            if (!fs.existsSync(`${_dir}/${_demo}.scss`)) {
+                if (fs.existsSync(`${_dir}/${_demo}.function.scss`))
+                    _content += `@import "${_dir}/${_demo}.function.scss";\n`;
+                if (fs.existsSync(`${_dir}/${_demo}.mixin.scss`))
+                    _content += `@import "${_dir}/${_demo}.mixin.scss";\n`;
+                if (fs.existsSync(`${_dir}/${_demo}.variables.scss`))
+                    _content += `@import "${_dir}/${_demo}.variables.scss";\n`;
+
+                if (_content !== '') {
+                    _newScss = true;
+
+                    fs.writeFileSync(`${_dir}/${_demo}.scss`, _content);
+                }
+            }
+        };
+
         let _sourceData,
             _sourcePath,
+            _newScss = false,
             _jsCode = `// auto import demo js\n`,
             _scssCode = `// auto impot demo scss\n@import "./src/app/demo/demo.scss";\n@import "./src/app/prismjs/prismjs.scss";\n`,
             _taskList = ['shortcode:js:build', 'shortcode:scss:build'];
@@ -211,6 +235,8 @@ gulp.task(
                                 _scssCode += `@import "${_sourcePath}";\n`;
                                 contentData.demoCode[demoGroup][demo].scss = _sourceData;
                             }
+
+                            _buildScss(demoGroup);
                         }
                     }
                 }
@@ -225,7 +251,12 @@ gulp.task(
                 _taskList.push('shortcode:nunjucks:build');
         }
 
-        return gulpSequence(_taskList, cd);
+        if (_newScss) {
+            if (startWatch !== true)
+                return gulp.start('shortcode:content:get');
+            else return;
+        } else
+            return gulpSequence(_taskList, cd);
     }
 );
 

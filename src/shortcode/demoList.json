@@ -1,6 +1,6 @@
 {
   "common": {
-    "enable": false,
+    "enable": true,
     "title": "common",
     "description": "",
     "demo": {
