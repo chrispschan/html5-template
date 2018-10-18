@@ -1,4 +1,4 @@
-{% set demoCode=demo.map.addMarkers %}
+{% set demoCodeObj=demoCode.map.addMarkers %}
 {% set demoContent=demoList.map.demo.addMarkers %}
 
 {% from "demo/demo.html" import demo %}
@@ -16,8 +16,8 @@ html: '{% from "map/map.html" import map %}
 <label for="mapDemoAddMarkersIndex">index:</label>
 <input type="number" name="mapIndex" id="mapDemoAddMarkersIndex" value="-1" />
 <button id="mapDemoAddMarkersButton">Add Marker</button>', 
-js: demoCode.js, 
-scss: demoCode.scss}) -%}
+js: demoCodeObj.js, 
+scss: demoCodeObj.scss}) -%}
     {{ map(class="mapDemoAddMarkers") }}
     {{ map(class="mapDemoAddMarkers") }}
     <label for="mapDemoAddMarkersLat">lat:</label>

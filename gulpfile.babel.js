@@ -39,13 +39,10 @@ gulp.task('default', (cd) => {
 
     watchTasks = watchTasks.concat(_watchTasks);
 
-    if (gulpOptions.htmlTemplate == 'hb') {
+    if (gulpOptions.htmlTemplate == 'hb')
         watchTasks.push('hb:watch');
-        watchTasks.push('shortcode:hb:watch');
-    } else {
+    else
         watchTasks.push('nunjucks:watch');
-        watchTasks.push('shortcode:nunjucks:watch');
-    }
 
     return gulpSequence(buildTasks, 'shortcode:build', serverTasks, watchTasks, cd);
 });

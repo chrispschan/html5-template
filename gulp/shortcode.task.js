@@ -16,6 +16,7 @@ import hb from 'gulp-hb';
 import nunjucksRender from 'gulp-nunjucks-render';
 import watch from 'gulp-watch';
 import highlight from 'gulp-prism';
+import gulpSequence from 'gulp-sequence';
 
 import helpers from './../src/helpers.js';    // handlebars helpers
 import manageEnvironment from './../src/manageEnvironment.js';    // nunjucks environment
@@ -28,21 +29,18 @@ const watchFiles = {
         serve: './shortcode/',
         hb: './src/app/**/*.{hbs,handlebars}',    // handlebars partials
         nunjucks: ['./src/app/'],    // nunjucks partials
-        handlebars: gulpOptions.watchAppFolder ? ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', './src/app/**/*.handlebars', './src/app/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs', '!./src/app/**/_*.handlebars', '!./src/app/**/_*.hbs', '!./src/app/**/demo/**/_*.handlebars', '!./src/app/**/demo/**/_*.hbs', './src/app/demo/**/_*.handlebars', './src/app/demo/**/_*.hbs'] : ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs'],
-        html: gulpOptions.watchAppFolder ? ['./src/shortcode/**/*.html', './src/app/**/*.html', '!./src/shortcode/**/_*.html', '!./src/app/**/_*.html', '!./src/app/**/demo/**/*.html', './src/app/demo/**/*.html'] : ['./src/shortcode/**/*.html', '!./src/shortcode/**/_*.html'],
-        content: ['./src/shortcode/**/*.json', '!./src/shortcode/**/_*.json'],    // html content json
-        scssVal: ['./src/app/**/*.variables.scss', '!./src/app/**/_*.variables.scss'],
+        handlebars: gulpOptions.watchAppFolder ? ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', './src/app/**/*.handlebars', './src/app/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs', '!./src/app/**/_*.handlebars', '!./src/app/**/_*.hbs'] : ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs'],
+        html: gulpOptions.watchAppFolder ? ['./src/shortcode/**/*.html', './src/app/**/*.html', '!./src/shortcode/**/_*.html', '!./src/app/**/_*.html'] : ['./src/shortcode/**/*.html', '!./src/shortcode/**/_*.html'],
         demo: gulpOptions.htmlTemplate == 'hb' ? ['./src/app/**/demo/**/*.html', '!./src/app/demo/**/*.html', '!./src/app/**/demo/**/_*.html'] : ['./src/app/**/demo/**/*.html', '!./src/app/demo/**/*.html', '!./src/app/**/demo/**/_*.html'],
+        content: ['./src/shortcode/**/*.json', './src/app/**/*.variables.scss', '!./src/shortcode/**/_*.json', '!./src/app/**/_*.variables.scss'],    // html content json
         asset: [`${gulpOptions.server.root}**/*`, `!${gulpOptions.server.root}**/*.html`],
         js: './src/shortcode/shortcode.js',
         import: ['./node_modules', './src/app/'],    // babel import path
-        scss: './src/shortcode/shortcode.scss',
-        demoJs: ['./src/app/**/demo/**/*.js', '!./src/app/demo/**/*.js', '!./src/app/**/demo/**/_*.js'],
-        demoScss: ['./src/app/**/demo/**/*.scss', '!./src/app/demo/**/*.js', '!./src/app/**/demo/**/_*.scss']
+        scss: './src/shortcode/shortcode.scss'
     },
     buildFiles = {
-        handlebars: ['./src/app/**/demo/**/*.handlebars', './src/app/**/demo/**/*.hbs', './src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', '!./src/app/demo/**/*.handlebars', '!./src/app/demo/**/*.hbs', '!./src/app/**/demo/**/_*.handlebars', '!./src/app/**/demo/**/_*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs'],
-        html: ['./src/app/**/demo/**/*.html', './src/shortcode/**/*.html', '!./src/app/demo/**/*.html', '!./src/app/**/demo/**/_*.html', '!./src/shortcode/**/_*.html']
+        handlebars: ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs'],
+        html: ['./src/shortcode/**/*.html', '!./src/shortcode/**/_*.html']
     },
     outputFiles = {
         fonts: watchFiles.serve + gulpOptions.outputFiles.fonts,
@@ -55,8 +53,8 @@ const watchFiles = {
     assetSource = gulpOptions.server.root.substr(0, gulpOptions.server.root.length - 1);
 
 let contentPath = watchFiles.content,
-    scssPath = watchFiles.scssVal,
     assetPath = watchFiles.asset,
+    shortcodeWatch = gulpOptions.htmlTemplate === 'hb' ? watchFiles.content.concat(watchFiles.handlebars) : watchFiles.content.concat(watchFiles.html),
     contentData = {
         path: {
             fonts: outputFiles.fonts[outputFiles.fonts - 1] == '/' ? outputFiles.fonts.replace(watchFiles.serve, '/') : outputFiles.fonts.replace(watchFiles.serve, '/') + '/',
@@ -66,30 +64,31 @@ let contentPath = watchFiles.content,
             css: outputFiles.scss[outputFiles.scss - 1] == '/' ? outputFiles.scss.replace(watchFiles.serve, '/') : outputFiles.scss.replace(watchFiles.serve, '/') + '/',
             html: outputFiles.html[outputFiles.html - 1] == '/' ? outputFiles.html.replace(watchFiles.serve, '/') : outputFiles.html.replace(watchFiles.serve, '/') + '/'
         },
-        demo: {
+        scssVal: {},
+        demoCode: {
             js: {},
             scss: {}
         }
     },
     watchTasks = [
         'shortcode:asset:watch',
-        'shortcode:demo:watch',
-        'shortcode:content:watch',
-        'shortcode:scssVal:watch',
-        'shortcode:scss:watch',
-        'shortcode:js:watch'
-    ];
+        'shortcode:content:watch'
+    ],
+    demoListUpdated = false,
+    startWatch = false;
 
-if (gulpOptions.htmlTemplate == 'hb')
-    watchTasks.push('shortcode:hb:watch');
-else
-    watchTasks.push('shortcode:nunjucks:watch');
+if (gulpOptions.watchAppFolder)
+    shortcodeWatch = shortcodeWatch.concat([
+        './src/app/**/*.scss',
+        './src/app/**/*.js',
+        '!./src/app/**/_*.scss',
+        '!./src/app/**/_*.js'
+    ]);
 
 // shortcode build
 gulp.task(
     'shortcode:build',
-    ['shortcode:content:build', 'shortcode:asset:copy'],
-    () => gulp.start(['shortcode:scssVal:get'])
+    ['shortcode:content:get', 'shortcode:asset:copy']
 );
 
 // shortcode clean
@@ -124,6 +123,112 @@ gulp.task('shortcode:asset:watch', () => {
     }
 });
 
+// get content json
+gulp.task(
+    'shortcode:content:get',
+    () => gulp.src(contentPath)
+        .pipe(each(function (content, file, callback) {
+            let newContent = content,
+                fileArr = file.path.search(/\\/) !== -1 ? file.path.split('\\') : file.path.split('\/'),
+                isJson = fileArr[fileArr.length - 1].search('.json') !== -1,
+                val = isJson ? fileArr[fileArr.length - 1].replace('.json', '') : fileArr[fileArr.length - 1].replace('.variables.scss', '');
+
+            fs.readFile(file.path, 'utf8', function (err, data) {
+                if (isJson)
+                    contentData[val] = JSON.parse(data.toString('utf8').replace(/^\uFEFF/, ''));
+                else
+                    contentData.scssVal[val] = scss2json(data);
+
+                callback(null, newContent);
+            });
+
+            // callback(null, newContent);
+        })).on('end', () => {
+            gulp.start('shortcode:demoList:build');
+        })
+);
+
+// watch content
+gulp.task('shortcode:content:watch', () => {
+    startWatch = true;
+
+    if (gulpOptions.gulpWatch) {
+        return watch(shortcodeWatch, (event) => {
+            return gulp.start('shortcode:content:get');
+        });
+    } else
+        return gulp.watch(shortcodeWatch, ['shortcode:content:get']);
+});
+
+// build shortcode js, scss
+gulp.task(
+    'shortcode:source:build',
+    (cd) => {
+        let _getSource = function (_path) {
+            let _source = {};
+
+            if (fs.existsSync(_path)) {
+                _source = fs.readFileSync(_path, 'utf8');
+
+                return _source;
+            }
+
+            return false;
+        };
+
+        let _sourceData,
+            _sourcePath,
+            _jsCode = `// auto import demo js\n`,
+            _scssCode = `// auto impot demo scss\n@import "./src/app/demo/demo.scss";\n@import "./src/app/prismjs/prismjs.scss";\n`,
+            _taskList = ['shortcode:js:build', 'shortcode:scss:build'];
+
+        contentData.shortcode.demo = {};
+
+        if (typeof contentData.demoList === 'object') {
+            for (let demoGroup in contentData.demoList) {
+                contentData.shortcode.demo[demoGroup] = contentData.demoList[demoGroup].enable === true;
+                if (contentData.demoList[demoGroup].enable === true && typeof contentData.demoList[demoGroup].demo === 'object') {
+                    contentData.demoCode[demoGroup] = {};
+
+                    for (let demo in contentData.demoList[demoGroup].demo) {
+                        if (contentData.demoList[demoGroup].demo[demo].enable === true) {
+                            contentData.demoCode[demoGroup][demo] = {};
+
+                            // get js code
+                            _sourcePath = `${demoGroup}/demo/${demo}`;
+                            _sourceData = _getSource(`./src/app/${_sourcePath}.js`);
+
+                            if (_sourceData !== false) {
+                                _jsCode += `import '${_sourcePath}';\n`;
+                                contentData.demoCode[demoGroup][demo].js = _sourceData;
+                            }
+
+                            // get scss code
+                            _sourcePath = `./src/app/${demoGroup}/demo/${demo}.scss`;
+                            _sourceData = _getSource(_sourcePath);
+
+                            if (_sourceData !== false) {
+                                _scssCode += `@import "${_sourcePath}";\n`;
+                                contentData.demoCode[demoGroup][demo].scss = _sourceData;
+                            }
+                        }
+                    }
+                }
+            }
+
+            fs.writeFileSync(watchFiles.js, _jsCode);
+            fs.writeFileSync(watchFiles.scss, _scssCode);
+
+            if (gulpOptions.htmlTemplate == 'hb')
+                _taskList.push('shortcode:hb:build');
+            else
+                _taskList.push('shortcode:nunjucks:build');
+        }
+
+        return gulpSequence(_taskList, cd);
+    }
+);
+
 // hb build
 gulp.task(
     'shortcode:hb:build',
@@ -141,16 +246,6 @@ gulp.task(
         .pipe(gulp.dest(outputFiles.html))
 );
 
-// hb watch
-gulp.task('shortcode:hb:watch', () => {
-    if (gulpOptions.gulpWatch) {
-        return watch(watchFiles.handlebars, () => {
-            return gulp.start('shortcode:hb:build');
-        });
-    } else
-        return gulp.watch(watchFiles.handlebars, ['shortcode:hb:build']);
-});
-
 // nunjucks build
 gulp.task(
     'shortcode:nunjucks:build',
@@ -166,164 +261,6 @@ gulp.task(
             path.dirname = path.dirname.replace('\\demo', '').replace('\/demo', '');
         }))
         .pipe(gulp.dest(outputFiles.html))
-);
-
-// nunjucks watch
-gulp.task('shortcode:nunjucks:watch', () => {
-    if (gulpOptions.gulpWatch) {
-        return watch(watchFiles.html, () => {
-            return gulp.start('shortcode:nunjucks:build');
-        });
-    } else
-        return gulp.watch(watchFiles.html, ['shortcode:nunjucks:build']);
-});
-
-// demo watch
-gulp.task('shortcode:demo:watch', () => {
-    if (gulpOptions.gulpWatch) {
-        return watch(watchFiles.demo, () => {
-            return gulp.start('shortcode:content:build');
-        });
-    } else
-        return gulp.watch(watchFiles.demo, ['shortcode:content:build']);
-});
-
-// build content json
-gulp.task(
-    'shortcode:content:build',
-    () => {
-        let _path = './src/shortcode/demoList.json',
-            _shortcode = './src/shortcode/shortcode.json',
-            _content = {},
-            _shortcodeDemo = {};
-        
-        if (!fs.existsSync(_path)) {
-            fs.writeFile(_path, '{}', function (err) {
-                if (err)
-                    return console.log(err);
-            });
-        }
-
-        fs.readFile(_path, 'utf8', (err, data) => {
-            if (err)
-                return console.log(err);
-
-            if (typeof data === 'string') {
-                if (data[0] !== '{' && data[0] !== '[' && data[0] !== '"') data = data.substr(1);
-                _content = JSON.parse(data);
-            } else
-                _content = data;
-        });
-
-        if (fs.existsSync(_shortcode)) {
-            fs.readFile(_shortcode, 'utf8', (err, data) => {
-                if (err)
-                    return console.log(err);
-
-                if (typeof data === 'string') {
-                    if (data[0] !== '{' && data[0] !== '[' && data[0] !== '"') data = data.substr(1);
-                    _shortcodeDemo = JSON.parse(data);
-                } else
-                    _shortcodeDemo = data;
-            });
-        }
-
-        return gulp.src(watchFiles.demo)
-            .pipe(each(function (content, file, callback) {
-                let newContent = content,
-                    fileArr = file.path.split('\\'),
-                    demoId = fileArr[fileArr.indexOf('demo') - 1],
-                    val = fileArr[fileArr.length - 1].replace('.html', '');
-
-                if (typeof _content[demoId] === 'undefined') {
-                    _content[demoId] = {
-                        title: demoId,
-                        description: '',
-                        demo: {}
-                    };
-                }
-
-                if (typeof _content[demoId].demo[val] === 'undefined') {
-                    _content[demoId].demo[val] = {
-                        enable: false,
-                        title: val,
-                        description: '',
-                        table: {}
-                    };
-                }
-
-                if (typeof _shortcodeDemo.demo[demoId] === 'undefined')
-                    _shortcodeDemo.demo[demoId] = false;
-
-                callback(null, newContent);
-            })).on('end', () => {
-                let _jsContent = '// auto import demo js\n',
-                    _scssContent = `// auto impot demo scss\n@import "./src/app/demo/demo.scss";\n@import "./src/app/prismjs/prismjs.scss";\n`;
-
-                fs.writeFile(_path, JSON.stringify(_content, null, 2), function (err) {
-                    if (err)
-                        return console.log(err);
-                });
-
-                if (fs.existsSync(_shortcode)) {
-                    fs.writeFile(_shortcode, JSON.stringify(_shortcodeDemo, null, 2), function (err) {
-                        if (err)
-                            return console.log(err);
-                    });
-                }
-
-                for (let key in _content) {
-                    if (_shortcodeDemo.demo[key] === true && typeof _content[key] !== 'undefined') {
-                        for (let demoKey in _content[key].demo) {
-                            if (_content[key].demo[demoKey].enable === true) {
-
-                                if (typeof contentData.demo[key] === 'undefined')
-                                    contentData.demo[key] = {};
-
-                                if (typeof contentData.demo[key][demoKey] === 'undefined')
-                                    contentData.demo[key][demoKey] = {};
-
-                                if (fs.existsSync(`./src/app/${key}/demo/${demoKey}.js`)) {
-                                    _jsContent += `import \'${key}/demo/${demoKey}\';\n`;
-                                    fs.readFile(`./src/app/${key}/demo/${demoKey}.js`, 'utf8', (err, data) => {
-                                        if (err)
-                                            return console.log(err);
-
-                                        if (typeof data === 'string')
-                                            contentData.demo[key][demoKey].js = data;
-                                    });
-                                }
-
-                                if (fs.existsSync(`./src/app/${key}/demo/${demoKey}.scss`)) {
-                                    _scssContent += `@import \"./src/app/${key}/demo/${demoKey}.scss\";\n`;
-                                    fs.readFile(`./src/app/${key}/demo/${demoKey}.scss`, 'utf8', (err, data) => {
-                                        if (err)
-                                            return console.log(err);
-
-                                        if (typeof data === 'string')
-                                            contentData.demo[key][demoKey].scss = data;
-                                    });
-                                }
-                            }
-                        }
-                    }
-                }
-
-                fs.writeFile(watchFiles.js, _jsContent, function (err) {
-                    if (err)
-                        return console.log(err);
-                });
-
-                fs.writeFile(watchFiles.scss, _scssContent, function (err) {
-                    if (err)
-                        return console.log(err);
-                });
-
-                contentPath = watchFiles.content;
-
-                gulp.start(['shortcode:content:get', 'shortcode:js:build', 'shortcode:scss:build']);
-            });
-    }
 );
 
 // js build
@@ -353,16 +290,6 @@ gulp.task(
         }))
 );
 
-// js watch
-gulp.task('shortcode:js:watch', () => {
-    if (gulpOptions.gulpWatch) {
-        return watch(watchFiles.demoJs, () => {
-            return gulp.start('shortcode:js:build');
-        });
-    } else
-        return gulp.watch(watchFiles.demoJs, ['shortcode:js:build']);
-});
-
 // scss build
 gulp.task(
     'shortcode:scss:build',
@@ -373,134 +300,48 @@ gulp.task(
         .pipe(gulp.dest(outputFiles.scss))
 );
 
-// scss watch
-gulp.task('shortcode:scss:watch', () => {
-    if (gulpOptions.gulpWatch) {
-        return watch(watchFiles.demoScss, () => {
-            return gulp.start('shortcode:scss:build');
-        });
-    } else
-        return gulp.watch(watchFiles.demoScss, ['shortcode:scss:build']);
-});
-
-// get content json
+// demoList build
 gulp.task(
-    'shortcode:content:get',
-    () => gulp.src(contentPath)
-        .pipe(each(function (content, file, callback) {
-            let newContent = content,
-                fileArr = file.path.split('\\'),
-                val = fileArr[fileArr.length - 1].replace('.json', '');
+    'shortcode:demoList:build',
+    () => {
+        demoListUpdated = false;
+        return gulp.src(watchFiles.demo)
+            .pipe(each(function (content, file, callback) {
+                let newContent = content,
+                    fileArr = file.path.search(/\\/) !== -1 ? file.path.split('\\') : file.path.split('\/'),
+                    demoId = fileArr[fileArr.indexOf('demo') - 1],
+                    val = gulpOptions.htmlTemplate === 'hb' ? fileArr[fileArr.length - 1].replace('.hbs', '').replace('.handlebars', '') : fileArr[fileArr.length - 1].replace('.html', '');
 
-            fs.readFile(file.path, 'utf8', function (err, data) {
-                contentData[val] = JSON.parse(data.toString('utf8').replace(/^\uFEFF/, ''));
+                if (typeof contentData.demoList[demoId] === 'undefined') {
+                    demoListUpdated = true;
+
+                    contentData.demoList[demoId] = {
+                        enable: false,
+                        title: demoId,
+                        description: '',
+                        demo: {}
+                    };
+                }
+
+                if (typeof contentData.demoList[demoId].demo[val] === 'undefined') {
+                    demoListUpdated = true;
+
+                    contentData.demoList[demoId].demo[val] = {
+                        enable: false,
+                        title: val,
+                        description: '',
+                        table: {}
+                    };
+                }
+
                 callback(null, newContent);
-            });
-
-            // callback(null, newContent);
-        })).on('end', () => {
-            let _dir = '',
-                _content = '',
-                _newScss = typeof contentData.scssVal === 'undefined',
-                _buildScss = function (key) {
-                    if (!fs.existsSync(`${_dir}/${key}.scss`)) {
-                        if (fs.existsSync(`${_dir}/${key}.function.scss`))
-                            _content += `@import "${_dir}/${key}.function.scss";\n`;
-                        if (fs.existsSync(`${_dir}/${key}.mixin.scss`))
-                            _content += `@import "${_dir}/${key}.mixin.scss";\n`;
-                        if (fs.existsSync(`${_dir}/${key}.variables.scss`))
-                            _content += `@import "${_dir}/${key}.variables.scss";\n`;
-
-                        if (_content !== '') {
-                            _newScss = true;
-
-                            fs.writeFile(`${_dir}/${key}.scss`, _content, function (err) {
-                                if (err)
-                                    return console.log(err);
-                            });
-                        }
-                    }
-                };
-
-            for (let key in contentData.demoList) {
-                _dir = `./src/app/${key}`;
-
-                if (fs.existsSync(`${_dir}/${key}.default.scss`) && !fs.existsSync(`${_dir}/${key}.variables.scss`)) {
-                    fs.copyFile(`${_dir}/${key}.default.scss`, `${_dir}/${key}.variables.scss`, function (err) {
-                        if (err)
-                            return console.log(err);
-
-                        _buildScss(key);
-                    });
+            })).on('end', () => {
+                if (demoListUpdated === true) {
+                    fs.writeFileSync('./src/shortcode/demoList.json', JSON.stringify(contentData.demoList, null, 2));
+                    if (startWatch !== true)
+                        gulp.start('shortcode:content:get');
                 } else
-                    _buildScss(key);
-            }
-
-            if (_newScss && !gulpOptions.gulpWatch) {
-                scssPath = watchFiles.scssVal;
-
-                gulp.start('shortcode:scssVal:get');
-            } else if (!_newScss) {
-                if (gulpOptions.htmlTemplate == 'hb') gulp.start('shortcode:hb:build');
-                else gulp.start('shortcode:nunjucks:build');
-            }
-        })
+                    gulp.start('shortcode:source:build');
+            })
+    }
 );
-
-// content json watch
-gulp.task('shortcode:content:watch',
-    () => {
-        if (gulpOptions.gulpWatch) {
-            return watch(watchFiles.content, (event) => {
-                contentPath = event.path;
-
-                return gulp.start('shortcode:content:get');
-            });
-        } else {
-            return gulp.watch(watchFiles.content, (event) => {
-                contentPath = event.path;
-
-                return gulp.start('shortcode:content:get');
-            });
-        }
-    });
-
-// get scss variables json
-gulp.task(
-    'shortcode:scssVal:get',
-    () => gulp.src(scssPath)
-        .pipe(each(function (content, file, callback) {
-            let newContent = content,
-                fileArr = file.path.split('\\'),
-                val = fileArr[fileArr.length - 1].replace('.variables.scss', '');
-
-            fs.readFile(file.path, 'utf8', function (err, data) {
-                if (!contentData.scssVal) contentData.scssVal = {};
-                contentData.scssVal[val] = scss2json(data);
-                callback(null, newContent);
-            });
-
-            // callback(null, newContent);
-        })).on('end', () => {
-            if (gulpOptions.htmlTemplate == 'hb') gulp.start('shortcode:hb:build');
-            else gulp.start('shortcode:nunjucks:build');
-        })
-);
-
-// scss variables json watch
-gulp.task('shortcode:scssVal:watch',
-    () => {
-        if (gulpOptions.gulpWatch) {
-            return watch(watchFiles.scssVal, (event) => {
-                scssPath = event.path;
-
-                return gulp.start('shortcode:scssVal:get');
-            });
-        } else {
-            return gulp.watch(watchFiles.scssVal, (event) => {
-                scssPath = event.path;
-
-                return gulp.start('shortcode:scssVal:get');
-            });
-        }
-    });

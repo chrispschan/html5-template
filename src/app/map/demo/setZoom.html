@@ -1,4 +1,4 @@
-{% set demoCode=demo.map.setZoom %}
+{% set demoCodeObj=demoCode.map.setZoom %}
 {% set demoContent=demoList.map.demo.setZoom %}
 
 {% from "demo/demo.html" import demo %}
@@ -14,8 +14,8 @@ html: '{% from "map/map.html" import map %}
 <label for="mapDemoSetZommIndex">index:</label>
 <input type="number" name="mapIndex" id="mapDemoSetZoomIndex" value="-1" />
 <button id="mapDemoSetZoomButton">Set Zoom</button>', 
-js: demoCode.js, 
-scss: demoCode.scss}) -%}
+js: demoCodeObj.js, 
+scss: demoCodeObj.scss}) -%}
     {{ map(class="mapDemoSetZoom") }}
     {{ map(class="mapDemoSetZoom") }}
     <label for="mapDemoSetZoomZoom">zoom:</label>

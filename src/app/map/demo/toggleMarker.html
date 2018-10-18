@@ -1,4 +1,4 @@
-{% set demoCode=demo.map.toggleMarker %}
+{% set demoCodeObj=demoCode.map.toggleMarker %}
 {% set demoContent=demoList.map.demo.toggleMarker %}
 
 {% from "demo/demo.html" import demo %}
@@ -23,8 +23,8 @@ html: '{% from "map/map.html" import map %}
 <button id="mapDemoHideButton2">Hide M2</button>
 <button id="mapDemoRemoveButton2">Remove M2</button>
 <button id="mapDemoResetButton2">Reset M2</button>', 
-js: demoCode.js, 
-scss: demoCode.scss}) -%}
+js: demoCodeObj.js, 
+scss: demoCodeObj.scss}) -%}
     {{ map(class="mapDemoToggleMarker") }}
     {{ map(class="mapDemoToggleMarker") }}
     <label for="mapDemoToggleMarkerIndex">index:</label>

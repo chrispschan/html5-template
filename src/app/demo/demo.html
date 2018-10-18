@@ -54,7 +54,7 @@
     </div>
 {% endmacro %}
 
-{% macro demoInclue(demoList={}, options={}) %}
+{% macro demoInclue(demoList={}, demoCode={}, options={}) %}
     {% for key, value in options %}
         {% if value === true and demoList[key] %}
             {% if demoList[key].title %}<h2>{{demoList[key].title}}</h2>{% endif %}
@@ -84,7 +84,7 @@
 
             {% for file, data in demoList[key].demo %}
                 {% if data.enable === true %}
-                    <!--#include virtual="/{{key}}/{{file}}.html"-->
+                    {% include key + "/demo/" + file + ".html" %}
                 {% endif %}
             {% endfor %}
         {% endif %}

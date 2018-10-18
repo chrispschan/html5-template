@@ -1,4 +1,4 @@
-{% set demoCode=demo.map.setCenter %}
+{% set demoCodeObj=demoCode.map.setCenter %}
 {% set demoContent=demoList.map.demo.setCenter %}
 
 {% from "demo/demo.html" import demo %}
@@ -18,8 +18,8 @@ html: '{% from "map/map.html" import map %}
 <label for="mapDemoSetCenterIndex">index:</label>
 <input type="number" name="mapIndex" id="mapDemoSetCenterIndex" value="-1" />
 <button id="mapDemoSetCenterButton">Set Center</button>', 
-js: demoCode.js, 
-scss: demoCode.scss}) -%}
+js: demoCodeObj.js, 
+scss: demoCodeObj.scss}) -%}
     {{ map(class="mapDemoSetCenter") }}
     {{ map(class="mapDemoSetCenter") }}
     <label for="mapDemoSetCenterLat">lat:</label>

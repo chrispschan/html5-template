@@ -64,9 +64,5 @@
       "en": "Shortcode",
       "zh": "Shortcode"
     }
-  },
-  "demo": {
-    "common": false,
-    "map": true
   }
 }

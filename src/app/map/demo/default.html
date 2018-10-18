@@ -1,4 +1,4 @@
-{% set demoCode=demo.map.default %}
+{% set demoCodeObj=demoCode.map.default %}
 {% set demoContent=demoList.map.demo.default %}
 
 {% from "demo/demo.html" import demo %}
@@ -8,7 +8,7 @@
 html: '{% from "map/map.html" import map %}
 
 {{ map(id="mapDemoDefault") }}', 
-js: demoCode.js, 
-scss: demoCode.scss}) -%}
+js: demoCodeObj.js, 
+scss: demoCodeObj.scss}) -%}
     {{ map(id="mapDemoDefault") }}
 {%- endcall %}
