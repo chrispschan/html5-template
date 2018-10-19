@@ -310,6 +310,7 @@ Output:
     width: 100%;
     height: 0;
     padding-top: 56.25%;
+    margin-bottom: 20px;
 }
 .map__msg {
     position: absolute;
@@ -334,6 +335,7 @@ Output:
     width: 100%;
     height: 0;
     padding-top: 75%;
+    margin-bottom: 20px;
 }
 .map__msg {
     position: absolute;
@@ -358,6 +360,7 @@ Output:
     width: 500px;
     height: 0;
     padding-top: 281.25px;
+    margin-bottom: 20px;
 }
 .map__msg {
     position: absolute;
@@ -383,6 +386,7 @@ Output:
     width: 100%;
     height: 500px;
     padding-top: 0;
+    margin-bottom: 20px;
 }
 .map__msg {
     position: absolute;
@@ -411,6 +415,7 @@ Output:
     width: 100%;
     height: 0;
     padding-top: 56.25%;
+    margin-bottom: 20px;
     margin-top: 20px;
 }
 .map__msg {

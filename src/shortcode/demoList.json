@@ -1,6 +1,6 @@
 {
   "common": {
-    "enable": true,
+    "enable": false,
     "title": "common",
     "description": "",
     "demo": {
@@ -68,10 +68,10 @@
   "map": {
     "enable": true,
     "title": "Map",
-    "description": "",
+    "description": "Module of <a href=\"https://developers.google.com/maps/documentation/javascript/tutorial\" target=\"_blank\">Google Maps Javascript API</a>.",
     "demo": {
       "default": {
-        "enable": false,
+        "enable": true,
         "title": "Map (map = '.map', options = {})",
         "description": "The initial Map class.",
         "table": {
@@ -535,7 +535,7 @@
             }
           },
           "nunjucks": {
-            "title": "{{ map(id, class, options) }}",
+            "title": "{{ map(id, class, dataset, options) }}",
             "data": {
               "id": {
                 "type": "string",
@@ -545,127 +545,127 @@
                 "type": "string",
                 "description": "Map element class attribute."
               },
-              "options.backgroundColor": {
+              "dataset.backgroundColor": {
                 "type": "string",
                 "description": "Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized."
               },
-              "options.center": {
+              "dataset.center": {
                 "type": "string",
                 "description": "The initial Map center.<br/>Format: 'lat, lng'<br/>Demo: '0, 0'"
               },
-              "options.clickableIcons": {
+              "dataset.clickableIcons": {
                 "type": "'true' | 'false'",
                 "description": "When <b>false</b>, map icons are not clickable. A map icon represents a point of interest, also known as a POI. By default map icons are clickable."
               },
-              "options.disableDefaultUI": {
+              "dataset.disableDefaultUi": {
                 "type": "'true' | 'false'",
                 "description": "Enables/disables all default UI. May be overridden individually."
               },
-              "options.disableDoubleClickZoom": {
+              "dataset.disableDoubleClickZoom": {
                 "type": "'true' | 'false'",
                 "description": "Enables/disables zoom and center on double click. Enabled by default.<br/><br/><b>Note:</b> This property is <b>not recommended</b>. To disable zooming on double click, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
               },
-              "options.draggable": {
+              "dataset.draggable": {
                 "type": "'true' | 'false'",
                 "description": "If false, prevents the map from being dragged. Dragging is enabled by default.<br/><br/><b>Note:</b> This property is <b>deprecated</b>. To disable dragging on the map, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
               },
-              "options.draggableCursor": {
+              "dataset.draggableCursor": {
                 "type": "string",
                 "description": "The name or url of the cursor to display when mousing over a draggable map. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggableCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
               },
-              "options.draggingCursor": {
+              "dataset.draggingCursor": {
                 "type": "string",
                 "description": "The name or url of the cursor to display when the map is being dragged. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggingCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
               },
-              "options.fullscreenControl": {
+              "dataset.fullscreenControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Fullscreen control."
               },
-              "options.fullscreenControlOptions": {
+              "dataset.fullscreenControlOptions": {
                 "type": "string",
                 "description": "The display options for the Fullscreen control."
               },
-              "options.heading": {
+              "dataset.heading": {
                 "type": "number",
                 "description": "The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available."
               },
-              "options.keyboardShortcuts": {
+              "dataset.keyboardShortcuts": {
                 "type": "'true' | 'false'",
                 "description": "If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default."
               },
-              "options.mapTypeControl": {
+              "dataset.mapTypeControl": {
                 "type": "'true' | 'false'",
                 "description": "The initial enabled/disabled state of the Map type control."
               },
-              "options.mapTypeId": {
+              "dataset.mapTypeId": {
                 "type": "string",
                 "description": "The initial Map mapTypeId. Defaults to <b>ROADMAP</b>."
               },
-              "options.maxZoom": {
+              "dataset.maxZoom": {
                 "type": "number",
                 "description": "The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
               },
-              "options.minZoom": {
+              "dataset.minZoom": {
                 "type": "number",
                 "description": "The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
               },
-              "options.noClear": {
+              "dataset.noClear": {
                 "type": "'true' | 'false'",
                 "description": "If true, do not clear the contents of the Map div."
               },
-              "options.panControl": {
+              "dataset.panControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
               },
-              "options.panControlOptions": {
+              "dataset.panControlOptions": {
                 "type": "string",
                 "description": "The display options for the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
               },
-              "options.rotateControl": {
+              "dataset.rotateControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Rotate control."
               },
-              "options.rotateControlOptions": {
+              "dataset.rotateControlOptions": {
                 "type": "string",
                 "description": "The display options for the Rotate control."
               },
-              "options.scaleControl": {
+              "dataset.scaleControl": {
                 "type": "'true' | 'false'",
                 "description": "The initial enabled/disabled state of the Scale control."
               },
-              "options.scaleControlOptions": {
+              "dataset.scaleControlOptions": {
                 "type": "string",
                 "description": "The initial display options for the Scale control."
               },
-              "options.scrollwheel": {
+              "dataset.scrollwheel": {
                 "type": "'true' | 'false'",
                 "description": "If false, disables zooming on the map using a mouse scroll wheel. The scrollwheel is enabled by default.<br/><br/><b>Note</b>: This property is <b>not recommended</b>. To disable zooming using scrollwheel, you can use the <b>gestureHandling</b> property, and set it to either \"<b>cooperative</b>\" or \"<b>none</b>\"."
               },
-              "options.streetViewControl": {
+              "dataset.streetViewControl": {
                 "type": "'true' | 'false'",
                 "description": "The initial enabled/disabled state of the Street View Pegman control. This control is part of the default UI, and should be set to <b>false</b> when displaying a map type on which the Street View road overlay should not appear (e.g. a non-Earth map type)."
               },
-              "options.streetViewControlOptions": {
+              "dataset.streetViewControlOptions": {
                 "type": "string",
                 "description": "The initial display options for the Street View Pegman control."
               },
-              "options.tilt": {
+              "dataset.tilt": {
                 "type": "number",
                 "description": "Controls the automatic switching behavior for the angle of incidence of the map. The only allowed values are <b>0</b> and <b>45</b>. The value <b>0</b> causes the map to always use a 0° overhead view regardless of the zoom level and viewport. The value <b>45</b> causes the tilt angle to automatically switch to 45 whenever 45° imagery is available for the current zoom level and viewport, and switch back to 0 whenever 45° imagery is not available (this is the default behavior). 45° imagery is only available for <b>satellite</b> and <b>hybrid</b> map types, within some locations, and at some zoom levels. <b>Note</b>: <b>getTilt</b> returns the current tilt angle, not the value specified by this option. Because <b>getTilt</b> and this option refer to different things, do not <b>bind()</b> the <b>tilt</b> property; doing so may yield unpredictable effects."
               },
-              "options.zoom": {
+              "dataset.zoom": {
                 "type": "number",
                 "description": "The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
               },
-              "options.zoomControl": {
+              "dataset.zoomControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Zoom control."
               },
-              "options.zoomControlOptions": {
+              "dataset.zoomControlOptions": {
                 "type": "string",
                 "description": "The display options for the Zoom control."
               },
-              "options.geolocation": {
+              "dataset.geolocation": {
                 "type": "'true' | 'false'",
                 "description": "The initial Map center to the user's position."
               },
@@ -690,137 +690,150 @@
                 "type": "string",
                 "description": "Map element class attribute."
               },
-              "backgroundColor": {
+              "dataset.backgroundColor": {
                 "type": "string",
                 "description": "Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as the user pans. This option can only be set when the map is initialized."
               },
-              "center": {
+              "dataset.center": {
                 "type": "string",
                 "description": "The initial Map center.<br/>Format: 'lat, lng'<br/>Demo: '0, 0'"
               },
-              "clickableIcons": {
+              "dataset.clickableIcons": {
                 "type": "'true' | 'false'",
                 "description": "When <b>false</b>, map icons are not clickable. A map icon represents a point of interest, also known as a POI. By default map icons are clickable."
               },
-              "disableDefaultUI": {
+              "dataset.disableDefaultUi": {
                 "type": "'true' | 'false'",
                 "description": "Enables/disables all default UI. May be overridden individually."
               },
-              "disableDoubleClickZoom": {
+              "dataset.disableDoubleClickZoom": {
                 "type": "'true' | 'false'",
                 "description": "Enables/disables zoom and center on double click. Enabled by default.<br/><br/><b>Note:</b> This property is <b>not recommended</b>. To disable zooming on double click, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
               },
-              "draggable": {
+              "dataset.draggable": {
                 "type": "'true' | 'false'",
                 "description": "If false, prevents the map from being dragged. Dragging is enabled by default.<br/><br/><b>Note:</b> This property is <b>deprecated</b>. To disable dragging on the map, you can use the <b>gestureHandling</b> property, and set it to \"<b>none</b>\"."
               },
-              "draggableCursor": {
+              "dataset.draggableCursor": {
                 "type": "string",
                 "description": "The name or url of the cursor to display when mousing over a draggable map. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggableCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
               },
-              "draggingCursor": {
+              "dataset.draggingCursor": {
                 "type": "string",
                 "description": "The name or url of the cursor to display when the map is being dragged. This property uses the css <b>cursor</b> attribute to change the icon. As with the css property, you must specify at least one fallback cursor that is not a URL. For example: <b>draggingCursor: 'url(http://www.example.com/icon.png), auto;'</b>."
               },
-              "fullscreenControl": {
+              "dataset.fullscreenControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Fullscreen control."
               },
-              "fullscreenControlOptions": {
+              "dataset.fullscreenControlOptions": {
                 "type": "string",
                 "description": "The display options for the Fullscreen control."
               },
-              "heading": {
+              "dataset.heading": {
                 "type": "number",
                 "description": "The heading for aerial imagery in degrees measured clockwise from cardinal direction North. Headings are snapped to the nearest available angle for which imagery is available."
               },
-              "keyboardShortcuts": {
+              "dataset.keyboardShortcuts": {
                 "type": "'true' | 'false'",
                 "description": "If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default."
               },
-              "mapTypeControl": {
+              "dataset.mapTypeControl": {
                 "type": "'true' | 'false'",
                 "description": "The initial enabled/disabled state of the Map type control."
               },
-              "mapTypeId": {
+              "dataset.mapTypeId": {
                 "type": "string",
                 "description": "The initial Map mapTypeId. Defaults to <b>ROADMAP</b>."
               },
-              "maxZoom": {
+              "dataset.maxZoom": {
                 "type": "number",
                 "description": "The maximum zoom level which will be displayed on the map. If omitted, or set to null, the maximum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
               },
-              "minZoom": {
+              "dataset.minZoom": {
                 "type": "number",
                 "description": "The minimum zoom level which will be displayed on the map. If omitted, or set to null, the minimum zoom from the current map type is used instead. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
               },
-              "noClear": {
+              "dataset.noClear": {
                 "type": "'true' | 'false'",
                 "description": "If true, do not clear the contents of the Map div."
               },
-              "panControl": {
+              "dataset.panControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
               },
-              "panControlOptions": {
+              "dataset.panControlOptions": {
                 "type": "string",
                 "description": "The display options for the Pan control.<br/><br/>Note: The Pan control is not available in the new set of controls introduced in v3.22 of the Google Maps JavaScript API. While using v3.22 and v3.23, you can choose to use the earlier set of controls rather than the new controls, thus making the Pan control available as part of the old control set. See <a href=\"https://developers.google.com/maps/documentation/javascript/controls\" target=\"_blank\">What's New in the v3.22 Map Controls</a>."
               },
-              "rotateControl": {
+              "dataset.rotateControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Rotate control."
               },
-              "rotateControlOptions": {
+              "dataset.rotateControlOptions": {
                 "type": "string",
                 "description": "The display options for the Rotate control."
               },
-              "scaleControl": {
+              "dataset.scaleControl": {
                 "type": "'true' | 'false'",
                 "description": "The initial enabled/disabled state of the Scale control."
               },
-              "scaleControlOptions": {
+              "dataset.scaleControlOptions": {
                 "type": "string",
                 "description": "The initial display options for the Scale control."
               },
-              "scrollwheel": {
+              "dataset.scrollwheel": {
                 "type": "'true' | 'false'",
                 "description": "If false, disables zooming on the map using a mouse scroll wheel. The scrollwheel is enabled by default.<br/><br/><b>Note</b>: This property is <b>not recommended</b>. To disable zooming using scrollwheel, you can use the <b>gestureHandling</b> property, and set it to either \"<b>cooperative</b>\" or \"<b>none</b>\"."
               },
-              "streetViewControl": {
+              "dataset.streetViewControl": {
                 "type": "'true' | 'false'",
                 "description": "The initial enabled/disabled state of the Street View Pegman control. This control is part of the default UI, and should be set to <b>false</b> when displaying a map type on which the Street View road overlay should not appear (e.g. a non-Earth map type)."
               },
-              "streetViewControlOptions": {
+              "dataset.streetViewControlOptions": {
                 "type": "string",
                 "description": "The initial display options for the Street View Pegman control."
               },
-              "tilt": {
+              "dataset.tilt": {
                 "type": "number",
                 "description": "Controls the automatic switching behavior for the angle of incidence of the map. The only allowed values are <b>0</b> and <b>45</b>. The value <b>0</b> causes the map to always use a 0° overhead view regardless of the zoom level and viewport. The value <b>45</b> causes the tilt angle to automatically switch to 45 whenever 45° imagery is available for the current zoom level and viewport, and switch back to 0 whenever 45° imagery is not available (this is the default behavior). 45° imagery is only available for <b>satellite</b> and <b>hybrid</b> map types, within some locations, and at some zoom levels. <b>Note</b>: <b>getTilt</b> returns the current tilt angle, not the value specified by this option. Because <b>getTilt</b> and this option refer to different things, do not <b>bind()</b> the <b>tilt</b> property; doing so may yield unpredictable effects."
               },
-              "zoom": {
+              "dataset.zoom": {
                 "type": "number",
                 "description": "The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported <a href=\"https://developers.google.com/maps/documentation/javascript/maxzoom\" target=\"_blank\">maximum zoom level</a>."
               },
-              "zoomControl": {
+              "dataset.zoomControl": {
                 "type": "'true' | 'false'",
                 "description": "The enabled/disabled state of the Zoom control."
               },
-              "zoomControlOptions": {
+              "dataset.zoomControlOptions": {
                 "type": "string",
                 "description": "The display options for the Zoom control."
               },
-              "geolocation": {
+              "dataset.geolocation": {
                 "type": "'true' | 'false'",
                 "description": "The initial Map center to the user's position."
               },
-              "notSupport": {
+              "options.notSupport": {
                 "type": "string",
                 "description": "Display string when IE < 9."
               },
-              "key": {
+              "options.key": {
                 "type": "string",
                 "description": "Add Google Maps JavaScript API with key. "
+              }
+            }
+          },
+          "scss": {
+            "title": "map.variables.scss",
+            "data": {
+              "$map-proportion": {
+                "type": "",
+                "description": ".map proportion"
+              },
+              "$map-margin-bottom": {
+                "type": "",
+                "description": ".map margin bottom"
               }
             }
           }

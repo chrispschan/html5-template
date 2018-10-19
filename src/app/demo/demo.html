@@ -10,30 +10,6 @@
                 <p>{{i | safe}}</p>
             {% endfor %}
         {% endif %}
-        {% if options.content.table %}
-            {% for key, value in options.content.table %}
-                <table width="100%">
-                    <thead>
-                        <tr>
-                            <th colspan="2">{{value.title}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for th, td in value.data %}
-                            <tr>
-                                <th>{{th}}</th>
-                                <td>
-                                    {% if td.type %}
-                                        <b>Type: {{td.type}}</b><br/>
-                                    {% endif %}
-                                    {{td.description}}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% endfor %}
-        {% endif %}
 {{caller()}}
         {% if options.html %}
             <p><b>Nunjucks:</b></p>
@@ -50,6 +26,32 @@
         {% if options.scss %}
         <p><b>SCSS:</b></p>
 <pre class="language-scss"><code class="language-scss">{{options.scss}}</code></pre>
+        {% endif %}
+        {% if options.content.table %}
+            {% for key, value in options.content.table %}
+                {% if key !== 'handlebars' %}
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th colspan="2">{{value.title}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for th, td in value.data %}
+                                <tr>
+                                    <th width="30%" align="left">{{th}}</th>
+                                    <td>
+                                        {% if td.type %}
+                                            <b>Type: {{td.type}}</b><br/>
+                                        {% endif %}
+                                        {{td.description}}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endfor %}
         {% endif %}
     </div>
 {% endmacro %}
