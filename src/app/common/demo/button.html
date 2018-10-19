@@ -2,7 +2,7 @@
 
 {% from "demo/demo.html" import demo %}
 
-{% call demo({content: demoContent }) -%}
+{% call demo({key: "common.button", content: demoContent }) -%}
     <button>button</button>
     <input type="button" value="input[type='button']" />
     <input type="reset" value="input[type='reset']" />

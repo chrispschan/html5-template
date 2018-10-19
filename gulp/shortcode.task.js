@@ -32,7 +32,7 @@ const watchFiles = {
         handlebars: gulpOptions.watchAppFolder ? ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', './src/app/**/*.handlebars', './src/app/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs', '!./src/app/**/_*.handlebars', '!./src/app/**/_*.hbs'] : ['./src/shortcode/**/*.handlebars', './src/shortcode/**/*.hbs', '!./src/shortcode/**/_*.handlebars', '!./src/shortcode/**/_*.hbs'],
         html: gulpOptions.watchAppFolder ? ['./src/shortcode/**/*.html', './src/app/**/*.html', '!./src/shortcode/**/_*.html', '!./src/app/**/_*.html'] : ['./src/shortcode/**/*.html', '!./src/shortcode/**/_*.html'],
         demo: gulpOptions.htmlTemplate == 'hb' ? ['./src/app/**/demo/**/*.html', '!./src/app/demo/**/*.html', '!./src/app/**/demo/**/_*.html'] : ['./src/app/**/demo/**/*.html', '!./src/app/demo/**/*.html', '!./src/app/**/demo/**/_*.html'],
-        content: ['./src/shortcode/**/*.json', './src/app/**/*.variables.scss', '!./src/shortcode/**/_*.json', '!./src/app/**/_*.variables.scss'],    // html content json
+        content: ['./src/shortcode/**/*.json', './src/data/html.json', './src/app/**/*.variables.scss', '!./src/shortcode/**/_*.json', '!./src/app/**/_*.variables.scss'],    // html content json
         asset: [`${gulpOptions.server.root}**/*`, `!${gulpOptions.server.root}**/*.html`],
         js: './src/shortcode/shortcode.js',
         import: ['./node_modules', './src/app/'],    // babel import path

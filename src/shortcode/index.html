@@ -14,8 +14,6 @@
 {% block html %}
     <!-- .innerWrapper -->
     <div class="innerWrapper">
-        <h1>Shortcode</h1>
-
-        {{ demoInclue(demoList=demoList, demoCode=demoCode, scssVal=scssVal, options=shortcode.demo) }}
+        {{ demoInclue(page={title: page.content.h1[lang]}, demoList=demoList, demoCode=demoCode, scssVal=scssVal, options=shortcode.demo) }}
     </div>
 {% endblock %}

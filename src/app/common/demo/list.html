@@ -2,7 +2,7 @@
 
 {% from "demo/demo.html" import demo %}
 
-{% call demo({content: demoContent }) -%}
+{% call demo({key: "common.list", content: demoContent }) -%}
     {% for key, value in demoContent.options %}
         {% if value === true %}
             <{{key}}>

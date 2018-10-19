@@ -4,7 +4,7 @@
 {% from "demo/demo.html" import demo %}
 {% from "map/map.html" import map %}
 
-{% call demo({content: demoContent, 
+{% call demo({key: "map.toggleMarker", content: demoContent, 
 html: '{% from "map/map.html" import map %}
 
 {{ map(class="mapDemoToggleMarker") }}

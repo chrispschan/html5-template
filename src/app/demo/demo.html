@@ -1,5 +1,5 @@
 {% macro demo(options) %}
-    <div class="demo">
+    <div class="demo__item" data-demo-key="{{options.key}}">
         {% if options.content.title %}
             <h3>{{options.content.title | safe}}</h3>
         {% endif %}
@@ -30,17 +30,17 @@
         {% if options.content.table %}
             {% for key, value in options.content.table %}
                 {% if key !== 'handlebars' %}
-                    <table width="100%">
-                        <thead>
-                            <tr>
-                                <th colspan="2">{{value.title}}</th>
+                    <table width="100%" class="demo__table">
+                        <thead class="demo__table__thead">
+                            <tr class="demo__table__tr">
+                                <th colspan="2" class="demo__table__th demo__table__th--title">{{value.title}}</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="demo__table__tbody">
                             {% for th, td in value.data %}
-                                <tr>
-                                    <th width="30%" align="left">{{th}}</th>
-                                    <td>
+                                <tr class="demo__table__tr">
+                                    <th width="30%" align="left" class="demo__table__th">{{th}}</th>
+                                    <td class="demo__table__td">
                                         {% if td.type %}
                                             <b>Type: {{td.type}}</b><br/>
                                         {% endif %}
@@ -56,39 +56,70 @@
     </div>
 {% endmacro %}
 
-{% macro demoInclue(demoList={}, demoCode={}, scssVal={}, options={}) %}
-    {% for key, value in options %}
-        {% if value === true and demoList[key] %}
-            {% if demoList[key].title %}<h2>{{demoList[key].title}}</h2>{% endif %}
-            {% if demoList[key].description | typeof('string') and demoList[key].description !== '' %}
-                {% if demoList[key].description %}<p>{{demoList[key].description}}</p>{% endif %}
-            {% else %}
-                {% for i in demoList[key].description %}
-                    <p>{{i | safe}}</p>
-                {% endfor %}
-            {% endif %}
-            {% if demoList[key].nunjucks %}
-                <p><b>Nunjucks:</b></p>
-<pre class="language-html"><code class="language-html">{{demoList[key].nunjucks}}</code></pre>
-            {% endif %}
-            {% if demoList[key].js %}
-                <p><b>Javascript(es6):</b></p>
-<pre class="language-javascript"><code class="language-javascript">{{demoList[key].js}}</code></pre>
-            {% endif %}
-            {% if demoList[key].es5 %}
-                <p><b>Javascript(es5):</b></p>
-<pre class="language-javascript"><code class="language-javascript">{{demoList[key].es5}}</code></pre>
-            {% endif %}
-            {% if demoList[key].scss %}
-            <p><b>SCSS:</b></p>
-<pre class="language-scss"><code class="language-scss">{{demoList[key].scss}}</code></pre>
-            {% endif %}
+{% macro demoInclue(page={title:"Shortcode"}, demoList={}, demoCode={}, scssVal={}, options={}) %}
+    <div class="demo">
+        <div class="demo__menu">
+            <input type="checkbox" id="demoNavBtn" />
+            <label for="demoNavBtn" class="demo__menu__button demo__menu__button--open"></label>
+            <div class="demo__menu__wrapper">
+                <nav class="demo__menu__list">
+                    {% for key, value in options %}
+                        {% if value === true and demoList[key] %}
+                            <li class="demo__menu__item">
+                                <label for="demoNavBtn" class="demo__menu__link"><a class="demo__menu__link" href="#{{key}}" data-demo-link="{{key}}">{{key}}</a></label>
+                                {% for file, data in demoList[key].demo %}
+                                    {% if data.enable === true %}
+                                        <label for="demoNavBtn" class="demo__menu__link"><a class="demo__menu__link demo__menu__link--sub-link" href="#{{key}}_{{file}}" data-demo-link="{{key}}.{{file}}">{{file}}</a></label>
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+                <label for="demoNavBtn" class="demo__menu__button demo__menu__button--close"></label>
+            </div>
+        </div>
+        <div class="demo__wrapper">
+            <h1>{{page.title | safe}}</h1>
 
-            {% for file, data in demoList[key].demo %}
-                {% if data.enable === true %}
-                    {% include key + "/demo/" + file + ".html" %}
+            {% for key, value in options %}
+                {% if value === true and demoList[key] %}
+                    <div class="demo__group" data-demo-key="{{key}}" id="{{key}}">
+                        {% if demoList[key].title %}<h2>{{demoList[key].title | safe}}</h2>{% endif %}
+                        {% if demoList[key].description | typeof('string') and demoList[key].description !== '' %}
+                            {% if demoList[key].description %}<p>{{demoList[key].description}}</p>{% endif %}
+                        {% else %}
+                            {% for i in demoList[key].description %}
+                                <p>{{i | safe}}</p>
+                            {% endfor %}
+                        {% endif %}
+                        {% if demoList[key].nunjucks %}
+                            <p><b>Nunjucks:</b></p>
+<pre class="language-html"><code class="language-html">{{demoList[key].nunjucks}}</code></pre>
+                        {% endif %}
+                        {% if demoList[key].js %}
+                            <p><b>Javascript(es6):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{demoList[key].js}}</code></pre>
+                        {% endif %}
+                        {% if demoList[key].es5 %}
+                            <p><b>Javascript(es5):</b></p>
+<pre class="language-javascript"><code class="language-javascript">{{demoList[key].es5}}</code></pre>
+                        {% endif %}
+                        {% if demoList[key].scss %}
+                        <p><b>SCSS:</b></p>
+<pre class="language-scss"><code class="language-scss">{{demoList[key].scss}}</code></pre>
+                        {% endif %}
+
+                        {% for file, data in demoList[key].demo %}
+                            {% if data.enable === true %}
+                                <div id="{{key}}_{{file}}">
+                                    {% include key + "/demo/" + file + ".html" %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 {% endif %}
             {% endfor %}
-        {% endif %}
-    {% endfor %}
+        </div>
+    </div>
 {% endmacro %}

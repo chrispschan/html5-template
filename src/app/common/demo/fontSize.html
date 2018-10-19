@@ -3,7 +3,7 @@
 
 {% from "demo/demo.html" import demo %}
 
-{% call demo({content: demoContent }) -%}
+{% call demo({key: "common.fontSize", content: demoContent }) -%}
     {% for key, value in fontSizeList %}
         {% if key !== 'font-size-fullList' and value | typeof('object') %}
             <p class="{{key}}">{{key}}: font size - {{value.value[0]}}, line height - {{value.value[1]}}</p>

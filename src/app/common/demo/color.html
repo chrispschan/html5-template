@@ -3,7 +3,7 @@
 
 {% from "demo/demo.html" import demo %}
 
-{% call demo({content: demoContent }) -%}
+{% call demo({key: "common.color", content: demoContent }) -%}
     {% if colorContent.title %}
     <h3><b>{{colorContent.title | safe}}</b></h3>
     {% endif %}
