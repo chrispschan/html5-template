@@ -14,15 +14,9 @@
 
             max-width: $wrapper-max-width;
 
-            min-width: $wrapper-min-width;
-
             padding: $wrapper-padding;
 
             margin: 0 auto;
-
-            width: 100%;
-
-            min-height: 100vh;
         }
 
         @content;
