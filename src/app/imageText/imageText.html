@@ -83,7 +83,7 @@
             {{ image(
                 id=item.id, 
                 class=item.class,
-                src=item.src,
+                src=(item.src | findContent("", options.lang))[0],
                 dataset=item.dataset,
                 options=options | assignObj([
                     {tag: itemTag}, 
@@ -117,7 +117,7 @@
                 {%- endif -%}
 
                 {%- if item.content | typeof("object") -%}
-                    {%- for content in options.text.content -%}
+                    {%- for content in item.content | findContent("", options.lang) -%}
                         {% call textItem(options={tag: textTag}) -%}
                             {{- content | safe -}}
                         {%- endcall %}

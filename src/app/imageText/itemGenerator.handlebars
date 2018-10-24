@@ -20,7 +20,7 @@
     {{~#ifCond item.type "===" "image"~}}
         {{~> imageText/image id=item.id class=item.class src=item.src dataset=item.dataset options=@local.itemGeneratorOptions~}}
     {{~else~}}
-        {{~#> imageText/text id=item.id class=item.class src=item.src dataset=item.dataset options=@local.itemGeneratorOptions~}}
+        {{~#> imageText/text id=item.id class=item.class dataset=item.dataset options=@local.itemGeneratorOptions~}}
             {{~#setVal~}}
                 itemGeneratorSubCanDivInside:canDivInside = {{#if @local.itemGeneratorOptions.tag}}{{@local.itemGeneratorOptions.tag}}{{else}}{{/if}};
             {{~/setVal~}}
@@ -36,11 +36,11 @@
             {{~/if~}}
 
             {{~#ifTypeof item.content "object"~}}
-                {{~#each item.content ~}}
+                {{~#eachContent item.content "" ../options.lang ~}}
                     {{~#> imageText/textItem options=@local.itemGeneratorSubInsideTab~}}
-                        {{{this.content}}}
+                        {{{../this}}}
                     {{~/imageText/textItem~}}
-                {{~/each~}}
+                {{~/eachContent~}}
             {{~else~}}
                 {{~#> imageText/textItem options=@local.itemGeneratorSubInsideTab~}}
                     {{{item.content}}}

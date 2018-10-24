@@ -250,7 +250,7 @@ const helpers = {
         }
 
         for (let i=0; i<result.length; i++) {
-            if (key !== '') {
+            if (key && key !== '') {
                 if (result[i][key] !== undefined && result[i][key] !== '') {
                     if (Array.isArray(result[i][key])) {
                         for(let j=0; j<result[i][key].length; j++) {

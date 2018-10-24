@@ -86,7 +86,7 @@ const manageEnvironment = function(environment) {
     /*----------  find key: value(searchBy) in object array  ----------*/
     environment.addFilter('findContent', (obj, searchBy, key) => {
         let results = [],
-            searchArr = Array.isArray(searchBy) ? searchBy.length > 2 ? searchBy : ['id', searchBy[0]] : ['id', searchBy];
+            searchArr = Array.isArray(searchBy) ? searchBy.length > 2 ? searchBy : ['id', searchBy[0]] : ['id', typeof searchBy === 'string' ? searchBy : ''];
 
         function outputKey (item) {
             if (key && key != '') {
