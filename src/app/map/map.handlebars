@@ -1,6 +1,6 @@
 <div
-    {{#if id}} id="{{id}}"{{/if}} 
-    class="map{{#if class}} {{class}}{{/if}}"
+    {{~#if id}} id="{{id}}"{{/if}}{{!--
+    --}} class="map{{#if class}} {{class}}{{/if}}"
     {{~#each dataset}} data-map-{{@key}}="{{this}}"{{~/each ~}}
 >
     {{~#if options.notSupport ~}}
