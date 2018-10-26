@@ -1,0 +1,97 @@
+{# collapse element #}
+{% macro collapse(id, class, dataset, options) %}
+    <div
+        {%- if id %} id="{{- id -}}"{%- endif -%}
+        {#!- #} class="collapse
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </div>
+{% endmacro %}
+
+{# collapse buttons list #}
+{%- macro buttons(id, class, dataset, options) -%}
+    <{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}
+        {%- if id %} id="{{- id -}}"{%- endif -%}
+        {#!- #} class="collapse__buttons
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </{% if options.tag %}{{- options.tag -}}{% else %}div{% endif %}>
+{%- endmacro -%}
+
+{# collapse button #}
+{% macro button(id, class, itemId, dataset, options) %}
+    <{%- if options.tag -%}{{- options.tag -}}{%- else -%}button{% endif -%}
+        {%- if id %} id="{{- id -}}"{% endif -%}
+        {#!- #} class="collapse__button
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- if options.tag === "a" %}
+            {#!- #} href="#{{itemId}}"
+        {%- endif -%} 
+        {#!- #} data-collapse-target="{{itemId}}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </{%- if options.tag -%}{{- options.tag -}}{%- else -%}button{% endif -%}>
+{% endmacro %}
+
+{# collapse wrapper #}
+{%- macro wrapper(id, class, dataset, options) -%}
+    <div
+        {%- if id %} id="{{- id -}}"{%- endif -%}
+        {#!- #} class="collapse__wrapper
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </div>
+{%- endmacro -%}
+
+{# collapse item #}
+{%- macro item(id, class, itemId, dataset, options) -%}
+    <div
+        {%- if id %} id="{{- id -}}"{%- endif -%}
+        {#!- #} class="collapse__item
+        {%- if class %} {{ class }}{% endif -%}"
+        {#!- #} data-collapse-id="{% if itemId %}{{itemId}}{% else %}{{id}}{% endif %}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </div>
+{%- endmacro -%}
+
+{# auto collapse generator #}
+{%- macro generator(id, class, items, dataset, options) -%}
+    {% call collapse(id=id, class=class, dataset=dataset, options=options) %}
+        {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
+            {%- for key, value in items | arr2obj -%}
+                {%- if value.button -%}
+                    {%- if value.itemId -%}
+                        {%- set itemId=value.itemId -%}
+                    {%- else -%}
+                        {%- set itemId=value.id -%}
+                    {%- endif -%}
+                    {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options=value.button.options) -%}
+                        {{- value.button.text | safe -}}
+                    {%- endcall -%}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endcall -%}
+        {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options=options.wrapper.options) -%}
+            {%- for key, value in items | arr2obj -%}
+                {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
+                    {%- if value.content | typeof("object") -%}
+                        {%- for content in value.content -%}
+                            <p>{{- content | safe -}}</p>
+                        {%- endfor -%}
+                    {%- else -%}
+                        <p>{{- value.content | safe -}}</p>
+                    {%- endif -%}
+                {%- endcall -%}
+            {%- endfor -%}
+        {%- endcall -%}
+    {% endcall %}
+{%- endmacro -%}

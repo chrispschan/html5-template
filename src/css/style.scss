@@ -1,4 +1,6 @@
 @import "./src/app/common/common.scss";
+@import "./src/app/collapse/collapse.mixin.scss";
 
 @include html-reset() {
+    @include collapse();
 }

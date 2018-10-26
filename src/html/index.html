@@ -9,6 +9,7 @@
 {% set noEmail=true %}     {# need disable browser email detection? #}
 
 {%- extends "template/html5.html" -%}
+{%- import "collapse/collapse.html" as collapse -%}
 
 {% block html %}
     <!-- .innerWrapper -->
@@ -29,5 +30,22 @@
                 <li>{{- i | safe -}}</li>
             {%- endfor %}
         </ul>
+
+        {{ collapse.generator(items=[
+            {
+                itemId: "collapse1",
+                button: {
+                    text: "Collapse 1"
+                },
+                content: "xxx"
+            },
+            {
+                itemId: "collapse2",
+                button: {
+                    text: "Collapse 2"
+                },
+                content: "yyy"
+            }
+        ]) }}
     </div>
 {% endblock %}

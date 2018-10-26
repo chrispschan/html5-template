@@ -1,0 +1,19 @@
+@mixin collapse() {
+    .collapse {
+        &__wrapper {
+            position: relative;
+
+            display: block;
+        }
+
+        &__item {
+            position: relative;
+
+            display: none;
+
+            &--expand, &:target {
+                display: block;
+            }
+        }
+    }
+}
