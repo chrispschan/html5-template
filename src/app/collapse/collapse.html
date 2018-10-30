@@ -55,11 +55,20 @@
     <div
         {%- if id %} id="{{- id -}}"{%- endif -%}
         {#!- #} class="collapse__item
-        {%- if class %} {{ class }}{% endif -%}"
+        {%- if options.animation %} collapse--animation{%- endif -%}"
         {#!- #} data-collapse-id="{% if itemId %}{{itemId}}{% else %}{{id}}{% endif %}"
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
-        {{- caller() -}}
+        {%- if options.animation -%}
+            <div class="collapse__animation collapse__animation--{{options.animation}}">
+        {%- endif -%}
+        <div class="collapse__item__wrapper
+        {%- if class %} {{ class }}{% endif -%}">
+            {{- caller() -}}
+        </div>
+        {%- if options.animation -%}
+            </div>
+        {%- endif -%}
     </div>
 {%- endmacro -%}
 

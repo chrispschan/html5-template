@@ -1,9 +1,31 @@
+@import "collapse.default.scss";
+
 @mixin collapse() {
     .collapse {
         &__wrapper {
             position: relative;
 
             display: block;
+
+            overflow: hidden;
+
+            &--overlap {
+                .collapse {
+                    &--animation {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+
+                        width: 100%;
+
+                        &--play,
+                        &--end {
+                            position: relative;
+                            z-index: 10;
+                        }
+                    }
+                }
+            }
         }
 
         &__item {
@@ -11,8 +33,227 @@
 
             display: none;
 
-            &--expand, &:target {
+            box-sizing: border-box;
+
+            &__wrapper {
+                box-sizing: border-box;
+
+                &::after {
+                    display: block;
+                    clear: both;
+
+                    height: 0;
+
+                    overflow-y: hidden;
+
+                    content: "";
+                }
+            }
+
+            &--expand,
+            &:target {
                 display: block;
+            }
+        }
+
+        // fade
+        &__animation {
+            &--fade {
+                opacity: 0;
+
+                -webkit-transition: opacity $animation-duration $animation-timing-function; /* Safari */
+                transition: opacity $animation-duration $animation-timing-function;
+            }
+        }
+        &--animation {
+            &--play,
+            &--end {
+                .collapse {
+                    &__animation {
+                        &--fade {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        // drop
+        &__animation {
+            &--dropdown,
+            &--dropup,
+            &--dropleft,
+            &--dropright {
+                position: relative;
+
+                overflow: hidden;
+            }
+
+            &--dropdown,
+            &--dropup {
+                height: 0;
+
+                -webkit-transition: height $animation-duration $animation-timing-function; /* Safari */
+                transition: height $animation-duration $animation-timing-function;
+
+                .collapse {
+                    &__item {
+                        &__wrapper {
+                            position: absolute;
+
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            &--dropdown {
+                .collapse {
+                    &__item {
+                        &__wrapper {
+                            top: 0;
+                            bottom: auto;
+                        }
+                    }
+                }
+            }
+
+            &--dropup {
+                .collapse {
+                    &__item {
+                        &__wrapper {
+                            top: auto;
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            &--dropleft,
+            &--dropright {
+                position: static;
+
+                max-width: 0;
+
+                -webkit-transition: max-width $animation-duration $animation-timing-function; /* Safari */
+                transition: max-width $animation-duration $animation-timing-function;
+
+                .collapse {
+                    &__item {
+                        &__wrapper {
+                            position: absolute;
+
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            &--dropleft {
+                margin-left: auto;
+                margin-right: 0;
+            }
+
+            &--dropright {
+                margin-left: 0;
+                margin-right: auto;
+            }
+        }
+        &--animation {
+            &--play {
+                .collapse {
+                    &__animation {
+                        &--dropleft,
+                        &--dropright {
+                            max-width: 100%;
+                        }
+                    }
+                }
+            }
+
+            &--expand,
+            &--collapse {
+                .collapse {
+                    &__animation {
+                        &--dropleft,
+                        &--dropright {
+                            .collapse {
+                                &__item {
+                                    &__wrapper {
+                                        position: static;
+
+                                        width: auto;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &--end {
+                .collapse {
+                    &__animation {
+                        &--dropdown,
+                        &--dropup,
+                        &--dropleft,
+                        &--dropright {
+                            height: auto;
+
+                            .collapse {
+                                &__item {
+                                    &__wrapper {
+                                        position: static;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // slide
+        &__animation {
+            &--slidedown,
+            &--slideup,
+            &--slideleft,
+            &--slideright {
+                overflow: hidden;
+
+                -webkit-transition: transform $animation-duration $animation-timing-function; /* Safari */
+                transition: transform $animation-duration $animation-timing-function;
+            }
+
+            &--slideup {
+                transform: translateY(100%);
+            }
+
+            &--slidedown {
+                transform: translateY(-100%);
+            }
+
+            &--slideleft {
+                transform: translateX(100%);
+            }
+
+            &--slideright {
+                transform: translateX(-100%);
+            }
+        }
+        &--animation {
+            &--play,
+            &--end {
+                .collapse {
+                    &__animation {
+                        &--slidedown,
+                        &--slideup,
+                        &--slideleft,
+                        &--slideright {
+                            transform: translate(0, 0);
+                        }
+                    }
+                }
             }
         }
     }

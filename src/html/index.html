@@ -31,20 +31,107 @@
             {%- endfor %}
         </ul>
 
+        <input type="text" id="collapseId" value="collapse1" />
+        <button id="collapseTest">Test</button>
+
         {{ collapse.generator(items=[
             {
                 itemId: "collapse1",
                 button: {
                     text: "Collapse 1"
                 },
-                content: "xxx"
+                content: "xxx",
+                options: {
+                    animation: "fade"
+                }
             },
             {
                 itemId: "collapse2",
                 button: {
                     text: "Collapse 2"
                 },
-                content: "yyy"
+                content: "yyy",
+                class: "blue-background",
+                options: {
+                    animation: "dropdown"
+                }
+            },
+            {
+                itemId: "collapse3",
+                button: {
+                    text: "Collapse 3"
+                },
+                content: "zzz",
+                class: "purple-background",
+                options: {
+                    animation: "dropup"
+                }
+            },
+            {
+                itemId: "collapse4",
+                button: {
+                    text: "Collapse 4"
+                },
+                content: "yyy yyy yyy yyy yyy yyy yyy yyy yyy yyy",
+                class: "blue-background",
+                options: {
+                    animation: "dropleft"
+                }
+            },
+            {
+                itemId: "collapse5",
+                button: {
+                    text: "Collapse 5"
+                },
+                content: "zzz",
+                class: "purple-background",
+                options: {
+                    animation: "dropright"
+                }
+            },
+            {
+                itemId: "collapse6",
+                button: {
+                    text: "Collapse 6"
+                },
+                content: "yyy",
+                class: "blue-background",
+                options: {
+                    animation: "slidedown"
+                }
+            },
+            {
+                itemId: "collapse7",
+                button: {
+                    text: "Collapse 7"
+                },
+                content: "zzz",
+                class: "purple-background",
+                options: {
+                    animation: "slideup"
+                }
+            },
+            {
+                itemId: "collapse8",
+                button: {
+                    text: "Collapse 8"
+                },
+                content: "yyy",
+                class: "blue-background",
+                options: {
+                    animation: "slideleft"
+                }
+            },
+            {
+                itemId: "collapse9",
+                button: {
+                    text: "Collapse 9"
+                },
+                content: "zzz",
+                class: "purple-background",
+                options: {
+                    animation: "slideright"
+                }
             }
         ]) }}
     </div>
