@@ -31,16 +31,26 @@
             {%- endfor %}
         </ul>
 
-        <input type="text" id="collapseId" value="collapse1" />
-        <button id="collapseTest">Test</button>
+        {%- call collapse.button(itemId="collapseTest", options={
+            dataset: {
+                type: "expand"
+            }
+        }) -%}
+            Test
+        {%- endcall -%}
 
         {{ collapse.generator(items=[
             {
                 itemId: "collapse1",
                 button: {
-                    text: "Collapse 1"
+                    text: "Collapse 1",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
-                content: "xxx",
+                content: ["xxx", "yyy"],
                 options: {
                     animation: "fade"
                 }
@@ -48,18 +58,29 @@
             {
                 itemId: "collapse2",
                 button: {
-                    text: "Collapse 2"
+                    text: "Collapse 2",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "yyy",
                 class: "blue-background",
                 options: {
-                    animation: "dropdown"
+                    expand: true,
+                    animation: "fade"
                 }
             },
             {
                 itemId: "collapse3",
                 button: {
-                    text: "Collapse 3"
+                    text: "Collapse 3",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -70,7 +91,12 @@
             {
                 itemId: "collapse4",
                 button: {
-                    text: "Collapse 4"
+                    text: "Collapse 4",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "yyy yyy yyy yyy yyy yyy yyy yyy yyy yyy",
                 class: "blue-background",
@@ -81,7 +107,12 @@
             {
                 itemId: "collapse5",
                 button: {
-                    text: "Collapse 5"
+                    text: "Collapse 5",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -92,7 +123,12 @@
             {
                 itemId: "collapse6",
                 button: {
-                    text: "Collapse 6"
+                    text: "Collapse 6",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "yyy",
                 class: "blue-background",
@@ -103,7 +139,12 @@
             {
                 itemId: "collapse7",
                 button: {
-                    text: "Collapse 7"
+                    text: "Collapse 7",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -114,7 +155,12 @@
             {
                 itemId: "collapse8",
                 button: {
-                    text: "Collapse 8"
+                    text: "Collapse 8",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "yyy",
                 class: "blue-background",
@@ -125,7 +171,12 @@
             {
                 itemId: "collapse9",
                 button: {
-                    text: "Collapse 9"
+                    text: "Collapse 9",
+                    options: {
+                        dataset: {
+                            type: "expand"
+                        }
+                    }
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -133,6 +184,16 @@
                     animation: "slideright"
                 }
             }
-        ]) }}
+        ], options={type: "tab"}) }}
     </div>
+
+    {%- call collapse.item(id="collapseTest", itemId="collapseTest", options={animation: "fade"}) -%}
+        {%- call collapse.button(itemId="collapseTest", options={
+            dataset: {
+                type: "collapse"
+            }
+        }) -%}
+            Close
+        {%- endcall -%}
+    {%- endcall -%}
 {% endblock %}

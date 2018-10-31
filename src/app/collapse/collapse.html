@@ -4,6 +4,7 @@
         {%- if id %} id="{{- id -}}"{%- endif -%}
         {#!- #} class="collapse
         {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in options.dataset %} data-collapse-{{key | toDataset}}="{{value}}"{%- endfor -%}
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
         {{- caller() -}}
@@ -16,6 +17,7 @@
         {%- if id %} id="{{- id -}}"{%- endif -%}
         {#!- #} class="collapse__buttons
         {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in options.dataset %} data-collapse-{{key | toDataset}}="{{value}}"{%- endfor -%}
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
         {{- caller() -}}
@@ -27,11 +29,13 @@
     <{%- if options.tag -%}{{- options.tag -}}{%- else -%}button{% endif -%}
         {%- if id %} id="{{- id -}}"{% endif -%}
         {#!- #} class="collapse__button
+        {%- if options.expand === true %} active{% endif -%}
         {%- if class %} {{ class }}{% endif -%}"
         {%- if options.tag === "a" %}
             {#!- #} href="#{{itemId}}"
         {%- endif -%} 
         {#!- #} data-collapse-target="{{itemId}}"
+        {%- for key, value in options.dataset %} data-collapse-{{key | toDataset}}="{{value}}"{%- endfor -%}
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
         {{- caller() -}}
@@ -43,7 +47,9 @@
     <div
         {%- if id %} id="{{- id -}}"{%- endif -%}
         {#!- #} class="collapse__wrapper
+        {%- if options.overlap %} collapse__wrapper--overlap{% endif -%}
         {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in options.dataset %} data-collapse-{{key | toDataset}}="{{value}}"{%- endfor -%}
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
         {{- caller() -}}
@@ -55,8 +61,12 @@
     <div
         {%- if id %} id="{{- id -}}"{%- endif -%}
         {#!- #} class="collapse__item
-        {%- if options.animation %} collapse--animation{%- endif -%}"
+        {%- if options.expand === true %} collapse__item--expand{% endif -%}
+        {%- if options.animation %} collapse--animation
+            {%- if options.expand === true %} collapse--animation--end collapse--animation--play{% endif -%}
+        {%- endif -%}"
         {#!- #} data-collapse-id="{% if itemId %}{{itemId}}{% else %}{{id}}{% endif %}"
+        {%- for key, value in options.dataset %} data-collapse-{{key | toDataset}}="{{value}}"{%- endfor -%}
         {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
     >
         {%- if options.animation -%}
@@ -74,33 +84,63 @@
 
 {# auto collapse generator #}
 {%- macro generator(id, class, items, dataset, options) -%}
-    {% call collapse(id=id, class=class, dataset=dataset, options=options) %}
-        {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
-            {%- for key, value in items | arr2obj -%}
-                {%- if value.button -%}
-                    {%- if value.itemId -%}
-                        {%- set itemId=value.itemId -%}
-                    {%- else -%}
-                        {%- set itemId=value.id -%}
+    {%- if options.type === "tab" -%}
+        {# tab #}
+        {% call collapse(id=id, class=class, dataset=dataset, options={
+            dataset: {accordion: "true"}
+        } | assignObj(options)) %}
+            {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
+                {%- for key, value in items | arr2obj -%}
+                    {%- if value.button -%}
+                        {%- if value.itemId -%}
+                            {%- set itemId=value.itemId -%}
+                        {%- else -%}
+                            {%- set itemId=value.id -%}
+                        {%- endif -%}
+                        {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options={expand: value.options.expand} | assignObj(value.button.options)) -%}
+                            {%- for text in value.button.text | findContent("", options.lang) -%}
+                                {{- text | safe -}}
+                            {%- endfor -%}
+                        {%- endcall -%}
                     {%- endif -%}
-                    {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options=value.button.options) -%}
-                        {{- value.button.text | safe -}}
-                    {%- endcall -%}
-                {%- endif -%}
-            {%- endfor -%}
-        {%- endcall -%}
-        {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options=options.wrapper.options) -%}
-            {%- for key, value in items | arr2obj -%}
-                {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
-                    {%- if value.content | typeof("object") -%}
-                        {%- for content in value.content -%}
+                {%- endfor -%}
+            {%- endcall -%}
+            {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options={overlap: true} | assignObj(options.wrapper.options)) -%}
+                {%- for key, value in items | arr2obj -%}
+                    {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
+                        {%- for content in value.content | findContent("", options.lang) -%}
                             <p>{{- content | safe -}}</p>
                         {%- endfor -%}
-                    {%- else -%}
-                        <p>{{- value.content | safe -}}</p>
+                    {%- endcall -%}
+                {%- endfor -%}
+            {%- endcall -%}
+        {%- endcall -%}
+    {%- else -%}
+    {# default #}
+        {% call collapse(id=id, class=class, dataset=dataset, options=options) %}
+            {%- for key, value in items | arr2obj -%}
+                {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
+                    {%- if value.button -%}
+                        {%- if value.itemId -%}
+                            {%- set itemId=value.itemId -%}
+                        {%- else -%}
+                            {%- set itemId=value.id -%}
+                        {%- endif -%}
+                        {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options={expand: value.options.expand} | assignObj(value.button.options)) -%}
+                            {%- for text in value.button.text | findContent("", options.lang) -%}
+                                {{- text | safe -}}
+                            {%- endfor -%}
+                        {%- endcall -%}
                     {%- endif -%}
+                {%- endcall -%}
+                {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options=options.wrapper.options) -%}    
+                    {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
+                        {%- for content in value.content | findContent("", options.lang) -%}
+                            <p>{{- content | safe -}}</p>
+                        {%- endfor -%}
+                    {%- endcall -%}
                 {%- endcall -%}
             {%- endfor -%}
         {%- endcall -%}
-    {% endcall %}
+    {%- endif -%}
 {%- endmacro -%}

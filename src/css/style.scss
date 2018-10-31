@@ -2,5 +2,31 @@
 @import "./src/app/collapse/collapse.mixin.scss";
 
 @include html-reset() {
-    @include collapse();
+    @include collapse($withAnimation: true);
+
+    #collapseTest {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+
+        height: 100%;
+        width: 100%;
+
+        .collapse {
+            &__item {
+                &__wrapper {
+                    height: 100%;
+                    width: 100%;
+
+                    background: rgba($black, 0.6);
+                }
+            }
+
+            &__animation {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
 }

@@ -104,13 +104,13 @@ const manageEnvironment = function(environment) {
                         if (obj[i][searchArr[0]] == searchArr[1])
                             outputKey(obj[i]);
                     } else outputKey(obj[i]);
-                }
+                } else if (searchBy === '' && (!key || key === '')) results.push(obj[i]);
             }
         } else if (typeof obj === 'object') {
             if (searchBy !== '') {
                 if (obj[searchArr[0]] == searchArr[1]) outputKey(obj);
             } else outputKey(obj);
-        } else if (searchBy === '' && key === '') results.push(obj);
+        } else if (searchBy === '' && (!key || key === '')) results.push(obj);
 
         return results;
     });
