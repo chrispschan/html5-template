@@ -126,46 +126,62 @@ export default class Collapse extends component {
     }
 
     _buttonInit (btn) {
-        let _self = this;
+        let _self = this,
+            _expand = function (event) {
+                let _target = this.collapse.target;
+
+                if (_self.getExpandItemsId(this.collapse.groupId).indexOf(this.collapse.target) === -1)
+                    _self.expand(_target, true, this.collapse.groupId);
+
+                if (typeof _self._options.events.buttonClick === 'function')
+                    _self._options.events.buttonClick();
+            },
+            _collapse = function (event) {
+                let _target = this.collapse.target;
+
+                if (_self.getExpandItemsId(this.collapse.groupId).indexOf(this.collapse.target) !== -1)
+                    _self.expand(_target, false, this.collapse.groupId);
+
+                if (typeof _self._options.events.buttonClick === 'function')
+                    _self._options.events.buttonClick();
+            },
+            _toggle = function (event) {
+                let _target = this.collapse.target;
+
+                if (typeof _target === 'string' & _target !== '') {
+                    if (_self.getExpandItemsId(this.collapse.groupId).indexOf(this.collapse.target) !== -1)
+                        _self.expand(_target, false, this.collapse.groupId);
+                    else
+                        _self.expand(_target, true, this.collapse.groupId);
+                }
+
+                if (typeof _self._options.events.buttonClick === 'function')
+                    _self._options.events.buttonClick();
+            };
 
         /*----------  add click event by type  ----------*/
         switch (btn.collapse.type) {
             case 'expand':    // only expand
-                btn.onclick = function (event) {
-                    let _target = this.collapse.target;
-
-                    if (!this.hasClass(_self._options.btnActiveClass))
-                        _self.expand(_target, true, this.collapse.groupId);
-
-                    if (typeof _self._options.events.buttonClick === 'function')
-                        _self._options.events.buttonClick();
-                };
+                btn.onclick = _expand;
                 break;
             case 'collapse':    // only collapse
-                btn.onclick = function (event) {
-                    let _target = this.collapse.target;
-
-                    if (this.hasClass(_self._options.btnActiveClass))
-                        _self.expand(_target, false, this.collapse.groupId);
-
-                    if (typeof _self._options.events.buttonClick === 'function')
-                        _self._options.events.buttonClick();
-                };
+                btn.onclick = _collapse;
+                break;
+            case 'hover':    // hover expand
+                btn.onmouseenter = _expand;
+                btn.onmouseleave = _collapse;
+                break;
+            case 'focus':    // only expand
+                btn.onfocus = _expand;
+                break;
+            case 'disable':
+                btn.onclick = null;
+                btn.onmouseenter = null;
+                btn.onmouseleave = null;
+                btn.onfocus = null;
                 break;
             default:    // toggle
-                btn.onclick = function (event) {
-                    let _target = this.collapse.target;
-
-                    if (typeof _target === 'string' & _target !== '') {
-                        if (this.hasClass(_self._options.btnActiveClass))
-                            _self.expand(_target, false, this.collapse.groupId);
-                        else
-                            _self.expand(_target, true, this.collapse.groupId);
-                    }
-
-                    if (typeof _self._options.events.buttonClick === 'function')
-                        _self._options.events.buttonClick();
-                };
+                btn.onclick = _toggle;
                 break;
         }
 
@@ -350,7 +366,7 @@ export default class Collapse extends component {
 
         for (let i = 0; i < _items.length; i++) {
             if (_items[i].collapse.expand === true)
-                _expandItems.push(this._collapseItem[i].collapse.id);
+                _expandItems.push(_items[i].collapse.id);
         }
 
         return _expandItems;

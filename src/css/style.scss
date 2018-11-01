@@ -29,4 +29,71 @@
             }
         }
     }
+
+    .header {
+        @media screen and (min-width: $breakpoint-md + 0.00001) {
+            #header {
+                position: relative;
+            }
+
+            .header {
+                &__item {
+                    display: inline-block;
+
+                    &__wrapper {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                    }
+                }
+
+                &__menu {
+                    &__button {
+                        display: none;
+                    }
+
+                    &__wrapper {
+
+                        overflow: visible;
+
+                        > .collapse {
+                            &__item {
+                                display: block;
+
+                                > .collapse {
+                                    &__animation {
+                                        transform: none;
+                                        height: auto;
+                                        max-width: none;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: $breakpoint-md) {
+            .header {
+                &__menu {
+                    &__wrapper {
+                        position: fixed;
+                        z-index: 50;
+                        width: 100%;
+                        bottom: 0;
+                        background: rgba($black, 0.4);
+                    }
+
+                    &__item {
+                        width: 70%;
+                        height: calc(100vh - 40px);
+                        background: $white;
+                    }
+                }
+            }
+        }
+    }
 }

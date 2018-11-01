@@ -119,27 +119,55 @@
     {# default #}
         {% call collapse(id=id, class=class, dataset=dataset, options=options) %}
             {%- for key, value in items | arr2obj -%}
-                {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
-                    {%- if value.button -%}
-                        {%- if value.itemId -%}
-                            {%- set itemId=value.itemId -%}
-                        {%- else -%}
-                            {%- set itemId=value.id -%}
+                {%- if value.button.options.dataset.type === "hover" -%}
+                    {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
+                        {%- if value.button -%}
+                            {%- if value.itemId -%}
+                                {%- set itemId=value.itemId -%}
+                            {%- else -%}
+                                {%- set itemId=value.id -%}
+                            {%- endif -%}
+                            {%- call button(itemId=itemId, options={expand: value.options.expand} | assignObj([value.button.options, {tag: "div"}])) -%}
+                                {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options={expand: value.options.expand} | assignObj([value.button.options, {
+                                    dataset: {type: "focus"}
+                                }])) -%}
+                                    {%- for text in value.button.text | findContent("", options.lang) -%}
+                                        {{- text | safe -}}
+                                    {%- endfor -%}
+                                {%- endcall -%}
+                                {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options=options.wrapper.options) -%}    
+                                    {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
+                                        {%- for content in value.content | findContent("", options.lang) -%}
+                                            <p>{{- content | safe -}}</p>
+                                        {%- endfor -%}
+                                    {%- endcall -%}
+                                {%- endcall -%}
+                            {%- endcall -%}
                         {%- endif -%}
-                        {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options={expand: value.options.expand} | assignObj(value.button.options)) -%}
-                            {%- for text in value.button.text | findContent("", options.lang) -%}
-                                {{- text | safe -}}
+                    {%- endcall -%}
+                {%- else -%}
+                    {%- call buttons(id=options.buttons.id, class=options.buttons.class, dataset=options.buttons.dataset, options=options.buttons.options) -%}
+                        {%- if value.button -%}
+                            {%- if value.itemId -%}
+                                {%- set itemId=value.itemId -%}
+                            {%- else -%}
+                                {%- set itemId=value.id -%}
+                            {%- endif -%}
+                            {%- call button(id=value.button.id, class=value.button.class, itemId=itemId, dataset=value.button.dataset, options={expand: value.options.expand} | assignObj(value.button.options)) -%}
+                                {%- for text in value.button.text | findContent("", options.lang) -%}
+                                    {{- text | safe -}}
+                                {%- endfor -%}
+                            {%- endcall -%}
+                        {%- endif -%}
+                    {%- endcall -%}
+                    {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options=options.wrapper.options) -%}    
+                        {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
+                            {%- for content in value.content | findContent("", options.lang) -%}
+                                <p>{{- content | safe -}}</p>
                             {%- endfor -%}
                         {%- endcall -%}
-                    {%- endif -%}
-                {%- endcall -%}
-                {%- call wrapper(id=options.wrapper.id, class=options.wrapper.class, dataset=options.wrapper.dataset, options=options.wrapper.options) -%}    
-                    {%- call item(id=value.id, class=value.class, itemId=value.itemId, dataset=value.dataset, options=value.options) -%}
-                        {%- for content in value.content | findContent("", options.lang) -%}
-                            <p>{{- content | safe -}}</p>
-                        {%- endfor -%}
                     {%- endcall -%}
-                {%- endcall -%}
+                {%- endif -%}
             {%- endfor -%}
         {%- endcall -%}
     {%- endif -%}

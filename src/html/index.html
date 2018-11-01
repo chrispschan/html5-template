@@ -12,6 +12,97 @@
 {%- import "collapse/collapse.html" as collapse -%}
 
 {% block html %}
+    <div class="header">
+        {%- call collapse.button(itemId="collapseMune", class="header__menu__button") -%}Menu{%- endcall -%}
+        {% call collapse.collapse(id="header") %}
+            {%- call collapse.wrapper(class="header__menu__wrapper") -%}    
+                {%- call collapse.item(itemId="collapseMune", class="header__menu__item", options={animation: "slideright"}) -%}
+                    {% call collapse.collapse(options={
+                        dataset: {
+                            accordion: true
+                        }
+                    }) %}
+                        {%- call collapse.buttons(class="header__item") -%}
+                            {%- call collapse.button(itemId="header1", options={tag: "div", dataset: {
+                                    type: "hover"
+                                }
+                            }) -%}
+                                {%- call collapse.button(itemId="header1", options={
+                                    dataset: {type: "focus"}
+                                }) -%}
+                                    Header 1
+                                {%- endcall -%}
+                                {%- call collapse.wrapper(class="header__item__wrapper") -%}    
+                                    {%- call collapse.item(class="purple-background white", itemId="header1", options={animation: "dropdown"}) -%}
+                                        {% call collapse.collapse() %}
+                                            {%- call collapse.buttons() -%}
+                                                {%- call collapse.button(itemId="sub1") -%}
+                                                    Sub 1
+                                                {%- endcall -%}                
+                                            {%- endcall -%}
+                                            {%- call collapse.wrapper() -%}
+                                                {%- call collapse.item(class="white-background black", itemId="sub1", options={animation: "dropdown"}) -%}
+                                                    <p>XXX</p>
+                                                    <p>YYY</p>
+                                                {%- endcall -%}
+                                            {%- endcall -%}
+                                            {%- call collapse.buttons() -%}
+                                                {%- call collapse.button(itemId="sub2") -%}
+                                                    Sub 2
+                                                {%- endcall -%}                
+                                            {%- endcall -%}
+                                            {%- call collapse.wrapper() -%}
+                                                {%- call collapse.item(class="white-background black", itemId="sub2", options={animation: "dropdown"}) -%}
+                                                    <p>XXX</p>
+                                                    <p>YYY</p>
+                                                {%- endcall -%}
+                                            {%- endcall -%}
+                                        {% endcall %}
+                                    {%- endcall -%}
+                                {%- endcall -%}
+                            {%- endcall -%}
+                        {%- endcall -%}
+                        {%- call collapse.buttons(class="header__item") -%}
+                            {%- call collapse.button(itemId="header2", options={tag: "div", dataset: {
+                                    type: "hover"
+                                }
+                            }) -%}
+                                {%- call collapse.button(itemId="header2", options={
+                                    dataset: {type: "focus"}
+                                }) -%}
+                                    Header 2
+                                {%- endcall -%}
+                                {%- call collapse.wrapper(class="header__item__wrapper") -%}    
+                                    {%- call collapse.item(class="blue-background white", itemId="header2", options={animation: "dropdown"}) -%}
+                                        <p>XXX</p>
+                                        <p>YYY</p>
+                                    {%- endcall -%}
+                                {%- endcall -%}
+                            {%- endcall -%}
+                        {%- endcall -%}
+                        {%- call collapse.buttons(class="header__item") -%}
+                            {%- call collapse.button(itemId="header3", options={tag: "div", dataset: {
+                                    type: "hover"
+                                }
+                            }) -%}
+                                {%- call collapse.button(itemId="header3", options={
+                                    dataset: {type: "focus"}
+                                }) -%}
+                                    Header 3
+                                {%- endcall -%}
+                                {%- call collapse.wrapper(class="header__item__wrapper") -%}    
+                                    {%- call collapse.item(class="black-background white", itemId="header3", options={animation: "dropdown"}) -%}
+                                        <p>XXX</p>
+                                        <p>YYY</p>
+                                    {%- endcall -%}
+                                {%- endcall -%}
+                            {%- endcall -%}
+                        {%- endcall -%}
+                    {%- endcall -%}
+                {%- endcall -%}
+            {% endcall %}
+        {% endcall %}
+    </div>
     <!-- .innerWrapper -->
     <div class="innerWrapper">
         <h1>
@@ -43,12 +134,7 @@
             {
                 itemId: "collapse1",
                 button: {
-                    text: "Collapse 1",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Fade"
                 },
                 content: ["xxx", "yyy"],
                 options: {
@@ -58,29 +144,19 @@
             {
                 itemId: "collapse2",
                 button: {
-                    text: "Collapse 2",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Dropdown"
                 },
                 content: "yyy",
                 class: "blue-background",
                 options: {
                     expand: true,
-                    animation: "fade"
+                    animation: "dropdown"
                 }
             },
             {
                 itemId: "collapse3",
                 button: {
-                    text: "Collapse 3",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Dropup"
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -91,12 +167,7 @@
             {
                 itemId: "collapse4",
                 button: {
-                    text: "Collapse 4",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Dropleft"
                 },
                 content: "yyy yyy yyy yyy yyy yyy yyy yyy yyy yyy",
                 class: "blue-background",
@@ -107,12 +178,7 @@
             {
                 itemId: "collapse5",
                 button: {
-                    text: "Collapse 5",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Dropright"
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -123,12 +189,7 @@
             {
                 itemId: "collapse6",
                 button: {
-                    text: "Collapse 6",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Slidedown"
                 },
                 content: "yyy",
                 class: "blue-background",
@@ -139,12 +200,7 @@
             {
                 itemId: "collapse7",
                 button: {
-                    text: "Collapse 7",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "Slideup"
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -155,12 +211,7 @@
             {
                 itemId: "collapse8",
                 button: {
-                    text: "Collapse 8",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "slideleft"
                 },
                 content: "yyy",
                 class: "blue-background",
@@ -171,12 +222,7 @@
             {
                 itemId: "collapse9",
                 button: {
-                    text: "Collapse 9",
-                    options: {
-                        dataset: {
-                            type: "expand"
-                        }
-                    }
+                    text: "slideright"
                 },
                 content: "zzz",
                 class: "purple-background",
@@ -184,7 +230,7 @@
                     animation: "slideright"
                 }
             }
-        ], options={type: "tab"}) }}
+        ], options={type: ""}) }}
     </div>
 
     {%- call collapse.item(id="collapseTest", itemId="collapseTest", options={animation: "fade"}) -%}
