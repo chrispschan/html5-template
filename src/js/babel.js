@@ -9,3 +9,6 @@ let collapse = new Collapse({
         }
     }
 });
+
+collapse.setButtonEvent(collapse.buttons[1], 'disable');
+collapse.setButtonEvent(collapse.buttons[2], 'toggle');

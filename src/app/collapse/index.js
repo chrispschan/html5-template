@@ -125,8 +125,9 @@ export default class Collapse extends component {
             item.collapse.groupId = -1;
     }
 
-    _buttonInit (btn) {
+    _buttonInit (btn, type) {
         let _self = this,
+            _type = typeof type !== 'undefined' ? type : btn.collapse.type,
             _expand = function (event) {
                 let _target = this.collapse.target;
 
@@ -159,8 +160,10 @@ export default class Collapse extends component {
                     _self._options.events.buttonClick();
             };
 
+        btn.removeClass('collapse__button--disabled');
+
         /*----------  add click event by type  ----------*/
-        switch (btn.collapse.type) {
+        switch (_type) {
             case 'expand':    // only expand
                 btn.onclick = _expand;
                 break;
@@ -179,6 +182,7 @@ export default class Collapse extends component {
                 btn.onmouseenter = null;
                 btn.onmouseleave = null;
                 btn.onfocus = null;
+                btn.addClass('collapse__button--disabled');
                 break;
             default:    // toggle
                 btn.onclick = _toggle;
@@ -299,6 +303,105 @@ export default class Collapse extends component {
         }
 
         return _item;
+    }
+
+    fixedState (collapseId, state, groupId = -1) {
+        let _collapseId = Array.isArray(collapseId) ? collapseId : (typeof collapseId === 'string' && collapseId !== '' ? [collapseId] : []),
+            _item = _collapseId.length > 0 ? this._collapseItem.filter(item => _collapseId.indexOf(item.collapse.id) !== -1) : this._collapseItem,
+            _btn,
+            _options;
+
+        if (groupId !== -1)
+            _item = _item.filter(item => item.collapse.groupId === groupId);
+
+        for (let i = 0; i < _item.length; i++) {
+            _options = _item[i].collapse;
+
+            switch (state) {
+                case 'expand':
+                    _item[i].removeClass('collapse__item--fixed--collapse');
+                    _item[i].addClass('collapse__item--fixed--expand');
+                    break;
+                case 'collapse':
+                    _item[i].addClass('collapse__item--fixed--collapse');
+                    _item[i].removeClass('collapse__item--fixed--expand');
+                    break;
+                default:
+                    _item[i].removeClass('collapse__item--fixed--collapse');
+                    _item[i].removeClass('collapse__item--fixed--expand');
+                    break;
+            }
+
+            _btn = this._collapseBtn.filter(btn => btn.collapse.target === _options.id && btn.collapse.groupId === _options.groupId);
+
+            /*----------  disable button  ----------*/
+            for (let j = 0; j < _btn.length; j++) {
+                switch (state) {
+                    case 'expand':
+                    case 'collapse':
+                        this._buttonInit(_btn[j], 'disable');
+                        break;
+                    default:
+                        this._buttonInit(_btn[j]);
+                        break;
+                }
+            }
+        }
+
+        return _item;
+    }
+
+    setButtonEvent (btn, type) {
+        let _btn = typeof btn.length === 'number' ? btn : [btn];
+
+        for (let i = 0; i < _btn.length; i++) {
+            if (typeof _btn[i] === 'object') {
+                _btn[i].onclick = null;
+                _btn[i].onmouseenter = null;
+                _btn[i].onmouseleave = null;
+                _btn[i].onfocus = null;
+                this._buttonInit(_btn[i], type);
+            }
+        }
+
+        return _btn;
+    }
+
+    setAnimation (collapseId, type = 'none', groupId = -1) {
+        let _collapseId = Array.isArray(collapseId) ? collapseId : (typeof collapseId === 'string' && collapseId !== '' ? [collapseId] : []),
+            _item = _collapseId.length > 0 ? this._collapseItem.filter(item => _collapseId.indexOf(item.collapse.id) !== -1) : this._collapseItem,
+            _animationEle,
+            _classList;
+
+        if (groupId !== -1)
+            _item = _item.filter(item => item.collapse.groupId === groupId);
+
+        for (let i = 0; i < _item.length; i++) {
+            _animationEle = _item[i].children;
+
+            for (let j = 0; j < _animationEle.length; j++) {
+                if (_animationEle[j].hasClass(this._options.animationClass)) {
+                    _classList = this.classList ? _animationEle[j].classList : _animationEle[j].className.split(' ');
+                
+                    for (let k = 0; k < _classList.length; k++) {
+                        if (_classList[k] !== this._options.animationClass && _classList[k].search(this._options.animationClass) === 0)
+                            _animationEle[j].removeClass(_classList[k]);
+                    }
+
+                    _animationEle[j].addClass(`${this._options.animationClass}--${type}`);
+                }
+            }
+
+            if (_item[i].querySelectorAll(`.${this._options.animationClass}`).length <= 0) {
+                _item[i].innerHTML = `<div class="${this._options.animationClass} ${this._options.animationClass}--${type}">${_item[i].innerHTML}</div>`;
+                this._animationInit(_item[i]);
+            }
+
+            if (type === 'none')
+                _item[i].removeClass(this._animation.class);
+            else
+                _item[i].addClass(this._animation.class);
+        }
     }
 
     _animationExpane (item) {
