@@ -140,7 +140,7 @@ export default class DeepLink {
         return setTimeout(() => {
             let _start = new Date().getTime();
             if (_options[this._os].support) {
-                if (!_options.deepLink) {
+                if (_options.deepLink) {
                     let _timeout = setTimeout(() => {
                         // Get current time
                         let _now = new Date().getTime();
