@@ -1,4 +1,8 @@
 @import "./src/app/common/common.scss";
+@import "./src/app/scrollbar/scrollbar.mixin.scss";
 
 @include html-reset() {
+    @include scrollbar() {
+        
+    }
 }

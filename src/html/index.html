@@ -29,5 +29,21 @@
                 <li>{{- i | safe -}}</li>
             {%- endfor %}
         </ul>
+
+        <a href="javascript:;" onclick="addImg()">Add IMG</a>
+
+        <div class="scrollbar" style="height: 300px">
+            <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+
+            <div class="scrollbar" style="height: 300px">
+                    <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+        </div>
     </div>
+
+    <script>
+        function addImg () {
+            document.querySelector('.scrollbar__wrapper').appendChild(document.querySelector('.testImg').cloneNode(true));
+        }
+    </script>
 {% endblock %}

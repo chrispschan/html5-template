@@ -2,7 +2,7 @@ import 'document/document.property';
 
 let _scrollTimeout = null;
 
-export default function ScrollTo (element, to, duration = 0) {
+export default function ScrollTo (element, to, duration = 100) {
     if (element) {
         let start = element.scrollTop,
             change = null,
