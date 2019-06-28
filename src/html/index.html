@@ -11,39 +11,76 @@
 {%- extends "template/html5.html" -%}
 
 {% block html %}
-    <!-- .innerWrapper -->
-    <div class="innerWrapper">
-        <h1>
-            {{- page.content.h1[lang] | safe -}}
-        </h1>
+    <!-- <div class="scrollbar"> -->
+        <!-- .innerWrapper -->
+        <div class="innerWrapper">
+            <h1>
+                {{- page.content.h1[lang] | safe -}}
+            </h1>
 
-        <p>{{- page.content.content1[lang] | safe -}}</p>
+            <p>{{- page.content.content1[lang] | safe -}}</p>
 
-        <p><strong>{{- page.content.content2[lang] | safe -}}</strong></p>
+            <p><strong>{{- page.content.content2[lang] | safe -}}</strong></p>
 
-        <ul>
-            {%- for i in page.content.tools[lang] -%}
-                <li>{{- i | safe -}}</li>
-            {%- endfor %}
-            {%- for i in page.content.nunjucksTool[lang] -%}
-                <li>{{- i | safe -}}</li>
-            {%- endfor %}
-        </ul>
+            <ul>
+                {%- for i in page.content.tools[lang] -%}
+                    <li>{{- i | safe -}}</li>
+                {%- endfor %}
+                {%- for i in page.content.nunjucksTool[lang] -%}
+                    <li>{{- i | safe -}}</li>
+                {%- endfor %}
+            </ul>
 
-        <a href="javascript:;" onclick="addImg()">Add IMG</a>
-
-        <div class="scrollbar" style="height: 300px">
-            <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
-
-            <div class="scrollbar" style="height: 300px">
-                    <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            <div id="scrollbar1" class="scrollbar" style="height: 300px; width: 50%; float: left;">
+                <img class="testImg" style="height: 100%; width: 100%" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
             </div>
-        </div>
-    </div>
+            <div class="" style="height: 300px; width: 50%; float: left; overflow: auto;">
+                <img class="testImg" style="height: 100%; width: 100%" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
 
-    <script>
-        function addImg () {
-            document.querySelector('.scrollbar__wrapper').appendChild(document.querySelector('.testImg').cloneNode(true));
-        }
-    </script>
+            <div class="scrollbar" style="height: 300px; width: 50%; float: left;">
+                <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+            <div class="" style="height: 300px; width: 50%; float: left; overflow: auto;">
+                <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+
+            <div class="scrollbar" style="height: 300px; width: 50%; float: left;">
+                <img class="testImg" style="width: 100%;" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+            <div class="" style="height: 300px; width: 50%; float: left; overflow: auto;">
+                <img class="testImg" style="width: 100%;" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+
+            <div class="scrollbar" style="height: 300px; width: 50%; float: left;">
+                <img class="testImg" style="height: 100%; width: 200%;" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+            <div class="" style="height: 300px; width: 50%; float: left; overflow: auto;">
+                <img class="testImg" style="height: 100%; width: 200%;" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+
+            <div class="scrollbar" style="height: 300px; width: 50%; float: left;">
+                <div class="scrollbar" style="height: 300px; width: 100%; float: left;">
+                    <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+                </div>
+                <img class="testImg" style="width: 100%;" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+            <div class="" style="height: 300px; width: 50%; float: left; overflow: auto;">
+                <div class="" style="height: 300px; width: 100%; float: left; overflow: auto;">
+                    <img class="testImg" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+                </div>
+                <img class="testImg" style="width: 100%;" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+            </div>
+
+            <hr />
+
+            <!-- <div class="scrollbar" style="height: 300px">
+                <img class="testImg" style="width:100%" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+
+                <div class="scrollbar" style="height: 300px">
+                    <img class="testImg" style="width:100%" src="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" alt="" />
+                </div>
+            </div> -->
+        </div>
+    <!-- </div> -->
 {% endblock %}

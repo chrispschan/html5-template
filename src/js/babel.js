@@ -3,7 +3,7 @@
 import Scrollbar from 'scrollbar';
 
 const scrollbar = new Scrollbar('.scrollbar', {
-    isOverlay: true
+    isOverlay: false
 });
 
 console.log(scrollbar);
