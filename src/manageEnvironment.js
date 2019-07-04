@@ -57,7 +57,7 @@ const manageEnvironment = function(environment) {
     /*----------  change array item to object  ----------*/
     environment.addFilter('arr2obj', (obj) => {
         if (Array.isArray(obj))
-            return Object.assign({}, obj);
+            return Object.deepAssign({}, obj);
         else
             return obj;
     });

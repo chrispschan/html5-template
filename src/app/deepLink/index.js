@@ -23,7 +23,7 @@ export default class DeepLink {
 
         this._deepLinkEle = [];
 
-        this._options = Object.assign({
+        this._options = Object.deepAssign({
             delay: 300,
             windows: {
                 support: false
@@ -70,14 +70,14 @@ export default class DeepLink {
     }
 
     addDeepLink (ele = '.deepLink', options = {}) {
-        let _options = Object.assign(this._options, options),
+        let _options = Object.deepAssign(this._options, options),
             _ele = document.querySelectorAll(ele),
             _self = this,
             _selfOptions = {};
 
         if (this._os !== 'other') {
             for (let i = 0; i < _ele.length; i++) {
-                _selfOptions = Object.assign({}, _options);
+                _selfOptions = Object.deepAssign({}, _options);
 
                 _ele[i].getDataset();
 
@@ -110,7 +110,7 @@ export default class DeepLink {
 
                     _selfOptions.store = this._getStore(_selfOptions);
 
-                    _ele[i].deepLinkOptions = Object.assign({}, _selfOptions);
+                    _ele[i].deepLinkOptions = Object.deepAssign({}, _selfOptions);
 
                     _ele[i].onclick = function (event) {
                         event.preventDefault();
@@ -130,7 +130,7 @@ export default class DeepLink {
     }
 
     call (options = {}, onLoadOpen = false) {
-        let _options = Object.assign(this._options, options),
+        let _options = Object.deepAssign(this._options, options),
             _delay = onLoadOpen && this._os === 'android' ? 500 : 0;
 
         if (!_options.store) _options.store = this._getStore(_options);

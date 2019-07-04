@@ -92,7 +92,7 @@ export default class SocialMedia {
 
         this._socialMediaEle = [];
 
-        this._options = Object.assign({
+        this._options = Object.deepAssign({
             href: '#',
             popup: false
         }, options);
@@ -101,13 +101,13 @@ export default class SocialMedia {
     }
 
     addSocialMedia (ele = '.socialMedia', options = {}) {
-        let _options = Object.assign(this._options, options),
+        let _options = Object.deepAssign(this._options, options),
             _ele = document.querySelectorAll(ele),
             _self = this,
             _selfOptions = {};
 
         for (let i = 0; i < _ele.length; i++) {
-            _selfOptions = Object.assign({}, _options);
+            _selfOptions = Object.deepAssign({}, _options);
 
             _ele[i].getDataset();
 
@@ -147,11 +147,11 @@ export default class SocialMedia {
                 }
             }
 
-            _ele[i].socialMediaOptions = Object.assign({}, _selfOptions);
+            _ele[i].socialMediaOptions = Object.deepAssign({}, _selfOptions);
 
             _ele[i].onclick = function (event) {
                 event.preventDefault();
-                let _options = Object.assign(_self._options, this.socialMediaOptions);
+                let _options = Object.deepAssign(_self._options, this.socialMediaOptions);
 
                 if (_options.popup)
                     window.open(_options.shareLink, 'socialMedia', 'width=600, height=400, scrollbars=no');

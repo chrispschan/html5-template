@@ -6,7 +6,7 @@ import plugin from 'plugin';
 export default class Map extends plugin {
     constructor (map = '.map', options = {}) {
         super(map, options);
-        this._options = Object.assign({
+        this._options = Object.deepAssign({
             key: '',
             language: '',
             region: '',
@@ -51,7 +51,7 @@ export default class Map extends plugin {
         let _options = {};
 
         for (let i = 0; i < self._mapEle.length; i++) {
-            _options = Object.assign({}, self._options);
+            _options = Object.deepAssign({}, self._options);
 
             delete _options.key;
             delete _options.geolocation;
@@ -251,7 +251,7 @@ export default class Map extends plugin {
     addMarkers (markers, index = -1) {
         function _addMarkers (self, map) {
             for (let j = 0; j < _markers.length; j++) {
-                let _marker = Object.assign({}, _markers[j]),
+                let _marker = Object.deepAssign({}, _markers[j]),
                     _layer = parseInt(_marker.layer) || 0;
                 if (_layer < 0) _layer = 0;
 
@@ -320,7 +320,7 @@ export default class Map extends plugin {
 
     toggleLayer (options, layer = -1, index = -1) {
         let _markers,
-            _options = Object.assign({
+            _options = Object.deepAssign({
                 show: true,
                 remove: false
             }, options),
@@ -343,7 +343,7 @@ export default class Map extends plugin {
 
     toggleMarker (options, marker, index = -1) {
         let _marker,
-            _options = Object.assign({
+            _options = Object.deepAssign({
                 show: true,
                 remove: false
             }, options),

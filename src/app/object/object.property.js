@@ -1,5 +1,5 @@
 // Object.assign (IE support)
-Object.assign = function () {
+Object.deepAssign = function () {
     return assignObj(arguments);
 
     function assignObj (objs) {
@@ -28,3 +28,6 @@ Object.assign = function () {
         return _objs;
     }
 };
+
+if (typeof Object.assign !== 'function')
+    Object.assign = Object.deepAssign;
