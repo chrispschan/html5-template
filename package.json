@@ -5,12 +5,16 @@
   "main": "gulp.babel.js",
   "scripts": {
     "test": "gulp test",
-    "start": "gulp"
+    "start": "gulp",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "chris.ps.chan",
   "license": "ISC",
   "devDependencies": {
+    "@storybook/html": "^5.1.9",
     "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^8.0.0",
     "browser-sync": "^2.24.7",
