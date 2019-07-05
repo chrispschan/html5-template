@@ -61,6 +61,7 @@
     "sshpk": "^1.14.2",
     "storybook-addon-code-improved": "^0.1.4",
     "storybook-addon-run-script": "^0.1.4",
+    "storybook-readme": "^5.0.5",
     "stringstream": "^1.0.0",
     "style-loader": "^0.23.1",
     "stylelint-order": "^1.0.0",

@@ -1,5 +1,6 @@
-import '@storybook/addon-options/register';
+import 'storybook-readme/register';
 import '@storybook/addon-a11y/register';
+import '@storybook/addon-options/register';
 import '@storybook/addon-viewport/register';
 
 import * as CodeAddon from 'storybook-addon-code-improved/dist/register';

@@ -1,4 +1,5 @@
 import { configure, addParameters, addDecorator  } from '@storybook/html';
+import { addReadme } from 'storybook-readme/html';
 import { withA11y } from '@storybook/addon-a11y';
 
 // import common style
@@ -10,6 +11,7 @@ function loadStories() {
   req.keys().sort().forEach(filename => req(filename));
 }
 
+addDecorator(addReadme);
 addDecorator(withA11y);
 
 // Option defaults:
