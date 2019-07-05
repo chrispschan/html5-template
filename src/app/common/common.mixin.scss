@@ -1,7 +1,8 @@
-@import "./src/app/common/reset/reset.mixin.scss";
+@import "reset/reset.mixin.scss";
 @import "color.mixin.scss";
 @import "fontSize.mixin.scss";
 
+@import "reset/font.variables.scss";
 @import "color.variables.scss";
 @import "fontSize.variables.scss";
 @import "breakpoint.variables.scss";
@@ -21,7 +22,7 @@
 
         @content;
 
-        @include font-size-class($font-unit: rem);
+        @include font-size-class($font-unit: $font-unit);
         @include color-class();
     }
 }

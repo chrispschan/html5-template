@@ -1,0 +1,97 @@
+{%- set regExpComment = r/comment/g -%}
+{%- set regExpList = r/-fullList/g -%}
+{%- set baseId = content.reset['base-font-size'].value | replace('$', '') -%}
+{%- set baseSize = content.font[baseId].value[0] | float -%}
+{%- set baseLineHeight = content.font[baseId].value[1] | float -%}
+<div class="innerWrapper">
+  <h1>Font Size</h1>
+  <p>Variables:</p>
+  <ul>
+    <li>src/app/common/reset/font.variables.scss</li>
+    <li>src/app/common/fontSize.variables.scss</li>
+  </ul>
+  <p>Mixin:</p>
+  <ul>
+    <li>src/app/common/reset/font.reset.scss</li>
+    <li>src/app/common/fontSize.mixin.scss</li>
+  </ul>
+  
+  <h2>HTML Tags</h2>
+  {% for i in range(1, 7) -%}
+    {%- set tag = 'h' + i -%}
+    {%- set fontSize = content.font[tag].value[0] | float -%}
+    {%- set lineHeight = content.font[tag].value[1] | float -%}
+
+    <{{tag}}>{{'<' + tag + '>'}} - font-size: 
+      {%- if content.reset['font-unit'].value != 'px' %} {{(fontSize/baseSize) | round(5)}}{{content.reset['font-unit'].value}}
+      {%- else %} {{content.font[tag].value[0]}}
+      {%- endif -%}
+      , line-height: {{(lineHeight / fontSize) | round(5) -}}
+    </{{tag}}>
+  {%- endfor %}
+  
+  <p>{{'<p>'}} - font-size: 
+    {%- if content.font.p -%}
+      {%- set fontSize = content.font.p.value[0] | float -%}
+      {%- set lineHeight = content.font.p.value[1] | float -%}
+      {%- if content.reset['font-unit'].value != 'px' %} {{(fontSize/baseSize) | round(5)}}{{content.reset['font-unit'].value}}{% endif %}
+    {%- else %} {{content.font[baseId].value[0] -}}, line-height: {{(baseLineHeight / baseSize) | round(5) -}}
+    {%- endif -%}
+  </p>
+
+  <h2>Font Class</h2>
+  <h3>Set font-size and line-height by scss variables</h3>
+  {% for tag, data in content.font -%}
+    {%- if not regExpComment.test(tag) and not regExpList.test(tag) %}
+      {% set fontSize = content.font[tag].value[0] | float %}
+      {% set lineHeight = content.font[tag].value[1] | float %}
+
+      <p class="{{tag}}">.{{tag}} - ${{tag}} - font-size:
+        {%- if content.reset['font-unit'].value != 'px' %} {{(fontSize/baseSize) | round(5)}}{{content.reset['font-unit'].value}}
+        {%- else %} {{content.font[tag].value[0]}}
+        {%- endif -%}
+        , line-height: {{(lineHeight / fontSize) | round(5) -}}
+      </p>
+    {%- endif %}
+  {%- endfor %}
+
+  {%- if content.reset['font-unit'].value != 'px' %}
+    <h3>Set font-size unit to px and line-height by scss variables</h3>
+    {% for tag, data in content.font -%}
+      {%- if not regExpComment.test(tag) and not regExpList.test(tag) %}
+        {% set fontSize = content.font[tag].value[0] | float %}
+        {% set lineHeight = content.font[tag].value[1] | float %}
+
+        <p class="{{tag}}px">.{{tag}}px - ${{tag}} - font-size: {{content.font[tag].value[0]}}, line-height: {{(lineHeight / fontSize) | round(5) -}}
+        </p>
+      {%- endif %}
+    {%- endfor %}
+  {%- endif %}
+
+  <h3>Only set font-size by scss variables</h3>
+  {% for tag, data in content.font -%}
+    {%- if not regExpComment.test(tag) and not regExpList.test(tag) %}
+      {% set fontSize = content.font[tag].value[0] | float %}
+
+      <p class="{{tag}}-size">.{{tag}}-size - font-size:
+        {%- if content.reset['font-unit'].value != 'px' %} {{(fontSize/baseSize) | round(5)}}{{content.reset['font-unit'].value}}
+        {%- else %} {{content.font[tag].value[0]}}
+        {%- endif -%}
+      </p>
+    {%- endif %}
+  {%- endfor %}
+
+  {%- if content.reset['font-unit'].value != 'px' %}
+    <h3>Only set font-size unit to px by scss variables</h3>
+    {% for tag, data in content.font -%}
+      {%- if not regExpComment.test(tag) and not regExpList.test(tag) %}
+        {% set fontSize = content.font[tag].value[0] | float %}
+        {% set lineHeight = content.font[tag].value[1] | float %}
+
+        <p class="{{tag}}px-size">.{{tag}}px-size - ${{tag}} - font-size: {{content.font[tag].value[0]}}
+        </p>
+      {%- endif %}
+    {%- endfor %}
+  {%- endif %}
+  
+</div>
