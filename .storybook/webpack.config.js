@@ -49,7 +49,10 @@ module.exports = {
         ],
         use: [ 
           {
-            loader: path.resolve(__dirname, '../src/loader/browserify-loader.js')
+            loader: path.resolve(__dirname, '../src/loader/browserify-loader.js'),
+            options: {
+              paths: [path.resolve(__dirname, '../node_modules/'), path.resolve(__dirname, '../src/app/')]
+            }
           }
         ]
       }

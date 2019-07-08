@@ -1,0 +1,27 @@
+{% for i in range(1, 11) %}
+<div id="demoEle{{i}}" class="demoEle">
+  <p>#demoEle{{i}}</p>
+</div>
+{% endfor %}
+<div class="demoPanel">
+  <div>
+    <label for="scrollPx">Scroll to px:</label>
+    <input id="scrollPx" type="number" value="0" />
+  </div>
+  <div>
+    <label for="scrollElement">Scroll to element:</label>
+    <select id="scrollElement">
+      {% for i in range(1, 11) %}
+        <option value="#demoEle{{i}}">#demoEle{{i}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="scrollDuration">Duration:</label>
+    <input id="scrollDuration" type="number" value="0" />
+  </div>
+  
+  <button onclick="scrollToPx()">Scroll to PX</button>
+  
+  <button onclick="scrollToElement()">Scroll to Element</button>
+</div>

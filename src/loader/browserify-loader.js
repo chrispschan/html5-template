@@ -1,16 +1,15 @@
 const fs = require('fs');
-const parseQuery = require('loader-utils').parseQuery;
+const getOptions = require('loader-utils').getOptions;
 const browserify = require('browserify');
 const babelify = require('babelify');
 const path = require('path');
 
 module.exports = async function (source) {
-  const queryData = this.resourceQuery ? parseQuery(this.resourceQuery) : {};
+  const options = getOptions(this);
 
-  const bundler = browserify(this.resourcePath, {debug: false, paths: [path.dirname('./node_modules'), path.dirname('./src/app/')]}).transform(babelify);
+  const bundler = browserify(this.resourcePath, {debug: false, paths: options.paths}).transform(babelify);
 
   const result = await bundle(bundler);
-  // console.log(result);
 
   return result;
 };

@@ -10,8 +10,6 @@ import defaultVariablesCode from '!!raw-loader!../imageText.default.scss';
 
 import styleCode from '!!raw-loader!sass-loader!./horizontal.stories.scss';
 
-// import './horizontal.stories.scss';
-
 storiesOf('imageText/Horizontal', module)
   .addParameters({
     readme: {

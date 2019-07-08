@@ -50,8 +50,7 @@ Output:
 ```
 
 #### options
-**tag**
-
+######tag
 Set element tag.
 Nunjucks Files:
 ```nunjucks
@@ -62,8 +61,7 @@ Output:
 <button class="imageText">Image Text</button>
 ```
 
-**href**
-
+######href
 Set element href if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -74,8 +72,7 @@ Output:
 <a class="imageText" href="#">Image Text</a>
 ```
 
-**target**
-
+######target
 Set element target if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -86,8 +83,7 @@ Output:
 <a class="imageText" href="javascript:;" target="_blank">Image Text</a>
 ```
 
-**modifier**
-
+######modifier
 Add modifier style class by array.<br/>
 If need add `imageText--center` and `imageText--horizontal`<br/>
 Nunjucks Files:
@@ -99,8 +95,7 @@ Output:
 <div class="imageText imageText--center imageText--horizontal">Image Text</div>
 ```
 
-**beforeItems**
-
+######beforeItems
 Call `macro itemGenerator(options.beforeItems, options)` to auto create `image/text` element before `caller()`.
 Nunjucks Files:
 ```nunjucks
@@ -126,8 +121,7 @@ Output:
 </div>
 ```
 
-**afterItems**
-
+######afterItems
 Call `macro itemGenerator(options.afterItems, options)` to auto create `image/text` element after `caller()`.
 Nunjucks Files:
 ```nunjucks
@@ -239,8 +233,7 @@ Output:
 ```
 
 #### options
-**alt**
-
+######alt
 Set image alt.
 Nunjucks Files:
 ```nunjucks
@@ -257,8 +250,7 @@ Output:
 </div>
 ```
 
-**width**
-
+######width
 Set image width.
 Nunjucks Files:
 ```nunjucks
@@ -275,8 +267,7 @@ Output:
 </div>
 ```
 
-**height**
-
+######height
 Set image height.
 Nunjucks Files:
 ```nunjucks
@@ -293,8 +284,7 @@ Output:
 </div>
 ```
 
-**tag**
-
+######tag
 Set element tag.
 Nunjucks Files:
 ```nunjucks
@@ -311,8 +301,7 @@ Output:
 </div>
 ```
 
-**href**
-
+######href
 Set element href if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -329,8 +318,7 @@ Output:
 </div>
 ```
 
-**target**
-
+######target
 Set element target if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -347,8 +335,7 @@ Output:
 </div>
 ```
 
-**align**
-
+######align
 Add align modifier class.<br/>
 Nunjucks Files:
 ```nunjucks
@@ -365,8 +352,7 @@ Output:
 </div>
 ```
 
-**background**
-
+######background
 Set image to background if imageText--inside<br/>
 Nunjucks Files:
 ```nunjucks
@@ -445,8 +431,7 @@ Output:
 ```
 
 #### options
-**tag**
-
+######tag
 Set element tag.
 Nunjucks Files:
 ```nunjucks
@@ -461,8 +446,7 @@ Output:
 </div>
 ```
 
-**href**
-
+######href
 Set element href if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -477,8 +461,7 @@ Output:
 </div>
 ```
 
-**target**
-
+######target
 Set element target if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -493,8 +476,7 @@ Output:
 </div>
 ```
 
-**align**
-
+######align
 Add align modifier class.<br/>
 Nunjucks Files:
 ```nunjucks
@@ -587,8 +569,7 @@ Output:
 ```
 
 #### options
-**tag**
-
+######tag
 Set element tag.
 Nunjucks Files:
 ```nunjucks
@@ -607,8 +588,7 @@ Output:
 </div>
 ```
 
-**href**
-
+######href
 Set element href if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -627,8 +607,7 @@ Output:
 </div>
 ```
 
-**target**
-
+######target
 Set element target if tag = 'a'.
 Nunjucks Files:
 ```nunjucks
@@ -778,8 +757,7 @@ Output:
 <div class="imageText" data-text="xxx">Image Text</div>
 ```
 
-**Set tag**
-
+######Set tag
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -792,8 +770,7 @@ Output:
 <button class="imageText">Image Text</button>
 ```
 
-**Set href if tag = 'a'**
-
+######Set href if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -806,8 +783,7 @@ Output:
 <a class="imageText" href="#">Image Text</a>
 ```
 
-**Set target if tag = 'a'**
-
+######Set target if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -820,8 +796,7 @@ Output:
 <a class="imageText" href="javascript:;" target="_blank">Image Text</a>
 ```
 
-**Set modifier style class by array**
-
+######Set modifier style class by array
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -834,7 +809,7 @@ Output:
 <div class="imageText imageText--center imageText--horizontal">Image Text</div>
 ```
 
-**Call `imageText/itemGenerator` to auto create `image/text` element before `{{>**
+######Call `imageText/itemGenerator` to auto create `image/text` element before `{{>**
  @partial-block }}`.
 Handlebars Files:
 ```handlebars
@@ -862,7 +837,7 @@ Output:
 </div>
 ```
 
-**Call `imageText/itemGenerator` to auto create `image/text` element after `{{>**
+######Call `imageText/itemGenerator` to auto create `image/text` element after `{{>**
  @partial-block }}`.
 Handlebars Files:
 ```handlebars
@@ -975,8 +950,7 @@ Output:
 </div>
 ```
 
-**Set alt**
-
+######Set alt
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -995,8 +969,7 @@ Output:
 </div>
 ```
 
-**Set width**
-
+######Set width
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1015,8 +988,7 @@ Output:
 </div>
 ```
 
-**Set height**
-
+######Set height
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1035,8 +1007,7 @@ Output:
 </div>
 ```
 
-**Set tag**
-
+######Set tag
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1055,8 +1026,7 @@ Output:
 </div>
 ```
 
-**Set href if tag = 'a'**
-
+######Set href if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1075,8 +1045,7 @@ Output:
 </div>
 ```
 
-**Set target if tag = 'a'**
-
+######Set target if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1095,8 +1064,7 @@ Output:
 </div>
 ```
 
-**Set align modifier class**
-
+######Set align modifier class
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1115,8 +1083,7 @@ Output:
 </div>
 ```
 
-**Set image to background if imageText--inside**
-
+######Set image to background if imageText--inside
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1197,8 +1164,7 @@ Output:
 </div>
 ```
 
-**Set tag**
-
+######Set tag
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1215,8 +1181,7 @@ Output:
 </div>
 ```
 
-**Set href if tag = 'a'**
-
+######Set href if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1233,8 +1198,7 @@ Output:
 </div>
 ```
 
-**Set target if tag = 'a'**
-
+######Set target if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1251,8 +1215,7 @@ Output:
 </div>
 ```
 
-**Set align modifier class**
-
+######Set align modifier class
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1346,8 +1309,7 @@ Output:
 </div>
 ```
 
-**Set tag**
-
+######Set tag
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1368,8 +1330,7 @@ Output:
 </div>
 ```
 
-**Set href if tag = 'a'**
-
+######Set href if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1390,8 +1351,7 @@ Output:
 </div>
 ```
 
-**Set target if tag = 'a'**
-
+######Set target if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1525,8 +1485,7 @@ Output:
 </div>
 ```
 
-**Set tag**
-
+######Set tag
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1547,8 +1506,7 @@ Output:
 </div>
 ```
 
-**Set href if tag = 'a'**
-
+######Set href if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1569,8 +1527,7 @@ Output:
 </div>
 ```
 
-**Set target if tag = 'a'**
-
+######Set target if tag = 'a'
 Handlebars Files:
 ```handlebars
 {{#setVal}}
@@ -1609,8 +1566,7 @@ SCSS Files:
 Output:
 `.imageText`, `.imageText--horizontal`, `.imageText--inline`, `.imageText--inside`, `.imageText--center`, `.imageText--right`, `.imageText--middle`, `.imageText--bottom` style
 
-**$defaultType**
-
+######$defaultType
 - `.imageText` default style
 - `"vertical" | "horizontal" | "inline" | "inside"`
 - default `$imageText-default-type: "vertical";`
@@ -1621,8 +1577,7 @@ SCSS Files:
 Output:
 `.imageText`, `.imageText--vertical`, `.imageText--inline`, `.imageText--inside`, `.imageText--center`, `.imageText--right`, `.imageText--middle`, `.imageText--bottom` style
 
-**$defaultOnly**
-
+######$defaultOnly
 - only create default type style
 - default `$imageText-default-only: false;`
 SCSS Files:
@@ -1632,8 +1587,7 @@ SCSS Files:
 Output:
 `.imageText`, `.imageText--center`, `.imageText--right` style
 
-**Add Custom Style**
-
+######Add Custom Style
 SCSS Files:
 ```scss
 @include imageText() {
@@ -1663,8 +1617,7 @@ SCSS Files:
 Output:
 `.imageText`, `.imageText--center`, `.imageText--right` style, without `.imageText__text` and `.imageText__image` reset style.
 
-**$ele**
-
+######$ele
 - `#{$ele}.imageText`
 - default `""`
 SCSS Files:
@@ -1674,8 +1627,7 @@ SCSS Files:
 Output:
 `.test.imageText`, `.test.imageText--center`, `.test.imageText--right` style
 
-**$modifier**
-
+######$modifier
 - `.imageText#{$modifier}`
 - default `""`
 SCSS Files:
@@ -1685,8 +1637,7 @@ SCSS Files:
 Output:
 `.imageText--custom`, `.imageText--custom.imageText--center`, `.imageText--custom.imageText--right` style
 
-**$itemStyle**
-
+######$itemStyle
 - `.imageText__text` and `.imageText__image` reset style
 - default `false`
 SCSS Files:
@@ -1696,8 +1647,7 @@ SCSS Files:
 Output:
 `.imageText`, `.imageText--center`, `.imageText--right` style, with `.imageText__text` and `.imageText__image` reset style.
 
-**Add Custom Style**
-
+######Add Custom Style
 SCSS Files:
 ```scss
 @include vertical-imageText() {
@@ -1719,8 +1669,7 @@ Output:
 ```
 
 #### Set Responsive Style
-**Default type only**
-
+######Default type only
 SCSS Files:
 ```scss
 @include imageText($defaultOnly: true);  // default style of type vertical
@@ -1729,8 +1678,7 @@ SCSS Files:
     @include horizontal-imageText();
 }
 ```
-**Multi type**
-
+######Multi type
 SCSS Files:
 ```scss
 @include imageText();  // create all type style
