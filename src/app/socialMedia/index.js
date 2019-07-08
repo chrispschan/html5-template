@@ -23,10 +23,6 @@ export default class SocialMedia {
                 url: 'https://www.facebook.com/sharer/sharer.php',
                 href: 'u'
             },
-            google: {   // google+
-                url: 'https://plus.google.com/share',
-                href: 'url'
-            },
             line: {   // line
                 url: 'https://social-plugins.line.me/lineit/share',
                 href: 'url'

@@ -21,6 +21,12 @@ Run command line:
 gulp
 ```
 
+### Start [Storybook](https://storybook.js.org/)
+Run command line:
+```cmd
+npm run storybook
+```
+
 ### Unit Test (Jasmine)
 Run jasmine unit test case (`./src/app/*.spec.js` & `./src/js/*.spec.js`)
 Run command line:

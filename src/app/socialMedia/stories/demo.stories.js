@@ -6,14 +6,11 @@ import { withRunScript } from 'storybook-addon-run-script/html';
 
 import htmlCode from './demo.stories.html';
 import nunjucksCode from '!!raw-loader!./demo.stories.html';
-import scssCode from '!!raw-loader!./demo.stories.scss';
 import jsCode from '!!raw-loader!./demo.stories.function.js';
-
-import styleCode from '!!raw-loader!sass-loader!./demo.stories.scss';
 
 import script from 'raw-loader!./demo.stories.function.js';
 
-storiesOf('scrollTo', module)
+storiesOf('socialMedia', module)
   .addParameters({
     readme: {
       sidebar: ``
@@ -30,14 +27,9 @@ storiesOf('scrollTo', module)
     code: htmlCode
   }))
   .addDecorator(withCode({
-    type: 'sass',
-    label: 'scss',
-    code: scssCode
-  }))
-  .addDecorator(withCode({
     type: 'js',
     label: 'es6',
     code: jsCode
   }))
   .addDecorator(withRunScript(script))
-  .add('Demo', () => `<style type="text/css">${styleCode}</style>${htmlCode}`);
+  .add('Demo', () => `${htmlCode}`);
