@@ -4,11 +4,8 @@ import { storiesOf } from '@storybook/html';
 import withCode from 'storybook-addon-code-improved';
 
 import htmlCode from './fontSize.stories.html?font=./src/app/common/fontSize.variables.scss&reset=./src/app/common/reset/font.variables.scss';
-import ResetVariablesCode from '!!raw-loader!./reset/font.variables.scss';
-import variablesCode from '!!raw-loader!./fontSize.variables.scss';
-import readmeCode from '../deepLink/README.md';
-
-console.log(readmeCode);
+import ResetVariablesCode from '!!raw-loader!./../reset/font.variables.scss';
+import variablesCode from '!!raw-loader!./../fontSize.variables.scss';
 
 storiesOf('Common/Typography', module)
   .addParameters({

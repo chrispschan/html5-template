@@ -3,19 +3,19 @@ import { storiesOf } from '@storybook/html';
 
 import withCode from 'storybook-addon-code-improved';
 
-import htmlCode from './inlineTextElements.stories.html';
-import ResetVariablesCode from '!!raw-loader!./reset/link.variables.scss';
+import htmlCode from './table.stories.html';
+import ResetVariablesCode from '!!raw-loader!./../reset/table.variables.scss';
 
-storiesOf('Common/Typography', module)
+storiesOf('Common', module)
   .addParameters({
     readme: {
       sidebar: `<h4>SCSS Variables</h4>
         <ul>
-        <li>src/app/common/reset/link.variables.scss</li>
+        <li>src/app/common/reset/table.variables.scss</li>
         </ul>
         <h4>SCSS Mixin</h4>
         <ul>
-        <li>src/app/common/reset/link.reset.scss</li>
+        <li>src/app/common/reset/table.reset.scss</li>
         </ul>`
     }
   })
@@ -24,4 +24,4 @@ storiesOf('Common/Typography', module)
     label: 'variables',
     code: ResetVariablesCode
   }))
-  .add('Inline Text Elements', () => htmlCode);
+  .add('Table', () => htmlCode);

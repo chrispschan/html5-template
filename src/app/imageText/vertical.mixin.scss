@@ -37,6 +37,15 @@
             @include vertical-imageText-item($itemStyle);
             @include imageText-text-align();
             @include vertical-imageText-item-align();
+
+            &.imageText {
+                &--center,
+                &--right {
+                    .imageText {
+                        @include vertical-imageText-item-align();
+                    }
+                }
+            }
         } @else {
             .imageText {
                 @include reset-imageText--inside();

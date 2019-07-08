@@ -38,18 +38,30 @@
             @include reset-imageText--inside();
             @include horizontal-imageText-item($itemStyle);
             @include imageText-vertical-align();
+            @include imageText-horizontal-align();
             @include horizontal-imageText-item-align();
             @if ($textAlign) {
                 @include imageText-text-align();
+            }
+
+            &.imageText {
+                &--middle,
+                &--bottom {
+                    .imageText {
+                        @include horizontal-imageText-item-align();
+                    }
+                }
             }
         } @else {
             .imageText {
                 @include reset-imageText--inside();
                 @include horizontal-imageText-item($itemStyle);
+                @include horizontal-imageText-item-align();
             }
 
             &.imageText {
                 @include imageText-vertical-align();
+                @include imageText-horizontal-align();
                 @if ($textAlign) {
                     @include imageText-text-align();
                 }

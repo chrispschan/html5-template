@@ -1,0 +1,8 @@
+@import '../imageText.mixin.scss';
+
+@include imageText() {
+  &--inside {
+    min-height: 300px;
+    background-color: #eeeeee;
+  }
+};

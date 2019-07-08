@@ -21,6 +21,9 @@ addParameters({
     url: '#',
     showPanel: true,
     panelPosition: 'bottom',
+  },
+  readme: {
+    codeTheme: 'github'
   }
 });
 

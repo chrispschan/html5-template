@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/html';
 import withCode from 'storybook-addon-code-improved';
 
 import htmlCode from './inputField.stories.html';
-import ResetVariablesCode from '!!raw-loader!./reset/input.variables.scss';
+import ResetVariablesCode from '!!raw-loader!./../reset/input.variables.scss';
 
 storiesOf('Common/Form', module)
   .addParameters({

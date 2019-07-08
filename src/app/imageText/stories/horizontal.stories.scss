@@ -1,0 +1,18 @@
+@import '../imageText.mixin.scss';
+
+@include imageText() {
+  &--horizontal {
+    .imageText {
+      &__image,
+      &__text {
+        width: 50%;
+      }
+
+      &__image {
+        &__item {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+};
