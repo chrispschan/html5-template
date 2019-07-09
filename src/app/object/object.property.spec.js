@@ -1,12 +1,12 @@
 import 'object/object.property';
 
 describe('object.property.js', function () {
-    describe('Object.assign', function () {
-        describe('Object.assign({a: 1}, {b: 2})', function () {
+    describe('Object.deepAssign', function () {
+        describe('Object.deepAssign({a: 1}, {b: 2})', function () {
             it(`should return {a: 1, b: 2} and deep clone`, function () {
                 let obj1 = {a: 1},
                     obj2 = {b: 2},
-                    obj3 = Object.assign(obj1, obj2);
+                    obj3 = Object.deepAssign(obj1, obj2);
 
                 expect(obj3.a).toBe(1);
                 expect(obj3.b).toBe(2);
@@ -24,12 +24,12 @@ describe('object.property.js', function () {
             });
         });
 
-        describe('Object.assign({a: 1, b: 2}, {b: 4, c: 5}, {b: 10})', function () {
+        describe('Object.deepAssign({a: 1, b: 2}, {b: 4, c: 5}, {b: 10})', function () {
             it(`should return {a: 1, b: 10, c: 5} and deep clone`, function () {
                 let obj1 = {a: 1, b: 2},
                     obj2 = {b: 4, c: 5},
                     obj3 = {b: 10},
-                    obj4 = Object.assign(obj1, obj2, obj3);
+                    obj4 = Object.deepAssign(obj1, obj2, obj3);
 
                 expect(obj4.a).toBe(1);
                 expect(obj4.b).toBe(10);
@@ -45,11 +45,11 @@ describe('object.property.js', function () {
             });
         });
 
-        describe('Object.assign({a: 1, b: {a: 2, b: 3}}, {b: {b: 4, c: 5}, c: 6})', function () {
+        describe('Object.deepAssign({a: 1, b: {a: 2, b: 3}}, {b: {b: 4, c: 5}, c: 6})', function () {
             it(`should return {a: 1, b: {a: 2, b: 4, c: 5}, c: 6} and deep clone`, function () {
                 let obj1 = {a: 1, b: {a: 2, b: 3}},
                     obj2 = {b: {b: 4, c: 5}, c: 6},
-                    obj3 = Object.assign(obj1, obj2);
+                    obj3 = Object.deepAssign(obj1, obj2);
 
                 expect(obj3.a).toBe(1);
                 expect(obj3.b.a).toBe(2);
@@ -66,11 +66,11 @@ describe('object.property.js', function () {
             });
         });
 
-        describe('Object.assign({a: 1, b: [2]}, {b: [3, 4], c: 5})', function () {
+        describe('Object.deepAssign({a: 1, b: [2]}, {b: [3, 4], c: 5})', function () {
             it(`should return {a: 1, b: [3, 4], c: 6} and deep clone`, function () {
                 let obj1 = {a: 1, b: [2]},
                     obj2 = {b: [3, 4], c: 5},
-                    obj3 = Object.assign(obj1, obj2);
+                    obj3 = Object.deepAssign(obj1, obj2);
 
                 expect(obj3.a).toBe(1);
                 expect(obj3.b[0]).toBe(3);
@@ -86,11 +86,11 @@ describe('object.property.js', function () {
             });
         });
 
-        describe('Object.assign({a: 1, b: {a: 2}}, {b: [{a: 3}, {b: 4}], c: 5})', function () {
+        describe('Object.deepAssign({a: 1, b: {a: 2}}, {b: [{a: 3}, {b: 4}], c: 5})', function () {
             it(`should return {a: 1, b: [{a: 3}, {b: 4}], c: 6} and deep clone`, function () {
                 let obj1 = {a: 1, b: {a: 2}},
                     obj2 = {b: [{a: 3}, {b: 4}], c: 5},
-                    obj3 = Object.assign(obj1, obj2);
+                    obj3 = Object.deepAssign(obj1, obj2);
 
                 expect(obj3.a).toBe(1);
                 expect(obj3.b[0].a).toBe(3);

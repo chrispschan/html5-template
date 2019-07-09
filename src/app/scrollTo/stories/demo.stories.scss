@@ -1,0 +1,18 @@
+.demoEle {
+  height: 300px;
+
+  &:nth-child(odd) {
+    background: #eeeeee;
+  }
+}
+
+.demoPanel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}

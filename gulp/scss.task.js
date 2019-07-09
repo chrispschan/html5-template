@@ -7,7 +7,7 @@ import watch from 'gulp-watch';
 import gulpOptions from './../gulp.options.js';
 
 const watchFiles = {
-        scss: gulpOptions.watchAppFolder ? ['./src/css/**/*.scss', './src/app/**/*.scss', '!./src/css/**/_*.scss', '!./src/app/**/_*.scss'] : ['./src/css/**/*.scss', '!./src/css/**/_*.scss']
+        scss: gulpOptions.watchAppFolder ? ['./src/css/**/*.scss', './src/app/**/*.scss', '!./src/css/**/_*.scss', '!./src/app/**/_*.scss', '!./src/app/**/*.stories.*'] : ['./src/css/**/*.scss', '!./src/css/**/_*.scss']
     },
     buildFiles = {
         scss: ['./src/css/**/*.scss', '!./src/css/**/_*.scss']

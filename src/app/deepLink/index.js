@@ -23,7 +23,7 @@ export default class DeepLink {
 
         this._deepLinkEle = [];
 
-        this._options = Object.assign({
+        this._options = Object.deepAssign({
             delay: 300,
             windows: {
                 support: false
@@ -70,14 +70,14 @@ export default class DeepLink {
     }
 
     addDeepLink (ele = '.deepLink', options = {}) {
-        let _options = Object.assign(this._options, options),
+        let _options = Object.deepAssign(this._options, options),
             _ele = document.querySelectorAll(ele),
             _self = this,
             _selfOptions = {};
 
         if (this._os !== 'other') {
             for (let i = 0; i < _ele.length; i++) {
-                _selfOptions = Object.assign({}, _options);
+                _selfOptions = Object.deepAssign({}, _options);
 
                 _ele[i].getDataset();
 
@@ -110,7 +110,7 @@ export default class DeepLink {
 
                     _selfOptions.store = this._getStore(_selfOptions);
 
-                    _ele[i].deepLinkOptions = Object.assign({}, _selfOptions);
+                    _ele[i].deepLinkOptions = Object.deepAssign({}, _selfOptions);
 
                     _ele[i].onclick = function (event) {
                         event.preventDefault();
@@ -130,7 +130,7 @@ export default class DeepLink {
     }
 
     call (options = {}, onLoadOpen = false) {
-        let _options = Object.assign(this._options, options),
+        let _options = Object.deepAssign(this._options, options),
             _delay = onLoadOpen && this._os === 'android' ? 500 : 0;
 
         if (!_options.store) _options.store = this._getStore(_options);
@@ -140,7 +140,7 @@ export default class DeepLink {
         return setTimeout(() => {
             let _start = new Date().getTime();
             if (_options[this._os].support) {
-                if (!_options.deepLink) {
+                if (_options.deepLink) {
                     let _timeout = setTimeout(() => {
                         // Get current time
                         let _now = new Date().getTime();
@@ -148,8 +148,7 @@ export default class DeepLink {
                         // clear timeout
                         clearTimeout(_timeout);
 
-                        // Has the user left the screen? ABORT!
-                        if (_now - _start >= _options.delay * 2) return;
+                        if (_now - _start >= _options.delay) return;
 
                         // Open store or original link
                         window.location = _options.store;

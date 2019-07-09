@@ -80,16 +80,29 @@
 
     {%- for key, item in items | arr2obj -%}
         {%- if item.type === 'image' -%}
-            {{ image(
-                id=item.id, 
-                class=item.class,
-                src=(item.src | findContent("", options.lang))[0],
-                dataset=item.dataset,
-                options=options | assignObj([
-                    {tag: itemTag}, 
-                    item.options
-                ])
-            ) }}
+            {%- if item.src | typeof("object") -%}
+                {{ image(
+                    id=item.id, 
+                    class=item.class,
+                    src=(item.src | findContent("", options.lang))[0],
+                    dataset=item.dataset,
+                    options=options | assignObj([
+                        {tag: itemTag}, 
+                        item.options
+                    ])
+                ) }}
+            {%- else -%}
+                {{ image(
+                    id=item.id, 
+                    class=item.class,
+                    src=item.src,
+                    dataset=item.dataset,
+                    options=options | assignObj([
+                        {tag: itemTag}, 
+                        item.options
+                    ])
+                ) }}
+            {%- endif -%}
         {%- else -%}
             {% call text(
                 id=item.id,

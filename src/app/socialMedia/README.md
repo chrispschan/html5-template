@@ -99,7 +99,7 @@ Set dataset value.<br/>
 If need set `data-text`<br/>
 Nunjucks Files:
 ```nunjucks
-{% call socialMedia(dataset: {text: 'share'}) -%}Share{%- endcall %}
+{% call socialMedia(dataset={text: 'share'}) -%}Share{%- endcall %}
 ```
 Output:
 ```html

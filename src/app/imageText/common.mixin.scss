@@ -1,4 +1,4 @@
-@import "imageText.default.scss";
+@import "imageText.variables.scss";
 
 @mixin imageText-text-align() {
     &--center {
@@ -62,6 +62,25 @@
             }
         }
 
+        &--left {
+            margin-left: 0;
+            margin-right: auto;
+
+            text-align: left;
+
+            .imageText {
+                &__image,
+                &__text {
+                    &__item {
+                        margin-left: 0;
+                        margin-right: auto;
+
+                        text-align: left;
+                    }
+                }
+            }
+        }
+
         &--right {
             margin-left: auto;
             margin-right: 0;
@@ -83,15 +102,31 @@
     }
 }
 
-@mixin imageText-vertical-align() {
+@mixin imageText-horizontal-align() {
     &--center {
         margin-left: auto;
+        margin-right: auto;
+    }
+
+    &--left {
+        margin-left: 0;
         margin-right: auto;
     }
 
     &--right {
         margin-left: auto;
         margin-right: 0;
+    }
+}
+
+@mixin imageText-vertical-align() {
+    &--top {
+        .imageText {
+            &__image,
+            &__text {
+                vertical-align: top;
+            }
+        }
     }
 
     &--middle {
@@ -116,6 +151,10 @@
 @mixin horizontal-imageText-item-align() {
     &__image,
     &__text {
+        &--top {
+            vertical-align: top;
+        }
+
         &--middle {
             vertical-align: middle;
         }

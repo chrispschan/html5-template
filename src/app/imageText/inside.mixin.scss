@@ -1,6 +1,6 @@
 @import "common.mixin.scss";
 
-@import "imageText.default.scss";
+@import "imageText.variables.scss";
 
 @mixin inside-imageText-image-align($x: "center", $y: "center") {
     .imageText {
@@ -83,8 +83,8 @@
     @include inside-imageText-image-align-modifier($modifier: "background-center-top", $x: "center", $y: "top");
     @include inside-imageText-image-align-modifier($modifier: "background-center-bottom", $x: "center", $y: "bottom");
     @include inside-imageText-image-align-modifier($modifier: "background-right-top", $x: "right", $y: "top");
-    @include inside-imageText-image-align-modifier($modifier: "background-right-top", $x: "right", $y: "center");
-    @include inside-imageText-image-align-modifier($modifier: "background-right-top", $x: "right", $y: "bottom");
+    @include inside-imageText-image-align-modifier($modifier: "background-right-center", $x: "right", $y: "center");
+    @include inside-imageText-image-align-modifier($modifier: "background-right-bottom", $x: "right", $y: "bottom");
 
     &--cover {
         .imageText {
@@ -118,6 +118,10 @@
                 }
             }
         }
+    }
+
+    &--text-top {
+        justify-content: flex-start;
     }
 
     &--text-center {
@@ -190,9 +194,9 @@
 
         flex-direction: column;
 
-        overflow: hidden;
-
         justify-content: flex-start;
+
+        overflow: hidden;
 
         padding: $imageText-inside-padding;
 
@@ -201,9 +205,19 @@
             @include inside-imageText-image-align($x: "center", $y: "center");
             @include imageText-text-align();
             @include vertical-imageText-item-align();
+
+            &.imageText {
+                &--center,
+                &--right {
+                    .imageText {
+                        @include vertical-imageText-item-align();
+                    }
+                }
+            }
         } @else {
             .imageText {
                 @include inside-imageText-item($itemStyle);
+                @include vertical-imageText-item-align();
             }
             @include inside-imageText-image-align($x: "center", $y: "center");
 

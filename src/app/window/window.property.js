@@ -43,7 +43,7 @@ window.location.setParameter = function (parameter = {}, url) {
         _url = _url.substr(0, _url.indexOf('?') + 1);
 
     if (typeof parameter === 'object')
-        _parameter = Object.assign(_parameter, parameter);
+        _parameter = Object.deepAssign(_parameter, parameter);
 
     if (_url[_url.length - 1] !== '&' && _url[_url.length - 1] !== '?')
         _url += '&';

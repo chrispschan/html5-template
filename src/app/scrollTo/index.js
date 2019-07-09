@@ -19,6 +19,14 @@ export default function ScrollTo (element, to, duration = 100) {
             }
         };
 
+        if (typeof duration !== 'number')
+            duration = parseInt(duration);
+        
+        if (duration < increment)
+            duration = increment;
+        else if (duration % increment !== 0)
+            duration += (duration % increment);
+        
         if (typeof to === 'number') change = to - start;
         else if (typeof to === 'string') {
             let _ele = document.querySelectorAll(to);

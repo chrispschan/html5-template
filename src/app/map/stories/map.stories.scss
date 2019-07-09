@@ -1,0 +1,7 @@
+@import '../map.mixin.scss';
+
+@include map();
+
+.demoMap {
+  max-width: 640px;
+}

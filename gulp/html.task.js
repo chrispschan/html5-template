@@ -16,8 +16,8 @@ const watchFiles = {
         serve: gulpOptions.server.root,
         hb: './src/app/**/*.{hbs,handlebars}',    // handlebars partials
         nunjucks: ['./src/app/'],    // nunjucks partials
-        handlebars: gulpOptions.watchAppFolder ? ['./src/html/**/*.handlebars', './src/html/**/*.hbs', './src/app/**/*.handlebars', './src/app/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs', '!./src/app/**/_*.handlebars', '!./src/app/**/_*.hbs'] : ['./src/html/**/*.handlebars', './src/html/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs'],
-        html: gulpOptions.watchAppFolder ? ['./src/html/**/*.html', './src/app/**/*.html', '!./src/html/**/_*.html', '!./src/app/**/_*.html'] : ['./src/html/**/*.html', '!./src/html/**/_*.html'],
+        handlebars: gulpOptions.watchAppFolder ? ['./src/html/**/*.handlebars', './src/html/**/*.hbs', './src/app/**/*.handlebars', './src/app/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs', '!./src/app/**/_*.handlebars', '!./src/app/**/_*.hbs', '!./src/app/**/*.stories.*'] : ['./src/html/**/*.handlebars', './src/html/**/*.hbs', '!./src/html/**/_*.handlebars', '!./src/html/**/_*.hbs'],
+        html: gulpOptions.watchAppFolder ? ['./src/html/**/*.html', './src/app/**/*.html', '!./src/html/**/_*.html', '!./src/app/**/_*.html', '!./src/app/**/*.stories.*'] : ['./src/html/**/*.html', '!./src/html/**/_*.html'],
         content: ['./src/data/**/*.json', '!./src/data/**/_*.json']    // html content json
     },
     buildFiles = {

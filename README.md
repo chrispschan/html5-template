@@ -21,6 +21,12 @@ Run command line:
 gulp
 ```
 
+### Start [Storybook](https://storybook.js.org/)
+Run command line:
+```cmd
+npm run storybook
+```
+
 ### Unit Test (Jasmine)
 Run jasmine unit test case (`./src/app/*.spec.js` & `./src/js/*.spec.js`)
 Run command line:
@@ -89,7 +95,7 @@ Default: `true`
 #### gulpOptions.htmlTemplate
 Ues whilch tool to build html files.<br/>
 Vaule: `'hb' | 'nunjucks'`<br/>
-Default: `'hb'`
+Default: `'nunjucks'`
 
 #### gulpOptions.htmlbeautify
 [gulp-html-beautify](https://www.npmjs.com/package/gulp-html-beautify) options.

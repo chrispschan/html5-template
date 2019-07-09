@@ -1,0 +1,32 @@
+{%- set regExpComment = r/comment/g -%}
+{%- set regExpList = r/-fullList/g -%}
+<div class="innerWrapper">
+  <h1>Color</h1>
+
+  <table width="100%">
+    <thead>
+      <tr>
+        <th width="20"></th>
+        <th>Color Code</th>
+        <th>SCSS variable</th>
+        <th>Text class</th>
+        <th>Background class</th>
+        <th>Border class</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for color, data in content.color -%}
+        {%- if not regExpComment.test(color) and not regExpList.test(color) %}
+          <tr>
+            <td class="{{color}}-background"></td>
+            <td>{{ data.value }}</td>
+            <td>${{ color }}</td>
+            <td>.{{ color }}</td>
+            <td>.{{ color }}-background</td>
+            <td>.{{ color }}-border</td>
+          </tr>
+        {%- endif %}
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>

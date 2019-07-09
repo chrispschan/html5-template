@@ -1,0 +1,28 @@
+{% set socials = [
+  "buffer",
+  "digg",
+  "facebook",
+  "line",
+  "linkedIn",
+  "reddit",
+  "stumbleUpon",
+  "tumblr",
+  "twitter",
+  "vk",
+  "whatsapp",
+  "yummly",
+  "wechat"
+] %}
+
+{%- from "socialMedia/socialMedia.html" import socialMedia -%}
+
+<div class="innerWrapper">
+  {% for social in socials %}
+    <p>{% call socialMedia(
+      href="https://github.com/chrispschan/html5-template",
+      dataset={
+        type: social
+      }
+    ) -%}Share to {{social}}{%- endcall %}</p>
+  {% endfor %}
+</div>
