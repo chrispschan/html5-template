@@ -31,17 +31,5 @@
                 <li>{{- i | safe -}}</li>
             {%- endfor %}
         </ul>
-
-        <div class="innerWrapper">
-          {% call deepLink(href="https://web.whatsapp.com/",
-          options={
-            target: "_blank"
-          },
-          dataset={
-            deepLink: "whatsapp://send?text=Hello",
-            androidId: "com.whatsapp",
-            iosId: "310633997"
-          }) -%}Deeplink{%- endcall %}
-        </div>
     </div>
 {% endblock %}
