@@ -1,0 +1,30 @@
+{%- from "map/map.html" import map -%}
+
+<div class="demoMap">
+  {{ map() }}
+</div>
+
+<div>
+  <label for="mapZoom">Zoom:</label>
+  <input id="mapZoom" type="number" value="10" />
+</div>
+<div>
+  <label for="mapCenterLat">Lat:</label>
+  <input id="mapCenterLat" type="number" value="22.28552" />
+</div>
+<div>
+  <label for="mapCenterLng">Lng:</label>
+  <input id="mapCenterLng" type="number" value="114.15769" />
+</div>
+<div>
+  <label for="mapPanTo">Pan to animation:</label>
+  <input id="mapPanTo" type="checkbox" value="panTo" />
+</div>
+  
+<button onclick="setZoom()">Set Zoom</button>
+
+<button onclick="getZoom()">Get Zoom</button>
+
+<button onclick="setCenter()">Set Center</button>
+
+<button onclick="getCenter()">Get Center</button>

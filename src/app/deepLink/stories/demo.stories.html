@@ -1,7 +1,7 @@
 {%- from "deepLink/deepLink.html" import deepLink -%}
 
 <div class="innerWrapper">
-  {% call deepLink(href="https://web.whatsapp.com/",
+  {%- call deepLink(href="https://web.whatsapp.com/",
   options={
     target: "_blank"
   },
@@ -9,5 +9,5 @@
     deepLink: "whatsapp://send?text=Hello",
     androidId: "com.whatsapp",
     iosId: "310633997"
-  }) -%}Whatsapp Deeplink{%- endcall %}
+  }) -%}Whatsapp Deeplink{%- endcall -%}
 </div>

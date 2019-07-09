@@ -1,0 +1,52 @@
+{%- from "map/map.html" import map -%}
+
+<div class="demoMap">
+  {{ map() }}
+</div>
+<div>
+  <label for="mapLayer">Layer:</label>
+  <input id="mapLayer" type="number" value="0" />
+</div>
+<div>
+  <label for="mapLayerShow">Show Layer:</label>
+  <input id="mapLayerShow" type="checkbox" checked="true" value="show" />
+</div>
+<div>
+  <label for="mapLayerRemove">Remove Layer:</label>
+  <input id="mapLayerRemove" type="checkbox" value="remove" />
+</div>
+<button onclick="toggleLayer()">Toggle Layer</button>
+
+<div>
+  <label for="mapCenterLat">Find Lat:</label>
+  <input id="mapCenterLat" type="number" value="22.28552" />
+</div>
+<div>
+  <label for="mapCenterLng">Find Lng:</label>
+  <input id="mapCenterLng" type="number" value="114.15769" />
+</div>
+<div>
+  <label for="mapRadius">Find Radius(km):</label>
+  <input id="mapRadius" type="number" value="1" />
+</div>
+<div>
+  <label for="mapFindLayer">Find Layer:</label>
+  <input id="mapFindLayer" type="number" value="-1" />
+</div>
+<button onclick="getCenter()">Get Center</button>
+  <button onclick="getMarkers()">Get All Markers</button>
+<button onclick="nearMarkers()">Find Markers</button>
+
+<div>
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>markerId</th>
+        <th>layer</th>
+        <th>lat</th>
+        <th>lng</th>
+      </tr>
+    </thead>
+    <tbody id="mapMarkers"></tbody>
+  </table>
+</div>
