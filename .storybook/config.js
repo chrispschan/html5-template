@@ -6,9 +6,10 @@ import { withA11y } from '@storybook/addon-a11y';
 import './../src/css/style.scss';
 
 // automatically import all files ending in *.stories.js
-const req = require.context('../src/app', true, /^(?!_.*\.stories\.js).*\.stories\.js$/);
+const req = require.context('../src/app', true, /^(?!.*_.*\.stories\.js).*\.stories\.js$/);
+
 function loadStories() {
-  req.keys().sort().forEach(filename => req(filename));
+  req.keys().sort().forEach((filename) => req(filename));
 }
 
 addDecorator(addReadme);

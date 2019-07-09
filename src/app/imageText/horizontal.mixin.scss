@@ -1,6 +1,6 @@
 @import "common.mixin.scss";
 
-@import "imageText.default.scss";
+@import "imageText.variables.scss";
 
 @mixin horizontal-imageText-item($itemStyle: false) {
     &__image,

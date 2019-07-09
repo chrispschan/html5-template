@@ -1,6 +1,6 @@
 @import "common.mixin.scss";
 
-@import "imageText.default.scss";
+@import "imageText.variables.scss";
 
 @mixin inside-imageText-image-align($x: "center", $y: "center") {
     .imageText {

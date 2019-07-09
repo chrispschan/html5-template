@@ -6,7 +6,7 @@ import withCode from 'storybook-addon-code-improved';
 import htmlCode from './horizontal.bottom.stories.html';
 import nunjucksCode from '!!raw-loader!./horizontal.bottom.stories.html';
 import scssCode from '!!raw-loader!./horizontal.stories.scss';
-import defaultVariablesCode from '!!raw-loader!../imageText.default.scss';
+import defaultVariablesCode from '!!raw-loader!../imageText.variables.scss';
 
 import styleCode from '!!raw-loader!sass-loader!./horizontal.stories.scss';
 

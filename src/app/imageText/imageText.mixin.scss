@@ -4,7 +4,7 @@
 @import "inline.mixin.scss";
 @import "inside.mixin.scss";
 
-@import "imageText.default.scss";
+@import "imageText.variables.scss";
 
 @mixin imageText($defaultType: $imageText-default-type, $defaultOnly: $imageText-default-only) {
     @if ($defaultType == "horizontal") {

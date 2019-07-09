@@ -6,7 +6,7 @@ import withCode from 'storybook-addon-code-improved';
 import htmlCode from './inside.textBottom.stories.html';
 import nunjucksCode from '!!raw-loader!./inside.textBottom.stories.html';
 import scssCode from '!!raw-loader!./inside.stories.scss';
-import defaultVariablesCode from '!!raw-loader!../imageText.default.scss';
+import defaultVariablesCode from '!!raw-loader!../imageText.variables.scss';
 
 import styleCode from '!!raw-loader!sass-loader!./inside.stories.scss';
 

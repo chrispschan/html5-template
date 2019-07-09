@@ -95,7 +95,7 @@ Default: `true`
 #### gulpOptions.htmlTemplate
 Ues whilch tool to build html files.<br/>
 Vaule: `'hb' | 'nunjucks'`<br/>
-Default: `'hb'`
+Default: `'nunjucks'`
 
 #### gulpOptions.htmlbeautify
 [gulp-html-beautify](https://www.npmjs.com/package/gulp-html-beautify) options.

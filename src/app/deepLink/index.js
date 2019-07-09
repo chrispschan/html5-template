@@ -148,8 +148,7 @@ export default class DeepLink {
                         // clear timeout
                         clearTimeout(_timeout);
 
-                        // Has the user left the screen? ABORT!
-                        if (_now - _start >= _options.delay * 2) return;
+                        if (_now - _start >= _options.delay) return;
 
                         // Open store or original link
                         window.location = _options.store;
