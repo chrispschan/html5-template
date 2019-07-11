@@ -526,9 +526,9 @@ export default class Scrollbar {
     setDisable (isDisable = false, index = -1) {
         if (index === -1) {
             for (let i = 0; i < this._scrollbarEle.length; i++)
-                this._setDisable(this._scrollbarEle[i]);
+                this._setDisable(this._scrollbarEle[i], isDisable);
         } else
-            this._setDisable(this._scrollbarEle[index]);
+            this._setDisable(this._scrollbarEle[index], isDisable);
 
         this.update();
     }
