@@ -147,12 +147,8 @@ export default class Scrollbar {
             _contentEle = document.createElement('DIV'),
             _scrollbarXEle = document.createElement('DIV'),
             _scrollbarXSlide = document.createElement('DIV'),
-            _scrollbarXBtnBack,
-            _scrollbarXBtnNext,
             _scrollbarYEle = document.createElement('DIV'),
             _scrollbarYSlide = document.createElement('DIV'),
-            _scrollbarYBtnBack,
-            _scrollbarYBtnNext,
             _paddingRight,
             _paddingBottom;
 
