@@ -4,8 +4,11 @@ import MutationObserver from 'mutationObserver';
 import ScrollTo from 'scrollTo';
 
 export default class Scrollbar {
-    constructor (scrollbar = '.scrollbar') {
-        this._options = {};
+    constructor (scrollbar = '.scrollbar', options = {}) {
+        this._options = Object.deepAssign({
+            disabledX: false,
+            disabledY: false
+        }, options);
 
         this._scrollbarEle = document.querySelectorAll(scrollbar);
         this._userAgent = /iPhone|iPad|iPod/i;    // fix ios native scrollbar
@@ -25,12 +28,25 @@ export default class Scrollbar {
             _options = Object.deepAssign({ index: i }, self._options);
 
             self._scrollbarEle[i].getDataset();
+            self._scrollbarEle[i].scrollbarOptions = _options;
 
             /*----------  self options from dataset  ----------*/
-            if (typeof self._scrollbarEle[i].dataset === 'object')
-                self._scrollbarEle[i].scrollbarOptions = Object.deepAssign(_options, self._scrollbarEle[i].dataset);
+            if (typeof self._scrollbarEle[i].dataset === 'object') {
+                for (let key in self._scrollbarEle[i].dataset) {
+                    switch (key) {
+                        case 'disabledX':   // true/false value
+                        case 'disabledY':
+                            self._scrollbarEle[i].scrollbarOptions[key] = self._scrollbarEle[i].dataset[key] === 'true';
+                            break;
+                        default:
+                            self._scrollbarEle[i].scrollbarOptions[key] = self._scrollbarEle[i].dataset[key];
+                            break;
+                    }
+                }
+            }
 
             this._cerateScrollbar(self._scrollbarEle[i]);
+            this._setDisable(self._scrollbarEle[i], self._scrollbarEle[i].scrollbarOptions);
             this._checkScrollbar(self._scrollbarEle[i]);
         }
 
@@ -55,58 +71,78 @@ export default class Scrollbar {
             _wrapper,
             _pos,
             _dis,
-            _dir;
+            _dir,
+            _isDisabled;
 
         if (this._mousedownTimer !== null)
             clearTimeout(this._mousedownTimer);
 
         if (scrollbarEle.hasClass('scrollbar__track')) {
-            this._isMouseDown = true;
-            _slide = scrollbarEle.querySelector('.scrollbar__track__slide');
-            _wrapper = scrollbarEle.parentNode.querySelector('.scrollbar__wrapper');
-            
-            if (scrollbarEle.hasClass('scrollbar__track--y')) {
-                if (_slide.offsetTop > mousePos)
-                    _dir = -1;
-                else if (_slide.offsetTop + _slide.offsetHeight < mousePos)
-                    _dir = 1;
-                else {
-                    this._isMouseDown = false;
-                    return;
+            if (scrollbarEle.hasClass('scrollbar__track--y'))
+                _isDisabled = scrollbarEle.parentNode.scrollbarOptions.disabledY === true;
+            else
+                _isDisabled = scrollbarEle.parentNode.scrollbarOptions.disabledX === true;
+
+            if (!_isDisabled) {
+                this._isMouseDown = true;
+                _slide = scrollbarEle.querySelector('.scrollbar__track__slide');
+                _wrapper = scrollbarEle.parentNode.querySelector('.scrollbar__wrapper');
+                
+                if (scrollbarEle.hasClass('scrollbar__track--y')) {
+                    if (_slide.offsetTop > mousePos)
+                        _dir = -1;
+                    else if (_slide.offsetTop + _slide.offsetHeight < mousePos)
+                        _dir = 1;
+                    else {
+                        this._isMouseDown = false;
+                        return;
+                    }
+
+                    _dis = _slide.offsetHeight / scrollbarEle.offsetHeight * _wrapper.scrollHeight;
+                    _pos = _wrapper.scrollTop + _dir * _dis;
+                } else {
+                    if (_slide.offsetLeft > mousePos)
+                        _dir = -1;
+                    else if (_slide.offsetLeft + _slide.offsetWidth < mousePos)
+                        _dir = 1;
+                    else {
+                        this._isMouseDown = false;
+                        return;
+                    }
+
+                    _dis = _slide.offsetWidth / scrollbarEle.offsetWidth * _wrapper.scrollWidth;
+                    _pos = { offsetLeft: _wrapper.scrollLeft + _dir * _dis };
                 }
 
-                _dis = _slide.offsetHeight / scrollbarEle.offsetHeight * _wrapper.scrollHeight;
-                _pos = _wrapper.scrollTop + _dir * _dis;
-            } else {
-                if (_slide.offsetLeft > mousePos)
-                    _dir = -1;
-                else if (_slide.offsetLeft + _slide.offsetWidth < mousePos)
-                    _dir = 1;
-                else {
-                    this._isMouseDown = false;
-                    return;
-                }
+                this.scrollTo(_pos, 0, _wrapper.parentNode.scrollbarOptions.index);
 
-                _dis = _slide.offsetWidth / scrollbarEle.offsetWidth * _wrapper.scrollWidth;
-                _pos = { offsetLeft: _wrapper.scrollLeft + _dir * _dis };
+                this._mousedownTimer = setTimeout(() => {
+                    this._mousedownScroll(scrollbarEle, mousePos);
+                }, 400);
             }
-
-            this.scrollTo(_pos, 0, _wrapper.parentNode.scrollbarOptions.index);
-
-            this._mousedownTimer = setTimeout(() => {
-                this._mousedownScroll(scrollbarEle, mousePos);
-            }, 400);
         }
     }
     // add class to slide element
     _startDrag (mouseEvent) {
-        console.log(mouseEvent);
-        this._dragScrollbar = mouseEvent.target;
-        this._dragScrollbar.addClass('scrollbar__track__slide--drag');
-        if (this._dragScrollbar.hasClass('scrollbar__track__slide--y'))
-            this._dragPos = mouseEvent.offsetY;
+        let _scrollDir = mouseEvent.target.hasClass('scrollbar__track__slide--y') ? 'y' : 'x',
+            _isDisabled = false;
+
+        console.log(mouseEvent.target.parentNode.parentNode.scrollbarOptions);
+
+        if (_scrollDir === 'y')
+            _isDisabled = mouseEvent.target.parentNode.parentNode.scrollbarOptions.disabledY === true;
         else
-            this._dragPos = mouseEvent.offsetX;
+            _isDisabled = mouseEvent.target.parentNode.parentNode.scrollbarOptions.disabledX === true;
+
+        if (!_isDisabled) {
+            this._dragScrollbar = mouseEvent.target;
+            this._dragScrollbar.addClass('scrollbar__track__slide--drag');
+            if (_scrollDir === 'y')
+                this._dragPos = mouseEvent.offsetY;
+            else
+                this._dragPos = mouseEvent.offsetX;
+        } else
+            this._resetMouseEvent();
     }
     // drag to scroll
     _dragScroll (mouseEvent) {
@@ -135,8 +171,12 @@ export default class Scrollbar {
         if (this._mousedownTimer !== null)
             clearTimeout(this._mousedownTimer);
         this._isMouseDown = false;
-        this._dragScrollbar.removeClass('scrollbar__track__slide--drag');
-        this._dragScrollbar = null;
+
+        if (this._dragScrollbar !== null) {
+            this._dragScrollbar.removeClass('scrollbar__track__slide--drag');
+            this._dragScrollbar = null;
+        }
+        
         this._dragPos = 0;
     }
 
@@ -424,6 +464,73 @@ export default class Scrollbar {
             
             ScrollTo(_scrollEle, to, duration);
         }
+    }
+
+    _setDisable (ele, isDisable) {
+        let _scrollEle = ele.querySelector('.scrollbar__wrapper');
+
+        if (typeof isDisable === 'boolean') {
+            if (isDisable) {
+                ele.scrollbarOptions.disabledX = true;
+                ele.scrollbarOptions.disabledY = true;
+                ele.removeClass('scrollbar--disabled-x');
+                ele.removeClass('scrollbar--disabled-y');
+                ele.addClass('scrollbar--disabled');
+                _scrollEle.style.overflow = 'hidden';
+            } else {
+                ele.scrollbarOptions.disabledX = false;
+                ele.scrollbarOptions.disabledY = false;
+                ele.removeClass('scrollbar--disabled-x');
+                ele.removeClass('scrollbar--disabled-y');
+                ele.removeClass('scrollbar--disabled');
+                _scrollEle.style.overflow = '';
+            }
+        } else if (typeof isDisable === 'object') {
+            if (isDisable.disabledX === true && isDisable.disabledY === true) {
+                ele.scrollbarOptions.disabledX = true;
+                ele.scrollbarOptions.disabledY = true;
+                ele.removeClass('scrollbar--disabled-x');
+                ele.removeClass('scrollbar--disabled-y');
+                ele.addClass('scrollbar--disabled');
+                _scrollEle.style.overflow = 'hidden';
+            } else {
+                ele.removeClass('scrollbar--disabled');
+                _scrollEle.style.overflow = '';
+
+                if (isDisable.disabledX === true) {
+                    ele.scrollbarOptions.disabledX = true;
+                    ele.scrollbarOptions.disabledY = false;
+                    ele.addClass('scrollbar--disabled-x');
+                    ele.removeClass('scrollbar--disabled-y');
+                    _scrollEle.style.overflowY = '';
+                    _scrollEle.style.overflowX = 'hidden';
+                } else if (isDisable.disabledY === true) {
+                    ele.scrollbarOptions.disabledX = false;
+                    ele.scrollbarOptions.disabledY = true;
+                    ele.addClass('scrollbar--disabled-y');
+                    ele.removeClass('scrollbar--disabled-x');
+                    _scrollEle.style.overflowY = 'hidden';
+                    _scrollEle.style.overflowX = '';
+                } else {
+                    ele.scrollbarOptions.disabledX = false;
+                    ele.scrollbarOptions.disabledY = false;
+                    ele.removeClass('scrollbar--disabled-y');
+                    ele.removeClass('scrollbar--disabled-x');
+                    _scrollEle.style.overflowY = '';
+                    _scrollEle.style.overflowX = '';
+                }
+            }
+        }
+    }
+
+    setDisable (isDisable = false, index = -1) {
+        if (index === -1) {
+            for (let i = 0; i < this._scrollbarEle.length; i++)
+                this._setDisable(this._scrollbarEle[i]);
+        } else
+            this._setDisable(this._scrollbarEle[index]);
+
+        this.update();
     }
 
     get scrollEle () { return this._scrollbarEle; }

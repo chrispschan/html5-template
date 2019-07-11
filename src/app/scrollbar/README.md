@@ -11,9 +11,17 @@ import Scrollbar from 'scrollbar';
 const scrollbar = new Scrollbar();
 ```
 
-### Scrollbar (scrollbar:string = '.scrollbar');
+### Scrollbar (scrollbar:string = '.scrollbar', options:object = {});
 #### scrollbar
 Scrollbar elements.
+#### options
+- disabledX: boolean (default: false) - disable horizontal scrollbar if true
+- disabledY: boolean (default: false) - disable vertical scrollbar if true
+
+#### dataset
+Some options can use element dataset setting:
+- data-disabled-x: string = `'true' | 'false'`
+- data-disabled-y: string = `'true' | 'false'`
 
 ### Scrollbar.update ()
 Update scrollbar elements position and sizing.
@@ -24,6 +32,13 @@ Set scrollbar scroll position.
 Scroll to position / element.
 #### duration
 Scroll animation duration.
+#### index
+Scrollbar.scrollEle array index (-1 = all)
+
+### Scrollbar.setDisable (isDisable: Boolean | Object { disabledX: Boolean, disabledY: Boolean } = false, index = -1)
+Set scrollbar to disable or not.
+#### isDisable
+Dose scrollbar set to disable
 #### index
 Scrollbar.scrollEle array index (-1 = all)
 

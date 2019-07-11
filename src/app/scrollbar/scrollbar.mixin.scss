@@ -134,4 +134,78 @@ html, body {
             }
         }
     }
+
+    &--disabled {
+        .scrollbar {
+            &__track {
+                display: none;
+            }
+
+            @if ($isOverlay == false) {
+                &__wrapper {
+                    &--scroll-x {
+                        height: 100%;
+                    }
+
+                    &--scroll-y {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    &--disabled-x {
+        .scrollbar {
+            &__track {
+                &--x {
+                    display: none;
+                }
+
+                &--y {
+                    &--with-x {
+                        @if ($margin == 0 or $margin == 0px) {
+                            height: 100%;
+                        } @else {
+                            height: calc(100% - #{$margin * 2});
+                        }
+                    }
+                }
+            }
+
+            @if ($isOverlay == false) {
+                &__wrapper {
+                    &--scroll-x {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+    &--disabled-y {
+        .scrollbar {
+            &__track {
+                &--y {
+                    display: none;
+                }
+
+                &--x {
+                    &--with-y {
+                        @if ($margin == 0 or $margin == 0px) {
+                            width: 100%;
+                        } @else {
+                            width: calc(100% - #{$margin * 2});
+                        }
+                    }
+                }
+            }
+
+            @if ($isOverlay == false) {
+                &__wrapper {
+                    &--scroll-y {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }

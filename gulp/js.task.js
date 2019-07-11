@@ -17,7 +17,7 @@ import eslintConfig from './../src/eslint.config.js';
 
 const watchFiles = {
         js: gulpOptions.watchAppFolder ? ['./src/js/**/*.js', './src/app/**/*.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js', '!./src/js/**/*.min.*', '!./src/js/**/*.es5.js', '!./src/app/**/_*.js', '!./src/app/**/*.spec.js', '!./src/app/**/*.stories.*'] : ['./src/js/**/*.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js', '!./src/js/**/*.min.*', '!./src/js/**/*.es5.js'],
-        es5: gulpOptions.es5 ? ['./src/js/**/*.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js', '!./src/app/**/*.stories.*'] : ['./src/js/**/*.es5.js', './src/js/**/*.min.js', '!./src/js/**/_*.es5.js', '!./src/js/**/_*.min.js'],
+        es5: gulpOptions.es5 ? ['./src/js/**/*.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js'] : ['./src/js/**/*.es5.js', './src/js/**/*.min.js', '!./src/js/**/_*.es5.js', '!./src/js/**/_*.min.js'],
         import: ['./node_modules', './src/app/'],    // babel import path
         jsInclude: [`${__dirname}/../node_modules`, `${__dirname}/../src/app`],
         jsLint: ['./src/app/**/*.js', './src/js/**/*.js', '!./src/app/**/_*.js', '!./src/app/**/*.spec.js', '!./src/js/**/_*.js', '!./src/js/**/*.spec.js', '!./src/js/**/*.min.*', '!./src/app/**/*.stories.*']
