@@ -6,7 +6,7 @@ const markerEvents = {
   }
 };
 
-const map = new Map('.map', {
+const map = new Map('#map', {
   key: 'AIzaSyBDWiNjmhLiH5KHrqKQL-mNN9gZ0GpzZvM',
   markers: [
     {

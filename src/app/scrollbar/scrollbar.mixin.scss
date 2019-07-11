@@ -1,126 +1,137 @@
-@import "scrollbar.default.scss";
+@import "scrollbar.variables.scss";
 
 html, body {
     height: 100%;
 }
 
-@mixin scrollbar() {
-    .scrollbar {
+@mixin scrollbar($isOverlay: $scrollbar-overlay, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background, $modifier: '') {
+    .scrollbar#{$modifier} {
         position: relative;
         display: block;
         width: 100%;
         overflow: hidden;
 
-        &__wrapper {
-            box-sizing: content-box;
-            position: relative;
-            display: block;
-            width: 100%;
-            height: 100%;
-            overflow: scroll;
-            padding-right: 0;
-            -webkit-overflow-scrolling: touch;
-
-            &--scroll-x {
-                height: calc(100% - 10px);
-            }
-
-            &--scroll-y {
-                width: calc(100% - 10px);
-            }
-        }
-
-        &__content {
-            box-sizing: border-box;
-            min-width: 100%;
-            height: 100%;
-            overflow: visible;
-
-            // &::after {
-            //     content: '';
-            //     display: block;
-            //     width: 100%;
-            //     height: 17px;
-            // }
-        }
-
-        &__track {
-            opacity: 1;
-            position: absolute;
-            display: none;
-            background: #000;
-            border-radius: 999px;
-
-            &--y {
-                width: 10px;
-                height: 100%;
-                top: 0;
-                right: 0;
-
-                &--with-x {
-                    height: calc(100% - 10px);
-
-                    // &::after {
-                    //     background: #000;
-                    //     content: '';
-                    //     display: block;
-                    //     position: absolute;
-                    //     width: 10px;
-                    //     height: 10px;
-                    //     bottom: -10px;
-                    //     right: 0;
-                    // }
-                }
-            }
-
-            &--x {
-                width: 100%;
-                height: 10px;
-                bottom: 0;
-                left: 0;
-
-                &--with-y {
-                    width: calc(100% - 10px);
-
-                    // &::after {
-                    //     background: #000;
-                    //     content: '';
-                    //     display: block;
-                    //     position: absolute;
-                    //     width: 10px;
-                    //     height: 10px;
-                    //     bottom: 0;
-                    //     right: -10px;
-                    // }
-                }
-            }
-
-            &--visility {
-                display: block;
-            }
-
-            &__slide {
-                position: absolute;
-                top: 0;
-                left: 0;
-                // background: #666;
-                width: 100%;
-                height: 100%;
-                border-radius: 999px;
-                box-sizing: border-box;
-                padding: 2px;
-
-                &::after {
-                    content: '';
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    background: #666;
-                    border-radius: 999px;
-                }
+        @if ($modifier == '') {
+            @include scrollbarStyle($isOverlay: $isOverlay, $size: $size, $margin: $margin, $padding: $padding, $borderRadius: $borderRadius, $trackBackground: $trackBackground, $slideBackground: $slideBackground);
+        } @else {
+            .scrollbar {
+                @include scrollbarStyle($isOverlay: $isOverlay, $size: $size, $margin: $margin, $padding: $padding, $borderRadius: $borderRadius, $trackBackground: $trackBackground, $slideBackground: $slideBackground);
             }
         }
 
         @content;
+    }
+}
+
+@mixin scrollbarStyle($isOverlay: $scrollbar-overlay, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background) {
+    &__wrapper {
+        box-sizing: content-box;
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        padding-right: 0;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+
+        // hide native scrollbar
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            background: transparent;
+            display: none;
+            -webkit-appearance: none;
+        }
+        
+        @if ($isOverlay == false) {
+            &--scroll-x {
+                height: calc(100% - #{$size + $margin * 2});
+            }
+
+            &--scroll-y {
+                width: calc(100% - #{$size + $margin * 2});
+            }
+        }
+    }
+
+    &__content {
+        display: table;
+        min-width: 100%;
+        box-sizing: border-box;
+        overflow: visible;
+    }
+
+    &__track {
+        opacity: 1;
+        position: absolute;
+        display: none;
+        background: $trackBackground;
+        border-radius: $borderRadius;
+
+        &--y {
+            width: $size;
+            @if ($margin == 0 or $margin == 0px) {
+                height: 100%;
+                top: 0;
+            } @else {
+                height: calc(100% - #{$margin * 2});
+                top: $margin;
+            }
+            right: $margin;
+
+            &--with-x {
+                @if ($margin == 0 or $margin == 0px) {
+                    height: calc(100% - #{$size});
+                } @else {
+                    height: calc(100% - #{$size + $margin * 3});
+                }
+            }
+        }
+
+        &--x {
+            height: $size;
+            bottom: $margin;
+
+            @if ($margin == 0 or $margin == 0px) {
+                width: 100%;
+                left: 0;
+            } @else {
+                width: calc(100% - #{$margin * 2});
+                left: $margin;
+            }
+
+            &--with-y {
+                @if ($margin == 0 or $margin == 0px) {
+                    width: calc(100% - #{$size});
+                } @else {
+                    width: calc(100% - #{$size + $margin * 3});
+                }
+            }
+        }
+
+        &--visility {
+            display: block;
+        }
+
+        &__slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: $borderRadius;
+            box-sizing: border-box;
+            padding: $padding;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: $slideBackground;
+                border-radius: $borderRadius;
+            }
+        }
     }
 }

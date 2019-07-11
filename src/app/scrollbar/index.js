@@ -1,15 +1,20 @@
 import 'object/object.property';
 import 'element/element.property';
 import MutationObserver from 'mutationObserver';
+import ScrollTo from 'scrollTo';
 
 export default class Scrollbar {
-    constructor (scrollbar = '.scrollbar', options = {}) {
-        this._options = Object.assign({
-            hasButtons: false
-        }, options);
+    constructor (scrollbar = '.scrollbar') {
+        this._options = {};
 
         this._scrollbarEle = document.querySelectorAll(scrollbar);
-
+        this._userAgent = /iPhone|iPad|iPod/i;    // fix ios native scrollbar
+        this._isMobile = navigator.userAgent.match(this._userAgent) !== null;
+        this._mousedownTimer = null;
+        this._isMouseDown = false;
+        this._dragScrollbar = null;
+        this._dragPos = 0;
+        
         this._initScrollbar(this);
     }
 
@@ -17,13 +22,13 @@ export default class Scrollbar {
         let _options = {};
 
         for (let i = 0; i < self._scrollbarEle.length; i++) {
-            _options = Object.assign({}, self._options);
+            _options = Object.deepAssign({ index: i }, self._options);
 
             self._scrollbarEle[i].getDataset();
 
             /*----------  self options from dataset  ----------*/
             if (typeof self._scrollbarEle[i].dataset === 'object')
-                self._scrollbarEle[i].scrollbarOptions = Object.assign(_options, self._scrollbarEle[i].dataset);
+                self._scrollbarEle[i].scrollbarOptions = Object.deepAssign(_options, self._scrollbarEle[i].dataset);
 
             this._cerateScrollbar(self._scrollbarEle[i]);
             this._checkScrollbar(self._scrollbarEle[i]);
@@ -38,67 +43,101 @@ export default class Scrollbar {
         window.addEventListener('load', () => {
             this.update();
         });
-        document.addEventListener('mousedown', (event) => {
-            let _dragEle = document.querySelectorAll('.scrollbar__track__slide--moving');
-
-            if (event.target.hasClass('scrollbar__track__slide')) {
-                event.preventDefault();
-                event.target.addClass('scrollbar__track__slide--moving');
-                document.scrollbarLastMouseY = event.screenY;
-                document.scrollbarLastMouseX = event.screenX;
-                document.isScrollbarYDrag = event.target.hasClass('scrollbar__track__slide--y');
-                document.isScrollbarXDrag = event.target.hasClass('scrollbar__track__slide--x');
-                document.scrollbarEle = event.target.parentNode.parentNode;
-            } else {
-                _dragEle = document.querySelectorAll('.scrollbar__track__slide--moving');
-                for (let i = 0; i < _dragEle.length; i++)
-                    _dragEle[i].removeClass('scrollbar__track__slide--moving');
-
-                document.isScrollbarYDrag = false;
-                document.isScrollbarXDrag = false;
-                document.scrollbarLastMouseY = 0;
-                document.scrollbarLastMouseX = 0;
-                document.scrollbarEle = null;
-            }
-        });
-        document.addEventListener('mouseup', (event) => {
-            let _dragEle = document.querySelectorAll('.scrollbar__track__slide--moving');
-            for (let i = 0; i < _dragEle.length; i++)
-                _dragEle[i].removeClass('scrollbar__track__slide--moving');
-
-            document.isScrollbarYDrag = false;
-            document.isScrollbarXDrag = false;
-            document.scrollbarEle = null;
-        });
-        document.addEventListener('mousemove', (event) => {
-            let _wrapperEle;
-            let _barEle;
-            let _scrollValue;
-
-            if (document.scrollbarEle !== null) {
-                _wrapperEle = document.scrollbarEle.querySelector('.scrollbar__wrapper');
-
-                if (document.isScrollbarYDrag === true) {
-                    event.preventDefault();
-                    _barEle = document.scrollbarEle.querySelector('.scrollbar__track--y');
-                    _scrollValue = _wrapperEle.scrollTop + (event.screenY - document.scrollbarLastMouseY) / _barEle.offsetHeight * _wrapperEle.scrollHeight;
-                    document.scrollbarLastMouseY = event.screenY;
-
-                    _wrapperEle.scrollTop = _scrollValue;
-                } else if (document.isScrollbarXDrag === true) {
-                    event.preventDefault();
-                    _barEle = document.scrollbarEle.querySelector('.scrollbar__track--x');
-                    _scrollValue = _wrapperEle.scrollLeft + (event.screenX - document.scrollbarLastMouseX) / _barEle.offsetWidth * _wrapperEle.scrollWidth;
-                    document.scrollbarLastMouseX = event.screenX;
-
-                    _wrapperEle.scrollLeft = _scrollValue;
-                }
-            }
-        });
 
         window.addEventListener('resize', (event) => {
             this.update();
         });
+    }
+
+    // click scrollbar to scroll
+    _mousedownScroll (scrollbarEle, mousePos) {
+        let _slide,
+            _wrapper,
+            _pos,
+            _dis,
+            _dir;
+
+        if (this._mousedownTimer !== null)
+            clearTimeout(this._mousedownTimer);
+
+        if (scrollbarEle.hasClass('scrollbar__track')) {
+            this._isMouseDown = true;
+            _slide = scrollbarEle.querySelector('.scrollbar__track__slide');
+            _wrapper = scrollbarEle.parentNode.querySelector('.scrollbar__wrapper');
+            
+            if (scrollbarEle.hasClass('scrollbar__track--y')) {
+                if (_slide.offsetTop > mousePos)
+                    _dir = -1;
+                else if (_slide.offsetTop + _slide.offsetHeight < mousePos)
+                    _dir = 1;
+                else {
+                    this._isMouseDown = false;
+                    return;
+                }
+
+                _dis = _slide.offsetHeight / scrollbarEle.offsetHeight * _wrapper.scrollHeight;
+                _pos = _wrapper.scrollTop + _dir * _dis;
+            } else {
+                if (_slide.offsetLeft > mousePos)
+                    _dir = -1;
+                else if (_slide.offsetLeft + _slide.offsetWidth < mousePos)
+                    _dir = 1;
+                else {
+                    this._isMouseDown = false;
+                    return;
+                }
+
+                _dis = _slide.offsetWidth / scrollbarEle.offsetWidth * _wrapper.scrollWidth;
+                _pos = { offsetLeft: _wrapper.scrollLeft + _dir * _dis };
+            }
+
+            this.scrollTo(_pos, 0, _wrapper.parentNode.scrollbarOptions.index);
+
+            this._mousedownTimer = setTimeout(() => {
+                this._mousedownScroll(scrollbarEle, mousePos);
+            }, 400);
+        }
+    }
+    // add class to slide element
+    _startDrag (mouseEvent) {
+        console.log(mouseEvent);
+        this._dragScrollbar = mouseEvent.target;
+        this._dragScrollbar.addClass('scrollbar__track__slide--drag');
+        if (this._dragScrollbar.hasClass('scrollbar__track__slide--y'))
+            this._dragPos = mouseEvent.offsetY;
+        else
+            this._dragPos = mouseEvent.offsetX;
+    }
+    // drag to scroll
+    _dragScroll (mouseEvent) {
+        let _scrollbar,
+            _wrapper,
+            _area,
+            _pos;
+
+        if (this._dragScrollbar !== null) {
+            _scrollbar = this._dragScrollbar.parentNode;
+            _area = _scrollbar.parentNode;
+            _wrapper = _area.querySelector('.scrollbar__wrapper');
+
+            if (_scrollbar.hasClass('scrollbar__track--y'))
+                _pos = (mouseEvent.pageY - _area.offsetTop - this._dragPos) / _scrollbar.offsetHeight * _wrapper.scrollHeight;
+            else {
+                _pos = {
+                    offsetLeft: (mouseEvent.pageX - _area.offsetLeft - this._dragPos) / _scrollbar.offsetWidth * _wrapper.scrollWidth
+                };
+            }
+
+            this.scrollTo(_pos, 0, _area.scrollbarOptions.index);
+        }
+    }
+    _resetMouseEvent () {
+        if (this._mousedownTimer !== null)
+            clearTimeout(this._mousedownTimer);
+        this._isMouseDown = false;
+        this._dragScrollbar.removeClass('scrollbar__track__slide--drag');
+        this._dragScrollbar = null;
+        this._dragPos = 0;
     }
 
     _cerateScrollbar (ele) {
@@ -120,52 +159,90 @@ export default class Scrollbar {
         _paddingRight = _wrapperEle.offsetWidth - _wrapperEle.clientWidth;
         _paddingBottom = _wrapperEle.offsetHeight - _wrapperEle.clientHeight;
 
+        if (this._isMobile) {
+            if (
+                _paddingRight === 0 &&
+                _wrapperEle.scrollHeight > _wrapperEle.clientHeight
+            ) {
+                _paddingRight = 25;
+
+                if (_wrapperEle.scrollWidth > _wrapperEle.clientWidth)
+                    _contentEle.style.paddingRight = `${_paddingRight}px`;
+            }
+            if (
+                _paddingBottom === 0 &&
+                _wrapperEle.scrollHeight > _wrapperEle.clientHeight
+            )
+                _paddingBottom = 25;
+        }
+
         _wrapperEle.style.paddingRight = `${_paddingRight}px`;
         _wrapperEle.style.paddingBottom = `${_paddingBottom}px`;
 
-        _contentEle.style.minWidth = `calc(100% + ${_paddingRight}px)`;
-        
-        if (ele.scrollbarOptions.hasButtons === true) {
-            _scrollbarXBtnBack = document.createElement('BUTTON');
-            _scrollbarXBtnBack.addClass('scrollbar__track__button');
-            _scrollbarXBtnBack.addClass('scrollbar__track__button--x');
-            _scrollbarXBtnBack.addClass('scrollbar__track__button--x--back');
-            _scrollbarXBtnNext = document.createElement('BUTTON');
-            _scrollbarXBtnNext.addClass('scrollbar__track__button');
-            _scrollbarXBtnNext.addClass('scrollbar__track__button--x');
-            _scrollbarXBtnNext.addClass('scrollbar__track__button--x--next');
-            _scrollbarYBtnBack = document.createElement('BUTTON');
-            _scrollbarYBtnBack.addClass('scrollbar__track__button');
-            _scrollbarYBtnBack.addClass('scrollbar__track__button--y');
-            _scrollbarYBtnBack.addClass('scrollbar__track__button--y--back');
-            _scrollbarYBtnNext = document.createElement('BUTTON');
-            _scrollbarYBtnNext.addClass('scrollbar__track__button');
-            _scrollbarYBtnBack.addClass('scrollbar__track__button--y');
-            _scrollbarYBtnBack.addClass('scrollbar__track__button--y--next');
-        }
-
         _wrapperEle.addClass('scrollbar__wrapper');
         _contentEle.addClass('scrollbar__content');
+        // create horizontal scrollbar
         _scrollbarXEle.addClass('scrollbar__track');
         _scrollbarXEle.addClass('scrollbar__track--x');
         _scrollbarXSlide.addClass('scrollbar__track__slide');
         _scrollbarXSlide.addClass('scrollbar__track__slide--x');
-
-        if (ele.scrollbarOptions.hasButtons === true)
-            _scrollbarXEle.appendChild(_scrollbarXBtnBack);
         _scrollbarXEle.appendChild(_scrollbarXSlide);
-        if (ele.scrollbarOptions.hasButtons === true)
-            _scrollbarXEle.appendChild(_scrollbarXBtnNext);
-
+        // create vertical scrollbar
         _scrollbarYEle.addClass('scrollbar__track');
         _scrollbarYEle.addClass('scrollbar__track--y');
         _scrollbarYSlide.addClass('scrollbar__track__slide');
         _scrollbarYSlide.addClass('scrollbar__track__slide--y');
-        if (ele.scrollbarOptions.hasButtons === true)
-            _scrollbarXEle.appendChild(_scrollbarYBtnBack);
         _scrollbarYEle.appendChild(_scrollbarYSlide);
-        if (ele.scrollbarOptions.hasButtons === true)
-            _scrollbarXEle.appendChild(_scrollbarYBtnNext);
+
+        // add event listener to scrollbar
+        document.addEventListener('mouseup', (event) => {
+            if (this._isMouseDown || this._dragScrollbar !== null) {
+                event.preventDefault();
+                this._resetMouseEvent();
+            }
+        });
+        document.addEventListener('mousemove', (event) => {
+            this._dragScroll(event);
+        });
+        document.addEventListener('mouseleave', (event) => {
+            this._resetMouseEvent();
+        });
+        _scrollbarYEle.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            this._mousedownScroll(event.target, event.offsetY);
+        });
+        _scrollbarYEle.addEventListener('mousemove', (event) => {
+            if (this._isMouseDown) {
+                this._resetMouseEvent();
+                this._mousedownScroll(event.target, event.offsetY);
+            }
+        });
+        _scrollbarYEle.addEventListener('mouseleave', (event) => {
+            if (this._isMouseDown)
+                this._resetMouseEvent();
+        });
+        _scrollbarYSlide.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            this._startDrag(event);
+        });
+        _scrollbarXEle.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            this._mousedownScroll(event.target, event.offsetX);
+        });
+        _scrollbarXEle.addEventListener('mousemove', (event) => {
+            if (this._isMouseDown) {
+                this._resetMouseEvent();
+                this._mousedownScroll(event.target, event.offsetY);
+            }
+        });
+        _scrollbarXEle.addEventListener('mouseleave', (event) => {
+            if (this._isMouseDown)
+                this._resetMouseEvent();
+        });
+        _scrollbarXSlide.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            this._startDrag(event);
+        });
 
         for (let i = _children.length - 1; i >= 0; i--)
             _contentEle.insertBefore(_children[i], _contentEle.firstChild);
@@ -201,8 +278,43 @@ export default class Scrollbar {
             _scrollbarXSlide,
             _scrollbarYEle,
             _scrollbarYSlide,
+            _scrollWrapperSize,
             _scrollValue,
-            _scrollSize;
+            _scrollSize,
+            _isXScroll,
+            _isYScroll;
+
+        const _checkScrollbarY = () => {
+                if (_isYScroll) {
+                    _wrapperEle.addClass('scrollbar__wrapper--scroll-y');
+                    _scrollbarYEle.addClass('scrollbar__track--visility');
+
+                    if (this._isMobile && _wrapperEle.offsetWidth - _wrapperEle.clientWidth === 0) {
+                        _paddingRight = 25;
+                        _wrapperEle.style.paddingRight = `${_paddingRight}px`;
+
+                        if (_isXScroll)
+                            _contentEle.style.paddingRight = `${_paddingRight}px`;
+                    }
+                } else {
+                    _wrapperEle.removeClass('scrollbar__wrapper--scroll-y');
+                    _scrollbarYEle.removeClass('scrollbar__track--visility');
+                }
+            },
+            _checkScrollbarX = () => {
+                if (_isXScroll) {
+                    _wrapperEle.addClass('scrollbar__wrapper--scroll-x');
+                    _scrollbarXEle.addClass('scrollbar__track--visility');
+
+                    if (this._isMobile && _wrapperEle.offsetHeight - _wrapperEle.clientHeight === 0) {
+                        _paddingBottom = 25;
+                        _wrapperEle.style.paddingBottom = `${_paddingBottom}px`;
+                    }
+                } else {
+                    _wrapperEle.removeClass('scrollbar__wrapper--scroll-x');
+                    _scrollbarXEle.removeClass('scrollbar__track--visility');
+                }
+            };
 
         for (let i = 0; i < _children.length; i++) {
             if (_children[i].hasClass('scrollbar__wrapper'))
@@ -213,11 +325,12 @@ export default class Scrollbar {
                 _scrollbarYEle = _children[i];
         }
 
+        _isXScroll = _wrapperEle.scrollWidth > _wrapperEle.clientWidth;
+        _isYScroll = _wrapperEle.scrollHeight > _wrapperEle.clientHeight;
+
         _contentEle = ele.querySelector('.scrollbar__content');
         _scrollbarXSlide = _scrollbarXEle.querySelector('.scrollbar__track__slide');
         _scrollbarYSlide = _scrollbarYEle.querySelector('.scrollbar__track__slide');
-
-        _contentEle.style.height = `100%`;
 
         _paddingRight = _wrapperEle.offsetWidth - _wrapperEle.clientWidth;
         _paddingBottom = _wrapperEle.offsetHeight - _wrapperEle.clientHeight;
@@ -227,28 +340,19 @@ export default class Scrollbar {
         else
             _paddingRight = parseInt(_wrapperEle.style.paddingRight);
 
-        _contentEle.style.minWidth = `calc(100% + ${_paddingRight}px)`;
+        _contentEle.style.marginRight = `-${_paddingRight}px`;
 
         if (parseInt(_wrapperEle.style.paddingBottom) < _paddingBottom)
             _wrapperEle.style.paddingBottom = `${_paddingBottom}px`;
         else
             _paddingBottom = parseInt(_wrapperEle.style.paddingBottom);
 
-        if (_wrapperEle.scrollHeight > _wrapperEle.clientHeight) {
-            _wrapperEle.addClass('scrollbar__wrapper--scroll-y');
-            _scrollbarYEle.addClass('scrollbar__track--visility');
+        if (_isYScroll && !_isXScroll) {
+            _checkScrollbarY();
+            _checkScrollbarX();
         } else {
-            _contentEle.style.height = `calc(100% + ${_paddingBottom}px)`;
-            _wrapperEle.removeClass('scrollbar__wrapper--scroll-y');
-            _scrollbarYEle.removeClass('scrollbar__track--visility');
-        }
-
-        if (_wrapperEle.scrollWidth > _wrapperEle.clientWidth) {
-            _wrapperEle.addClass('scrollbar__wrapper--scroll-x');
-            _scrollbarXEle.addClass('scrollbar__track--visility');
-        } else {
-            _wrapperEle.removeClass('scrollbar__wrapper--scroll-x');
-            _scrollbarXEle.removeClass('scrollbar__track--visility');
+            _checkScrollbarX();
+            _checkScrollbarY();
         }
 
         if (_scrollbarYEle.hasClass('scrollbar__track--visility') && _scrollbarXEle.hasClass('scrollbar__track--visility')) {
@@ -260,8 +364,9 @@ export default class Scrollbar {
         }
 
         if (_scrollbarXEle.hasClass('scrollbar__track--visility')) {
-            _scrollValue = _scrollbarXEle.clientWidth / _wrapperEle.scrollWidth * _wrapperEle.scrollLeft;
-            _scrollSize = ele.clientWidth / _wrapperEle.scrollWidth * _scrollbarXEle.clientWidth;
+            _scrollWrapperSize = this._isMobile && _scrollbarYEle.hasClass('scrollbar__track--visility') ? _wrapperEle.scrollWidth - 25 : _wrapperEle.scrollWidth;
+            _scrollValue = _scrollbarXEle.clientWidth / _scrollWrapperSize * _wrapperEle.scrollLeft;
+            _scrollSize = ele.clientWidth / _scrollWrapperSize * _scrollbarXEle.clientWidth;
 
             if (_scrollSize % 1 !== 0)
                 _scrollSize = _scrollSize - (_scrollSize % 1) + 1;
@@ -280,8 +385,9 @@ export default class Scrollbar {
         }
 
         if (_scrollbarYEle.hasClass('scrollbar__track--visility')) {
-            _scrollValue = _scrollbarYEle.clientHeight / _wrapperEle.scrollHeight * _wrapperEle.scrollTop;
-            _scrollSize = ele.clientHeight / _wrapperEle.scrollHeight * _scrollbarYEle.clientHeight;
+            _scrollWrapperSize = this._isMobile && _scrollbarXEle.hasClass('scrollbar__track--visility') ? _wrapperEle.scrollHeight - 25 : _wrapperEle.scrollHeight;
+            _scrollValue = _scrollbarYEle.clientHeight / _scrollWrapperSize * _wrapperEle.scrollTop;
+            _scrollSize = ele.clientHeight / _scrollWrapperSize * _scrollbarYEle.clientHeight;
 
             if (_scrollSize % 1 !== 0)
                 _scrollSize = _scrollSize - (_scrollSize % 1) + 1;
@@ -300,12 +406,38 @@ export default class Scrollbar {
     }
 
     _scrollListener (event) {
-        console.log(event);
         this._checkScrollbar(event.target.parentNode);
     }
 
     update () {
         for (let i = 0; i < this._scrollbarEle.length; i++)
             this._checkScrollbar(this._scrollbarEle[i]);
+    }
+
+    scrollTo (to, duration = 0, index = -1) {
+        let _scrollEle;
+
+        if (index === -1) {
+            for (let i = 0; i < this._scrollbarEle.length; i++) {
+                _scrollEle = this._scrollbarEle[i].querySelector('.scrollbar__wrapper');
+
+                ScrollTo(_scrollEle, to, duration);
+            }
+        } else {
+            _scrollEle = this._scrollbarEle[index].querySelector('.scrollbar__wrapper');
+            
+            ScrollTo(_scrollEle, to, duration);
+        }
+    }
+
+    get scrollEle () { return this._scrollbarEle; }
+
+    get scrollWrapper () {
+        let _scrollEle = [];
+
+        for (let i = 0; i < this._scrollbarEle.length; i++)
+            _scrollEle.push(this._scrollbarEle[i].querySelector('.scrollbar__wrapper'));
+
+        return _scrollEle;
     }
 }

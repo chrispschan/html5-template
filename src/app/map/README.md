@@ -288,7 +288,7 @@ Output:
 <div class="map"><!--[if lte IE 9]><p class="map__msg">Not Support Google Maps</p><![endif]--></div>
 ```
 
-## map.scss
+## map.mixin.scss
 Map style template.
 
 ### Getting Started

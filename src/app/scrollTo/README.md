@@ -8,8 +8,11 @@ import ScrollTo from 'scrollTo';
 
 let scrollElement = document.documentElement;
 
-// scroll to 500px
+// scroll vertical to 500px
 ScrollTo(scrollElement, 500);
+
+// scroll horizontal to 500px
+ScrollTo(scrollElement, {offsetLeft: 500});
 
 // scroll with animate
 ScrollTo(scrollElement, 500, 500);

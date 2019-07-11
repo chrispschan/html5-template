@@ -24,4 +24,4 @@ storiesOf('Common/Form', module)
     label: 'variables',
     code: ResetVariablesCode
   }))
-  .add('Button', () => htmlCode);
+  .add('Button', () => `${htmlCode}<script>console.log('test');</script>`);

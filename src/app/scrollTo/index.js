@@ -2,17 +2,29 @@ import 'document/document.property';
 
 let _scrollTimeout = null;
 
-export default function ScrollTo (element, to, duration = 100) {
+export default function ScrollTo (element, to, duration = 0) {
     if (element) {
-        let start = element.scrollTop,
-            change = null,
+        let startY = element.scrollTop,
+            startX = element.scrollLeft,
+            changeY = null,
+            changeX = null,
             currentTime = 0,
-            increment = 20;
+            increment = 20,
+            findEle,
+            newValY,
+            newValX;
         
         let animateScroll = function () {
             currentTime += increment;
-            let val = Math.easeInOutQuad(currentTime, start, change, duration);
-            element.scrollTop = val;
+            if (changeY !== null) {
+                newValY = Math.easeInOutQuad(currentTime, startY, changeY, duration);
+                element.scrollTop = newValY;
+            }
+            if (changeX !== null) {
+                newValX = Math.easeInOutQuad(currentTime, startX, changeX, duration);
+                element.scrollLeft = newValX;
+            }
+            
             if (currentTime < duration) {
                 if (_scrollTimeout !== null) clearTimeout(_scrollTimeout);
                 _scrollTimeout = setTimeout(animateScroll, increment);
@@ -27,17 +39,25 @@ export default function ScrollTo (element, to, duration = 100) {
         else if (duration % increment !== 0)
             duration += (duration % increment);
         
-        if (typeof to === 'number') change = to - start;
+        if (typeof to === 'number') changeY = to - startY;
         else if (typeof to === 'string') {
-            let _ele = document.querySelectorAll(to);
+            findEle = document.querySelectorAll(to);
 
-            if (_ele.length > 0)
-                change = _ele[0].offsetTop - start;
-        } else if (to.offsetTop) change = to.offsetTop - start;
-        else if (to.length > 0)
-            if (to[0].offsetTop) change = to[0].offsetTop - start;
+            if (findEle.length > 0) {
+                changeY = findEle[0].offsetTop - startY;
+                changeX = findEle[0].offsetLeft - startX;
+            }
+        } else {
+            if (Array.isArray(to)) {
+                if (to[0].offsetTop) changeY = to[0].offsetTop - startY;
+                if (to[0].offsetLeft) changeX = to[0].offsetLeft - startX;
+            } else {
+                if (to.offsetTop) changeY = to.offsetTop - startY;
+                if (to.offsetLeft) changeX = to.offsetLeft - startX;
+            }
+        }
         
-        if (change !== null) animateScroll();
+        if (changeY !== null || changeX !== null) animateScroll();
     }
 }
 

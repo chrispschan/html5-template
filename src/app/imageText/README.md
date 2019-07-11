@@ -1593,7 +1593,7 @@ Output:
 </div>
 ```
 
-## imageText.scss
+## imageText.mixin.scss
 imageText style template.
 
 ### Getting Started

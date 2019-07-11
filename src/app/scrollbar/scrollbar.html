@@ -1,0 +1,11 @@
+{% macro scrollbar(id, class, dataset, options) %}
+    <div
+        {% if id %} id="{{- id -}}"{% endif %} 
+        {#!- #} class="scrollbar
+        {%- for modifier in options.modifier %} scrollbar--{{ modifier }}{% endfor -%}
+        {%- if class %} {{ class }}{% endif -%}"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    >
+        {{- caller() -}}
+    </div>
+{% endmacro %}

@@ -1,5 +1,8 @@
 .demoEle {
+  width: 1000px;
   height: 300px;
+  border: 1px solid #ff0000;
+  box-sizing: border-box;
 
   &:nth-child(odd) {
     background: #eeeeee;

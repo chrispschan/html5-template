@@ -1,6 +1,6 @@
 import Map from 'map';
 
-const map = new Map('.map', {key: 'AIzaSyBDWiNjmhLiH5KHrqKQL-mNN9gZ0GpzZvM'});
+const map = new Map('#map', {key: 'AIzaSyBDWiNjmhLiH5KHrqKQL-mNN9gZ0GpzZvM'});
 
 const mapZoom = document.getElementById('mapZoom');
 const mapCenterLat = document.getElementById('mapCenterLat');

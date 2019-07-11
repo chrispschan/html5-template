@@ -12,6 +12,13 @@ function loadStories() {
   req.keys().sort().forEach((filename) => req(filename));
 }
 
+// fix storybook-addon-run-script in IE
+if (!Element.prototype.append) {
+  Element.prototype.append = function (_append) {
+    this.appendChild(_append);
+  };
+}
+
 addDecorator(addReadme);
 addDecorator(withA11y);
 
@@ -19,7 +26,7 @@ addDecorator(withA11y);
 addParameters({
   options: {
     name: 'HTML5 Template',
-    url: '#',
+    url: 'https://github.com/chrispschan/html5-template',
     showPanel: true,
     panelPosition: 'bottom',
   },

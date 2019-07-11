@@ -1,0 +1,23 @@
+{%- from "scrollbar/scrollbar.html" import scrollbar -%}
+
+{% call scrollbar() -%}
+    {% for i in range(1, 11) %}
+        <div class="demoEle demoEle{{i}}">
+            .demoEle{{i}}
+        </div>
+    {% endfor %}
+{%- endcall %}
+
+{% call scrollbar(
+    options={
+        modifier: [
+          "overlay"
+        ]  
+    }
+) -%}
+    {% for i in range(1, 11) %}
+        <div class="demoEle demoEle{{i}}">
+            .demoEle{{i}}
+        </div>
+    {% endfor %}
+{%- endcall %}
