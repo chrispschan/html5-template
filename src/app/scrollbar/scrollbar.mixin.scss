@@ -141,8 +141,10 @@ html, body {
                 display: none;
             }
 
-            @if ($isOverlay == false) {
-                &__wrapper {
+            &__wrapper {
+                overflow: hidden;
+
+                @if ($isOverlay == false) {
                     &--scroll-x {
                         height: 100%;
                     }
@@ -172,8 +174,11 @@ html, body {
                 }
             }
 
-            @if ($isOverlay == false) {
-                &__wrapper {
+            &__wrapper {
+                overflow-y: scroll;
+                overflow-x: hidden;
+
+                @if ($isOverlay == false) {
                     &--scroll-x {
                         height: 100%;
                     }
@@ -199,8 +204,11 @@ html, body {
                 }
             }
 
-            @if ($isOverlay == false) {
-                &__wrapper {
+            &__wrapper {
+                overflow-x: hidden;
+                overflow-y: scroll;
+                
+                @if ($isOverlay == false) {
                     &--scroll-y {
                         width: 100%;
                     }

@@ -1,12 +1,12 @@
 {%- from "deepLink/deepLink.html" import deepLink -%}
 
 <div class="innerWrapper">
-  {%- call deepLink(href="https://web.whatsapp.com/",
+  {%- call deepLink(href="https://wa.me/?text=https%3a%2f%2fgithub.com%2fchrispschan%2fhtml5-template",
   options={
     target: "_blank"
   },
   dataset={
-    deepLink: "whatsapp://send?text=Hello",
+    deepLink: "whatsapp://send?text=https%3a%2f%2fgithub.com%2fchrispschan%2fhtml5-template",
     androidId: "com.whatsapp",
     iosId: "310633997"
   }) -%}Whatsapp Deeplink{%- endcall -%}

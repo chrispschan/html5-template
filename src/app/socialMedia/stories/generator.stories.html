@@ -1,0 +1,40 @@
+{% set socials = [
+  "buffer",
+  "digg",
+  "facebook",
+  "line",
+  "linkedIn",
+  "reddit",
+  "stumbleUpon",
+  "tumblr",
+  "twitter",
+  "vk",
+  "whatsapp",
+  "yummly",
+  "wechat"
+] %}
+
+
+{%- from "socialMedia/socialMedia.html" import socialMedia -%}
+
+<div class="innerWrapper">
+  <div>
+    <label for="shareUrl">Share Link:</label>
+    <input id="shareUrl" type="text" value="https://github.com/chrispschan/html5-template" style="display: block; width: 100%;" />
+  </div>
+  <div>
+    <label for="socials">{% call socialMedia(
+      href="javascript:;"
+    ) -%}Share to {{social}}{%- endcall %}</label>
+    <select id="socials">
+      {% for social in socials %}
+        <option value="{{social}}">{{social}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button onclick="getUrl()">Get Share URL</button>
+  <div>
+    <label for="output">Share URL:</label>
+    <input id="output" type="text" value="" readonly="true" style="display: block; width: 100%;" />
+  </div>
+</div>
