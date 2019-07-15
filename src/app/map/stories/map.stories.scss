@@ -1,7 +1,7 @@
-@import './src/app/map/map.mixin.scss';
+@import "./src/app/map/map.mixin.scss";
 
 @include map();
 
 .demoMap {
-  max-width: 640px;
+    max-width: 640px;
 }

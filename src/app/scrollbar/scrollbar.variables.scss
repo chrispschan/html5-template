@@ -1,6 +1,8 @@
 @import "./src/app/common/common.scss";
 
 $scrollbar-overlay: false;
+$scrollbar-height: 300px;
+$scrollbar-max-height: null;
 $scrollbar-size: 10px;
 $scrollbar-margin: 0;
 $scrollbar-padding: 2px;

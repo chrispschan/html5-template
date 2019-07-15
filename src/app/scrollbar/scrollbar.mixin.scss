@@ -1,21 +1,23 @@
 @import "scrollbar.variables.scss";
 
-html, body {
-    height: 100%;
-}
-
-@mixin scrollbar($isOverlay: $scrollbar-overlay, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background, $modifier: '') {
+@mixin scrollbar($isOverlay: $scrollbar-overlay, $height: $scrollbar-height, $maxHeight: $scrollbar-max-height, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background, $modifier: "") {
     .scrollbar#{$modifier} {
-        position: relative;
-        display: block;
-        width: 100%;
-        overflow: hidden;
+        @if ($modifier == "") {
+            @include scrollbarStyle($isOverlay: $isOverlay, $height: $maxHeight, $size: $size, $margin: $margin, $padding: $padding, $borderRadius: $borderRadius, $trackBackground: $trackBackground, $slideBackground: $slideBackground, $modifier: $modifier);
 
-        @if ($modifier == '') {
-            @include scrollbarStyle($isOverlay: $isOverlay, $size: $size, $margin: $margin, $padding: $padding, $borderRadius: $borderRadius, $trackBackground: $trackBackground, $slideBackground: $slideBackground);
+            position: relative;
+
+            display: block;
+
+            height: $height;
+            width: 100%;
+
+            overflow: hidden;
         } @else {
+            height: $height;
+
             .scrollbar {
-                @include scrollbarStyle($isOverlay: $isOverlay, $size: $size, $margin: $margin, $padding: $padding, $borderRadius: $borderRadius, $trackBackground: $trackBackground, $slideBackground: $slideBackground);
+                @include scrollbarStyle($isOverlay: $isOverlay, $height: $maxHeight, $size: $size, $margin: $margin, $padding: $padding, $borderRadius: $borderRadius, $trackBackground: $trackBackground, $slideBackground: $slideBackground, $modifier: $modifier);
             }
         }
 
@@ -23,65 +25,114 @@ html, body {
     }
 }
 
-@mixin scrollbarStyle($isOverlay: $scrollbar-overlay, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background) {
+@mixin scrollbarStyle($isOverlay: $scrollbar-overlay, $height: $scrollbar-max-height, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background, $modifier: "") {
     &__wrapper {
-        box-sizing: content-box;
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        overflow: scroll;
-        padding-right: 0;
-        -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: none;
+        @if ($modifier == "") {
+            position: relative;
 
-        // hide native scrollbar
-        &::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-            background: transparent;
-            display: none;
-            -webkit-appearance: none;
+            display: block;
+
+            box-sizing: content-box;
+
+            width: 100%;
+
+            overflow: scroll;
+
+            padding-right: 0;
+
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: none;
+
+            @if ($height != null) {
+                height: auto;
+                max-height: $height;
+            } @else {
+                height: 100%;
+                max-height: none;
+            }
+
+            // hide native scrollbar
+            &::-webkit-scrollbar {
+                display: none;
+
+                height: 0;
+                width: 0;
+
+                background: transparent;
+
+                -webkit-appearance: none;
+            }
         }
-        
+
         @if ($isOverlay == false) {
             &--scroll-x {
-                height: calc(100% - #{$size + $margin * 2});
+                @if ($height != null) {
+                    height: auto;
+                    max-height: calc(#{$height} - #{$size + $margin * 2});
+                } @else {
+                    height: calc(100% - #{$size + $margin * 2});
+                }
             }
 
             &--scroll-y {
                 width: calc(100% - #{$size + $margin * 2});
             }
+        } @else if ($modifier != "") {
+            &--scroll-x {
+                @if ($height != null) {
+                    height: auto;
+                    max-height: $height;
+                } @else {
+                    height: 100%;
+                }
+            }
+
+            &--scroll-y {
+                width: 100%;
+            }
         }
     }
 
-    &__content {
-        display: table;
-        min-width: 100%;
-        box-sizing: border-box;
-        overflow: visible;
+    @if ($modifier == "") {
+        &__content {
+            display: table;
+
+            box-sizing: border-box;
+
+            min-width: 100%;
+
+            overflow: visible;
+        }
     }
 
     &__track {
-        opacity: 1;
-        position: absolute;
-        display: none;
-        background: $trackBackground;
         border-radius: $borderRadius;
 
+        background: $trackBackground;
+        @if ($modifier == "") {
+            position: absolute;
+
+            display: none;
+
+            opacity: 1;
+        }
+
         &--y {
-            width: $size;
-            @if ($margin == 0 or $margin == 0px) {
-                height: 100%;
-                top: 0;
-            } @else {
-                height: calc(100% - #{$margin * 2});
-                top: $margin;
-            }
             right: $margin;
 
+            width: $size;
+            @if ($margin == 0 or $margin == 0) {
+                top: 0;
+
+                height: 100%;
+            } @else {
+                top: $margin;
+
+                height: calc(100% - #{$margin * 2});
+            }
+
             &--with-x {
-                @if ($margin == 0 or $margin == 0px) {
+                @if ($margin == 0 or $margin == 0) {
                     height: calc(100% - #{$size});
                 } @else {
                     height: calc(100% - #{$size + $margin * 3});
@@ -90,19 +141,22 @@ html, body {
         }
 
         &--x {
-            height: $size;
             bottom: $margin;
 
-            @if ($margin == 0 or $margin == 0px) {
-                width: 100%;
+            height: $size;
+
+            @if ($margin == 0 or $margin == 0) {
                 left: 0;
+
+                width: 100%;
             } @else {
-                width: calc(100% - #{$margin * 2});
                 left: $margin;
+
+                width: calc(100% - #{$margin * 2});
             }
 
             &--with-y {
-                @if ($margin == 0 or $margin == 0px) {
+                @if ($margin == 0 or $margin == 0) {
                     width: calc(100% - #{$size});
                 } @else {
                     width: calc(100% - #{$size + $margin * 3});
@@ -110,43 +164,64 @@ html, body {
             }
         }
 
-        &--visility {
-            display: block;
+        @if ($modifier == "") {
+            &--visility {
+                display: block;
+            }
         }
 
         &__slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: $borderRadius;
-            box-sizing: border-box;
             padding: $padding;
 
-            &::after {
-                content: '';
-                display: block;
-                width: 100%;
+            border-radius: $borderRadius;
+            @if ($modifier == "") {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                box-sizing: border-box;
+
                 height: 100%;
-                background: $slideBackground;
+                width: 100%;
+            }
+
+            &::after {
                 border-radius: $borderRadius;
+
+                background: $slideBackground;
+                @if ($modifier == "") {
+                    display: block;
+
+                    height: 100%;
+                    width: 100%;
+
+                    content: "";
+                }
             }
         }
     }
 
     &--disabled {
         .scrollbar {
-            &__track {
-                display: none;
+            @if ($modifier == "") {
+                &__track {
+                    display: none;
+                }
             }
 
             &__wrapper {
-                overflow: hidden;
+                @if ($modifier == "") {
+                    overflow: hidden;
+                }
 
                 @if ($isOverlay == false) {
                     &--scroll-x {
-                        height: 100%;
+                        @if ($height != null) {
+                            height: auto;
+                            max-height: $height;
+                        } @else {
+                            height: 100%;
+                        }
                     }
 
                     &--scroll-y {
@@ -159,13 +234,15 @@ html, body {
     &--disabled-x {
         .scrollbar {
             &__track {
-                &--x {
-                    display: none;
+                @if ($modifier == "") {
+                    &--x {
+                        display: none;
+                    }
                 }
 
                 &--y {
                     &--with-x {
-                        @if ($margin == 0 or $margin == 0px) {
+                        @if ($margin == 0 or $margin == 0) {
                             height: 100%;
                         } @else {
                             height: calc(100% - #{$margin * 2});
@@ -175,12 +252,20 @@ html, body {
             }
 
             &__wrapper {
-                overflow-y: scroll;
-                overflow-x: hidden;
+                @if ($modifier == "") {
+                    overflow-x: hidden;
+
+                    overflow-y: scroll;
+                }
 
                 @if ($isOverlay == false) {
                     &--scroll-x {
-                        height: 100%;
+                        @if ($height != null) {
+                            height: auto;
+                            max-height: $height;
+                        } @else {
+                            height: 100%;
+                        }
                     }
                 }
             }
@@ -189,13 +274,15 @@ html, body {
     &--disabled-y {
         .scrollbar {
             &__track {
-                &--y {
-                    display: none;
+                @if ($modifier == "") {
+                    &--y {
+                        display: none;
+                    }
                 }
 
                 &--x {
                     &--with-y {
-                        @if ($margin == 0 or $margin == 0px) {
+                        @if ($margin == 0 or $margin == 0) {
                             width: 100%;
                         } @else {
                             width: calc(100% - #{$margin * 2});
@@ -205,9 +292,12 @@ html, body {
             }
 
             &__wrapper {
-                overflow-x: hidden;
-                overflow-y: scroll;
-                
+                @if ($modifier == "") {
+                    overflow-x: hidden;
+
+                    overflow-y: scroll;
+                }
+
                 @if ($isOverlay == false) {
                     &--scroll-y {
                         width: 100%;

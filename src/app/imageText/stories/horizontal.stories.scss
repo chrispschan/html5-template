@@ -1,18 +1,18 @@
-@import './src/app/imageText/imageText.mixin.scss';
+@import "./src/app/imageText/imageText.mixin.scss";
 
 @include imageText() {
-  &--horizontal {
-    .imageText {
-      &__image,
-      &__text {
-        width: 50%;
-      }
+    &--horizontal {
+        .imageText {
+            &__image,
+            &__text {
+                width: 50%;
+            }
 
-      &__image {
-        &__item {
-          max-width: 100%;
+            &__image {
+                &__item {
+                    max-width: 100%;
+                }
+            }
         }
-      }
     }
-  }
 };

@@ -195,7 +195,7 @@ SCSS Files:
 @import './src/app/scrollbar/scrollbar.mixin.scss';
 ```
 
-#### @mixin scrollbar($isOverlay: $scrollbar-overlay, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background, $modifier: '')
+#### @mixin scrollbar($isOverlay: $scrollbar-overlay, $height: $scrollbar-height, $maxHeight: $scrollbar-max-height, $size: $scrollbar-size, $margin: $scrollbar-margin, $padding: $scrollbar-padding, $borderRadius: $scrollbar-border-radius, $trackBackground: $scrollbar-track-background, $slideBackground: $scrollbar-slide-background, $modifier: '')
 .scrollbar style.<br/>
 SCSS Files:
 ```scss
