@@ -1,0 +1,94 @@
+@import "formInput.variables.scss";
+@import "textInput.mixin.scss";
+
+@mixin formInput() {
+    .formInput {
+        margin-bottom: $formInput-margin-bottom;
+
+        &__label {
+            display: block;
+
+            padding: $formInput-label-padding;
+
+            margin-bottom: $formInput-label-margin-bottom;
+
+            color: $formInput-label-color;
+
+            line-height: $formInput-label-line-height / $formInput-label-font-size;
+
+            @if ($font-unit == em or $font-unit == rem) {
+                font-size: px2rem($formInput-label-font-size);
+            } @else {
+                font-size: $formInput-label-font-size;
+            }
+
+            &--hide {
+                position: absolute;
+                z-index: -999;
+
+                height: 0;
+                width: 0;
+
+                overflow: hidden;
+
+                padding: 0;
+
+                margin: 0;
+
+                opacity: 0;
+            }
+        }
+
+        &__wrapper {
+            position: relative;
+        }
+
+        &__note {
+            margin: $formInput-note-margin-top 0 0;
+
+            color: $formInput-note-color;
+
+            line-height: $formInput-note-line-height / $formInput-note-font-size;
+
+            @if ($font-unit == em or $font-unit == rem) {
+                font-size: px2rem($formInput-note-font-size);
+            } @else {
+                font-size: $formInput-note-font-size;
+            }
+
+            &--error {
+                display: none;
+
+                color: $formInput-note-error-color;
+            }
+
+            &--show {
+                display: block;
+            }
+
+            &--hide {
+                display: none;
+            }
+        }
+
+        &--error {
+            .formInput {
+                &__note {
+                    &--error {
+                        display: block;
+                    }
+
+                    &--hide {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    @include textInput();
+
+    .formInput {
+        @content;
+    }
+}

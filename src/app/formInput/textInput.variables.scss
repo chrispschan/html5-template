@@ -1,0 +1,32 @@
+@import "./src/app/common/common.scss";
+
+$textInput-padding: 4px 8px;
+$textInput-font-size: nth($h4, 1);
+$textInput-line-height: nth($h4, 2);
+$textInput-border-width: 1px;
+$textInput-border-style: solid;
+$textInput-border-radius: 4px;
+$textInput-transition: color .4s ease, background .4s ease, border-color .4s ease;
+$textInput-date-icon: "https://via.placeholder.com/20"; // append to [type="data"|"datetime-local"|"month"|"week"|"time"]
+$textInput-date-icon-width: nth($h4, 2);
+// theme
+$textInput-placeholder-color: rgba($black, .7);
+$textInput-background: $white;
+$textInput-border-color: $black;
+$textInput-color: $black;
+// focus theme
+$textInput-focus-background: rgba($blue, .1);
+$textInput-focus-border-color: $blue;
+$textInput-focus-color: $blue;
+// disabled theme
+$textInput-disabled-background: rgba($black, .1);
+$textInput-disabled-border-color: rgba($black, .1);
+$textInput-disabled-color: $black;
+// readonly theme
+$textInput-readonly-background: $white;
+$textInput-readonly-border-color: rgba($black, .1);
+$textInput-readonly-color: $black;
+// error theme
+$textInput-error-background: rgba($red, .1);
+$textInput-error-border-color: $red;
+$textInput-error-color: $red;

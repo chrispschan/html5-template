@@ -1,0 +1,71 @@
+{%- from "formInput/formInput.html" import formInput, label, textInput, note -%}
+
+{% call formInput(
+    id='fieldsetInputs',
+    options={fieldset: true}
+) -%}
+    {%- call label(options={tag: 'legend'}) -%}
+        Inputs Group
+    {%- endcall -%}
+    {%- call label(for='fieldsetInputText') -%}
+        Text Input
+    {%- endcall -%}
+    {{- textInput(id='fieldsetInputText', options={
+        type: 'text',
+        placeholder: 'Placeholder'
+    }) -}}
+    {%- call label(for='fieldsetInputNumber') -%}
+        Number Input
+    {%- endcall -%}
+    {{- textInput(id='fieldsetInputNumber', dataset={
+        valueKey: 'number'
+    }, options={
+        type: 'number',
+        placeholder: 'Placeholder'
+    }) -}}
+    {%- call note(options={modifier: ['error']}) -%}
+        Error
+    {%- endcall -%}
+    {%- call note() -%}
+        Note
+    {%- endcall -%}
+{%- endcall %}
+<div>
+    <label for="formInputKey">Input Key:</label>
+    <select id="formInputKey">
+        <option value="-1">-1</option>
+        <option value="fieldsetInputText">fieldsetInputText</option>
+        <option value="fieldsetInputNumber">fieldsetInputNumber</option>
+        <option value="number">number</option>
+    </select>
+</div>
+<div>
+    <label for="formInputDisabled">Is disabled:</label>
+    <input id="formInputDisabled" type="checkbox" value="disabled" />
+    <button onclick="setDisabled()">Set Disabled</button>
+</div>
+<div>
+    <label for="formInputReadonly">Is read only:</label>
+    <input id="formInputReadonly" type="checkbox" value="readonly" />
+    <button onclick="setReadOnly()">Set Read Only</button>
+</div>
+<div>
+    <label for="formInputError">Is error:</label>
+    <input id="formInputError" type="checkbox" value="readonly" />
+    <label for="formInputErrorMessage">Error message:</label>
+    <input id="formInputErrorMessage" type="text" value="" />
+    <button onclick="setError()">Set Error</button>
+</div>
+<div>
+    <div>{
+        <label for="formInputSetTextValue">fieldsetInputText:</label>
+        <input id="formInputSetTextValue" type="text" value="" />,
+        <label for="formInputSetNumberValue">number:</label>
+        <input id="formInputSetNumberValue" type="number" value="" />
+    }</div>
+    <button onclick="setValue()">Set Value</button>
+</div>
+<div>
+    <button onclick="getValue()">Get Value</button>
+</div>
+<p>Value: <strong id="formInputGetValue"></strong></p>

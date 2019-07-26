@@ -127,8 +127,6 @@ export default class Scrollbar {
         let _scrollDir = mouseEvent.target.hasClass('scrollbar__track__slide--y') ? 'y' : 'x',
             _isDisabled = false;
 
-        console.log(mouseEvent.target.parentNode.parentNode.scrollbarOptions);
-
         if (_scrollDir === 'y')
             _isDisabled = mouseEvent.target.parentNode.parentNode.scrollbarOptions.disabledY === true;
         else

@@ -1,0 +1,53 @@
+{%- set inputType=[
+    "text",
+    "number",
+    "email",
+    "tel",
+    "password",
+    "url",
+    "search",
+    "date",
+    "datetime-local",
+    "month",
+    "week",
+    "time",
+    "textarea"
+] -%}
+{%- set inputValue=[
+    "text",
+    "0",
+    "xxx@email.com",
+    "66666666",
+    "password",
+    "http://url.com",
+    "search",
+    "2018-06-12",
+    "2018-06-12T19:30",
+    "2018-06",
+    "2018-W26",
+    "18:00",
+    "textarea"
+] -%}
+
+{%- from "formInput/formInput.html" import formInput, label, textInput, note -%}
+
+{%- for type in inputType -%}
+    {%- set inputId="input_" + type -%}
+    {% call formInput(options={modifier: ['disabled']}) -%}
+        {%- call label(for=inputId) -%}
+            [type="{{type}}"]
+        {%- endcall -%}
+        {{- textInput(id=inputId, options={
+            type: type,
+            placeholder: 'placeholder',
+            modifier: ['disabled'],
+            value: inputValue[loop.index0]
+        }) -}}
+        {%- call note(options={modifier: ['error']}) -%}
+            Error
+        {%- endcall -%}
+        {%- call note() -%}
+            Note
+        {%- endcall -%}
+    {%- endcall %}
+{%- endfor -%}

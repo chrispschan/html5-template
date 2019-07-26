@@ -35,4 +35,11 @@
     strong {
         font-weight: bold;
     }
+
+    textarea,
+    input,
+    select {
+        // Firefox
+        font-family: $font-family;
+    }
 }

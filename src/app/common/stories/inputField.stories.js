@@ -16,7 +16,10 @@ storiesOf('Common/Form', module)
         <h4>SCSS Mixin</h4>
         <ul>
         <li>src/app/common/reset/input.reset.scss</li>
-        </ul>`
+        </ul>
+        <p>Safari not suppot [type="week"]</p>
+        <p>Firefox not suppot [type="datetime-local"|"month"|"week"]</p>
+        <p>IE not suppot [type="date"|"datetime-local"|"month"|"week"|"time"]</p>`
     }
   })
   .addDecorator(withCode({

@@ -1,0 +1,41 @@
+{%- from "formInput/formInput.html" import formInput, label, textInput, note -%}
+
+{% call formInput(
+    id='withValidation',
+    options={fieldset: true}
+) -%}
+    {%- call label(options={tag: 'legend'}) -%}
+        Inputs Group
+    {%- endcall -%}
+    {%- call label(for='withValidationInputText') -%}
+        Text Input
+    {%- endcall -%}
+    {{- textInput(id='withValidationInputText', options={
+        type: 'text',
+        placeholder: 'Placeholder',
+        modifier: [
+            'required'
+        ],
+        pattern: '^[a-zA-Z0-9]+$'
+    }) -}}
+    {%- call label(for='withValidationInputNumber') -%}
+        Number Input
+    {%- endcall -%}
+    {{- textInput(id='withValidationInputNumber', dataset={
+        valueKey: 'number'
+    }, options={
+        type: 'number',
+        placeholder: 'Placeholder',
+        min: 1,
+        max: 10
+    }) -}}
+    {%- call note(options={modifier: ['error']}) -%}
+        Error
+    {%- endcall -%}
+    {%- call note() -%}
+        Note
+    {%- endcall -%}
+{%- endcall %}
+<div>
+    <button onclick="checkValidation()">Check Validation</button>
+</div>
