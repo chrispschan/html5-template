@@ -1,9 +1,0 @@
-<a href="{{~#if href}}{{href}}{{else}}#{{~/if~}}"
-    {{~#if id}} id="{{id}}"{{~/if}}{{!--
-    --}} class="socialMedia
-    {{~#if dataset.type}} socialMedia--{{dataset.type}}{{~/if}}
-    {{~#if class}} {{class}}{{~/if}}"
-    {{~#each dataset}} data-{{@key}}="{{this}}"{{~/each ~}}
->
-    {{~> @partial-block ~}}
-</a>

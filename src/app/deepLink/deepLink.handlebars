@@ -1,8 +1,0 @@
-<a href="{{~#if href}}{{href}}{{else}}javascript:;{{~/if~}}"
-	{{~#if options.target}} target="{{options.target}}"{{~/if}} 
-	{{~#if id}} id="{{id}}"{{~/if}}{{!--
-    --}} class="deepLink{{#if class}} {{class}}{{/if}}"
-    {{~#each dataset}} data-{{@key}}="{{this}}"{{~/each ~}}
->
-	{{~> @partial-block ~}}
-</a>

@@ -1,9 +1,0 @@
-<div 
-    {{~#if id}} id="{{id}}"{{/if}}{{!--
-    --}} class="scrollbar
-    {{~#each options.modifier}} scrollbar--{{this}}{{~/each ~}}
-    {{~#if class}} {{class}}{{/if~}}" 
-    {{~#each dataset}} data-{{@key}}="{{this}}"{{~/each ~}}
->
-    {{~> @partial-block ~}}
-</div>

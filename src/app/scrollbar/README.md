@@ -127,65 +127,6 @@ Output:
 <div class="scrollbar scrollbar--overlay">scrollbar</div>
 ```
 
-## scrollbar.handlebars
-Handlebars template.<br/>
-Handlebars Files:
-```handlebars
-{{#> scrollbar/scrollbar}}scrollbar{{/scrollbar/scrollbar}}
-```
-Output:
-```html
-<div class="scrollbar">scrollbar</div>
-```
-
-#### Set id
-Handlebars Files:
-```handlebars
-{{#> scrollbar/scrollbar id="scrollbar1"}}scrollbar{{/scrollbar/scrollbar}}
-```
-Output:
-```html
-<div id="scrollbar1" class="scrollbar">scrollbar</div>
-```
-
-#### Set class
-Handlebars Files:
-```handlebars
-{{#> scrollbar/scrollbar class="scrollbar1"}}scrollbar{{/scrollbar/scrollbar}}
-```
-Output:
-```html
-<div class="scrollbar scrollbar1">scrollbar</div>
-```
-
-#### Set dataset
-If need set `data-text`<br/>
-Handlebars Files:
-```handlebars
-{{#setVal}}
-    dataset:dataset = {"text": "xxx"};
-{{/setVal}}
-{{#> scrollbar/scrollbar dataset=@local.dataset}}scrollbar{{/scrollbar/scrollbar}}
-```
-Output:
-```html
-<div class="scrollbar" data-text="xxx">scrollbar</div>
-```
-
-**Set modifier style class by array**
-
-Handlebars Files:
-```handlebars
-{{#setVal}}
-    options:json = {"modifier": ["overlay"]};
-{{/setVal}}
-{{#> scrollbar/scrollbar options=@local.options}}scrollbar{{/scrollbar/scrollbar}}
-```
-Output:
-```html
-<div class="scrollbar scrollbar--overlay">scrollbar</div>
-```
-
 ## scrollbar.mixin.scss
 scrollbar style template.
 

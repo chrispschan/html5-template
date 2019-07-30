@@ -1,8 +1,0 @@
-<!-- style -->
-{{#each @local.page.style as |files|}}
-    {{~#ifCond files.type "===" "relative" ~}}
-        <link rel="stylesheet" type="text/css" href="{{@local.path.css}}{{{files.file}}}" />
-    {{else}}
-        <link rel="stylesheet" type="text/css" href="{{{files.file}}}" />
-    {{~/ifCond}}
-{{~/each}}

@@ -34,8 +34,7 @@ gulp.task('default', (cd) => {
 
     watchTasks = watchTasks.concat(_watchTasks);
 
-    if (gulpOptions.htmlTemplate == 'hb') watchTasks.push('hb:watch');
-    else watchTasks.push('nunjucks:watch');
+    watchTasks.push('nunjucks:watch');
 
     return gulpSequence(buildTasks, serverTasks, watchTasks, cd);
 });

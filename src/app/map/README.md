@@ -228,66 +228,6 @@ Output:
 <div class="map"><!--[if lte IE 9]><p class="map__msg">Not Support Google Maps</p><![endif]--></div>
 ```
 
-## map.handlebars
-Handlebars template.
-
-### Getting Started
-Handlebars Files:
-```handlebars
-{{> map/map}}
-```
-Output:
-```html
-<div class="map"></div>
-```
-
-#### Set id
-Handlebars Files:
-```handlebars
-{{> map/map id="map1"}}
-```
-Output:
-```html
-<div id="map1" class="map"></div>
-```
-
-#### Set class
-Handlebars Files:
-```handlebars
-{{> map/map class="map1"}}
-```
-Output:
-```html
-<div class="map map1"></div>
-```
-
-#### Set dataset
-If need set `data-map-clickable-icons`<br/>
-Handlebars Files:
-```handlebars
-{{#setVal}}
-    dataset:dataset = {"clickableIcons": "false"}
-{{/setVal}}
-{{> map/map dataset=@local.dataset}}
-```
-Output:
-```html
-<div class="map" data-map-clickable-icons="false"></div>
-```
-
-##### Set not support message (< IE9)
-Handlebars Files:
-```handlebars
-{{#setVal}}
-    options:json = {"notSupport": "Not Support Google Maps"}
-{{/setVal}}
-{{> map/map options=@local.options}}
-```
-Output:
-```html
-<div class="map"><!--[if lte IE 9]><p class="map__msg">Not Support Google Maps</p><![endif]--></div>
-```
-
 ## map.mixin.scss
 Map style template.
 

@@ -1,0 +1,16 @@
+{# set value #}
+{% set lang="en" %}     {# page language id <src/data/html.xlsm -- lang -- id> #}
+{% set page=index %}     {# page content data <json file name> #}
+{% set viewport="device" %}     {# viewport setting <src/data/html.xlsm -- viewport -- id> #}
+{% set share=true %}     {# add facebook, LinkedIn, Twitter share meta tag? #}
+{% set noTel=true %}     {# need disable browser telephone number detection? #}
+{% set noDate=true %}     {# need disable browser date detection? #}
+{% set noAddr=true %}     {# need disable browser address detection? #}
+{% set noEmail=true %}     {# need disable browser email detection? #}
+
+{% set refresh="en/index.html" %}
+
+{%- extends "template/html5.html" -%}
+
+{% block html %}
+{% endblock %}

@@ -6,6 +6,10 @@ const gulpOptions = {
     cmsServer: {
         port: '30001'
     },
+    lang: [
+        {lang: 'en', dirname: 'en', suffix: ''},
+        {lang: 'zh', dirname: 'tc', suffix: ''}
+    ],
     outputFiles: {
         fonts: 'fonts',
         img: 'images',
@@ -29,7 +33,6 @@ const gulpOptions = {
     es5: false,
     gulpWatch: false,
     watchAppFolder: false,
-    htmlTemplate: 'nunjucks', // 'hb' | 'nunjucks'
     htmlbeautify: {
         'indent_size': 4,
         'indent_char': ' ',
