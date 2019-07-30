@@ -1,0 +1,67 @@
+@import "./src/app/common/common.scss";
+
+$toggleInput-font-size: nth($h6, 1);
+$toggleInput-height: 20px;
+$toggleInput-width: 60px;
+$toggleInput-border-width: none;
+$toggleInput-border-style: solid;
+$toggleInput-transition-duration: .4s;
+$toggleInput-transition-timing-function: ease;
+$toggleInput-text-outside: false;
+$toggleInput-text-outside-padding-right: 4px;
+$toggleInput-point-size: 24px;
+$toggleInput-point-border-width: 1px;
+$toggleInput-point-border-style: solid;
+$toggleInput-point-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.4);
+// theme
+$toggleInput-opacity: 1;
+$toggleInput-outside-text-color: $black;
+$toggleInput-valid-text-color: $white;
+$toggleInput-valid-background: $blue;
+$toggleInput-valid-border-color: $blue;
+$toggleInput-valid-point-background: $white;
+$toggleInput-valid-point-border-color: $black;
+$toggleInput-invalid-text-color: $white;
+$toggleInput-invalid-background: $black;
+$toggleInput-invalid-border-color: $black;
+$toggleInput-invalid-point-background: $white;
+$toggleInput-invalid-point-border-color: $black;
+// focus theme
+$toggleInput-focus-opacity: 1;
+$toggleInput-focus-outside-text-color: $black;
+$toggleInput-focus-valid-text-color: $white;
+$toggleInput-focus-valid-background: rgba($blue, .7);
+$toggleInput-focus-valid-border-color: $blue;
+$toggleInput-focus-valid-point-background: $white;
+$toggleInput-focus-valid-point-border-color: $blue;
+$toggleInput-focus-invalid-text-color: $white;
+$toggleInput-focus-invalid-background: rgba($black, .7);
+$toggleInput-focus-invalid-border-color: $black;
+$toggleInput-focus-invalid-point-background: $white;
+$toggleInput-focus-invalid-point-border-color: $blue;
+// disabled theme
+$toggleInput-disabled-opacity: .7;
+$toggleInput-disabled-outside-text-color: $black;
+$toggleInput-disabled-valid-text-color: $white;
+$toggleInput-disabled-valid-background: $blue;
+$toggleInput-disabled-valid-border-color: $blue;
+$toggleInput-disabled-valid-point-background: $white;
+$toggleInput-disabled-valid-point-border-color: $black;
+$toggleInput-disabled-invalid-text-color: $white;
+$toggleInput-disabled-invalid-background: $black;
+$toggleInput-disabled-invalid-border-color: $black;
+$toggleInput-disabled-invalid-point-background: $white;
+$toggleInput-disabled-invalid-point-border-color: $black;
+// error theme
+$toggleInput-error-opacity: 1;
+$toggleInput-error-outside-text-color: $black;
+$toggleInput-error-valid-text-color: $white;
+$toggleInput-error-valid-background: $blue;
+$toggleInput-error-valid-border-color: $blue;
+$toggleInput-error-valid-point-background: $white;
+$toggleInput-error-valid-point-border-color: $red;
+$toggleInput-error-invalid-text-color: $white;
+$toggleInput-error-invalid-background: $black;
+$toggleInput-error-invalid-border-color: $black;
+$toggleInput-error-invalid-point-background: $white;
+$toggleInput-error-invalid-point-border-color: $red;

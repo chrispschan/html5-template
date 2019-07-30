@@ -1,0 +1,51 @@
+{%- from "formInput/label/label.html" import label -%}
+
+{% macro toggleInput(id, class, dataset, options) %}
+    <input
+        {#!- #} id="{{- id -}}"
+        {#!- #} class="formInput__input formInput__input--toggle
+            {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {#!- #} type="checkbox"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+        {#!- #} value="{{options.value}}"
+        {%- if options.autofocus %} autofocus{%- endif -%}
+        {%- if options.checked %} checked{%- endif -%}
+        {%- if options.dirname %} dirname="{{options.dirname}}"{%- endif -%}
+        {%- if options.form %} form="{{options.form}}"{%- endif -%}
+        {%- if options.name %} name="{{options.name}}"{%- endif -%}
+        {%- if options.modifier -%}
+            {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
+            {%- if 'required' in options.modifier %} required{%- endif -%}
+            {%- if 'readonly' in options.modifier %} readonly{%- endif -%}
+        {%- endif -%}
+    {#!- #} />
+    {%- call label(
+        id=options.label.id,
+        for=id,
+        class='formInput__label--toggle' + ((' ' + options.label.class) if options.label.class),
+        dataset=options.label.dataset,
+        options=options.label.options
+    ) -%}
+        <span class="formInput__label--toggle__topic">
+            {%- if options.label.text -%}
+                {{options.label.text | safe}}
+            {%- else -%}
+                {{options.value}}
+            {%- endif -%}
+        </span>
+
+        {%- if options.outside -%}
+            {%- if options.label.valid -%}<span class="formInput__label--toggle__valid" aria-hidden="true">{{options.label.valid | safe}}</span>{%- endif -%}
+            {%- if options.label.invalid -%}<span class="formInput__label--toggle__invalid" aria-hidden="true">{{options.label.invalid | safe}}</span>{%- endif -%}
+        {%- endif -%}
+        
+        <span class="formInput__label--toggle__track">
+            {%- if not options.outside -%}
+                {%- if options.label.valid -%}<span class="formInput__label--toggle__track__valid" aria-hidden="true">{{options.label.valid | safe}}</span>{%- endif -%}
+                {%- if options.label.invalid -%}<span class="formInput__label--toggle__track__invalid" aria-hidden="true">{{options.label.invalid | safe}}</span>{%- endif -%}
+            {%- endif -%}
+        </span>
+    {%- endcall -%}
+{% endmacro %}

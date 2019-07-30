@@ -1,0 +1,8 @@
+@import "./src/app/common/common.scss";
+
+$formInput-label-font-size: nth($h5, 1);
+$formInput-label-line-height: nth($h5, 2);
+$formInput-label-padding: 0;
+$formInput-label-margin-bottom: 4px;
+// theme
+$formInput-label-color: $black;

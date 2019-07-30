@@ -1,0 +1,216 @@
+@import "selectInput.variables.scss";
+
+@mixin selectInput() {
+    $selectInput-border-top-width: 0;
+    $selectInput-border-bottom-width: 0;
+    $selectInput-padding-right-width: 0;
+    .formInput {
+        &__input {
+            &--select {
+                display: block;
+
+                box-sizing: border-box;
+
+                width: 100%;
+
+                border-radius: $selectInput-border-radius;
+
+                box-shadow: none;
+
+                color: $selectInput-color;
+
+                // line-height: $selectInput-line-height / $selectInput-font-size;
+
+                background-color: $selectInput-background;
+                background-image: url($selectInput-icon);
+                background-repeat: no-repeat;
+                background-size: $selectInput-icon-width auto;
+                background-position-y: center;
+
+                -webkit-appearance: none;
+                -moz-appearance: textfield;
+                appearance: none;
+
+                @if ($font-unit == em or $font-unit == rem) {
+                    font-size: px2rem($selectInput-font-size);
+                } @else {
+                    font-size: $selectInput-font-size;
+                }
+                @if ($selectInput-border-width == none) {
+                    border: $selectInput-border-width;
+                } @else {
+                    @if (type-of($selectInput-border-width) == list or type-of($selectInput-border-style) == list or type-of($selectInput-border-color) == list) {
+                        border-color: $selectInput-border-color;
+                        border-style: $selectInput-border-style;
+                        border-width: $selectInput-border-width;
+
+                        @if (type-of($selectInput-border-width) == list) {
+                            @if (length($selectInput-border-width) >= 3) {
+                                $selectInput-border-top-width: nth($selectInput-border-width, 1);
+                                $selectInput-border-bottom-width: nth($selectInput-border-width, 3);
+                            } @else {
+                                $selectInput-border-top-width: nth($selectInput-border-width, 1);
+                                $selectInput-border-bottom-width: nth($selectInput-border-width, 1);
+                            }
+                        } @else {
+                            $selectInput-border-top-width: $selectInput-border-width;
+                            $selectInput-border-bottom-width: $selectInput-border-width;
+                        }
+                    } @else {
+                        $selectInput-border-top-width: $selectInput-border-width;
+                        $selectInput-border-bottom-width: $selectInput-border-width;
+
+                        border: $selectInput-border-width $selectInput-border-style $selectInput-border-color;
+                    }
+                }
+
+                @if ($selectInput-transition != none) {
+                    -webkit-transition: $selectInput-transition; /* Safari prior 6.1 */
+                    transition: $selectInput-transition;
+                }
+
+                @if (typeof $selectInput-padding == list) {
+                    @if (length($selectInput-padding) >= 3) {
+                        height: $selectInput-line-height + nth($selectInput-padding, 1) + nth($selectInput-padding, 3) + $selectInput-border-top-width + $selectInput-border-bottom-width;
+                        
+                        line-height: $selectInput-line-height + nth($selectInput-padding, 1) + nth($selectInput-padding, 3) + $selectInput-border-top-width + $selectInput-border-bottom-width;
+                        
+                        padding: 0 #{$selectInput-icon-width + nth($selectInput-padding, 2) * 2} 0 nth($selectInput-padding, 2);
+
+                        background-position-x: calc(100% - #{nth($selectInput-padding, 2)});
+                    } @else {
+                        height: $selectInput-line-height + nth($selectInput-padding, 1) * 2 + $selectInput-border-top-width + $selectInput-border-bottom-width;
+                        
+                        line-height: $selectInput-line-height + nth($selectInput-padding, 1) * 2 + $selectInput-border-top-width + $selectInput-border-bottom-width;
+
+                        padding: 0 #{$selectInput-icon-width + nth($selectInput-padding, 2) * 2} 0 nth($selectInput-padding, 2);
+
+                        background-position-x: calc(100% - #{nth($selectInput-padding, 2)});
+                    }
+                } @else {
+                    height: $selectInput-line-height + $selectInput-padding * 2 + $selectInput-border-top-width + $selectInput-border-bottom-width;
+
+                    line-height: $selectInput-line-height + $selectInput-padding * 2 + $selectInput-border-top-width + $selectInput-border-bottom-width;
+
+                    padding: 0 #{$selectInput-icon-width + $selectInput-padding * 2} 0 $selectInput-padding;
+
+                    background-position-x: calc(100% - #{$selectInput-padding});
+                }
+
+                &::-ms-expand {
+                    display: none;
+                }
+
+                &:focus {
+                    outline: 0;
+
+                    @include selectInputColor($selectInput-focus-color, $selectInput-focus-background, $selectInput-focus-border-color);
+                }
+
+                &.formInput__input--disabled,
+                &:disabled {
+                    opacity: 1;
+
+                    @include selectInputColor($selectInput-disabled-color, $selectInput-disabled-background, $selectInput-disabled-border-color);
+                }
+
+                &.formInput__input--error {
+                    @include selectInputColor($selectInput-error-color, $selectInput-error-background, $selectInput-error-border-color);
+
+                    &:focus {
+                        @include selectInputColor($selectInput-error-color, $selectInput-error-background, $selectInput-error-border-color, true);
+                    }
+                }
+            }
+
+            &--multiple {
+                background-image: none;
+
+                height: auto;
+
+                overflow: auto;
+
+                line-height: $selectInput-line-height / $selectInput-font-size;
+
+                @if (typeof $selectInput-padding == list) {
+                    @if (length($selectInput-padding) >= 3) {
+                        padding: nth($selectInput-padding, 1) nth($selectInput-padding, 2) nth($selectInput-padding, 3) nth($selectInput-padding, 2);
+                    } @else {
+                        padding: nth($selectInput-padding, 1) nth($selectInput-padding, 2);
+                    }
+                } @else {
+                    padding-right: $selectInput-padding;
+                }
+            }
+        }
+
+        @include selectInputStatus('error', $selectInput-error-color, $selectInput-error-background, $selectInput-error-border-color);
+        @include selectInputStatus('disabled', $selectInput-disabled-color, $selectInput-disabled-background, $selectInput-disabled-border-color);
+    }
+}
+
+@mixin selectInputColor(
+    $selectInputColor: $selectInput-color,
+    $selectInputBg: $selectInput-background,
+    $selectInputBorder: $selectInput-border-color,
+    $isFocus: false
+) {
+    $defaultColor: $selectInput-color;
+    $defaultBg: $selectInput-background;
+    $defaultBorder: $selectInput-border-color;
+
+    @if ($isFocus != false) {
+        $defaultColor: $selectInput-focus-color;
+        $defaultBg: $selectInput-focus-background;
+        $defaultBorder: $selectInput-focus-border-color;
+    }
+
+    
+    @if ($defaultColor != $selectInputColor) {
+        color: $selectInputColor;
+    }
+    @if ($defaultBg != $selectInputBg) {
+        background-color: $selectInputBg;
+    }
+    @if ($defaultBorder != $selectInputBorder) {
+        border-color: $selectInputBorder;
+    }
+}
+
+@mixin selectInputStatus(
+    $selectInputStatus,
+    $selectInputColor: $selectInput-color,
+    $selectInputBg: $selectInput-background,
+    $selectInputBorder: $selectInput-border-color,
+    $selectInputFocusColor: false,
+    $selectInputFocusBg: false,
+    $selectInputFocusBorder: false
+) {
+    $focusColor: $selectInputColor;
+    $focusBg: $selectInputBg;
+    $focusBorder: $selectInputBorder;
+
+    @if ($selectInputFocusColor != false) {
+        $focusColor : $selectInputFocusColor;
+    }
+    @if ($selectInputFocusBg != false) {
+        $focusBg : $selectInputFocusBg;
+    }
+    @if ($selectInputFocusBorder != false) {
+        $focusBorder : $selectInputBoxBorder;
+    }
+
+    &--#{$selectInputStatus} {
+        .formInput {
+            &__input {
+                &--select {
+                    @include selectInputColor($selectInputColor, $selectInputBg, $selectInputBorder);
+
+                    &:focus {
+                        @include selectInputColor($focusColor, $focusBg, $focusBorder, true);
+                    }
+                }
+            }
+        }
+    }
+}

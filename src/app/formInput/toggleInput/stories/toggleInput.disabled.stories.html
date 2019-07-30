@@ -1,0 +1,22 @@
+{%- from "formInput/formInput.html" import formInput, label, toggleInput, note -%}
+
+{% call formInput(options={modifier: ['disabled']}) -%}
+    {%- call label() -%}
+        Toggle
+    {%- endcall -%}
+    {{- toggleInput(id='input_toggle', options={
+        value: 'Toggle',
+        outside: true,
+        label: {
+            valid: 'Yes',
+            invalid: 'No'
+        },
+        modifier: ['disabled']
+    }) -}}
+    {%- call note(options={modifier: ['error']}) -%}
+        Error
+    {%- endcall -%}
+    {%- call note() -%}
+        Note
+    {%- endcall -%}
+{%- endcall %}

@@ -1,15 +1,3 @@
 @import "./src/app/common/common.scss";
-@import "textInput.variables.scss";
 
 $formInput-margin-bottom: $base-margin;
-$formInput-label-font-size: nth($h5, 1);
-$formInput-label-line-height: nth($h5, 2);
-$formInput-label-padding: 0;
-$formInput-label-margin-bottom: 4px;
-$formInput-note-margin-top: 4px;
-$formInput-note-font-size: nth($h5, 1);
-$formInput-note-line-height: nth($h5, 2);
-// theme
-$formInput-label-color: $black;
-$formInput-note-color: $black;
-$formInput-note-error-color: $red;

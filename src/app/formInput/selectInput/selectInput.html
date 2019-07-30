@@ -1,0 +1,21 @@
+{% macro selectInput(id, class, dataset, options) %}
+    <select
+        {#!- #} id="{{- id -}}"
+        {#!- #} class="formInput__input formInput__input--select
+            {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+        {%- if options.autofocus %} autofocus{%- endif -%}
+        {%- if options.form %} form="{{options.form}}"{%- endif -%}
+        {%- if options.name %} name="{{options.name}}"{%- endif -%}
+        {%- if options.size %} size="{{options.size}}"{%- endif -%}
+        {%- if options.modifier -%}
+            {%- if 'multiple' in options.modifier %} multiple{%- endif -%}
+            {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
+            {%- if 'required' in options.modifier %} required{%- endif -%}
+        {%- endif -%}
+    {#!- #}>
+        {{- caller() -}}
+    </select>
+{% endmacro %}

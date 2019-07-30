@@ -66,6 +66,13 @@
         &:focus {
             outline: $focus-outlin;
         }
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-box-shadow: none;
+        }
     }
 
     input {
@@ -85,6 +92,8 @@
     input[type="checkbox"],
     input[type="radio"] {
         box-sizing: border-box;
+
+        pointer-events: none;
     }
 
     input[type="search"] {

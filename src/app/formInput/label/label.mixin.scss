@@ -1,0 +1,41 @@
+@import "label.variables.scss";
+
+@mixin label() {
+    .formInput {
+        &__label {
+            display: block;
+
+            padding: $formInput-label-padding;
+
+            margin-bottom: $formInput-label-margin-bottom;
+
+            color: $formInput-label-color;
+
+            clear: both;
+
+            line-height: $formInput-label-line-height / $formInput-label-font-size;
+
+            @if ($font-unit == em or $font-unit == rem) {
+                font-size: px2rem($formInput-label-font-size);
+            } @else {
+                font-size: $formInput-label-font-size;
+            }
+
+            &--hide {
+                position: absolute;
+                z-index: -999;
+
+                height: 0;
+                width: 0;
+
+                overflow: hidden;
+
+                padding: 0;
+
+                margin: 0;
+
+                opacity: 0;
+            }
+        }
+    }
+}

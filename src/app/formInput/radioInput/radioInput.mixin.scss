@@ -1,0 +1,281 @@
+@import "radioInput.variables.scss";
+
+@mixin radioInput() {
+    .formInput {
+        &__label {
+            &--radio {
+                position: relative;
+
+                display: block;
+                float: left;
+
+                padding: $radioInput-text-padding-top 0 0 #{$radioInput-box-size + $radioInput-box-margin-right};
+
+                color: $radioInput-text-color;
+
+                line-height: $radioInput-line-height / $radioInput-font-size;
+
+                @if ($font-unit == em or $font-unit == rem) {
+                    font-size: px2rem($radioInput-font-size);
+                } @else {
+                    font-size: $radioInput-font-size;
+                }
+
+                &::before {
+                    position: absolute;
+                    top: ($radioInput-line-height - $radioInput-box-size) / 2 + $radioInput-text-padding-top;
+                    left: 0;
+
+                    display: block;
+
+                    box-sizing: border-box;
+
+                    height: $radioInput-box-size;
+                    width: $radioInput-box-size;
+
+                    overflow: hidden;
+
+                    border-radius: $radioInput-box-border-radius;
+
+                    content: "";
+
+                    background: $radioInput-box-background;
+
+                    @if ($radioInput-box-border-width == none) {
+                        border: $radioInput-box-border-width;
+                    } @else {
+                        @if (type-of($radioInput-box-border-width) == list or type-of($radioInput-box-border-style) == list or type-of($radioInput-box-border-color) == list) {
+                            border-color: $radioInput-box-border-color;
+                            border-style: $radioInput-box-border-style;
+                            border-width: $radioInput-box-border-width;
+
+                            @if (type-of($radioInput-box-border-width) == list) {
+                                @if (length($radioInput-box-border-width) >= 3) {
+                                    $radioInput-box-border-top-width: nth($radioInput-box-border-width, 1);
+                                    $radioInput-box-border-bottom-width: nth($radioInput-box-border-width, 3);
+                                } @else {
+                                    $radioInput-box-border-top-width: nth($radioInput-box-border-width, 1);
+                                    $radioInput-box-border-bottom-width: nth($radioInput-box-border-width, 1);
+                                }
+                            } @else {
+                                $radioInput-box-border-top-width: $radioInput-box-border-width;
+                                $radioInput-box-border-bottom-width: $radioInput-box-border-width;
+                            }
+                        } @else {
+                            $radioInput-box-border-top-width: $radioInput-box-border-width;
+                            $radioInput-box-border-bottom-width: $radioInput-box-border-width;
+
+                            border: $radioInput-box-border-width $radioInput-box-border-style $radioInput-box-border-color;
+                        }
+                    }
+
+                    @if ($radioInput-box-transition != none) {
+                        -webkit-transition: $radioInput-box-transition; /* Safari prior 6.1 */
+                        transition: $radioInput-box-transition;
+                    }
+                }
+
+                &::after {
+                    position: absolute;
+                    top: ($radioInput-box-size - $radioInput-box-checked-size) / 2 + ($radioInput-line-height - $radioInput-box-size) / 2 + $radioInput-text-padding-top;
+                    left: ($radioInput-box-size - $radioInput-box-checked-size) / 2;
+
+                    display: block;
+
+                    height: $radioInput-box-checked-size;
+                    width: $radioInput-box-checked-size;
+
+                    overflow: hidden;
+
+                    line-height: 1;
+
+                    text-align: center;
+
+                    content: '';
+
+                    opacity: 0;
+
+                    border-radius: $radioInput-box-checked-border-radius;
+                    background: $radioInput-box-checked-background;
+
+                    @if ($radioInput-box-checked-border-width == none) {
+                        border: $radioInput-box-checked-border-width;
+                    } @else {
+                        @if (type-of($radioInput-box-checked-border-width) == list or type-of($radioInput-box-checked-border-style) == list or type-of($radioInput-box-checked-border-color) == list) {
+                            border-color: $radioInput-box-checked-border-color;
+                            border-style: $radioInput-box-checked-border-style;
+                            border-width: $radioInput-box-checked-border-width;
+
+                            @if (type-of($radioInput-box-checked-border-width) == list) {
+                                @if (length($radioInput-box-checked-border-width) >= 3) {
+                                    $radioInput-box-border-top-width: nth($radioInput-box-checked-border-width, 1);
+                                    $radioInput-box-border-bottom-width: nth($radioInput-box-checked-border-width, 3);
+                                } @else {
+                                    $radioInput-box-border-top-width: nth($radioInput-box-checked-border-width, 1);
+                                    $radioInput-box-border-bottom-width: nth($radioInput-box-checked-border-width, 1);
+                                }
+                            } @else {
+                                $radioInput-box-border-top-width: $radioInput-box-checked-border-width;
+                                $radioInput-box-border-bottom-width: $radioInput-box-checked-border-width;
+                            }
+                        } @else {
+                            $radioInput-box-border-top-width: $radioInput-box-checked-border-width;
+                            $radioInput-box-border-bottom-width: $radioInput-box-checked-border-width;
+
+                            border: $radioInput-box-checked-border-width $radioInput-box-checked-border-style $radioInput-box-checked-border-color;
+                        }
+                    }
+
+                    @if ($radioInput-box-transition != none) {
+                        -webkit-transition: $radioInput-box-transition; /* Safari prior 6.1 */
+                        transition: $radioInput-box-transition;
+                    }
+                }
+            }
+        }
+
+        &__input {
+            &--radio {
+                position: absolute;
+                z-index: -1;
+
+                opacity: 0;
+
+                &:checked {
+                     + .formInput {
+                        &__label {
+                            &--radio {
+                                &::after {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:focus {
+                    outline: 0;
+
+                    @include radioColor($radioInput-focus-text-color, $radioInput-focus-box-background, $radioInput-focus-box-border-color, $radioInput-focus-box-checked-background, $radioInput-focus-box-checked-border-color);
+                }
+
+                &.formInput__input--disabled,
+                &:disabled {
+                    @include radioColor($radioInput-disabled-text-color, $radioInput-disabled-box-background, $radioInput-disabled-box-border-color, $radioInput-disabled-box-checked-background, $radioInput-disabled-box-checked-border-color);
+                }
+
+                &.formInput__input--error {
+                    @include radioColor($radioInput-error-text-color, $radioInput-error-box-background, $radioInput-error-box-border-color, $radioInput-error-box-checked-background, $radioInput-error-box-checked-border-color);
+
+                    &:focus {
+                        @include radioColor($radioInput-error-text-color, $radioInput-error-box-background, $radioInput-error-box-border-color, $radioInput-error-box-checked-background, $radioInput-error-box-checked-border-color, true);
+                    }
+                }
+            }
+        }
+
+        @include radioStatus('error', $radioInput-error-text-color, $radioInput-error-box-background, $radioInput-error-box-border-color, $radioInput-error-box-checked-background, $radioInput-error-box-checked-border-color);
+        @include radioStatus('disabled', $radioInput-disabled-text-color, $radioInput-disabled-box-background, $radioInput-disabled-box-border-color, $radioInput-disabled-box-checked-background, $radioInput-disabled-box-checked-border-color);
+    }
+}
+
+@mixin radioColor(
+    $radioTextColor: $radioInput-text-color,
+    $radioBoxBg: $radioInput-box-background,
+    $radioBoxBorder: $radioInput-box-border-color,
+    $radioCheckedBg: $radioInput-box-checked-background,
+    $radioCheckedBorder: $radioInput-box-checked-border-color,
+    $isFocus: false
+) {
+    $defaultTextColor: $radioInput-text-color;
+    $defaultBoxBg: $radioInput-box-background;
+    $defaultBoxBorder: $radioInput-box-border-color;
+    $defaultCheckedBg: $radioInput-box-checked-background;
+    $defaultCheckedBorder: $radioInput-box-checked-border-color;
+
+    @if ($isFocus != false) {
+        $defaultTextColor: $radioInput-focus-text-color;
+        $defaultBoxBg: $radioInput-focus-box-background;
+        $defaultBoxBorder: $radioInput-focus-box-border-color;
+        $defaultCheckedBg: $radioInput-focus-box-checked-background;
+        $defaultCheckedBorder: $radioInput-focus-box-checked-border-color;
+    }
+
+     + .formInput {
+        &__label {
+            &--radio {
+                @if ($defaultTextColor != $radioTextColor) {
+                    color: $radioTextColor;
+                }
+
+                &::before {
+                    @if ($defaultBoxBg != $radioBoxBg) {
+                        background-color: $radioBoxBg;
+                    }
+                    @if ($defaultBoxBorder != $radioBoxBorder) {
+                        border-color: $radioBoxBorder;
+                    }
+                }
+
+                &::after {
+                    @if ($defaultCheckedBg != $radioCheckedBg) {
+                        background-color: $radioCheckedBg;
+                    }
+                    @if ($defaultCheckedBorder != $defaultCheckedBorder) {
+                        border-color: $defaultCheckedBorder;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin radioStatus(
+    $radioStatus,
+    $radioTextColor: $radioInput-text-color,
+    $radioBoxBg: $radioInput-box-background,
+    $radioBoxBorder: $radioInput-box-border-color,
+    $radioCheckedBg: $radioInput-box-checked-background,
+    $radioCheckedBorder: $radioInput-box-checked-border-color,
+    $radioFocusTextColor: false,
+    $radioFocusBoxBg: false,
+    $radioFocusBoxBorder: false,
+    $radioFocusCheckedBg: false,
+    $radioFocusCheckedBorder: false,
+) {
+    $focusTextColor: $radioTextColor;
+    $focusBoxBg: $radioBoxBg;
+    $focusBoxBorder: $radioBoxBorder;
+    $focusCheckedBg: $radioCheckedBg;
+    $focusCheckedBorder: $radioCheckedBorder;
+
+    @if ($radioFocusTextColor != false) {
+        $focusTextColor : $radioFocusTextColor;
+    }
+    @if ($radioBoxBg != false) {
+        $focusBoxBg : $radioBoxBg;
+    }
+    @if ($radioBoxBorder != false) {
+        $focusBoxBorder : $radioBoxBorder;
+    }
+    @if ($radioFocusCheckedBg != false) {
+        $focusCheckedBg : $radioFocusCheckedBg;
+    }
+    @if ($radioFocusCheckedBorder != false) {
+        $focusCheckedBorder : $radioFocusCheckedBorder;
+    }
+
+    &--#{$radioStatus} {
+        .formInput {
+            &__input {
+                &--radio {
+                    @include radioColor($radioTextColor, $radioBoxBg, $radioBoxBorder, $radioCheckedBg, $radioCheckedBorder);
+
+                    &:focus {
+                        @include radioColor($focusTextColor, $focusBoxBg, $focusBoxBorder, $focusCheckedBg, $focusCheckedBorder, true);
+                    }
+                }
+            }
+        }
+    }
+}

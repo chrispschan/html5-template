@@ -1,0 +1,299 @@
+@import "textInput.variables.scss";
+
+@mixin textInput() {
+    $textInput-border-top-width: 0;
+    $textInput-border-bottom-width: 0;
+    $textInput-padding-right-width: 0;
+    .formInput {
+        &__input {
+            &--textInput {
+                display: block;
+
+                box-sizing: border-box;
+
+                width: 100%;
+
+                border-radius: $textInput-border-radius;
+
+                box-shadow: none;
+
+                color: $textInput-color;
+
+                line-height: $textInput-line-height / $textInput-font-size;
+
+                background-color: $textInput-background;
+
+                -webkit-appearance: none;
+                -moz-appearance: textfield;
+                appearance: none;
+
+                @if ($font-unit == em or $font-unit == rem) {
+                    font-size: px2rem($textInput-font-size);
+                } @else {
+                    font-size: $textInput-font-size;
+                }
+                @if ($textInput-border-width == none) {
+                    border: $textInput-border-width;
+                } @else {
+                    @if (type-of($textInput-border-width) == list or type-of($textInput-border-style) == list or type-of($textInput-border-color) == list) {
+                        border-color: $textInput-border-color;
+                        border-style: $textInput-border-style;
+                        border-width: $textInput-border-width;
+
+                        @if (type-of($textInput-border-width) == list) {
+                            @if (length($textInput-border-width) >= 3) {
+                                $textInput-border-top-width: nth($textInput-border-width, 1);
+                                $textInput-border-bottom-width: nth($textInput-border-width, 3);
+                            } @else {
+                                $textInput-border-top-width: nth($textInput-border-width, 1);
+                                $textInput-border-bottom-width: nth($textInput-border-width, 1);
+                            }
+                        } @else {
+                            $textInput-border-top-width: $textInput-border-width;
+                            $textInput-border-bottom-width: $textInput-border-width;
+                        }
+                    } @else {
+                        $textInput-border-top-width: $textInput-border-width;
+                        $textInput-border-bottom-width: $textInput-border-width;
+
+                        border: $textInput-border-width $textInput-border-style $textInput-border-color;
+                    }
+                }
+
+                @if ($textInput-transition != none) {
+                    -webkit-transition: $textInput-transition; /* Safari prior 6.1 */
+                    transition: $textInput-transition;
+                }
+
+                // fix ios safari type="date" without height if value is blank
+                @if (typeof $textInput-padding == list) {
+                    $textInput-padding-right-width: nth($textInput-padding, 2);
+
+                    @if (length($textInput-padding) >= 3) {
+                        height: $textInput-line-height + nth($textInput-padding, 1) + nth($textInput-padding, 3) + $textInput-border-top-width + $textInput-border-bottom-width;
+
+                        padding: #{nth($textInput-padding, 1) + $textInput-line-height / 2 - $textInput-font-size / 2} nth($textInput-padding, 2) #{nth($textInput-padding, 3) + $textInput-line-height / 2 - $textInput-font-size / 2};
+                    } @else {
+                        height: $textInput-line-height + nth($textInput-padding, 1) * 2 + $textInput-border-top-width + $textInput-border-bottom-width;
+
+                        padding: #{(nth($textInput-padding, 1) * 2 + $textInput-line-height - $textInput-font-size) / 2} nth($textInput-padding, 2);
+                    }
+                } @else {
+                    $textInput-padding-right-width: $textInput-padding;
+
+                    height: $textInput-line-height + $textInput-padding * 2 + $textInput-border-top-width + $textInput-border-bottom-width;
+
+                    padding: #{($textInput-padding * 2 + $textInput-line-height - $textInput-font-size) / 2} $textInput-padding;
+                }
+
+                &:-webkit-autofill {
+                    -webkit-box-shadow: none;
+                }
+
+                &::-ms-clear,
+                &::-ms-reveal {
+                    display: none;
+                }
+
+                &::-moz-clear {
+                    display: none;
+                }
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button,
+                &::-webkit-clear-button,
+                &::-webkit-search-decoration,
+                &::-webkit-search-cancel-button,
+                &::-webkit-search-results-button,
+                &::-webkit-search-results-decoration {
+                    display: none;
+
+                    margin: 0;
+                }
+
+                &::-webkit-calendar-picker-indicator {
+                    position: absolute;
+                    right: $textInput-padding-right-width;
+                    left: auto;
+
+                    height: $textInput-line-height;
+                    width: $textInput-date-icon-width;
+
+                    padding: 0;
+
+                    margin: 0;
+
+                    color: transparent;
+
+                    background: transparent;
+
+                    opacity: 0;
+                }
+
+                &:-ms-input-placeholder {
+                    // Internet Explorer 10-11
+                    color: $textInput-placeholder-color;
+                }
+
+                &::-ms-input-placeholder {
+                    // Microsoft Edge
+                    color: $textInput-placeholder-color;
+                }
+
+                &::placeholder {
+                    color: $textInput-placeholder-color;
+
+                    opacity: 1; // Firefox
+                }
+
+                &:invalid,
+                &:valid {
+                    box-shadow: none;
+                }
+
+                &:focus {
+                    outline: 0;
+
+                    @include textInputColor($textInput-focus-color, $textInput-focus-background, $textInput-focus-border-color);
+                }
+
+                &.formInput__input--disabled,
+                &:disabled {
+                    opacity: 1;
+
+                    @include textInputColor($textInput-disabled-color, $textInput-disabled-background, $textInput-disabled-border-color);
+                }
+
+                &.formInput__input--readonly,
+                &:read-only {
+                    @include textInputColor($textInput-readonly-color, $textInput-readonly-background, $textInput-readonly-border-color);
+
+                    &:focus {
+                        @include textInputColor($textInput-readonly-color, $textInput-readonly-background, $textInput-readonly-border-color, true);
+                    }
+                }
+
+                &:-moz-read-only {
+                    @include textInputColor($textInput-readonly-color, $textInput-readonly-background, $textInput-readonly-border-color);
+
+                    &:focus {
+                        @include textInputColor($textInput-readonly-color, $textInput-readonly-background, $textInput-readonly-border-color, true);
+                    }
+                }
+
+                &.formInput__input--error {
+                    @include textInputColor($textInput-error-color, $textInput-error-background, $textInput-error-border-color);
+
+                    &:focus {
+                        @include textInputColor($textInput-error-color, $textInput-error-background, $textInput-error-border-color, true);
+                    }
+                }
+            }
+
+            &--textarea {
+                height: auto;
+
+                overflow: auto;
+
+                padding: $textInput-padding;
+
+                line-height: $textInput-line-height / $textInput-font-size;
+
+                resize: none;
+            }
+
+            &--date,
+            &--datetime-local,
+            &--month,
+            &--week,
+            &--time {
+                padding-right: $textInput-date-icon-width + $textInput-padding-right-width * 2;
+
+                line-height: 1;
+
+                background-image: url($textInput-date-icon);
+                background-repeat: no-repeat;
+
+                background-size: $textInput-date-icon-width auto;
+
+                @if ($textInput-padding-right-width != 0) {
+                    background-position-x: calc(100% - #{$textInput-padding-right-width});
+                } @else {
+                    background-position-x: 100%;
+                }
+                
+                background-position-y: center;
+            }
+        }
+
+        @include textInputStatus('error', $textInput-error-color, $textInput-error-background, $textInput-error-border-color);
+        @include textInputStatus('disabled', $textInput-disabled-color, $textInput-disabled-background, $textInput-disabled-border-color);
+        @include textInputStatus('readonly', $textInput-readonly-color, $textInput-readonly-background, $textInput-readonly-border-color);
+    }
+}
+
+@mixin textInputColor(
+    $textInputColor: $textInput-color,
+    $textInputBg: $textInput-background,
+    $textInputBorder: $textInput-border-color,
+    $isFocus: false
+) {
+    $defaultColor: $textInput-color;
+    $defaultBg: $textInput-background;
+    $defaultBorder: $textInput-border-color;
+
+    @if ($isFocus != false) {
+        $defaultColor: $textInput-focus-color;
+        $defaultBg: $textInput-focus-background;
+        $defaultBorder: $textInput-focus-border-color;
+    }
+
+    
+    @if ($defaultColor != $textInputColor) {
+        color: $textInputColor;
+    }
+    @if ($defaultBg != $textInputBg) {
+        background-color: $textInputBg;
+    }
+    @if ($defaultBorder != $textInputBorder) {
+        border-color: $textInputBorder;
+    }
+}
+
+@mixin textInputStatus(
+    $textInputStatus,
+    $textInputColor: $textInput-color,
+    $textInputBg: $textInput-background,
+    $textInputBorder: $textInput-border-color,
+    $textInputFocusColor: false,
+    $textInputFocusBg: false,
+    $textInputFocusBorder: false
+) {
+    $focusColor: $textInputColor;
+    $focusBg: $textInputBg;
+    $focusBorder: $textInputBorder;
+
+    @if ($textInputFocusColor != false) {
+        $focusColor : $textInputFocusColor;
+    }
+    @if ($textInputFocusBg != false) {
+        $focusBg : $textInputFocusBg;
+    }
+    @if ($textInputFocusBorder != false) {
+        $focusBorder : $textInputBoxBorder;
+    }
+
+    &--#{$textInputStatus} {
+        .formInput {
+            &__input {
+                &--textInput {
+                    @include textInputColor($textInputColor, $textInputBg, $textInputBorder);
+
+                    &:focus {
+                        @include textInputColor($focusColor, $focusBg, $focusBorder, true);
+                    }
+                }
+            }
+        }
+    }
+}

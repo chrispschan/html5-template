@@ -1,0 +1,26 @@
+{%- from "formInput/formInput.html" import formInput, label, chooseInput, note -%}
+
+{% call formInput(options={fieldset: true, modifier: ['disabled']}) -%}
+    {%- call label(options={tag: 'legend'}) -%}
+        Radio
+    {%- endcall -%}
+    {{- chooseInput(id='input_choose1', options={
+        value: 'Choose 1',
+        name: 'input_choose',
+        type: 'radio',
+        checked: true,
+        modifier: ['disabled']
+    }) -}}
+    {{- chooseInput(id='input_choose2', options={
+        value: 'Choose 2',
+        name: 'input_choose',
+        type: 'radio',
+        modifier: ['disabled']
+    }) -}}
+    {%- call note(options={modifier: ['error']}) -%}
+        Error
+    {%- endcall -%}
+    {%- call note() -%}
+        Note
+    {%- endcall -%}
+{%- endcall %}

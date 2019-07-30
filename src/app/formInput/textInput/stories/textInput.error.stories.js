@@ -4,13 +4,13 @@ import { storiesOf } from '@storybook/html';
 import withCode from 'storybook-addon-code-improved';
 import { withRunScript } from 'storybook-addon-run-script/html';
 
-import htmlCode from './textInput.disabled.stories.html';
-import nunjucksCode from '!!raw-loader!./textInput.disabled.stories.html';
-import scssCode from '!!raw-loader!./formInput.stories.scss';
-import defaultVariablesCode from '!!raw-loader!../formInput.variables.scss';
+import htmlCode from './textInput.error.stories.html';
+import nunjucksCode from '!!raw-loader!./textInput.error.stories.html';
+import scssCode from '!!raw-loader!../../stories/formInput.stories.scss';
+import defaultVariablesCode from '!!raw-loader!../textInput.variables.scss';
 // import jsCode from '!!raw-loader!./scrollbar.stories.function.js';
 
-import styleCode from '!!raw-loader!sass-loader!./formInput.stories.scss';
+import styleCode from '!!raw-loader!sass-loader!../../stories/formInput.stories.scss';
 
 // import script from 'raw-loader!./scrollbar.stories.function.js';
 
@@ -48,4 +48,4 @@ storiesOf('formInput/textInput', module)
     code: scssCode
   }))
   // .addDecorator(withRunScript(script))
-  .add('Disabled', () => `<style type="text/css">${styleCode}</style>${htmlCode}`);
+  .add('Error', () => `<style type="text/css">${styleCode}</style>${htmlCode}`);

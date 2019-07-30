@@ -1,0 +1,22 @@
+{%- from "formInput/formInput.html" import formInput, label, chooseInput, note -%}
+
+{% call formInput(options={fieldset: true}) -%}
+    {%- call label(options={tag: 'legend'}) -%}
+        Checkbox
+    {%- endcall -%}
+    {{- chooseInput(id='input_choose1', options={
+        value: 'Choose 1',
+        name: 'input_choose',
+        checked: true
+    }) -}}
+    {{- chooseInput(id='input_choose2', options={
+        value: 'Choose 2',
+        name: 'input_choose'
+    }) -}}
+    {%- call note(options={modifier: ['error']}) -%}
+        Error
+    {%- endcall -%}
+    {%- call note() -%}
+        Note
+    {%- endcall -%}
+{%- endcall %}

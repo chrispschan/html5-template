@@ -4,21 +4,20 @@ import { storiesOf } from '@storybook/html';
 import withCode from 'storybook-addon-code-improved';
 import { withRunScript } from 'storybook-addon-run-script/html';
 
-import htmlCode from './textInput.readonly.stories.html';
-import nunjucksCode from '!!raw-loader!./textInput.readonly.stories.html';
-import scssCode from '!!raw-loader!./formInput.stories.scss';
-import defaultVariablesCode from '!!raw-loader!../formInput.variables.scss';
+import htmlCode from './textInput.default.stories.html';
+import nunjucksCode from '!!raw-loader!./textInput.default.stories.html';
+import scssCode from '!!raw-loader!../../stories/formInput.stories.scss';
+import defaultVariablesCode from '!!raw-loader!../textInput.variables.scss';
 // import jsCode from '!!raw-loader!./scrollbar.stories.function.js';
 
-import styleCode from '!!raw-loader!sass-loader!./formInput.stories.scss';
+import styleCode from '!!raw-loader!sass-loader!../../stories/formInput.stories.scss';
 
 // import script from 'raw-loader!./scrollbar.stories.function.js';
 
 storiesOf('formInput/textInput', module)
   .addParameters({
     readme: {
-      sidebar: `<p>IOS [type="date"|"datetime-local"|"month"|"week"|"time"][read-only] not work</p>
-        <p>Safari not suppot [type="week"]</p>
+      sidebar: `<p>Safari not suppot [type="week"]</p>
         <p>Firefox not suppot [type="datetime-local"|"month"|"week"]</p>
         <p>IE not suppot [type="date"|"datetime-local"|"month"|"week"|"time"]</p>`
     }
@@ -49,4 +48,4 @@ storiesOf('formInput/textInput', module)
     code: scssCode
   }))
   // .addDecorator(withRunScript(script))
-  .add('Readonly', () => `<style type="text/css">${styleCode}</style>${htmlCode}`);
+  .add('Default', () => `<style type="text/css">${styleCode}</style>${htmlCode}`);

@@ -1,0 +1,8 @@
+@import "./src/app/common/common.scss";
+
+$formInput-note-margin-top: 4px;
+$formInput-note-font-size: nth($h5, 1);
+$formInput-note-line-height: nth($h5, 2);
+// theme
+$formInput-note-color: $black;
+$formInput-note-error-color: $red;

@@ -1,0 +1,32 @@
+@import "./src/app/common/common.scss";
+
+$selectInput-padding: 4px 8px;
+$selectInput-font-size: nth($h4, 1);
+$selectInput-line-height: nth($h4, 2);
+$selectInput-border-width: 1px;
+$selectInput-border-style: solid;
+$selectInput-border-radius: 4px;
+$selectInput-transition: color .4s ease, background .4s ease, border-color .4s ease;
+$selectInput-icon: "https://via.placeholder.com/20";
+$selectInput-icon-width: nth($h4, 2);
+// theme
+$selectInput-placeholder-color: rgba($black, .7);
+$selectInput-background: $white;
+$selectInput-border-color: $black;
+$selectInput-color: $black;
+// focus theme
+$selectInput-focus-background: rgba($blue, .1);
+$selectInput-focus-border-color: $blue;
+$selectInput-focus-color: $blue;
+// disabled theme
+$selectInput-disabled-background: rgba($black, .1);
+$selectInput-disabled-border-color: rgba($black, .1);
+$selectInput-disabled-color: $black;
+// readonly theme
+$selectInput-readonly-background: $white;
+$selectInput-readonly-border-color: rgba($black, .1);
+$selectInput-readonly-color: $black;
+// error theme
+$selectInput-error-background: rgba($red, .1);
+$selectInput-error-border-color: $red;
+$selectInput-error-color: $red;

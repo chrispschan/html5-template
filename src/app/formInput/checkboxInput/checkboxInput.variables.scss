@@ -1,0 +1,34 @@
+@import "./src/app/common/common.scss";
+
+$checkboxInput-font-size: nth($h4, 1);
+$checkboxInput-line-height: nth($h4, 2);
+$checkboxInput-text-padding-top: 0;
+$checkboxInput-box-margin-right: 4px;
+$checkboxInput-box-size: 20px;
+$checkboxInput-box-border-width: 1px;
+$checkboxInput-box-border-style: solid;
+$checkboxInput-box-border-radius: 4px;
+$checkboxInput-box-transition: color .4s ease, background .4s ease, border-color .4s ease, opacity .4s ease;
+$checkboxInput-box-font-family: none; // if not svg font set value to none
+$checkboxInput-box-checked-icon: '✓'; // ::after {content: $checkboxInput-box-checked-icon;}
+$checkboxInput-box-checked-icon-size: 14px;
+// theme
+$checkboxInput-text-color: $black;
+$checkboxInput-box-background: $white;
+$checkboxInput-box-border-color: $black;
+$checkboxInput-box-color: $black;
+// focus theme
+$checkboxInput-focus-text-color: $black;
+$checkboxInput-focus-box-background: rgba($blue, .1);
+$checkboxInput-focus-box-border-color: $blue;
+$checkboxInput-focus-box-color: $blue;
+// disabled theme
+$checkboxInput-disabled-text-color: $black;
+$checkboxInput-disabled-box-background: rgba($black, .1);
+$checkboxInput-disabled-box-border-color: rgba($black, .1);
+$checkboxInput-disabled-box-color: $black;
+// error theme
+$checkboxInput-error-text-color: $black;
+$checkboxInput-error-box-background: rgba($red, .1);
+$checkboxInput-error-box-border-color: $red;
+$checkboxInput-error-box-color: $red;

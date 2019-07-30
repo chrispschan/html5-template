@@ -1,3 +1,11 @@
+{%- from "formInput/note/note.html" import note as noteItem -%}
+{%- from "formInput/label/label.html" import label as labelItem -%}
+{%- from "formInput/textInput/textInput.html" import textInput as textInputItem, textArea as textAreaItem -%}
+{%- from "formInput/checkboxInput/checkboxInput.html" import checkboxInput -%}
+{%- from "formInput/radioInput/radioInput.html" import radioInput -%}
+{%- from "formInput/toggleInput/toggleInput.html" import toggleInput as toggleInputItem -%}
+{%- from "formInput/selectInput/selectInput.html" import selectInput as selectInputItem -%}
+
 {# formInput element #}
 {% macro formInput(id, class, dataset, options) %}
     <{%- if options.fieldset %}fieldset{% else %}div{% endif %}
@@ -68,17 +76,9 @@
 
 {# formInput label item #}
 {% macro label(id, for, class, dataset, options) %}
-    <{%- if options.tag %}{{options.tag}}{% else %}label{% endif %}
-        {%- if id %} id="{{id}}"{% endif %}
-        {%- if for %} for="{{for}}"{% endif %}
-        {#!- #} class="formInput__label
-            {%- for modifier in options.modifier %} formInput__label--{{ modifier }}{% endfor -%}
-            {%- if class %} {{ class }}{% endif -%}
-        "
-        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
-    {#!- #}>
+    {%- call labelItem(id, for, class, dataset, options) -%}
         {{- caller() -}}
-    </{%- if options.tag %}{{options.tag}}{% else %}label{% endif %}>
+    {%- endcall -%}
 {% endmacro %}
 
 {# formInput input wrapper item #}
@@ -96,100 +96,70 @@
     </{%- if options.tag %}{{options.tag}}{% else %}div{% endif %}>
 {% endmacro %}
 
+{# formInput note item #}
+{% macro note(id, class, dataset, options) -%}
+    {%- call noteItem(id, class, dataset, options) -%}
+        {{- caller() -}}
+    {%- endcall -%}
+{%- endmacro %}
+
 {# formInput input item #}
 {% macro input(id, class, dataset, options) %}
-    {%- if options.type == 'textarea' and
-        options.type == 'text' and
-        options.type == 'number' and
-        options.type == 'email' and
-        options.type == 'tel' and
-        options.type == 'password' and
-        options.type == 'url' and
-        options.type == 'search' and
-        options.type == 'date' and
-        options.type == 'datetime-local' and
-        options.type == 'month' and
-        options.type == 'week' and
+    {%- if options.type == 'textarea' or
+        options.type == 'text' or
+        options.type == 'number' or
+        options.type == 'email' or
+        options.type == 'tel' or
+        options.type == 'password' or
+        options.type == 'url' or
+        options.type == 'search' or
+        options.type == 'date' or
+        options.type == 'datetime-local' or
+        options.type == 'month' or
+        options.type == 'week' or
         options.type == 'time' 
     -%}
         {{ textInput(id, class, dataset, options) }}
+    {%- elif options.type == 'checkbox' or
+        options.type == 'radio' -%}
+        {{ chooseInput(id, class, dataset, options) }}
+    {%- elif options.type == 'toggle' -%}
+        {{ toggleInput(id, class, dataset, options) }}
+    {%- elif options.type == 'select' -%}
+        {% call selectInput(id, class, dataset, options) %}
+            {%- for option in options.options -%}
+                <option value="{{option.value}}"{% if option.selected %} selected{% endif %}>{{option.text}}</option>
+            {%- endfor -%}
+        {% endcall %}
     {%- endif -%}
 {% endmacro %}
 
 {# formInput textInput item #}
 {% macro textInput(id, class, dataset, options) %}
     {%- if options.type == 'textarea'-%}
-        <textarea
-            {#!- #} id="{{- id -}}"
-            {#!- #} class="formInput__input formInput__input--textInput formInput__input--textarea
-                {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
-                {%- if class %} {{ class }}{% endif -%}
-            "
-            {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
-            {%- if options.autofocus %} autofocus{%- endif -%}
-            {%- if options.cols %} cols="{{cols}}"{%- endif -%}
-            {%- if options.dirname %} dirname="{{options.dirname}}"{%- endif -%}
-            {%- if options.form %} form="{{options.form}}"{%- endif -%}
-            {%- if options.maxlength %} maxlength="{{options.maxlength}}"{%- endif -%}
-            {%- if options.name %} name="{{options.name}}"{%- endif -%}
-            {%- if options.placeholder %} placeholder="{{options.placeholder}}"{%- endif -%}
-            {%- if options.rows %} rows="{{options.rows}}"{%- endif -%}
-            {%- if options.wrap %} wrap="{{options.wrap}}"{%- endif -%}
-            {%- if options.modifier -%}
-                {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
-                {%- if 'readonly' in options.modifier %} readonly{%- endif -%}
-                {%- if 'required' in options.modifier %} required{%- endif -%}
-            {%- endif -%}
-        {#!- #}>{{options.value}}</textarea>
+        {{- textAreaItem(id, class, dataset, options) -}}
     {%- else -%}
-      <input
-          {#!- #} id="{{- id -}}"
-          {#!- #} class="formInput__input formInput__input--textInput formInput__input--{%- if options.type -%}{{options.type}}{%- else -%}text{%- endif -%}
-              {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
-              {%- if class %} {{ class }}{% endif -%}
-          "
-          {#!- #} type="
-              {%- if options.type -%}
-                  {{options.type}}
-              {%- else -%}
-                  text
-              {%- endif -%}
-          "
-          {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
-          {#!- #} value="{{options.value}}"
-          {%- if options.autocomplete %} autocomplete="{{options.autocomplete}}"{%- endif -%}
-          {%- if options.autofocus %} autofocus{%- endif -%}
-          {%- if options.dirname %} dirname="{{options.dirname}}"{%- endif -%}
-          {%- if options.form %} form="{{options.form}}"{%- endif -%}
-          {%- if options.height %} form="{{options.height}}"{%- endif -%}
-          {%- if options.list %} list="{{id}}Datalist"{%- endif -%}
-          {%- if options.max %} max="{{options.max}}"{%- endif -%}
-          {%- if options.maxlength %} maxlength="{{options.maxlength}}"{%- endif -%}
-          {%- if options.min %} min="{{options.min}}"{%- endif -%}
-          {%- if options.name %} name="{{options.name}}"{%- endif -%}
-          {%- if options.pattern %} pattern="{{options.pattern}}"{%- endif -%}
-          {%- if options.placeholder %} placeholder="{{options.placeholder}}"{%- endif -%}
-          {%- if options.size %} size="{{options.size}}"{%- endif -%}
-          {%- if options.width %} width="{{options.width}}"{%- endif -%}
-          {%- if options.modifier -%}
-              {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
-              {%- if 'readonly' in options.modifier %} readonly{%- endif -%}
-              {%- if 'required' in options.modifier %} required{%- endif -%}
-          {%- endif -%}
-      {#!- #} />
+        {{- textInputItem(id, class, dataset, options) -}}
     {%- endif -%}
 {% endmacro %}
 
-{# formInput note item #}
-{% macro note(id, class, dataset, options) -%}
-    <{%- if options.tag %}{{options.tag}}{% else %}p{% endif %}
-        {%- if id %} id="{{id}}"{% endif %}
-        {#!- #} class="formInput__note
-            {%- for modifier in options.modifier %} formInput__note--{{ modifier }}{% endfor -%}
-            {%- if class %} {{ class }}{% endif -%}
-        "
-        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
-    {#!- #}>
+{# formInput chooseInput (checkbox / radio) item #}
+{% macro chooseInput(id, class, dataset, options) %}
+    {%- if options.type == "checkbox" -%}
+        {{- checkboxInput(id, class, dataset, options) -}}
+    {%- else -%}
+        {{- radioInput(id, class, dataset, options) -}}
+    {%- endif -%}
+{% endmacro %}
+
+{# formInput selectInput item #}
+{% macro selectInput(id, class, dataset, options) %}
+    {%- call selectInputItem(id, class, dataset, options) -%}
         {{- caller() -}}
-    </{%- if options.tag %}{{options.tag}}{% else %}p{% endif %}>
-{%- endmacro %}
+    {%- endcall -%}
+{% endmacro %}
+
+{# formInput toggleInput item #}
+{% macro toggleInput(id, class, dataset, options) %}
+    {{- toggleInputItem(id, class, dataset, options) -}}
+{% endmacro %}

@@ -1,0 +1,61 @@
+{% macro textInput(id, class, dataset, options) %}
+    <input
+        {#!- #} id="{{- id -}}"
+        {#!- #} class="formInput__input formInput__input--textInput formInput__input--{%- if options.type -%}{{options.type}}{%- else -%}text{%- endif -%}
+            {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {#!- #} type="
+            {%- if options.type -%}
+                {{options.type}}
+            {%- else -%}
+                text
+            {%- endif -%}
+        "
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+        {#!- #} value="{{options.value}}"
+        {%- if options.autocomplete %} autocomplete="{{options.autocomplete}}"{%- endif -%}
+        {%- if options.autofocus %} autofocus{%- endif -%}
+        {%- if options.dirname %} dirname="{{options.dirname}}"{%- endif -%}
+        {%- if options.form %} form="{{options.form}}"{%- endif -%}
+        {%- if options.list %} list="{{id}}Datalist"{%- endif -%}
+        {%- if options.max %} max="{{options.max}}"{%- endif -%}
+        {%- if options.maxlength %} maxlength="{{options.maxlength}}"{%- endif -%}
+        {%- if options.min %} min="{{options.min}}"{%- endif -%}
+        {%- if options.name %} name="{{options.name}}"{%- endif -%}
+        {%- if options.pattern %} pattern="{{options.pattern}}"{%- endif -%}
+        {%- if options.placeholder %} placeholder="{{options.placeholder}}"{%- endif -%}
+        {%- if options.size %} size="{{options.size}}"{%- endif -%}
+        {%- if options.modifier -%}
+            {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
+            {%- if 'readonly' in options.modifier %} readonly{%- endif -%}
+            {%- if 'required' in options.modifier %} required{%- endif -%}
+        {%- endif -%}
+    {#!- #} />
+{% endmacro %}
+
+{% macro textArea(id, class, dataset, options) %}
+    <textarea
+        {#!- #} id="{{- id -}}"
+        {#!- #} class="formInput__input formInput__input--textInput formInput__input--textarea
+            {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+        {%- if options.autofocus %} autofocus{%- endif -%}
+        {%- if options.cols %} cols="{{cols}}"{%- endif -%}
+        {%- if options.dirname %} dirname="{{options.dirname}}"{%- endif -%}
+        {%- if options.form %} form="{{options.form}}"{%- endif -%}
+        {%- if options.maxlength %} maxlength="{{options.maxlength}}"{%- endif -%}
+        {%- if options.name %} name="{{options.name}}"{%- endif -%}
+        {%- if options.placeholder %} placeholder="{{options.placeholder}}"{%- endif -%}
+        {%- if options.rows %} rows="{{options.rows}}"{%- endif -%}
+        {%- if options.wrap %} wrap="{{options.wrap}}"{%- endif -%}
+        {%- if options.modifier -%}
+            {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
+            {%- if 'readonly' in options.modifier %} readonly{%- endif -%}
+            {%- if 'required' in options.modifier %} required{%- endif -%}
+        {%- endif -%}
+    {#!- #}>{{options.value}}</textarea>
+    
+{% endmacro %}

@@ -1,0 +1,246 @@
+@import "checkboxInput.variables.scss";
+
+@mixin checkboxInput() {
+    .formInput {
+        &__label {
+            &--checkbox {
+                position: relative;
+
+                display: block;
+                float: left;
+
+                padding: $checkboxInput-text-padding-top 0 0 #{$checkboxInput-box-size + $checkboxInput-box-margin-right};
+
+                color: $checkboxInput-text-color;
+
+                line-height: $checkboxInput-line-height / $checkboxInput-font-size;
+
+
+                @if ($font-unit == em or $font-unit == rem) {
+                    font-size: px2rem($checkboxInput-font-size);
+                } @else {
+                    font-size: $checkboxInput-font-size;
+                }
+
+                &::before {
+                    position: absolute;
+                    top: ($checkboxInput-line-height - $checkboxInput-box-size) / 2 + $checkboxInput-text-padding-top;
+                    left: 0;
+
+                    display: block;
+
+                    box-sizing: border-box;
+
+                    height: $checkboxInput-box-size;
+                    width: $checkboxInput-box-size;
+
+                    overflow: hidden;
+
+                    border-radius: $checkboxInput-box-border-radius;
+
+                    content: "";
+
+                    background: $checkboxInput-box-background;
+
+                    @if ($checkboxInput-box-border-width == none) {
+                        border: $checkboxInput-box-border-width;
+                    } @else {
+                        @if (type-of($checkboxInput-box-border-width) == list or type-of($checkboxInput-box-border-style) == list or type-of($checkboxInput-box-border-color) == list) {
+                            border-color: $checkboxInput-box-border-color;
+                            border-style: $checkboxInput-box-border-style;
+                            border-width: $checkboxInput-box-border-width;
+
+                            @if (type-of($checkboxInput-box-border-width) == list) {
+                                @if (length($checkboxInput-box-border-width) >= 3) {
+                                    $checkboxInput-box-border-top-width: nth($checkboxInput-box-border-width, 1);
+                                    $checkboxInput-box-border-bottom-width: nth($checkboxInput-box-border-width, 3);
+                                } @else {
+                                    $checkboxInput-box-border-top-width: nth($checkboxInput-box-border-width, 1);
+                                    $checkboxInput-box-border-bottom-width: nth($checkboxInput-box-border-width, 1);
+                                }
+                            } @else {
+                                $checkboxInput-box-border-top-width: $checkboxInput-box-border-width;
+                                $checkboxInput-box-border-bottom-width: $checkboxInput-box-border-width;
+                            }
+                        } @else {
+                            $checkboxInput-box-border-top-width: $checkboxInput-box-border-width;
+                            $checkboxInput-box-border-bottom-width: $checkboxInput-box-border-width;
+
+                            border: $checkboxInput-box-border-width $checkboxInput-box-border-style $checkboxInput-box-border-color;
+                        }
+                    }
+
+                    @if ($checkboxInput-box-transition != none) {
+                        -webkit-transition: $checkboxInput-box-transition; /* Safari prior 6.1 */
+                        transition: $checkboxInput-box-transition;
+                    }
+                }
+
+                &::after {
+                    position: absolute;
+                    top: ($checkboxInput-box-size - $checkboxInput-box-checked-icon-size) / 2 + ($checkboxInput-line-height - $checkboxInput-box-size) / 2 + $checkboxInput-text-padding-top;
+                    left: ($checkboxInput-box-size - $checkboxInput-box-checked-icon-size) / 2;
+
+                    display: block;
+
+                    height: $checkboxInput-box-checked-icon-size;
+                    width: $checkboxInput-box-checked-icon-size;
+
+                    overflow: hidden;
+
+                    color: $checkboxInput-box-color;
+                    font-size: $checkboxInput-box-checked-icon-size;
+
+                    line-height: 1;
+
+                    text-align: center;
+
+                    content: $checkboxInput-box-checked-icon;
+
+                    opacity: 0;
+
+                    @if ($checkboxInput-box-font-family != none) {
+                        font-family: $checkboxInput-box-font-family;
+                    }
+
+                    @if ($checkboxInput-box-transition != none) {
+                        -webkit-transition: $checkboxInput-box-transition; /* Safari prior 6.1 */
+                        transition: $checkboxInput-box-transition;
+                    }
+                }
+            }
+        }
+
+        &__input {
+            &--checkbox {
+                position: absolute;
+                z-index: -1;
+
+                opacity: 0;
+
+                &:checked {
+                     + .formInput {
+                        &__label {
+                            &--checkbox {
+                                &::after {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:focus {
+                    @include checkboxColor($checkboxInput-focus-text-color, $checkboxInput-focus-box-background, $checkboxInput-focus-box-border-color, $checkboxInput-focus-box-color);
+
+                    outline: 0;
+                }
+
+                &.formInput__input--disabled,
+                &:disabled {
+                    @include checkboxColor($checkboxInput-disabled-text-color, $checkboxInput-disabled-box-background, $checkboxInput-disabled-box-border-color, $checkboxInput-disabled-box-color);
+                }
+
+                &.formInput__input--error {
+                    @include checkboxColor($checkboxInput-error-text-color, $checkboxInput-error-box-background, $checkboxInput-error-box-border-color, $checkboxInput-error-box-color);
+
+                    &:focus {
+                        @include checkboxColor($checkboxInput-error-text-color, $checkboxInput-error-box-background, $checkboxInput-error-box-border-color, $checkboxInput-error-box-color, true);
+                    }
+                }
+            }
+        }
+
+        @include checkboxStatus("error", $checkboxInput-error-text-color, $checkboxInput-error-box-background, $checkboxInput-error-box-border-color, $checkboxInput-error-box-color);
+        @include checkboxStatus("disabled", $checkboxInput-disabled-text-color, $checkboxInput-disabled-box-background, $checkboxInput-disabled-box-border-color, $checkboxInput-disabled-box-color);
+    }
+}
+
+@mixin checkboxColor(
+    $checkboxTextColor: $checkboxInput-text-color,
+    $checkboxBoxBg: $checkboxInput-box-background,
+    $checkboxBoxBorder: $checkboxInput-box-border-color,
+    $checkboxBoxColor: $checkboxInput-box-color,
+    $isFocus: false
+) {
+    $defaultTextColor: $checkboxInput-text-color;
+    $defaultBoxBg: $checkboxInput-box-background;
+    $defaultBoxBorder: $checkboxInput-box-border-color;
+    $defaultBoxColor: $checkboxInput-box-color;
+
+    @if ($isFocus != false) {
+        $defaultTextColor: $checkboxInput-focus-text-color;
+        $defaultBoxBg: $checkboxInput-focus-box-background;
+        $defaultBoxBorder: $checkboxInput-focus-box-border-color;
+        $defaultBoxColor: $checkboxInput-focus-box-color;
+    }
+
+     + .formInput {
+        &__label {
+            &--checkbox {
+                @if ($defaultTextColor != $checkboxTextColor) {
+                    color: $checkboxTextColor;
+                }
+
+                &::before {
+                    @if ($defaultBoxBg != $checkboxBoxBg) {
+                        background-color: $checkboxBoxBg;
+                    }
+                    @if ($defaultBoxBorder != $checkboxBoxBorder) {
+                        border-color: $checkboxBoxBorder;
+                    }
+                }
+
+                &::after {
+                    @if ($defaultBoxColor != $checkboxBoxColor) {
+                        color: $checkboxBoxColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin checkboxStatus(
+    $checkboxStatus,
+    $checkboxTextColor: $checkboxInput-text-color,
+    $checkboxBoxBg: $checkboxInput-box-background,
+    $checkboxBoxBorder: $checkboxInput-box-border-color,
+    $checkboxBoxColor: $checkboxInput-box-color,
+    $checkboxFocusTextColor: false,
+    $checkboxFocusBoxBg: false,
+    $checkboxFocusBoxBorder: false,
+    $checkboxFocusBoxColor: false
+) {
+    $focusTextColor: $checkboxTextColor;
+    $focusBoxBg: $checkboxBoxBg;
+    $focusBoxBorder: $checkboxBoxBorder;
+    $focusBoxColor: $checkboxBoxColor;
+
+    @if ($checkboxFocusTextColor != false) {
+        $focusTextColor : $checkboxFocusTextColor;
+    }
+    @if ($checkboxBoxBg != false) {
+        $focusBoxBg : $checkboxBoxBg;
+    }
+    @if ($checkboxBoxBorder != false) {
+        $focusBoxBorder : $checkboxBoxBorder;
+    }
+    @if ($checkboxBoxColor != false) {
+        $focusBoxColor : $checkboxBoxColor;
+    }
+
+    &--#{$checkboxStatus} {
+        .formInput {
+            &__input {
+                &--checkbox {
+                    @include checkboxColor($checkboxTextColor, $checkboxBoxBg, $checkboxBoxBorder, $checkboxBoxColor);
+
+                    &:focus {
+                        @include checkboxColor($focusTextColor, $focusBoxBg, $focusBoxBorder, $focusBoxColor, true);
+                    }
+                }
+            }
+        }
+    }
+}

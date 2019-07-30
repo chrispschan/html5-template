@@ -1,0 +1,12 @@
+{% macro note(id, class, dataset, options) -%}
+    <{%- if options.tag %}{{options.tag}}{% else %}p{% endif %}
+        {%- if id %} id="{{id}}"{% endif %}
+        {#!- #} class="formInput__note
+            {%- for modifier in options.modifier %} formInput__note--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    {#!- #}>
+        {{- caller() -}}
+    </{%- if options.tag %}{{options.tag}}{% else %}p{% endif %}>
+{%- endmacro %}

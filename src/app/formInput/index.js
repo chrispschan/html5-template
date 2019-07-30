@@ -79,9 +79,8 @@ export default class FormInput {
                 if (typeof _valueKey === 'undefined' || _valueKey === null || _valueKey === '') {
                     _valueKey = _inputEle[j].name;
 
-                    if (typeof _valueKey === 'undefined' || _valueKey === null || _valueKey === '') {
+                    if (typeof _valueKey === 'undefined' || _valueKey === null || _valueKey === '')
                         _valueKey = _inputEle[j].id;
-                    }
                 }
 
                 if (self._formInputEle[i].formInputOptions.required || _inputEle[j].required)
@@ -175,8 +174,10 @@ export default class FormInput {
 
         if (inputEle.length > 0) {
             for (let i = 0; i < inputEle.length; i++) {
-                if (_state !== null)
-                    inputEle[i][_state] = _isToggle;
+                if (_state !== null) {
+                    if ((_state === 'readOnly' && inputEle[i].tagName !== 'SELECT') || _state !== 'readOnly')
+                        inputEle[i][_state] = _isToggle;
+                }
 
                 if (_isToggle === false)
                     inputEle[i].removeClass(_class);
@@ -268,7 +269,7 @@ export default class FormInput {
                     _value = inputEle.value;
                 break;
             default:
-                if (inputEle.tagName === 'select')
+                if (inputEle.tagName === 'SELECT')
                     _value = inputEle.options[inputEle.selectedIndex].value;
                 else
                     _value = inputEle.value;
@@ -284,13 +285,13 @@ export default class FormInput {
                 inputEle.checked = value !== 'false' && value !== false;
                 break;
             case 'radio':
-                inputEle.checked = (value !== 'false' && value !== false) || inputEle.value === value;
+                inputEle.checked = value === true || inputEle.value === value;
                 break;
             default:
-                if (inputEle.tagName === 'select')
-                    inputEle.value = value === false ? '' : value;
+                if (inputEle.tagName === 'SELECT')
+                    inputEle.value = value === false || typeof value !== 'string' ? '' : value;
                 else
-                    inputEle.value = value === false ? '' : value;
+                    inputEle.value = value === false || typeof value !== 'string' ? '' : value;
                 break;
         }
     }
@@ -429,6 +430,7 @@ export default class FormInput {
             _errorMsg,
             _errors = [],
             _results,
+            _isValid = true,
             _checkValidation = (_formInputIndex) => {
                 _validation = this._formInputEle[_formInputIndex].formInputOptions.validation;
                 _errorMsg = this._formInputEle[_formInputIndex].formInputOptions.errorMessage;
@@ -457,10 +459,23 @@ export default class FormInput {
             };
 
         if (index === -1) {
-            for (let i = 0; i < this._formInputEle.length; i++)
+            for (let i = 0; i < this._formInputEle.length; i++) {
+                _errors = [];
                 _checkValidation(i);
-        } else if (this._formInputEle.length > index)
+                if (!_results.isValid)
+                    _isValid = false;
+            }
+        } else if (this._formInputEle.length > index) {
             _checkValidation(index);
+            if (!_results.isValid)
+                _isValid = false;
+        }
+
+        return _isValid;
+    }
+
+    get formInput () {
+        return this._formInputEle;
     }
 
     get value () {
@@ -485,16 +500,16 @@ export default class FormInput {
                     else
                         _valueKey = _inputEle[j].id;
                     
-                    if (_inputEle[j].type === 'checked') {
+                    if (_inputEle[j].type === 'checkbox') {
                         if (!Array.isArray(_value[i][_valueKey]))
                             _value[i][_valueKey] = [];
                         if (this._getValue(_inputEle[j]) === true)
                             _value[i][_valueKey].push(_inputEle[j].value);
-                    } else if (_inputEle[j].type === 'checked') {
+                    } else if (_inputEle[j].type === 'radio') {
                         if (this._getValue(_inputEle[j]) === true)
                             _value[i][_valueKey] = _inputEle[j].value;
-                        else
-                            _value[i][_valueKey] = '';
+                        else if (typeof _value[i][_valueKey] === 'undefined')
+                            _value[i][_valueKey] = false;
                     } else
                         _value[i][_valueKey] = this._getValue(_inputEle[j]);
                 }

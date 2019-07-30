@@ -1,0 +1,49 @@
+@import "note.variables.scss";
+
+@mixin note() {
+    .formInput {
+        &__note {
+            margin: $formInput-note-margin-top 0 0;
+
+            color: $formInput-note-color;
+
+            clear: both;
+
+            line-height: $formInput-note-line-height / $formInput-note-font-size;
+
+            @if ($font-unit == em or $font-unit == rem) {
+                font-size: px2rem($formInput-note-font-size);
+            } @else {
+                font-size: $formInput-note-font-size;
+            }
+
+            &--error {
+                display: none;
+
+                color: $formInput-note-error-color;
+            }
+
+            &--show {
+                display: block;
+            }
+
+            &--hide {
+                display: none;
+            }
+        }
+
+        &--error {
+            .formInput {
+                &__note {
+                    &--error {
+                        display: block;
+                    }
+
+                    &--hide {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

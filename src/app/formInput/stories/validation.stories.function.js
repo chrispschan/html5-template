@@ -21,6 +21,6 @@ const formInput = new FormInput('#withValidation', {
 
 const withValidationInput = document.getElementById('withValidationInput');
 
-window.checkValidation = () => {//
+window.checkValidation = () => {
     formInput.validation();
 };

@@ -1,0 +1,583 @@
+@import "toggleInput.variables.scss";
+
+@mixin toggleInput() {
+    .formInput {
+        &__label {
+            &--toggle {
+                position: relative;
+
+                display: block;
+                float: left;
+
+                font-size: $toggleInput-font-size;
+
+                opacity: $toggleInput-opacity;
+
+                @if ($toggleInput-height > $toggleInput-point-size) {
+                    min-height: $toggleInput-height;
+
+                    padding-right: $toggleInput-width;
+                } @else {
+                    min-height: $toggleInput-point-size;
+
+                    padding-right: $toggleInput-width + $toggleInput-point-size - $toggleInput-height;
+                }
+
+                -webkit-transition: opacity $toggleInput-transition-duration $toggleInput-transition-timing-function; /* Safari prior 6.1 */
+                transition: opacity $toggleInput-transition-duration $toggleInput-transition-timing-function;
+
+                &::after {
+                    position: absolute;
+                    z-index: 3;
+
+                    display: block;
+
+                    box-sizing: border-box;
+
+                    height: $toggleInput-point-size;
+                    width: $toggleInput-point-size;
+
+                    overflow: hidden;
+
+                    border-radius: 999px;
+
+                    content: "";
+
+                    background: $toggleInput-invalid-point-background;
+
+                    -webkit-transition: right $toggleInput-transition-duration $toggleInput-transition-timing-function, background $toggleInput-transition-duration $toggleInput-transition-timing-function, border-color $toggleInput-transition-duration $toggleInput-transition-timing-function; /* Safari prior 6.1 */
+                    transition: right $toggleInput-transition-duration $toggleInput-transition-timing-function, background $toggleInput-transition-duration $toggleInput-transition-timing-function, border-color $toggleInput-transition-duration $toggleInput-transition-timing-function;
+
+                    @if ($toggleInput-height > $toggleInput-point-size) {
+                        top: ($toggleInput-height - $toggleInput-point-size) / 2;
+                        right: $toggleInput-width - ($toggleInput-height - $toggleInput-point-size) / 2 + $toggleInput-point-size;
+                    } @else {
+                        top: 0;
+                        right: $toggleInput-width + ($toggleInput-point-size - $toggleInput-height) / 2 - $toggleInput-point-size;
+                    }
+
+                    @if ($toggleInput-point-border-width == none) {
+                        border: $toggleInput-point-border-width;
+                    } @else {
+                        @if (type-of($toggleInput-point-border-width) == list or type-of($toggleInput-point-border-style) == list or type-of($toggleInput-invalid-border-color) == list) {
+                            border-color: $toggleInput-invalid-point-border-color;
+                            border-style: $toggleInput-point-border-style;
+                            border-width: $toggleInput-point-border-width;
+
+                            @if (type-of($toggleInput-point-border-width) == list) {
+                                @if (length($toggleInput-point-border-width) >= 3) {
+                                    $toggleInput-point-border-top-width: nth($toggleInput-point-border-width, 1);
+                                    $toggleInput-point-border-bottom-width: nth($toggleInput-point-border-width, 3);
+                                } @else {
+                                    $toggleInput-point-border-top-width: nth($toggleInput-point-border-width, 1);
+                                    $toggleInput-point-border-bottom-width: nth($toggleInput-point-border-width, 1);
+                                }
+                            } @else {
+                                $toggleInput-point-border-top-width: $toggleInput-point-border-width;
+                                $toggleInput-point-border-bottom-width: $toggleInput-point-border-width;
+                            }
+                        } @else {
+                            $toggleInput-point-border-top-width: $toggleInput-point-border-width;
+                            $toggleInput-point-border-bottom-width: $toggleInput-point-border-width;
+
+                            border: $toggleInput-point-border-width $toggleInput-point-border-style $toggleInput-invalid-point-border-color;
+                        }
+                    }
+
+                    @if ($toggleInput-point-box-shadow != none) {
+                        box-shadow: $toggleInput-point-box-shadow;
+
+                        -webkit-box-shadow: $toggleInput-point-box-shadow;
+                        -moz-box-shadow: $toggleInput-point-box-shadow;
+                    }
+                }
+
+                &__topic {
+                    position: absolute;
+                    z-index: -1;
+
+                    display: block;
+
+                    height: 0;
+                    width: 0;
+
+                    overflow: hidden;
+
+                    opacity: 0;
+                }
+
+                &__track {
+                    position: absolute;
+
+                    display: block;
+
+                    height: $toggleInput-height;
+
+                    width: $toggleInput-width;
+
+                    overflow: hidden;
+
+                    border-radius: 999px;
+
+                    box-sizing: border-box;
+
+                    @if ($toggleInput-height > $toggleInput-point-size) {
+                        top: 0;
+                        right: 0;
+                    } @else {
+                        top: ($toggleInput-point-size - $toggleInput-height) / 2;
+                        right: ($toggleInput-point-size - $toggleInput-height) / 2;
+                    }
+
+                    @if ($toggleInput-border-width == none) {
+                        border: $toggleInput-border-width;
+                    } @else {
+                        -webkit-transition: border-color $toggleInput-transition-duration $toggleInput-transition-timing-function; /* Safari prior 6.1 */
+                        transition: border-color $toggleInput-transition-duration $toggleInput-transition-timing-function;
+                        @if (type-of($toggleInput-border-width) == list or type-of($toggleInput-border-style) == list or type-of($toggleInput-invalid-border-color) == list) {
+                            border-color: $toggleInput-invalid-border-color;
+                            border-style: $toggleInput-border-style;
+                            border-width: $toggleInput-border-width;
+
+                            @if (type-of($toggleInput-border-width) == list) {
+                                @if (length($toggleInput-border-width) >= 3) {
+                                    $toggleInput-border-top-width: nth($toggleInput-border-width, 1);
+                                    $toggleInput-border-bottom-width: nth($toggleInput-border-width, 3);
+                                } @else {
+                                    $toggleInput-border-top-width: nth($toggleInput-border-width, 1);
+                                    $toggleInput-border-bottom-width: nth($toggleInput-border-width, 1);
+                                }
+                            } @else {
+                                $toggleInput-border-top-width: $toggleInput-border-width;
+                                $toggleInput-border-bottom-width: $toggleInput-border-width;
+                            }
+                        } @else {
+                            $toggleInput-border-top-width: $toggleInput-border-width;
+                            $toggleInput-border-bottom-width: $toggleInput-border-width;
+
+                            border: $toggleInput-border-width $toggleInput-border-style $toggleInput-invalid-border-color;
+                        }
+                    }
+
+                    &::before,
+                    &::after {
+                        position: absolute;
+                        z-index: 1;
+                        top: 0;
+
+                        display: block;
+
+                        box-sizing: border-box;
+
+                        height: 100%;
+                        width: 100%;
+
+                        content: "";
+
+                        -webkit-transition: left $toggleInput-transition-duration $toggleInput-transition-timing-function, background $toggleInput-transition-duration $toggleInput-transition-timing-function; /* Safari prior 6.1 */
+                        transition: left $toggleInput-transition-duration $toggleInput-transition-timing-function, background $toggleInput-transition-duration $toggleInput-transition-timing-function;
+                    }
+
+                    &::before {
+                        left: -100%;
+
+                        background: $toggleInput-valid-background;
+                    }
+
+                    &::after {
+                        left: 0;
+
+                        background: $toggleInput-invalid-background;
+                    }
+
+                    &__valid,
+                    &__invalid {
+                        position: absolute;
+                        z-index: 2;
+                        top: 0;
+
+                        display: block;
+
+                        box-sizing: border-box;
+
+                        height: 100%;
+                        width: 100%;
+
+                        padding: 0 #{$toggleInput-height / 4};
+
+                        line-height: $toggleInput-height;
+
+                        white-space: nowrap;
+
+                        -webkit-transition: left $toggleInput-transition-duration $toggleInput-transition-timing-function, background $toggleInput-transition-duration $toggleInput-transition-timing-function; /* Safari prior 6.1 */
+                        transition: left $toggleInput-transition-duration $toggleInput-transition-timing-function, background $toggleInput-transition-duration $toggleInput-transition-timing-function;
+                    }
+
+                    &__valid {
+                        left: -100%;
+
+                        color: $toggleInput-valid-text-color;
+
+                        text-align: center;
+
+                        @if ($toggleInput-height > $toggleInput-point-size) {
+                            padding-right: $toggleInput-height;
+                        } @else {
+                            padding-right: $toggleInput-height + ($toggleInput-point-size - $toggleInput-height) / 2;
+                        }
+                    }
+
+                    &__invalid {
+                        left: 0;
+
+                        color: $toggleInput-invalid-text-color;
+
+                        text-align: center;
+
+                        @if ($toggleInput-height > $toggleInput-point-size) {
+                            padding-left: $toggleInput-height;
+                        } @else {
+                            padding-left: $toggleInput-height + ($toggleInput-point-size - $toggleInput-height) / 2;
+                        }
+                    }
+                }
+
+                &__valid,
+                &__invalid {
+                    color: $toggleInput-outside-text-color;
+
+                    padding-right: $toggleInput-text-outside-padding-right;
+
+                    text-align: right;
+
+                    @if ($toggleInput-height > $toggleInput-point-size) {
+                        line-height: $toggleInput-height;
+                    } @else {
+                        line-height: $toggleInput-height + $toggleInput-point-size - $toggleInput-height;
+                    }
+                }
+
+                &__valid {
+                    display: none;
+                }
+
+                &__invalid {
+                    display: block;
+                }
+            }
+        }
+
+        &__input {
+            &--toggle {
+                position: absolute;
+                z-index: -1;
+
+                opacity: 0;
+
+                &:checked {
+                     + .formInput {
+                        &__label {
+                            &--toggle {
+                                &::after {
+                                    right: 0;
+
+                                    @if ($toggleInput-invalid-point-background != $toggleInput-valid-point-background) {
+                                        background: $toggleInput-valid-point-background;
+                                    }
+
+                                    @if ($toggleInput-invalid-point-border-color != $toggleInput-valid-point-border-color) {
+                                        border-color: $toggleInput-valid-point-border-color;
+                                    }
+                                }
+
+                                .formInput {
+                                    &__label {
+                                        &--toggle {
+                                            &__valid {
+                                                display: block;
+                                            }
+
+                                            &__invalid {
+                                                display: none;
+                                            }
+
+                                            &__track {
+                                                @if ($toggleInput-border-width != none) {
+                                                    @if ($toggleInput-invalid-border-color != $toggleInput-valid-border-color) {
+                                                        border-color: $toggleInput-valid-border-color;
+                                                    }
+                                                }
+
+                                                &::before {
+                                                    left: 0;
+                                                }
+
+                                                &::after {
+                                                    left: 100%;
+                                                }
+
+                                                &__valid {
+                                                    left: 0;
+                                                }
+
+                                                &__invalid {
+                                                    left: 100%;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:focus {
+                    outline: 0;
+
+                    @include toggleColor($toggleInput-focus-opacity, $toggleInput-focus-outside-text-color, $toggleInput-focus-valid-text-color, $toggleInput-focus-valid-background, $toggleInput-focus-valid-border-color, $toggleInput-focus-valid-point-background, $toggleInput-focus-valid-point-border-color, $toggleInput-focus-invalid-text-color, $toggleInput-focus-invalid-background, $toggleInput-focus-invalid-border-color, $toggleInput-focus-invalid-point-background, $toggleInput-focus-invalid-point-border-color);
+                }
+
+                &.formInput__input--disabled,
+                &:disabled {
+                    @include toggleColor($toggleInput-disabled-opacity, $toggleInput-disabled-outside-text-color, $toggleInput-disabled-valid-text-color, $toggleInput-disabled-valid-background, $toggleInput-disabled-valid-border-color, $toggleInput-disabled-valid-point-background, $toggleInput-disabled-valid-point-border-color, $toggleInput-disabled-invalid-text-color, $toggleInput-disabled-invalid-background, $toggleInput-disabled-invalid-border-color, $toggleInput-disabled-invalid-point-background, $toggleInput-disabled-invalid-point-border-color);
+                }
+
+                &.formInput__input--error {
+                    @include toggleColor($toggleInput-error-opacity, $toggleInput-error-outside-text-color, $toggleInput-error-valid-text-color, $toggleInput-error-valid-background, $toggleInput-error-valid-border-color, $toggleInput-error-valid-point-background, $toggleInput-error-valid-point-border-color, $toggleInput-error-invalid-text-color, $toggleInput-error-invalid-background, $toggleInput-error-invalid-border-color, $toggleInput-error-invalid-point-background, $toggleInput-error-invalid-point-border-color);
+
+                    &:focus {
+                        @include toggleColor($toggleInput-error-opacity, $toggleInput-error-outside-text-color, $toggleInput-error-valid-text-color, $toggleInput-error-valid-background, $toggleInput-error-valid-border-color, $toggleInput-error-valid-point-background, $toggleInput-error-valid-point-border-color, $toggleInput-error-invalid-text-color, $toggleInput-error-invalid-background, $toggleInput-error-invalid-border-color, $toggleInput-error-invalid-point-background, $toggleInput-error-invalid-point-border-color, true);
+                    }
+                }
+            }
+        }
+
+        @include toggleStatus("error", $toggleInput-error-opacity, $toggleInput-error-outside-text-color, $toggleInput-error-valid-text-color, $toggleInput-error-valid-background, $toggleInput-error-valid-border-color, $toggleInput-error-valid-point-background, $toggleInput-error-valid-point-border-color, $toggleInput-error-invalid-text-color, $toggleInput-error-invalid-background, $toggleInput-error-invalid-border-color, $toggleInput-error-invalid-point-background, $toggleInput-error-invalid-point-border-color);
+        @include toggleStatus("disabled", $toggleInput-disabled-opacity, $toggleInput-disabled-outside-text-color, $toggleInput-disabled-valid-text-color, $toggleInput-disabled-valid-background, $toggleInput-disabled-valid-border-color, $toggleInput-disabled-valid-point-background, $toggleInput-disabled-valid-point-border-color, $toggleInput-disabled-invalid-text-color, $toggleInput-disabled-invalid-background, $toggleInput-disabled-invalid-border-color, $toggleInput-disabled-invalid-point-background, $toggleInput-disabled-invalid-point-border-color);
+    }
+}
+
+@mixin toggleColor(
+    $toggleOpacity: $toggleInput-opacity,
+    $toggleColor: $toggleInput-outside-text-color,
+    $toggleValidColor: $toggleInput-valid-text-color,
+    $toggleValidBg: $toggleInput-valid-background,
+    $toggleValidBorder: $toggleInput-valid-border-color,
+    $toggleValidPointBg: $toggleInput-valid-point-background,
+    $toggleValidPointBorder: $toggleInput-valid-point-border-color,
+    $toggleInvalidColor: $toggleInput-invalid-text-color,
+    $toggleInvalidBg: $toggleInput-invalid-background,
+    $toggleInvalidBorder: $toggleInput-invalid-border-color,
+    $toggleInvalidPointBg: $toggleInput-invalid-point-background,
+    $toggleInvalidPointBorder: $toggleInput-invalid-point-border-color,
+    $isFocus: false
+) {
+    $defaultOpacity: $toggleInput-opacity;
+    $defaultColor: $toggleInput-outside-text-color;
+    $defaultValidColor: $toggleInput-valid-text-color;
+    $defaultValidBg: $toggleInput-valid-background;
+    $defaultValidBorder: $toggleInput-valid-border-color;
+    $defaultValidPointBg: $toggleInput-valid-point-background;
+    $defaultValidPointBorder: $toggleInput-valid-point-border-color;
+    $defaultInvalidColor: $toggleInput-invalid-text-color;
+    $defaultInvalidBg: $toggleInput-invalid-background;
+    $defaultInvalidBorder: $toggleInput-invalid-border-color;
+    $defaultInvalidPointBg: $toggleInput-invalid-point-background;
+    $defaultInvalidPointBorder: $toggleInput-invalid-point-border-color;
+
+    @if ($isFocus != false) {
+        $defaultOpacity: $toggleInput-focus-opacity;
+        $defaultColor: $toggleInput-focus-outside-text-color;
+        $defaultValidColor: $toggleInput-focus-valid-text-color;
+        $defaultValidBg: $toggleInput-focus-valid-background;
+        $defaultValidBorder: $toggleInput-focus-valid-border-color;
+        $defaultValidPointBg: $toggleInput-focus-valid-point-background;
+        $defaultValidPointBorder: $toggleInput-focus-valid-point-border-color;
+        $defaultInvalidColor: $toggleInput-focus-invalid-text-color;
+        $defaultInvalidBg: $toggleInput-focus-invalid-background;
+        $defaultInvalidBorder: $toggleInput-focus-invalid-border-color;
+        $defaultInvalidPointBg: $toggleInput-focus-invalid-point-background;
+        $defaultInvalidPointBorder: $toggleInput-focus-invalid-point-border-color;
+    }
+
+     + .formInput {
+        &__label {
+            &--toggle {
+                @if ($defaultOpacity != $toggleOpacity) {
+                    opacity: $toggleOpacity;
+                }
+
+                &::after {
+                    @if ($defaultInvalidPointBg != $toggleInvalidPointBg) {
+                        background: $toggleInvalidPointBg;
+                    }
+                    @if ($defaultInvalidPointBorder != $toggleInvalidPointBorder) {
+                        border-color: $toggleInvalidPointBorder;
+                    }
+                }
+
+                .formInput {
+                    &__label {
+                        &--toggle {
+                            &__track {
+                                @if ($toggleInput-border-width != none) {
+                                    @if ($defaultInvalidBorder != $toggleInvalidBorder) {
+                                        border-color: $toggleInvalidBorder;
+                                    }
+                                }
+
+                                &::before {
+                                    @if ($defaultValidBg != $toggleValidBg) {
+                                        background: $toggleValidBg;
+                                    }
+                                }
+
+                                &::after {
+                                    @if ($defaultInvalidBg != $toggleInvalidBg) {
+                                        background: $toggleInvalidBg;
+                                    }
+                                }
+
+                                &__valid {
+                                    @if ($defaultValidColor != $toggleValidColor) {
+                                        color: $toggleValidColor;
+                                    }
+                                }
+
+                                &__invalid {
+                                    @if ($defaultInvalidColor != $toggleInvalidColor) {
+                                        color: $toggleInvalidColor;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &:checked {
+         + .formInput {
+            &__label {
+                &--toggle {
+                    &::after {
+                        @if ($defaultValidPointBg != $toggleValidPointBg) {
+                            background: $toggleValidPointBg;
+                        }
+                        @if ($defaultValidPointBorder != $toggleValidPointBorder) {
+                            border-color: $toggleValidPointBorder;
+                        }
+                    }
+                    
+                    .formInput {
+                        &__label {
+                            &--toggle {
+                                &__track {
+                                    @if ($toggleInput-border-width != none) {
+                                        @if ($defaultValidBorder != $toggleValidBorder) {
+                                            border-color: $toggleValidBorder;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin toggleStatus(
+    $toggleStatus,
+    $toggleOpacity: $toggleInput-opacity,
+    $toggleColor: $toggleInput-outside-text-color,
+    $toggleValidColor: $toggleInput-valid-text-color,
+    $toggleValidBg: $toggleInput-valid-background,
+    $toggleValidBorder: $toggleInput-valid-border-color,
+    $toggleValidPointBg: $toggleInput-valid-point-background,
+    $toggleValidPointBorder: $toggleInput-valid-point-border-color,
+    $toggleInvalidColor: $toggleInput-invalid-text-color,
+    $toggleInvalidBg: $toggleInput-invalid-background,
+    $toggleInvalidBorder: $toggleInput-invalid-border-color,
+    $toggleInvalidPointBg: $toggleInput-invalid-point-background,
+    $toggleInvalidPointBorder: $toggleInput-invalid-point-border-color,
+    $toggleFocusOpacity: false,
+    $toggleFocusColor: false,
+    $toggleFocusValidColor: false,
+    $toggleFocusValidBg: false,
+    $toggleFocusValidBorder: false,
+    $toggleFocusValidPointBg: false,
+    $toggleFocusValidPointBorder: false,
+    $toggleFocusInvalidColor: false,
+    $toggleFocusInvalidBg: false,
+    $toggleFocusInvalidBorder: false,
+    $toggleFocusInvalidPointBg: false,
+    $toggleFocusInvalidPointBorder: false
+) {
+    $focusOpacity: $toggleOpacity;
+    $focusColor: $toggleColor;
+    $focusValidColor: $toggleValidColor;
+    $focusValidBg: $toggleValidBg;
+    $focusValidBorder: $toggleValidBorder;
+    $focusValidPointBg: $toggleValidPointBg;
+    $focusValidPointBorder: $toggleValidPointBorder;
+    $focusInvalidColor: $toggleInvalidColor;
+    $focusInvalidBg: $toggleInvalidBg;
+    $focusInvalidBorder: $toggleInvalidBorder;
+    $focusInvalidPointBg: $toggleInvalidPointBg;
+    $focusInvalidPointBorder: $toggleInvalidPointBorder;
+
+    @if ($toggleFocusOpacity != false) {
+        $focusOpacity: $toggleFocusOpacity;
+    }
+    @if ($toggleFocusColor != false) {
+        $focusColor: $toggleFocusColor;
+    }
+    @if ($toggleFocusValidColor != false) {
+        $focusValidColor: $toggleFocusValidColor;
+    }
+    @if ($toggleFocusValidBg != false) {
+        $focusValidBg: $toggleFocusValidBg;
+    }
+    @if ($toggleFocusValidBorder != false) {
+        $focusValidBorder: $toggleFocusValidBorder;
+    }
+    @if ($toggleFocusValidPointBg != false) {
+        $focusValidPointBg: $toggleFocusValidPointBg;
+    }
+    @if ($toggleFocusValidPointBorder != false) {
+        $focusValidPointBorder: $toggleFocusValidPointBorder;
+    }
+    @if ($toggleFocusInvalidColor != false) {
+        $focusInvalidColor: $toggleFocusInvalidColor;
+    }
+    @if ($toggleFocusInvalidBg != false) {
+        $focusInvalidBg: $toggleFocusInvalidBg;
+    }
+    @if ($toggleFocusInvalidBorder != false) {
+        $focusInvalidBorder: $toggleFocusInvalidBorder;
+    }
+    @if ($toggleFocusInvalidPointBg != false) {
+        $focusInvalidPointBg: $toggleFocusInvalidPointBg;
+    }
+    @if ($toggleFocusInvalidPointBorder != false) {
+        $focusInvalidPointBorder: $toggleFocusInvalidPointBorder;
+    }
+
+    &--#{$toggleStatus} {
+        .formInput {
+            &__input {
+                &--toggle {
+                    @include toggleColor($toggleOpacity, $toggleColor, $toggleValidColor, $toggleValidBg, $toggleValidBorder, $toggleValidPointBg, $toggleValidPointBorder, $toggleInvalidColor, $toggleInvalidBg, $toggleInvalidBorder, $toggleInvalidPointBg, $toggleInvalidPointBorder);
+
+                    &:focus {
+                        @include toggleColor($focusOpacity, $focusColor, $focusValidColor, $focusValidBg, $focusValidBorder, $focusValidPointBg, $focusValidPointBorder, $focusInvalidColor, $focusInvalidBg, $focusInvalidBorder, $focusInvalidPointBg, $focusInvalidPointBorder, true);
+                    }
+                }
+            }
+        }
+    }
+}

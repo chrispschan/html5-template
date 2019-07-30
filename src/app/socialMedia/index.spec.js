@@ -56,24 +56,6 @@ describe('socialMedia/index.js', function () {
         });
     });
 
-    describe(`google`, function () {
-        beforeEach(function () {
-            document.body.innerHTML += `<a id="socialMediaGoogle" href="https://chrispschan.github.io/index.html"></a>`;
-        });
-
-        afterEach(function () {
-            document.body.removeChild(document.getElementById('socialMediaGoogle'));
-        });
-
-        describe(`new SocialMedia`, function () {
-            it(`should create socialMedia`, function () {
-                let socialMedia = new SocialMedia({ele: '#socialMediaGoogle', type: 'google'});
-
-                expect(socialMedia.socialMedia[0].socialMediaOptions.shareLink).toBe('https://plus.google.com/share?url=https%3A%2F%2Fchrispschan.github.io%2Findex.html');
-            });
-        });
-    });
-
     describe(`line`, function () {
         beforeEach(function () {
             document.body.innerHTML += `<a id="socialMediaLine" href="https://chrispschan.github.io/index.html"></a>`;

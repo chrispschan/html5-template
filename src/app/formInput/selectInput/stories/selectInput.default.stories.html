@@ -1,0 +1,18 @@
+{%- from "formInput/formInput.html" import formInput, label, selectInput, note -%}
+
+{% call formInput() -%}
+    {%- call label(for='input_select') -%}
+        Select
+    {%- endcall -%}
+    {%- call selectInput(id='input_select') -%}
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+    {%- endcall -%}
+    {%- call note(options={modifier: ['error']}) -%}
+        Error
+    {%- endcall -%}
+    {%- call note() -%}
+        Note
+    {%- endcall -%}
+{%- endcall %}

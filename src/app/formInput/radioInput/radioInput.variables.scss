@@ -1,0 +1,39 @@
+@import "./src/app/common/common.scss";
+
+$radioInput-font-size: nth($h4, 1);
+$radioInput-line-height: nth($h4, 2);
+$radioInput-text-padding-top: 0;
+$radioInput-box-margin-right: 4px;
+$radioInput-box-size: 20px;
+$radioInput-box-border-width: 1px;
+$radioInput-box-border-style: solid;
+$radioInput-box-border-radius: 999px;
+$radioInput-box-transition: color .4s ease, background .4s ease, border-color .4s ease, opacity .4s ease;
+$radioInput-box-checked-border-width: none;
+$radioInput-box-checked-border-style: solid;
+$radioInput-box-checked-border-radius: 999px;
+$radioInput-box-checked-size: 14px;
+// theme
+$radioInput-text-color: $black;
+$radioInput-box-background: $white;
+$radioInput-box-border-color: $black;
+$radioInput-box-checked-background: $black;
+$radioInput-box-checked-border-color: $black;
+// focus theme
+$radioInput-focus-text-color: $black;
+$radioInput-focus-box-background: rgba($blue, .1);
+$radioInput-focus-box-border-color: $blue;
+$radioInput-focus-box-checked-background: $blue;
+$radioInput-focus-box-checked-border-color: $black;
+// disabled theme
+$radioInput-disabled-text-color: $black;
+$radioInput-disabled-box-background: rgba($black, .1);
+$radioInput-disabled-box-border-color: rgba($black, .1);
+$radioInput-disabled-box-checked-background: $black;
+$radioInput-disabled-box-checked-border-color: $black;
+// error theme
+$radioInput-error-text-color: $black;
+$radioInput-error-box-background: rgba($red, .1);
+$radioInput-error-box-border-color: $red;
+$radioInput-error-box-checked-background: $red;
+$radioInput-error-box-checked-border-color: $black;

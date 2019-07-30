@@ -1,0 +1,13 @@
+{%- macro label(id, for, class, dataset, options) -%}
+    <{%- if options.tag %}{{options.tag}}{% else %}label{% endif %}
+        {%- if id %} id="{{id}}"{% endif %}
+        {%- if for %} for="{{for}}"{% endif %}
+        {#!- #} class="formInput__label
+            {%- for modifier in options.modifier %} formInput__label--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+    {#!- #}>
+        {{- caller() -}}
+    </{%- if options.tag %}{{options.tag}}{% else %}label{% endif %}>
+{%- endmacro -%}

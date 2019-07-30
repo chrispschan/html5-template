@@ -1,0 +1,37 @@
+{%- from "formInput/label/label.html" import label -%}
+
+{% macro checkboxInput(id, class, dataset, options) %}
+    <input
+        {#!- #} id="{{- id -}}"
+        {#!- #} class="formInput__input formInput__input--checkbox
+            {%- for modifier in options.modifier %} formInput__input--{{ modifier }}{% endfor -%}
+            {%- if class %} {{ class }}{% endif -%}
+        "
+        {#!- #} type="checkbox"
+        {%- for key, value in dataset %} data-{{key | toDataset}}="{{value}}"{%- endfor -%}
+        {#!- #} value="{{options.value}}"
+        {%- if options.autofocus %} autofocus{%- endif -%}
+        {%- if options.checked %} checked{%- endif -%}
+        {%- if options.dirname %} dirname="{{options.dirname}}"{%- endif -%}
+        {%- if options.form %} form="{{options.form}}"{%- endif -%}
+        {%- if options.name %} name="{{options.name}}"{%- endif -%}
+        {%- if options.modifier -%}
+            {%- if 'disabled' in options.modifier %} disabled{%- endif -%}
+            {%- if 'required' in options.modifier %} required{%- endif -%}
+            {%- if 'readonly' in options.modifier %} readonly{%- endif -%}
+        {%- endif -%}
+    {#!- #} />
+    {%- call label(
+        id=options.label.id,
+        for=id,
+        class='formInput__label--' + (options.type if options.type else 'checkbox') + ((' ' + options.label.class) if options.label.class),
+        dataset=options.label.dataset,
+        options=options.label.options
+    ) -%}
+        {%- if options.label.text -%}
+            {{options.label.text | safe}}
+        {%- else -%}
+            {{options.value}}
+        {%- endif -%}
+    {%- endcall -%}
+{% endmacro %}
