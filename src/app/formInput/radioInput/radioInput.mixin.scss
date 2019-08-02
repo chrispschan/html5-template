@@ -15,6 +15,8 @@
 
                 line-height: $radioInput-line-height / $radioInput-font-size;
 
+                min-height: $radioInput-box-size;
+
                 @if ($font-unit == em or $font-unit == rem) {
                     font-size: px2rem($radioInput-font-size);
                 } @else {

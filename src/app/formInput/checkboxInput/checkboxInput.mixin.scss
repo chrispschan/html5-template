@@ -15,6 +15,7 @@
 
                 line-height: $checkboxInput-line-height / $checkboxInput-font-size;
 
+                min-height: $checkboxInput-box-size;
 
                 @if ($font-unit == em or $font-unit == rem) {
                     font-size: px2rem($checkboxInput-font-size);
