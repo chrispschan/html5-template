@@ -107,13 +107,12 @@
                 }
 
                 &__track {
+                    
                     position: absolute;
 
                     display: block;
 
                     height: $toggleInput-height;
-
-                    width: $toggleInput-width;
 
                     overflow: hidden;
 
@@ -124,9 +123,13 @@
                     @if ($toggleInput-height > $toggleInput-point-size) {
                         top: 0;
                         right: 0;
+
+                        width: $toggleInput-width;
                     } @else {
                         top: ($toggleInput-point-size - $toggleInput-height) / 2;
                         right: ($toggleInput-point-size - $toggleInput-height) / 2;
+
+                        width: $toggleInput-width - ($toggleInput-point-size - $toggleInput-height) / 2;
                     }
 
                     @if ($toggleInput-border-width == none) {
