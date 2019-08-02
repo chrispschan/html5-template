@@ -145,7 +145,7 @@
 
 {# formInput chooseInput (checkbox / radio) item #}
 {% macro chooseInput(id, class, dataset, options) %}
-    {%- if options.type == "checkbox" -%}
+    {%- if options.type != "radio" -%}
         {{- checkboxInput(id, class, dataset, options) -}}
     {%- else -%}
         {{- radioInput(id, class, dataset, options) -}}
