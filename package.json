@@ -52,7 +52,7 @@
     "html-loader": "^0.5.5",
     "js-yaml": "^3.13.1",
     "jsdom-global": "^3.0.2",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "lodash.mergewith": "^4.6.2",
     "lodash.template": "^4.5.0",
     "markdown-loader": "^5.0.0",
