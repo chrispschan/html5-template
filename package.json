@@ -82,7 +82,7 @@
   "dependencies": {
     "github-markdown-css": "^3.0.1",
     "gulp-eslint": "^5.0.0",
-    "postcss": "^7.0.2"
+    "postcss": "^8.2.10"
   },
   "optionalDependencies": {}
 }
